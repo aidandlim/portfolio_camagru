@@ -1,0 +1,78 @@
+.account {
+    width: calc(100% - 1.5rem);
+    height: auto;
+
+    padding: 0.75rem;
+}
+
+.account-title {
+    width: 70%;
+    height: 1.5rem;
+    margin-bottom: 0.5rem;
+
+    position: relative;
+    float: left;
+
+    color: white;
+    font-size: 0.6rem;
+    font-weight: 700;
+    line-height: 1.5rem;
+
+    opacity: 0.5;
+}
+
+.account-toggle {
+    width: 30%;
+    height: 1.5rem;
+    margin-bottom: 0.5rem;
+
+    position: relative;
+    float: left;
+
+    cursor: pointer;
+
+    opacity: 0.75;
+}
+
+.account-toggle-box-active {
+    width: 50%;
+    height: 1rem;
+    margin: 0.15rem 0 0.15rem calc(50% - 0.1rem);
+
+    background-color: #00695C;
+    border: solid 0.1rem #404040;
+    border-radius: 1rem;
+}
+
+.account-toggle-box-inactive {
+    width: 50%;
+    height: 1rem;
+    margin: 0.15rem 0 0.15rem calc(50% - 0.1rem);
+
+    border: solid 0.1rem #404040;
+    border-radius: 1rem;
+}
+
+.account-toggle-button-active {
+    width: 1rem;
+    height: 1rem;
+    
+    position: absolute;
+    top: 0.25rem;
+    left: calc(100% - 1rem);
+
+    background-color: #404040;
+    border-radius: 1rem;
+}
+
+.account-toggle-button-inactive {
+    width: 1rem;
+    height: 1rem;
+    
+    position: absolute;
+    top: 0.25rem;
+    left: calc(100% - 2rem);
+
+    background-color: #404040;
+    border-radius: 1rem;
+}

@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Astloch:400&display=swap');
+
+.sidebar {
+    width: 15rem;
+    height: calc(100vh - 5rem + 2px);
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    position: absolute;
+    top: 2.5rem;
+    left: calc(100% - 15rem);
+    
+    background-color: #151515;
+    border-left: solid 1px #404040;
+}

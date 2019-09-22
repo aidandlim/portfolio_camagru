@@ -1,5 +1,5 @@
 const ui = {
-    nav: 0
+    nav: 1
     // main             0
     // sidebar          1
     // search           2

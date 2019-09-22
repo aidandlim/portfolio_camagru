@@ -1,4 +1,6 @@
-.DS_STORE
-._.DS_STORE
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
 
 node_modules

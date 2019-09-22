@@ -2,7 +2,7 @@ const auth = {
     id: '',
     isRegister: false,
     isForgot: false,
-    isAccount: false,
+    isAccount: true,
 }
 
 const authReducer = (state = auth, action) => {

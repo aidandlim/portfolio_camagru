@@ -29,3 +29,15 @@ export const auth_isaccount = () => {
         type: 'AUTH_ISACCOUNT'
     };
 };
+
+export const account_isprivate = () => {
+    return {
+        type: 'ACCOUNT_ISPRIVATE'
+    };
+};
+
+export const account_isnotificate = () => {
+    return {
+        type: 'ACCOUNT_ISNOTIFICATE'
+    };
+};

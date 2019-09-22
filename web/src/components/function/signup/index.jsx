@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { auth_isregister } from '../../../actions';
 
 import FacebookLogin from 'react-facebook-login';
+import { GoogleLogin } from 'react-google-login';
 
 function Signup() {
 	const dispatch = useDispatch();
@@ -12,6 +13,10 @@ function Signup() {
 	}
 	
 	function _handleFacebookSignup(res) {
+		console.log(res);
+	}
+
+	function _handleGoogleSignup(res) {
 		console.log(res);
 	}
 
@@ -31,8 +36,17 @@ function Signup() {
 				appId='304184623413563'
 				fields='name,email,picture'
 				callback={(res) => _handleFacebookSignup(res)}
-				icon='fa-facebook-square'
-				textButton=' Sign up with Facebook'
+				textButton='Sign up with Facebook'
+			/>
+			<GoogleLogin
+				clientId='572337747213-el3eomejo8fi035ge0tj2n4vff9qbvcl.apps.googleusercontent.com'
+				onSuccess={(res) => _handleGoogleSignup(res)}
+				onFailure={(res) => _handleGoogleSignup(res)}
+				icon={false}
+				buttonText='Sign in with Google'
+				render={renderProps => (
+					<button className='signin-google-btn' onClick={renderProps.onClick}>Sign in with Google</button>
+				)}
 			/>
 			<p>Do you have an account? <span onClick={() => dispatch(auth_isregister())}>Sign in!</span></p>
 		</div>

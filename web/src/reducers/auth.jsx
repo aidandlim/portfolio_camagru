@@ -1,5 +1,5 @@
 const auth = {
-    id: 'dlim',
+    id: '',
     isRegister: false,
     isForgot: false,
     isAccount: true,

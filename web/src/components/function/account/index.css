@@ -59,7 +59,7 @@
     
     position: absolute;
     top: 0.25rem;
-    left: calc(100% - 1rem);
+    left: calc(100% - 0.9rem);
 
     background-color: #404040;
     border-radius: 1rem;

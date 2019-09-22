@@ -25,7 +25,7 @@ function Profile() {
 				<span className='profile-placeholder'>Bio</span>
 				<div className='profile-textbox' contentEditable='true'></div>
 				<input className='profile-submit' type='submit' value='Update User Information' />
-				<input className='profile-detail' type='button' value='Go to Account Setting' onClick={ () => dispatch(auth_isaccount()) } />
+				<input className='profile-logout' type='button' value='Go to Account Setting' onClick={ () => dispatch(auth_isaccount()) } />
 				<input className='profile-logout' type='button' value='Logout' onClick={ () => dispatch(auth_id('')) } />
 				{/* <input className='profile-delete' type='button' value='Delete User Information' /> */}
 			</form>

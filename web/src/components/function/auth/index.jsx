@@ -11,7 +11,7 @@ function Auth() {
 	const auth = useSelector(state => state.auth);
 	return (
 		<div className='auth'>
-			{ auth.isRegister ? <Signup /> : ( auth.isForgotPassword ? <Forgot /> : <Signin /> ) }
+			{ auth.isRegister ? <Signup /> : ( auth.isForgot ? <Forgot /> : <Signin /> ) }
 		</div>
 	);
 }

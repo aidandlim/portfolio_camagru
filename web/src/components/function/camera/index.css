@@ -1,0 +1,16 @@
+.camera {
+    width: 100%;
+    height: calc(100% - 5rem + 2px);
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    position: fixed;
+    top: calc(2.5rem + 1px);
+    left: 0;
+
+    background-color: #202020;
+    opacity: 0.975;
+
+    z-index: 2;
+}

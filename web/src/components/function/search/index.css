@@ -1,0 +1,43 @@
+.search {
+    width: 100%;
+    height: calc(100% - 5rem + 2px);
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    position: fixed;
+    top: calc(2.5rem + 1px);
+    left: 0;
+
+    background-color: #202020;
+    opacity: 0.975;
+
+    z-index: 2;
+}
+
+.search-input {
+    width: 28rem;
+    height: 4rem;
+    padding: 0 1rem;
+
+    position: absolute;
+    top: calc(50% - 3rem);
+    left: calc(50% - 15rem);
+
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    background: none;
+    border: none;
+    border-bottom: solid 0.125rem #303030;
+
+    opacity: 0.95;
+
+    cursor: pointer;
+    outline: none;
+}
+
+.search-input:focus {
+    border-bottom: solid 0.125rem #505050;
+    transition: 0.25s;
+}

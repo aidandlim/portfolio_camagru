@@ -24,8 +24,11 @@ function Camera() {
 	}
 
 	function capture() {
-		images.push(webcamRef.current.getScreenshot());
-		dispatch(camera_images(images));
+		let data = webcamRef.current.getScreenshot();
+		if(data !== null) {
+			images.push(data);
+			dispatch(camera_images(images));
+		}
 	}
 
 	return (
@@ -50,6 +53,7 @@ function Camera() {
 					{ !camera.isLoad && camera.preview === '' ? <div className='camera-shoot' onClick={ () => capture() }></div> : '' }
 					{ !camera.isLoad && camera.preview !== '' ? <img className='camera-preview' src={preview} alt='Rendered' /> : '' }
 					{ !camera.isLoad && camera.preview !== '' ? <FiChevronDown className='camera-rollback' onClick={ () => dispatch(camera_preview('')) } /> : '' }
+					<div className='camera-margin'></div>
 					<Gallery />
 					<div className='post-reflect-container'>
 						<FiHeart className='post-icon' />

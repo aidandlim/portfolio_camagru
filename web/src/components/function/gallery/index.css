@@ -10,7 +10,6 @@
     white-space: nowrap;
 
     background-color: #303030;
-    border-top: solid #404040 1px;
     border-bottom: solid #404040 1px;
 }
 
@@ -26,5 +25,23 @@
     -webkit-transform:rotateY(180deg);
     -moz-transform:rotateY(180deg);
 
+    opacity: 0.35;
+
     cursor: pointer;
+}
+
+.camera-gallery-image-active {
+    width: 5rem;
+    height: 5rem;
+
+    display: inline-block;
+
+    object-fit: cover;
+
+    transform: rotateY(180deg);
+    -webkit-transform:rotateY(180deg);
+    -moz-transform:rotateY(180deg);
+
+    cursor: pointer;
+
 }

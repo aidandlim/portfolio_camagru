@@ -9,11 +9,12 @@ function GalleryPics() {
 	const dispatch = useDispatch();
 
 	let images = camera.images;
+	let preview = camera.preview;
 
 	return (
 		<div className='camera-gallery'>
 			{ images.map((image, i) => 
-				<img className='camera-gallery-image' key={i} src={image} onClick={ () => dispatch(camera_preview(images[i])) } alt='Rendered' />
+				<img className={preview === images[i] ? 'camera-gallery-image-active' : 'camera-gallery-image'} key={i} src={image} onClick={ () => dispatch(camera_preview(images[i])) } alt='Rendered' />
 			)}
 		</div>
 );

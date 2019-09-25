@@ -41,3 +41,24 @@ export const account_isnotificate = () => {
         type: 'ACCOUNT_ISNOTIFICATE'
     };
 };
+
+export const camera_images = (value) => {
+    return {
+        type: 'CAMERA_IMAGES',
+        payload: value
+    };
+};
+
+export const camera_preview = (value) => {
+    return {
+        type: 'CAMERA_PREVIEW',
+        payload: value
+    };
+};
+
+export const camera_isload = (value) => {
+    return {
+        type: 'CAMERA_ISLOAD',
+        payload: value
+    };
+};

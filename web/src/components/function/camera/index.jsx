@@ -1,70 +1,31 @@
 import React from 'react';
-import $ from 'jquery';
+import { useSelector, useDispatch } from 'react-redux';
+import { camera_isload, camera_images, camera_preview } from '../../../actions';
 
-import Webcam from "react-webcam";
-import { FiChevronDown, FiChevronsLeft, FiChevronsRight, FiCheck, FiHeart, FiMoreVertical } from 'react-icons/fi';
+import Webcam from 'react-webcam';
+import Loadcam from '../loadcam';
+import Gallery from '../gallery';
 
+import { FiChevronDown, FiHeart, FiMoreVertical } from 'react-icons/fi';
 import './index.css';
 
 function Camera() {
+	const camera = useSelector(state => state.camera);
+	const dispatch = useDispatch();
+
 	const webcamRef = React.useRef(null);
+	let images = camera.images;
+	let preview = camera.preview;
 
-	function cameraReady() {
-		$('.camera-loading').delay(1000).fadeOut(500);
-		$('.camera-shoot').delay(1000).fadeIn(500);
+	function load() {
+		setTimeout(() => {
+			dispatch(camera_isload(false));
+		}, 1000);
 	}
-
-	let images = [];
 
 	function capture() {
-		const image = webcamRef.current.getScreenshot();
-		images[images.length] = image;
-		render();
-	}
-
-	let index = 0;
-
-	function handleIndex(direction) {
-		if(direction === 'left') {
-			if(images.length - index > 5)
-				index++;
-		} else {
-			if(images.length - index < images.length)
-				index--;
-		}
-		render();
-		rollback();
-	}
-
-	function render() {
-		$('.camera-gallery-container').html("");
-		for(let i = images.length - 5 - index; i < images.length - index; i++) {
-			if(images[i] !== undefined)
-				$('.camera-gallery-container').html($('.camera-gallery-container').html() + `<div class='camera-gallery-image' style='background: url("${images[i]}"); background-position: center; background-size: cover;'/>`);
-		}
-	}
-
-	function preview(num) {
-		let number = 0;
-		if(images.length < 5) {
-			number = num;
-		} else {
-			number = images.length - 5 - index + num;
-		}
-		const preview = `<div class='camera-preview-image' style='background: url("${images[number]}"); background-position: center; background-size: cover;'/>`;
-		$('.camera-galley-check-icon').css('display', 'none');
-		$('.camera-preview-container').html(preview);
-		$('.camera-galley-check-icon').eq(num).css('display', 'block');
-		$('.camera-shoot').fadeOut(0);
-		$('.camera-preview-container').fadeIn(0);
-		$('.camera-rollback').fadeIn(0);
-	}
-
-	function rollback() {
-		$('.camera-galley-check-icon').css('display', 'none');
-		$('.camera-shoot').fadeIn(0);
-		$('.camera-preview-container').fadeOut(0);
-		$('.camera-rollback').fadeOut(0);
+		images.push(webcamRef.current.getScreenshot());
+		dispatch(camera_images(images));
 	}
 
 	return (
@@ -84,43 +45,12 @@ function Camera() {
 							<input className='camera-input' type='text' />
 						</div>
 					</div>
-					<Webcam
-						className='camera-webcam'
-						width={1600}
-						height={900}
-						audio={false}
-						ref={webcamRef}
-						screenshotFormat='image/jpeg'
-						onUserMedia={ () => cameraReady() }
-					/>
-					<div className='camera-loading'>
-						<div className='camera-loading-img'></div>
-					</div>
-					<div className='camera-preview-container'></div>
-					<div className='camera-shoot' onClick={ () => capture() }></div>
-					<FiChevronDown className='camera-rollback' onClick={ () => rollback() } />
-					<div className='camera-gallery'>
-						<div className='camera-gallery-arrow' onClick={ () => handleIndex('left') }><FiChevronsLeft className='camera-gallery-arrow-icon' /></div>
-						<div className='camera-gallery-container'></div>
-						<div className='camera-gallery-check'>
-							<div className='camera-gallery-check-zone' onClick={ () => preview(0) }>
-								<FiCheck className='camera-galley-check-icon' />
-							</div>
-							<div className='camera-gallery-check-zone' onClick={ () => preview(1) }>
-								<FiCheck className='camera-galley-check-icon' />
-							</div>
-							<div className='camera-gallery-check-zone' onClick={ () => preview(2) }>
-								<FiCheck className='camera-galley-check-icon' />
-							</div>
-							<div className='camera-gallery-check-zone' onClick={ () => preview(3) }>
-								<FiCheck className='camera-galley-check-icon' />
-							</div>
-							<div className='camera-gallery-check-zone' onClick={ () => preview(4) }>
-								<FiCheck className='camera-galley-check-icon' />
-							</div>
-						</div>
-						<div className='camera-gallery-arrow' onClick={ () => handleIndex('right') }><FiChevronsRight className='camera-gallery-arrow-icon' /></div>
-					</div>
+					<Webcam className='camera-webcam' ref={webcamRef} screenshotFormat='image/jpeg' audio={false} onUserMedia={ () => load() } />
+					{ camera.isLoad ? <Loadcam /> : '' }
+					{ !camera.isLoad && camera.preview === '' ? <div className='camera-shoot' onClick={ () => capture() }></div> : '' }
+					{ !camera.isLoad && camera.preview !== '' ? <img className='camera-preview' src={preview} alt='Rendered' /> : '' }
+					{ !camera.isLoad && camera.preview !== '' ? <FiChevronDown className='camera-rollback' onClick={ () => dispatch(camera_preview('')) } /> : '' }
+					<Gallery />
 					<div className='post-reflect-container'>
 						<FiHeart className='post-icon' />
 						<FiMoreVertical className='post-icon' />

@@ -1,0 +1,30 @@
+.camera-gallery {
+    width: 30rem;
+    height: calc(5rem + 15px);
+
+    position: relative;
+    float: left;
+
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+
+    background-color: #303030;
+    border-top: solid #404040 1px;
+    border-bottom: solid #404040 1px;
+}
+
+.camera-gallery-image {
+    width: 5rem;
+    height: 5rem;
+
+    display: inline-block;
+
+    object-fit: cover;
+
+    transform: rotateY(180deg);
+    -webkit-transform:rotateY(180deg);
+    -moz-transform:rotateY(180deg);
+
+    cursor: pointer;
+}

@@ -42,6 +42,13 @@ export const account_isnotificate = () => {
     };
 };
 
+export const camera_isload = (value) => {
+    return {
+        type: 'CAMERA_ISLOAD',
+        payload: value
+    };
+};
+
 export const camera_images = (value) => {
     return {
         type: 'CAMERA_IMAGES',
@@ -56,9 +63,9 @@ export const camera_preview = (value) => {
     };
 };
 
-export const camera_isload = (value) => {
+export const camera_filter = (value) => {
     return {
-        type: 'CAMERA_ISLOAD',
+        type: 'CAMERA_FILTER',
         payload: value
     };
 };

@@ -1,11 +1,16 @@
 const camera = {
+    isLoad: true,
     images: [],
     preview: '',
-    isLoad: true,
+    filter: 0,
 }
 
 const cameraReducer = (state = camera, action) => {
     switch (action.type) {
+        case 'CAMERA_ISLOAD':
+            return Object.assign({}, state, {
+                isLoad: action.payload
+            });
         case 'CAMERA_IMAGES':
             return Object.assign({}, state, {
                 images: action.payload
@@ -14,9 +19,9 @@ const cameraReducer = (state = camera, action) => {
             return Object.assign({}, state, {
                 preview: action.payload
             });
-        case 'CAMERA_ISLOAD':
+        case 'CAMERA_FILTER':
             return Object.assign({}, state, {
-                isLoad: action.payload
+                filter: action.payload
             });
         default:
             return state;

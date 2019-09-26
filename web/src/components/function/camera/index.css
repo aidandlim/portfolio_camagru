@@ -59,26 +59,6 @@
     border-bottom: solid #404040 1px;
 }
 
-.camera-preview {
-    width: 30rem;
-    height: 30rem;
-
-    position: absolute;
-    top: 3.5rem;
-    left: 0;
-
-    object-fit: cover;
-
-    transform: rotateY(180deg);
-    -webkit-transform:rotateY(180deg);
-    -moz-transform:rotateY(180deg);
-
-    border-top: solid #404040 1px;
-    border-bottom: solid #404040 1px;
-
-    cursor: pointer;
-}
-
 .camera-shoot {
     width: 2rem;
     height: 2rem;
@@ -101,26 +81,6 @@
 .camera-shoot:hover {
     opacity: 1;
     transition: 0.3s;
-}
-
-.camera-rollback {
-    width: 2rem;
-    height: 2rem;
-
-    position: absolute;
-    top: 29.5rem;
-    left: calc(50% - 1.5rem);
-
-    color: #808080;
-    background-color: #404040;
-    border-radius: 50%;
-    border: solid 0.5rem #404040;
-
-    opacity: 0.75;
-
-    cursor: pointer;
-
-    z-index: 2;
 }
 
 .camera-margin {

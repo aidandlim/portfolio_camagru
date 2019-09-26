@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { camera_preview } from '../../../actions';
+import { camera_preview, camera_filter } from '../../../actions';
 
 import './index.css';
 
@@ -11,10 +11,15 @@ function GalleryPics() {
 	let images = camera.images;
 	let preview = camera.preview;
 
+	function choose(i) {
+		dispatch(camera_preview(images[i]));
+		dispatch(camera_filter(0));
+	}
+
 	return (
 		<div className='camera-gallery'>
 			{ images.map((image, i) => 
-				<img className={preview === images[i] ? 'camera-gallery-image-active' : 'camera-gallery-image'} key={i} src={image} onClick={ () => dispatch(camera_preview(images[i])) } alt='Rendered' />
+				<img className={preview === images[i] ? 'camera-gallery-image-active' : 'camera-gallery-image'} key={i} src={image} onClick={ () => choose(i) } alt='Rendered' />
 			)}
 		</div>
 );

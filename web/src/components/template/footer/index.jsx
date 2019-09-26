@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, camera_isload } from '../../../actions';
+import { ui_nav, camera_isload, camera_preview } from '../../../actions';
 
 import { FiCompass, FiCamera, FiSearch, FiHeart } from 'react-icons/fi';
 
@@ -13,6 +13,7 @@ function Footer() {
 	function handleCamera() {
 		dispatch(ui_nav(3));
 		dispatch(camera_isload(true));
+		dispatch(camera_preview(''));
 	}
 
 	return (

@@ -1,12 +1,13 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { camera_isload, camera_images, camera_preview } from '../../../actions';
+import { camera_isload, camera_images } from '../../../actions';
 
 import Webcam from 'react-webcam';
 import Loadcam from '../loadcam';
 import Gallery from '../gallery';
+import Preview from '../preview';
 
-import { FiChevronDown, FiHeart, FiMoreVertical } from 'react-icons/fi';
+import { FiHeart, FiMoreVertical } from 'react-icons/fi';
 import './index.css';
 
 function Camera() {
@@ -15,7 +16,6 @@ function Camera() {
 
 	const webcamRef = React.useRef(null);
 	let images = camera.images;
-	let preview = camera.preview;
 
 	function load() {
 		setTimeout(() => {
@@ -48,17 +48,17 @@ function Camera() {
 							<input className='camera-input' type='text' />
 						</div>
 					</div>
-					<Webcam className='camera-webcam' ref={webcamRef} screenshotFormat='image/jpeg' audio={false} onUserMedia={ () => load() } />
+					{ camera.preview === '' ? <Webcam className='camera-webcam' ref={webcamRef} screenshotFormat='image/jpeg' audio={false} onUserMedia={ () => load() } /> : '' }
 					{ camera.isLoad ? <Loadcam /> : '' }
 					{ !camera.isLoad && camera.preview === '' ? <div className='camera-shoot' onClick={ () => capture() }></div> : '' }
-					{ !camera.isLoad && camera.preview !== '' ? <img className='camera-preview' src={preview} alt='Rendered' /> : '' }
-					{ !camera.isLoad && camera.preview !== '' ? <FiChevronDown className='camera-rollback' onClick={ () => dispatch(camera_preview('')) } /> : '' }
+					{ !camera.isLoad && camera.preview !== '' ? <Preview /> : '' }
 					<div className='camera-margin'></div>
 					<Gallery />
 					<div className='post-reflect-container'>
 						<FiHeart className='post-icon' />
 						<FiMoreVertical className='post-icon' />
-						<div className='post-content' contentEditable='true' data-placeholder='Add a comment...'></div>
+						<div className='post-comment-box' contentEditable='true' data-placeholder='Add a comment...'></div>
+						<div className='post-comment-post'>POST</div>
 					</div>
 				</div>
 			</div>

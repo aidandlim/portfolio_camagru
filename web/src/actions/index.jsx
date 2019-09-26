@@ -1,9 +1,13 @@
+/****************************************************/
+
 export const ui_nav = (value) => {
     return {
         type: 'UI_NAV',
         payload: value
     };
 };
+
+/***************************************************/
 
 export const auth_id = (value) => {
     return {
@@ -30,6 +34,8 @@ export const auth_isaccount = () => {
     };
 };
 
+/***************************************************/
+
 export const account_isprivate = () => {
     return {
         type: 'ACCOUNT_ISPRIVATE'
@@ -41,6 +47,8 @@ export const account_isnotificate = () => {
         type: 'ACCOUNT_ISNOTIFICATE'
     };
 };
+
+/***************************************************/
 
 export const camera_isload = (value) => {
     return {
@@ -66,6 +74,15 @@ export const camera_preview = (value) => {
 export const camera_filter = (value) => {
     return {
         type: 'CAMERA_FILTER',
+        payload: value
+    };
+};
+
+/***************************************************/
+
+export const content_id = (value) => {
+    return {
+        type: 'CONTENT_ID',
         payload: value
     };
 };

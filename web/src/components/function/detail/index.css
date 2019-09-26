@@ -1,0 +1,36 @@
+.detail {
+    width: 100%;
+    height: auto;
+}
+
+.detail-rollback {
+    width: 2rem;
+    height: 1rem;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+
+    position: relative;
+    float: left;
+
+    color: white;
+    background-color: black;
+    border: solid 1px #404040;
+    border-radius: 0 3rem 0 0;
+
+    opacity: 0.25;
+
+    cursor: pointer;
+}
+
+.detail-post {
+    width: 30rem;
+    height: auto;
+
+    position: relative;
+    float: left;
+
+    background-color: #202020;
+    border: solid #404040 1px;
+
+    cursor: pointer;
+}

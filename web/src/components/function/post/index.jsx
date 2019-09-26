@@ -1,10 +1,14 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { content_id } from '../../../actions';
 
 import { FiHeart, FiMoreVertical } from 'react-icons/fi';
 
 import './index.css';
 
-function Post() {
+function Post(props) {
+	const dispatch = useDispatch();
+
 	return (
 		<div className='post'>
 			<div className='post-profile'></div>
@@ -24,8 +28,8 @@ function Post() {
 					Hello World!<br />
 					Good Morning!
 				</div>
-				<div className='post-likes'>10 likes</div>
-				<div className='post-comments'>View all 6 comments</div>
+				<div className='post-likes' onClick={ () => dispatch(content_id(props.id)) }>10 likes</div>
+				<div className='post-comments' onClick={ () => dispatch(content_id(props.id)) }>View all 6 comments</div>
 				<div className='post-comment-box' contentEditable='true' data-placeholder='Add a comment...'></div>
 				<div className='post-comment-post'>POST</div>
 			</div>

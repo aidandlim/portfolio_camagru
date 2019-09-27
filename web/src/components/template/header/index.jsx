@@ -16,6 +16,7 @@ function Header() {
 	function openUser() {
 		axios.get(URL + 'api/user/isLogin')
 		.then(res => {
+			console.log(res);
 			if(res.data.id !== -1) {
 				dispatch(auth_id(res.data.id));
 				dispatch(auth_email(res.data.email));

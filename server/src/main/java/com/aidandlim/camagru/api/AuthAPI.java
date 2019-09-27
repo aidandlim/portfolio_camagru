@@ -1,5 +1,6 @@
 package com.aidandlim.camagru.api;
 
+import com.aidandlim.camagru.dto.Token;
 import com.aidandlim.camagru.dto.User;
 import com.aidandlim.camagru.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +17,13 @@ public class AuthAPI {
     AuthService service;
 
     @RequestMapping("/api/user/isLogin")
-    public User isLogin(HttpServletRequest req) {
-        return (service.isLogin(req));
+    public User isLogin(@RequestBody Token token) {
+        return (service.isLogin(token));
     }
 
-    @RequestMapping("/api/user/signup")
-    public boolean signin(HttpServletRequest req, @RequestBody User user) {
-        return (service.signin(req, user));
+    @RequestMapping("/api/user/signin")
+    public Token signin(@RequestBody User user) {
+        return (service.signin(user));
     }
 
     @RequestMapping("/api/user/signup")

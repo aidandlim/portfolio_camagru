@@ -1,6 +1,7 @@
 package com.aidandlim.camagru.service;
 
 import com.aidandlim.camagru.dao.AuthDao;
+import com.aidandlim.camagru.dto.Token;
 import com.aidandlim.camagru.dto.User;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +21,8 @@ public class AuthService {
     AuthDao dao;
 
     @Transactional
-    public User isLogin(HttpServletRequest req) {
-        HttpSession session = req.getSession();
+    public User isLogin(Token token) {
         User result = new User(-1);
-        if(session.getAttribute("user_id") != null) {
-            result.setId(Long.parseLong((String) session.getAttribute("user_id")));
-            result.setEmail((String) session.getAttribute("user_email"));
-            result.setNickname((String) session.getAttribute("user_nickname"));
-        }
         return result;
     }
 
@@ -43,20 +38,17 @@ public class AuthService {
     }
 
     @Transactional
-    public boolean signin(HttpServletRequest req, User user) {
-        HttpSession session = req.getSession();
+    public Token signin(User user) {
         try {
             dao = sqlSession.getMapper(AuthDao.class);
             User result = dao.signin(user);
             if(result != null) {
-                session.setAttribute("user_id", result.getId());
-                session.setAttribute("user_email", result.getEmail());
-                session.setAttribute("user_nickname", result.getNickname());
-                return (true);
+                result.setToken("");
+                return (result);
             }
-            return (false);
+            return (new Token("null"));
         } catch (Exception e) {
-            return (false);
+            return (new Token("null"));
         }
     }
 

@@ -1,6 +1,6 @@
 package com.aidandlim.camagru.dto;
 
-public class User {
+public class User extends Token {
 
     private long id;
     private String email;
@@ -8,13 +8,16 @@ public class User {
     private String nickname;
 
     public User() {
+        super();
     }
 
     public User(long id) {
+        super();
         this.id = id;
     }
 
     public User(long id, String email, String password, String nickname) {
+        super();
         this.id = id;
         this.email = email;
         this.password = password;

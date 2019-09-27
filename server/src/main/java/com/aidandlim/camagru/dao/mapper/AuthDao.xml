@@ -2,4 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.aidandlim.camagru.dao.AuthDao">
 
+    <select id="signin" resultType="com.aidandlim.camagru.dto.User">
+        SELECT * FROM
+            user
+        WHERE
+            email = #{email} AND password = PASSWORD(#{password})
+    </select>
+
+    <insert id="signup">
+        INSERT INTO user
+            (email, password, nickname)
+        VALUES
+            (#{email}, PASSWORD(#{password}), #{nickname})
+    </insert>
 </mapper>

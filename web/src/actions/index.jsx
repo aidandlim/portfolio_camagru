@@ -16,6 +16,20 @@ export const auth_id = (value) => {
     };
 };
 
+export const auth_email = (value) => {
+    return {
+        type: 'AUTH_EMAIL',
+        payload: value
+    };
+};
+
+export const auth_nickname = (value) => {
+    return {
+        type: 'AUTH_NICKNAME',
+        payload: value
+    };
+};
+
 export const auth_isregister = () => {
     return {
         type: 'AUTH_ISREGISTER'

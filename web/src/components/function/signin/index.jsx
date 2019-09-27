@@ -2,6 +2,9 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { auth_id, auth_isregister, auth_isforgot } from '../../../actions';
 
+import axios from 'axios';
+import { URL } from '../../../const';
+
 import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
 
@@ -10,8 +13,24 @@ import './index.css';
 function Signin() {
 	const dispatch = useDispatch();
 
-	function _handleForm() {
-		dispatch(auth_id('dlim'));
+	function _handleForm(e) {
+		// if(document.signup.password.value === document.signup.confirm.value) {
+		// 	axios.post(URL + 'api/user/signup', {
+		// 		email: document.signup.email.value,
+		// 		password: document.signup.password.value,
+		// 		nickname: document.signup.nickname.value,
+		// 	})
+		// 	.then(res => {
+		// 		if(res.data) {
+		// 			dispatch(auth_isregister());
+		// 		} else {
+		// 			alert('Fail!');
+		// 		}
+		// 	});
+		// } else {
+		// 	alert('Password is not matched');
+		// }
+		e.preventDefault();
 	}
 	
 	function _handleFacebookSignin(res) {
@@ -25,7 +44,7 @@ function Signin() {
 	return (
 		<div className='signin'>
 			<div className='signin-title'>Sign in!</div>
-			<form action='#' onSubmit={() => _handleForm()}>
+			<form name='signin' onSubmit={() => _handleForm()}>
 				<input className='signin-input' type='email' placeholder='Email Address' required />
 				<input className='signin-input' type='password' placeholder='Password' required />
 				<button className='signin-btn' type='submit'>Sign in</button>

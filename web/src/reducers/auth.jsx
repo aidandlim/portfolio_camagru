@@ -1,8 +1,10 @@
 const auth = {
     id: '',
-    isRegister: false,
+    email: '',
+    nickname: '',
+    isRegister: true,
     isForgot: false,
-    isAccount: true,
+    isAccount: false,
 }
 
 const authReducer = (state = auth, action) => {
@@ -10,6 +12,14 @@ const authReducer = (state = auth, action) => {
         case 'AUTH_ID':
             return Object.assign({}, state, {
                 id: action.payload
+            });
+        case 'AUTH_EMAIL':
+            return Object.assign({}, state, {
+                email: action.payload
+            });
+        case 'AUTH_NICKNAME':
+            return Object.assign({}, state, {
+                nickname: action.payload
             });
         case 'AUTH_ISREGISTER':
             return Object.assign({}, state, {

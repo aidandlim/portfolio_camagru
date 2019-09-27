@@ -2,14 +2,33 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { auth_isregister } from '../../../actions';
 
+import axios from 'axios';
+import { URL } from '../../../const';
+
 import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
 
 function Signup() {
 	const dispatch = useDispatch();
 
-	function _handleForm() {
-		
+	function _handleForm(e) {
+		if(document.signup.password.value === document.signup.confirm.value) {
+			axios.post(URL + 'api/user/signup', {
+				email: document.signup.email.value,
+				password: document.signup.password.value,
+				nickname: document.signup.nickname.value,
+			})
+			.then(res => {
+				if(res.data) {
+					dispatch(auth_isregister());
+				} else {
+					alert('Fail!');
+				}
+			});
+		} else {
+			alert('Password is not matched');
+		}
+		e.preventDefault();
 	}
 	
 	function _handleFacebookSignup(res) {
@@ -23,11 +42,11 @@ function Signup() {
 	return (
 		<div className='signin'>
 			<div className='signin-title'>Sign up!</div>
-			<form action='#' onSubmit={() => _handleForm()}>
-				<input className='signin-input' type='email' placeholder='Email Address' required />
-				<input className='signin-input' type='password' placeholder='Password' required />
-				<input className='signin-input' type='password' placeholder='Confirm Password' required />
-				<input className='signin-input' type='text' placeholder='Nickname' required />
+			<form name='signup' onSubmit={() =>_handleForm()}>
+				<input className='signin-input' type='email' name='email' placeholder='Email Address' required />
+				<input className='signin-input' type='password' name='password' placeholder='Password' required />
+				<input className='signin-input' type='password' name='confirm' placeholder='Confirm Password' required />
+				<input className='signin-input' type='text' name='nickname' placeholder='Nickname' required />
 				<button className='signin-btn' type='submit'>Sign up</button>
 			</form>
 			<div className='signin-or'>OR</div>

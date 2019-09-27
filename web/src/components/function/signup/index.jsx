@@ -12,6 +12,7 @@ function Signup() {
 	const dispatch = useDispatch();
 
 	function _handleForm(e) {
+		e.preventDefault();
 		if(document.signup.password.value === document.signup.confirm.value) {
 			axios.post(URL + 'api/user/signup', {
 				email: document.signup.email.value,
@@ -28,7 +29,6 @@ function Signup() {
 		} else {
 			alert('Password is not matched');
 		}
-		e.preventDefault();
 	}
 	
 	function _handleFacebookSignup(res) {
@@ -42,7 +42,7 @@ function Signup() {
 	return (
 		<div className='signin'>
 			<div className='signin-title'>Sign up!</div>
-			<form name='signup' onSubmit={() =>_handleForm()}>
+			<form name='signup' onSubmit={_handleForm}>
 				<input className='signin-input' type='email' name='email' placeholder='Email Address' required />
 				<input className='signin-input' type='password' name='password' placeholder='Password' required />
 				<input className='signin-input' type='password' name='confirm' placeholder='Confirm Password' required />

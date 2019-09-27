@@ -9,4 +9,6 @@ public interface AuthDao {
     public User signin(User user);
     public void signup(User user);
 
+    public User selectById(long id);
+
 }

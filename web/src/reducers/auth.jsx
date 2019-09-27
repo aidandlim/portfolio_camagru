@@ -1,25 +1,15 @@
 const auth = {
-    id: '',
-    email: '',
-    nickname: '',
-    isRegister: true,
+    token: '',
+    isRegister: false,
     isForgot: false,
     isAccount: false,
 }
 
 const authReducer = (state = auth, action) => {
     switch (action.type) {
-        case 'AUTH_ID':
+        case 'AUTH_TOKEN':
             return Object.assign({}, state, {
-                id: action.payload
-            });
-        case 'AUTH_EMAIL':
-            return Object.assign({}, state, {
-                email: action.payload
-            });
-        case 'AUTH_NICKNAME':
-            return Object.assign({}, state, {
-                nickname: action.payload
+                token: action.payload
             });
         case 'AUTH_ISREGISTER':
             return Object.assign({}, state, {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { auth_id, auth_email, auth_nickname, auth_isregister, auth_isforgot } from '../../../actions';
+import { auth_token, auth_isregister, auth_isforgot } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -20,10 +20,9 @@ function Signin() {
 			password: document.signin.password.value
 		})
 		.then(res => {
-			if(res.data.id !== -1) {
-				dispatch(auth_id(res.data.id));
-				dispatch(auth_email(res.data.email));
-				dispatch(auth_nickname(res.data.nickname));
+			console.log(res);
+			if(res.data.token !== null) {
+				dispatch(auth_token(res.data.token));
 			} else {
 				alert('Fail!');
 			}

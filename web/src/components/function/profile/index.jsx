@@ -1,11 +1,15 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { auth_id, auth_isaccount } from '../../../actions';
+import { auth_token, auth_isaccount } from '../../../actions';
 
 import './index.css';
 
 function Profile() {
 	const dispatch = useDispatch();
+
+	function logout() {
+		dispatch(auth_token(''));
+	}
 
 	return (
 		<div className='profile'>
@@ -26,8 +30,7 @@ function Profile() {
 				<div className='profile-textbox' contentEditable='true'></div>
 				<input className='profile-submit' type='submit' value='Update User Information' />
 				<input className='profile-logout' type='button' value='Go to Account Setting' onClick={ () => dispatch(auth_isaccount()) } />
-				<input className='profile-logout' type='button' value='Logout' onClick={ () => dispatch(auth_id('')) } />
-				{/* <input className='profile-delete' type='button' value='Delete User Information' /> */}
+				<input className='profile-logout' type='button' value='Logout' onClick={ () => logout() }/>
 			</form>
 		</div>
 	);

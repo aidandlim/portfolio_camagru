@@ -15,4 +15,14 @@
         VALUES
             (#{email}, PASSWORD(#{password}), #{nickname})
     </insert>
+
+    <select id="selectById" resultType="com.aidandlim.camagru.dto.User">
+        SELECT
+            id, email, nickname
+        FROM
+            user
+        WHERE
+            id = #{id}
+    </select>
+
 </mapper>

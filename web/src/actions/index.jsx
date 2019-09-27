@@ -9,23 +9,9 @@ export const ui_nav = (value) => {
 
 /***************************************************/
 
-export const auth_id = (value) => {
+export const auth_token = (value) => {
     return {
-        type: 'AUTH_ID',
-        payload: value
-    };
-};
-
-export const auth_email = (value) => {
-    return {
-        type: 'AUTH_EMAIL',
-        payload: value
-    };
-};
-
-export const auth_nickname = (value) => {
-    return {
-        type: 'AUTH_NICKNAME',
+        type: 'AUTH_TOKEN',
         payload: value
     };
 };
@@ -104,6 +90,29 @@ export const content_id = (value) => {
 export const content_islikes = (value) => {
     return {
         type: 'CONTENT_ISLIKES',
+        payload: value
+    };
+};
+
+/***************************************************/
+
+export const user_id = (value) => {
+    return {
+        type: 'USER_ID',
+        payload: value
+    };
+};
+
+export const user_email = (value) => {
+    return {
+        type: 'USER_EMIAL',
+        payload: value
+    };
+};
+
+export const user_nickname = (value) => {
+    return {
+        type: 'USER_NICKNAME',
         payload: value
     };
 };

@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-
 @RestController
 public class AuthAPI {
 
@@ -17,9 +15,7 @@ public class AuthAPI {
     AuthService service;
 
     @RequestMapping("/api/user/isLogin")
-    public User isLogin(@RequestBody Token token) {
-        return (service.isLogin(token));
-    }
+    public boolean isLogin(@RequestBody Token token) { return (service.isLogin(token)); }
 
     @RequestMapping("/api/user/signin")
     public Token signin(@RequestBody User user) {
@@ -30,5 +26,8 @@ public class AuthAPI {
     public boolean signup(@RequestBody User user) {
         return (service.signup(user));
     }
+
+    @RequestMapping("/api/user/select")
+    public User select(@RequestBody Token token) { return (service.select(token)); }
     
 }

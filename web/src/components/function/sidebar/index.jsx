@@ -12,7 +12,7 @@ function Sidebar() {
 	
 	return (
 		<div className='sidebar'>
-			{ auth.id === '' ? <Auth /> : (auth.isAccount ? <Account /> : <Profile />) }
+			{ auth.token === '' ? <Auth /> : (auth.isAccount ? <Account /> : <Profile />) }
 		</div>
 	);
 }

@@ -8,9 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 @Service
 public class AuthService {
 
@@ -20,10 +17,16 @@ public class AuthService {
     @Autowired
     AuthDao dao;
 
+    @Autowired
+    TokenService tokenService;
+
     @Transactional
-    public User isLogin(Token token) {
-        User result = new User(-1);
-        return result;
+    public boolean isLogin(Token token) {
+        try {
+            return (tokenService.checkToken(token));
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Transactional
@@ -42,13 +45,20 @@ public class AuthService {
         try {
             dao = sqlSession.getMapper(AuthDao.class);
             User result = dao.signin(user);
-            if(result != null) {
-                result.setToken("");
-                return (result);
-            }
-            return (new Token("null"));
+            return (tokenService.createToken(result));
         } catch (Exception e) {
-            return (new Token("null"));
+            return (new Token(""));
+        }
+    }
+
+    @Transactional
+    public User select(Token token) {
+        try {
+            dao = sqlSession.getMapper(AuthDao.class);
+            User result = dao.selectById(tokenService.getIdFromToken(token));
+            return (result);
+        } catch (Exception e) {
+            return (null);
         }
     }
 

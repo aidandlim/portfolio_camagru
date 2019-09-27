@@ -1,0 +1,24 @@
+.likes {
+    width: 100%;
+    height: auto;
+    padding-bottom: 0.5rem;
+
+    position: relative;
+    float: left;
+
+    border-top: solid 1px #303030;
+}
+
+.likes-user {
+    width: calc(2.45rem - 2px);
+    height: calc(2.45rem - 2px);
+    margin: 0.5rem 0 0 0.5rem;
+
+    position: relative;
+    float: left;
+
+    border: solid 1px #404040;
+    border-radius: 50%;
+
+    cursor: pointer;
+}

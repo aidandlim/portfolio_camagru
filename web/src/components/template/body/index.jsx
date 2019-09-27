@@ -20,9 +20,9 @@ function Body() {
 			{ ui.nav === 4 ? <Notification /> : '' }
 			<div className='inner-container'>
 				{ content.id !== -1 ? <Detail id={content.id} /> : '' }
-				{ content.id === -1 ? <Post id={0} /> : '' }
-				{ content.id === -1 ? <Post id={1} /> : '' }
-				{ content.id === -1 ? <Post id={2} /> : '' }
+				<Post id={0} />
+				<Post id={1} />
+				<Post id={2} />
 			</div>
 		</div>
 	);

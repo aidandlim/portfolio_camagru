@@ -86,3 +86,10 @@ export const content_id = (value) => {
         payload: value
     };
 };
+
+export const content_islikes = (value) => {
+    return {
+        type: 'CONTENT_ISLIKES',
+        payload: value
+    };
+};

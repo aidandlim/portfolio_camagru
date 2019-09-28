@@ -1,10 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { auth_token, auth_isaccount, user_id, user_email, user_nickname, user_bio } from '../../../actions';
+import { auth_token, auth_isaccount, user_id, user_email, user_nickname, user_bio, user_isprivate, user_isnotificate, user_pic } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
 
+import default_user from '../../../resources/default_user.jpg';
 import './index.css';
 
 function Profile() {
@@ -63,8 +64,7 @@ function Profile() {
 			if(res.data !== null) {
 				dispatch(user_id(res.data.id));
 				dispatch(user_email(res.data.email));
-				dispatch(user_nickname(res.data.nickname));
-				
+				dispatch(user_nickname(res.data.nickname));	
 				dispatch(user_bio(res.data.bio));
 			} else {
 				alert('Fail!');
@@ -78,11 +78,18 @@ function Profile() {
 		dispatch(user_email(''));
 		dispatch(user_nickname(''));
 		dispatch(user_bio(''));
+		dispatch(user_isprivate(false));
+		dispatch(user_isnotificate(false));
+		dispatch(user_pic(null));
 	}
 
 	return (
 		<div className='profile'>
-			<div className='profile-profile'></div>
+			<div className='profile-profile' style={
+				user.pic === null ? 
+				{backgroundImage: 'url(\'' + default_user + '\')', backgroundSize: '10rem 10rem', backgroundRepeat: 'no-repeat'} : 
+				{backgroundImage: 'url(\'' + user.pic + '\')', backgroundSize: '10rem 10rem', backgroundRepeat: 'no-repeat'}
+			}></div>
 			<div className='profile-change-profile'>Change Profile Picture</div>
 			<form name='changeProfile' onSubmit={_handleForm}>
 				<span className='profile-placeholder'>Nickname</span>
@@ -90,7 +97,7 @@ function Profile() {
 				<span className='profile-placeholder'>Email</span>
 				<input className='profile-input' type='email' name='email' required defaultValue={user.email} />
 				<span className='profile-placeholder'>Bio</span>
-				<input className='profile-textbox' name='bio' defaultValue={user.bio} />
+				<input className='profile-input' name='bio' defaultValue={user.bio} />
 				<input className='profile-submit' type='submit' value='Update User Information' />
 			</form>
 			<form name='changePassword' onSubmit={_handleChangePassword}>

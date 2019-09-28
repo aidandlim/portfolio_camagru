@@ -36,15 +36,52 @@ export const auth_isaccount = () => {
 
 /***************************************************/
 
-export const account_isprivate = () => {
+export const user_id = (value) => {
     return {
-        type: 'ACCOUNT_ISPRIVATE'
+        type: 'USER_ID',
+        payload: value
     };
 };
 
-export const account_isnotificate = () => {
+export const user_email = (value) => {
     return {
-        type: 'ACCOUNT_ISNOTIFICATE'
+        type: 'USER_EMAIL',
+        payload: value
+    };
+};
+
+export const user_nickname = (value) => {
+    return {
+        type: 'USER_NICKNAME',
+        payload: value
+    };
+};
+
+export const user_bio = (value) => {
+    return {
+        type: 'USER_BIO',
+        payload: value
+    };
+};
+
+export const user_isprivate = (value) => {
+    return {
+        type: 'USER_ISPRIVATE',
+        payload: value
+    };
+};
+
+export const user_isnotificate = (value) => {
+    return {
+        type: 'USER_ISNOTIFICATE',
+        payload: value
+    };
+};
+
+export const user_pic = (value) => {
+    return {
+        type: 'USER_PIC',
+        payload: value
     };
 };
 
@@ -96,30 +133,3 @@ export const content_islikes = (value) => {
 
 /***************************************************/
 
-export const user_id = (value) => {
-    return {
-        type: 'USER_ID',
-        payload: value
-    };
-};
-
-export const user_email = (value) => {
-    return {
-        type: 'USER_EMAIL',
-        payload: value
-    };
-};
-
-export const user_nickname = (value) => {
-    return {
-        type: 'USER_NICKNAME',
-        payload: value
-    };
-};
-
-export const user_bio = (value) => {
-    return {
-        type: 'USER_BIO',
-        payload: value
-    };
-};

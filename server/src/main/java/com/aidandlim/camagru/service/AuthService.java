@@ -55,10 +55,10 @@ public class AuthService {
     }
 
     @Transactional
-    public User selectById(Token token) {
+    public User select(Token token) {
         try {
             dao = sqlSession.getMapper(AuthDao.class);
-            User result = dao.selectById(tokenService.getIdFromToken(token));
+            User result = dao.select(tokenService.getIdFromToken(token));
             return (result);
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,6 +89,46 @@ public class AuthService {
             if(dao.signin(user) == null)
                 return (false);
             dao.updatePassword(user);
+            return (true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
+
+    @Transactional
+    public boolean updatePrivate(User user) {
+        if(!tokenService.checkToken(new Token(user.getToken())))
+            return false;
+        try {
+            dao = sqlSession.getMapper(AuthDao.class);
+            dao.updatePrivate(user);
+            return (true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
+
+    @Transactional
+    public boolean updateNotificate(User user) {
+        if(!tokenService.checkToken(new Token(user.getToken())))
+            return false;
+        try {
+            dao = sqlSession.getMapper(AuthDao.class);
+            dao.updateNotificate(user);
+            return (true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
+
+    @Transactional
+    public boolean delete(User user) {
+        try {
+            dao = sqlSession.getMapper(AuthDao.class);
+            dao.delete(user);
             return (true);
         } catch (Exception e) {
             e.printStackTrace();

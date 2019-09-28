@@ -14,9 +14,8 @@
     position: relative;
     float: left;
 
-    background: url('https://post-phinf.pstatic.net/MjAxOTA4MDZfMTAg/MDAxNTY1MDc5NDM2NjQy.mXguO78S40YwnkUe6KGCu_QTEJDvcOr9AAtGosAi_wgg.05dbyJZgGd9_0VNWoP5TZVedTivq-24-Z7QMWipjEfUg.JPEG/1-2.jpg?type=w1200');
-    background-size: 11rem 11rem;
-    background-repeat: no-repeat;
+    object-fit: cover;
+
     border: solid 1px #404040;
     border-radius: 50%;
 }
@@ -78,35 +77,10 @@
     opacity: 0.75;
 }
 
-.profile-textbox {
-    width: calc(100% - 1rem);
-    height: auto;
-    min-height: 1rem;
-    margin-bottom: 1rem;
-    padding: 0.3rem 0.5rem;
-
-    position: relative;
-    float: left;
-
-    color: white;
-    font-size: 0.5rem;
-    font-weight: 600;
-    line-height: 1rem;
-    background: none;
-    border: none;
-    border-bottom: solid 0.1rem #404040;
-
-    outline: none;
-
-    opacity: 0.75;
-
-    content: attr(data-value);
-}
-
 .profile-submit {
     width: 100%;
     height: 1.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 
     position: relative;
     float: left;

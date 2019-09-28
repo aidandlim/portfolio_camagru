@@ -16,9 +16,9 @@
             (#{email}, PASSWORD(#{password}), #{nickname})
     </insert>
 
-    <select id="selectById" resultType="com.aidandlim.camagru.dto.User">
+    <select id="select" resultType="com.aidandlim.camagru.dto.User">
         SELECT
-            id, email, nickname, bio
+            id, email, nickname, bio, isPrivate, isNotificate, pic
         FROM
             user
         WHERE
@@ -44,5 +44,30 @@
         WHERE
             email = #{email}
     </update>
+
+    <update id="updatePrivate">
+        UPDATE
+            user
+        SET
+            isPrivate = !isPrivate
+        WHERE
+            id = #{id}
+    </update>
+
+    <update id="updateNotificate">
+        UPDATE
+            user
+        SET
+            isNotificate = !isNotificate
+        WHERE
+            id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM
+            user
+        WHERE
+            id = #{id}
+    </delete>
 
 </mapper>

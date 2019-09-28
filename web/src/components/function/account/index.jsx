@@ -1,44 +1,100 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { auth_isaccount, account_isprivate, account_isnotificate } from '../../../actions';
+import { auth_token, auth_isaccount, user_id, user_email, user_nickname, user_bio, user_isprivate, user_isnotificate, user_pic } from '../../../actions';
+
+import axios from 'axios';
+import { URL } from '../../../const';
 
 import './index.css';
 
 function Account() {
-	const account = useSelector(state => state.account);
+	const auth = useSelector(state => state.auth);
+	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
+
+	function _handleIsPrivate() {
+		axios.post(URL + 'api/user/updatePrivate', {
+			token: auth.token,
+			id: user.id,
+		})
+		.then(res => {
+			if(res.data) {
+				dispatch(user_isprivate(!user.isPrivate));
+			} else {
+				alert('Fail!');
+			}
+		});
+		
+	}
+
+	function _handleIsNotificate() {
+		axios.post(URL + 'api/user/updateNotificate', {
+			token: auth.token,
+			id: user.id,
+		})
+		.then(res => {
+			if(res.data) {
+				dispatch(user_isnotificate(!user.isNotificate));
+			} else {
+				alert('Fail!');
+			}
+		});
+	}
+
+	function _deleteUser() {
+		if(window.confirm('Are you sure?')) {
+			axios.post(URL + 'api/user/delete', {
+				id: user.id,
+			})
+			.then(res => {
+				if(res.data) {
+					dispatch(auth_token(''));
+					dispatch(user_id(-1));
+					dispatch(user_email(''));
+					dispatch(user_nickname(''));
+					dispatch(user_bio(''));
+					dispatch(user_isprivate(false));
+					dispatch(user_isnotificate(false));
+					dispatch(user_pic(undefined));
+					dispatch(auth_isaccount(false));
+				} else {
+					alert('Fail!');
+				}
+			});
+		}
+	}
 
 	return (
 		<div className='account'>
 			<span className='account-title'>Private Account</span>
-			{ account.isPrivate 
+			{ user.isPrivate 
 				? 
-					<div className='account-toggle' onClick={() => dispatch(account_isprivate())}>
+					<div className='account-toggle' onClick={ () => _handleIsPrivate() }>
 						<div className='account-toggle-box-active'></div>
 						<div className='account-toggle-button-active'></div>
 					</div>
 				:
-					<div className='account-toggle' onClick={() => dispatch(account_isprivate())}>
+					<div className='account-toggle' onClick={ () => _handleIsPrivate() }>
 						<div className='account-toggle-box-inactive'></div>
 						<div className='account-toggle-button-inactive'></div>
 					</div>
 			}
 			<span className='account-title'>Send Notification</span>
-			{ account.isNotificate 
+			{ user.isNotificate 
 				? 
-					<div className='account-toggle' onClick={() => dispatch(account_isnotificate())}>
+					<div className='account-toggle' onClick={ () => _handleIsNotificate() }>
 						<div className='account-toggle-box-active'></div>
 						<div className='account-toggle-button-active'></div>
 					</div>
 				:
-					<div className='account-toggle' onClick={() => dispatch(account_isnotificate())}>
+					<div className='account-toggle' onClick={ () => _handleIsNotificate() }>
 						<div className='account-toggle-box-inactive'></div>
 						<div className='account-toggle-button-inactive'></div>
 					</div>
 			}
 			<div className='signin-margin'></div>
 			<input className='profile-logout' type='button' value='Back to User Information' onClick={ () => dispatch(auth_isaccount()) } />
-			<input className='profile-delete' type='button' value='Delete Account' />
+			<input className='profile-delete' type='button' value='Delete Account' onClick={ () => _deleteUser() } />
 		</div>
 	);
 }

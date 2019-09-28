@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { auth_token, auth_isregister, auth_isforgot, user_id, user_email, user_nickname, user_bio } from '../../../actions';
+import { auth_token, auth_isregister, auth_isforgot, user_id, user_email, user_nickname, user_bio, user_isprivate, user_isnotificate, user_pic } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -30,7 +30,7 @@ function Signin() {
 	}
 
 	function _handleData(token) {
-		axios.post(URL + 'api/user/selectById', {
+		axios.post(URL + 'api/user/select', {
 			token: token
 		})
 		.then(res => {
@@ -39,6 +39,9 @@ function Signin() {
 				dispatch(user_email(res.data.email));
 				dispatch(user_nickname(res.data.nickname));
 				dispatch(user_bio(res.data.bio));
+				dispatch(user_isprivate(res.data.private));
+				dispatch(user_isnotificate(res.data.notificate));
+				dispatch(user_pic(res.data.pic));
 			} else {
 				alert('Fail!');
 			}

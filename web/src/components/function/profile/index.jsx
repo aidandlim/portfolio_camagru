@@ -1,10 +1,11 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { auth_token, auth_isaccount } from '../../../actions';
 
 import './index.css';
 
 function Profile() {
+	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
 
 	function logout() {
@@ -17,7 +18,7 @@ function Profile() {
 			<div className='profile-change-profile'>Change Profile Picture</div>
 			<form>
 				<span className='profile-placeholder'>Nickname</span>
-				<input className='profile-input' type='text' required />
+				<input className='profile-input' type='text' required defaultValue={user.nickname} />
 				<span className='profile-placeholder'>Current Password</span>
 				<input className='profile-input' type='text' />
 				<span className='profile-placeholder'>Change Password</span>
@@ -25,7 +26,7 @@ function Profile() {
 				<span className='profile-placeholder'>Confirm Password</span>
 				<input className='profile-input' type='password' />
 				<span className='profile-placeholder'>Email</span>
-				<input className='profile-input' type='email' required />
+				<input className='profile-input' type='email' required defaultValue={user.email} />
 				<span className='profile-placeholder'>Bio</span>
 				<div className='profile-textbox' contentEditable='true'></div>
 				<input className='profile-submit' type='submit' value='Update User Information' />

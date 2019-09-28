@@ -22,7 +22,7 @@ public class TokenService {
 
     private String secretKey = "JwTsEcReTbYdLiMoF42sIlIcOnVaLlEyInThEuSa";
 
-    public Token createToken(User user) throws Exception {
+    public Token createToken(User user) {
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
         Date expireTime = new Date();
         expireTime.setTime(expireTime.getTime() + 1000 * 60 * 60);
@@ -35,7 +35,7 @@ public class TokenService {
         headerMap.put("alg","HS256");
 
         Map<String, Object> map= new HashMap<String, Object>();
-        map.put("id", user.getId());
+        map.put("user_id", user.getId());
 
         JwtBuilder builder = Jwts.builder().setHeader(headerMap)
                 .setClaims(map)
@@ -45,7 +45,7 @@ public class TokenService {
         return new Token(builder.compact());
     }
 
-    public boolean checkToken(Token token) throws Exception {
+    public boolean checkToken(Token token) {
         try {
             Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(secretKey)).parseClaimsJws(token.getToken()).getBody();
             return true;
@@ -56,10 +56,10 @@ public class TokenService {
         }
     }
 
-    public long getIdFromToken(Token token) throws Exception {
+    public long getIdFromToken(Token token) {
         try {
             Claims claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(secretKey)).parseClaimsJws(token.getToken()).getBody();
-            return Long.parseLong((String) claims.get("id"));
+            return Long.parseLong(claims.get("user_id").toString());
         } catch (ExpiredJwtException exception) {
             return -1;
         } catch (JwtException exception) {

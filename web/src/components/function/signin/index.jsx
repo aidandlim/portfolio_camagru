@@ -1,6 +1,6 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { auth_token, auth_isregister, auth_isforgot } from '../../../actions';
+import { useSelector, useDispatch } from 'react-redux';
+import { auth_token, auth_isregister, auth_isforgot, user_id, user_email, user_nickname } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -20,9 +20,24 @@ function Signin() {
 			password: document.signin.password.value
 		})
 		.then(res => {
-			console.log(res);
-			if(res.data.token !== null) {
+			if(res.data.token !== '') {
 				dispatch(auth_token(res.data.token));
+				_handleData(res.data.token);
+			} else {
+				alert('Fail!');
+			}
+		});
+	}
+
+	function _handleData(token) {
+		axios.post(URL + 'api/user/selectById', {
+			token: token
+		})
+		.then(res => {
+			if(res.data !== null) {
+				dispatch(user_id(res.data.id));
+				dispatch(user_email(res.data.email));
+				dispatch(user_nickname(res.data.nickname));
 			} else {
 				alert('Fail!');
 			}

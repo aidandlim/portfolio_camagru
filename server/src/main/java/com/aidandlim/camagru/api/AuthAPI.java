@@ -27,7 +27,7 @@ public class AuthAPI {
         return (service.signup(user));
     }
 
-    @RequestMapping("/api/user/select")
-    public User select(@RequestBody Token token) { return (service.select(token)); }
+    @RequestMapping("/api/user/selectById")
+    public User selectById(@RequestBody Token token) { return (service.selectById(token)); }
     
 }

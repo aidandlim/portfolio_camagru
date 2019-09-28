@@ -105,7 +105,7 @@ export const user_id = (value) => {
 
 export const user_email = (value) => {
     return {
-        type: 'USER_EMIAL',
+        type: 'USER_EMAIL',
         payload: value
     };
 };

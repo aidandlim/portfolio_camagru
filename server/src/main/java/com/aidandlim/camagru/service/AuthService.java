@@ -52,10 +52,12 @@ public class AuthService {
     }
 
     @Transactional
-    public User select(Token token) {
+    public User selectById(Token token) {
         try {
             dao = sqlSession.getMapper(AuthDao.class);
+            System.out.println(tokenService.getIdFromToken(token));
             User result = dao.selectById(tokenService.getIdFromToken(token));
+            System.out.println(result.getEmail());
             return (result);
         } catch (Exception e) {
             return (null);

@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AuthDao {
 
-    public User signin(User user);
-    public void signup(User user);
+    User signin(User user);
+    void signup(User user);
 
-    public User selectById(long id);
+    User selectById(long id);
 
 }

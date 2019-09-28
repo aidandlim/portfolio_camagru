@@ -57,7 +57,7 @@ function Profile() {
 	}
 
 	function _handleData(token) {
-		axios.post(URL + 'api/user/selectById', {
+		axios.post(URL + 'api/user/select', {
 			token: token
 		})
 		.then(res => {

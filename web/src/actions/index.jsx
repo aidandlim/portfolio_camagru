@@ -116,3 +116,10 @@ export const user_nickname = (value) => {
         payload: value
     };
 };
+
+export const user_bio = (value) => {
+    return {
+        type: 'USER_BIO',
+        payload: value
+    };
+};

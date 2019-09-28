@@ -29,5 +29,11 @@ public class AuthAPI {
 
     @RequestMapping("/api/user/selectById")
     public User selectById(@RequestBody Token token) { return (service.selectById(token)); }
+
+    @RequestMapping("/api/user/update")
+    public boolean update(@RequestBody User user) { return (service.update(user)); }
+
+    @RequestMapping("/api/user/updatePassword")
+    public boolean updatePassword(@RequestBody User user) { return (service.updatePassword(user)); }
     
 }

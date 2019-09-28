@@ -18,11 +18,31 @@
 
     <select id="selectById" resultType="com.aidandlim.camagru.dto.User">
         SELECT
-            id, email, nickname
+            id, email, nickname, bio
         FROM
             user
         WHERE
             id = #{id}
     </select>
+
+    <update id="update">
+        UPDATE
+            user
+        SET
+            email = #{email},
+            nickname = #{nickname},
+            bio = #{bio}
+        WHERE
+            id = #{id}
+    </update>
+
+    <update id="updatePassword">
+        UPDATE
+            user
+        SET
+            password = PASSWORD(#{change})
+        WHERE
+            email = #{email}
+    </update>
 
 </mapper>

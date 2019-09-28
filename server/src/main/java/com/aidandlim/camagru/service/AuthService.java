@@ -25,6 +25,7 @@ public class AuthService {
         try {
             return (tokenService.checkToken(token));
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -36,6 +37,7 @@ public class AuthService {
             dao.signup(user);
             return true;
         } catch(Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -47,6 +49,7 @@ public class AuthService {
             User result = dao.signin(user);
             return (tokenService.createToken(result));
         } catch (Exception e) {
+            e.printStackTrace();
             return (new Token(""));
         }
     }
@@ -55,12 +58,41 @@ public class AuthService {
     public User selectById(Token token) {
         try {
             dao = sqlSession.getMapper(AuthDao.class);
-            System.out.println(tokenService.getIdFromToken(token));
             User result = dao.selectById(tokenService.getIdFromToken(token));
-            System.out.println(result.getEmail());
             return (result);
         } catch (Exception e) {
+            e.printStackTrace();
             return (null);
+        }
+    }
+
+    @Transactional
+    public boolean update(User user) {
+        if(!tokenService.checkToken(new Token(user.getToken())))
+            return false;
+        try {
+            dao = sqlSession.getMapper(AuthDao.class);
+            dao.update(user);
+            return (true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
+
+    @Transactional
+    public boolean updatePassword(User user) {
+        if(!tokenService.checkToken(new Token(user.getToken())))
+            return false;
+        try {
+            dao = sqlSession.getMapper(AuthDao.class);
+            if(dao.signin(user) == null)
+                return (false);
+            dao.updatePassword(user);
+            return (true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return (false);
         }
     }
 

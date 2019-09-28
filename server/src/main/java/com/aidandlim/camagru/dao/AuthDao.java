@@ -8,7 +8,8 @@ public interface AuthDao {
 
     User signin(User user);
     void signup(User user);
-
     User selectById(long id);
+    void update(User user);
+    void updatePassword(User user);
 
 }

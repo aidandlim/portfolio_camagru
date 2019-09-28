@@ -30,7 +30,7 @@ function Header() {
 
 	return (
 		<div className='header'>
-			<div className='header-title' onClick={() => window.location.reload()}>#Camagru</div>
+			<div className='header-title' onClick={() => dispatch(ui_nav(0))}>#Camagru</div>
 			{ ui.nav === 1 ? <FiXCircle className='header-icon' onClick={() => dispatch(ui_nav(0))}/> : <FiUser className='header-icon' onClick={() => openUser()}/> }
 		</div>
 	);

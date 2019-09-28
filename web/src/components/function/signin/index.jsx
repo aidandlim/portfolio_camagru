@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { auth_token, auth_isregister, auth_isforgot, user_id, user_email, user_nickname } from '../../../actions';
+import { useDispatch } from 'react-redux';
+import { auth_token, auth_isregister, auth_isforgot, user_id, user_email, user_nickname, user_bio } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -38,6 +38,7 @@ function Signin() {
 				dispatch(user_id(res.data.id));
 				dispatch(user_email(res.data.email));
 				dispatch(user_nickname(res.data.nickname));
+				dispatch(user_bio(res.data.bio));
 			} else {
 				alert('Fail!');
 			}

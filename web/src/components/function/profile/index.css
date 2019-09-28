@@ -99,12 +99,14 @@
     outline: none;
 
     opacity: 0.75;
+
+    content: attr(data-value);
 }
 
 .profile-submit {
     width: 100%;
     height: 1.5rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
 
     position: relative;
     float: left;

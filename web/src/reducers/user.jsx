@@ -2,6 +2,7 @@ const user = {
     id: -1,
     email: '',
     nickname: '',
+    bio: '',
 }
 
 const userReducer = (state = user, action) => {
@@ -17,6 +18,10 @@ const userReducer = (state = user, action) => {
         case 'USER_NICKNAME':
             return Object.assign({}, state, {
                 nickname: action.payload
+            });
+        case 'USER_BIO':
+            return Object.assign({}, state, {
+                bio: action.payload
             });
         default:
             return state;

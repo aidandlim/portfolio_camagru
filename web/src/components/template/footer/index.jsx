@@ -8,12 +8,18 @@ import './index.css';
 
 function Footer() {
 	const ui = useSelector(state => state.ui);
+	const auth = useSelector(state => state.auth);
 	const dispatch = useDispatch();
 
 	function handleCamera() {
-		dispatch(ui_nav(3));
-		dispatch(camera_isload(true));
-		dispatch(camera_preview(''));
+		if(auth.token !== '') {
+			dispatch(ui_nav(3));
+			dispatch(camera_isload(true));
+			dispatch(camera_preview(''));
+		} else {
+			dispatch((ui_nav(1)));
+			alert('You need to sign in first');
+		}
 	}
 
 	return (

@@ -23,7 +23,7 @@ public class AuthService {
     @Transactional
     public boolean isLogin(Token token) {
         try {
-            return (tokenService.checkToken(token));
+            return (token == null ? false : tokenService.checkToken(token));
         } catch (Exception e) {
             e.printStackTrace();
             return false;

@@ -85,11 +85,15 @@ function Profile() {
 
 	return (
 		<div className='profile'>
-			<div className='profile-profile' style={
-				user.pic === null ? 
-				{backgroundImage: 'url(\'' + default_user + '\')', backgroundSize: '10rem 10rem', backgroundRepeat: 'no-repeat'} : 
-				{backgroundImage: 'url(\'' + user.pic + '\')', backgroundSize: '10rem 10rem', backgroundRepeat: 'no-repeat'}
-			}></div>
+			<div className='profile-profile'
+				style={
+					user.pic === null
+					?
+					{ backgroundImage: 'url(\'' + default_user + '\')' }
+					:
+					{ backgroundImage: 'url(\'' + user.pic + '\')' }
+				}
+			></div>
 			<div className='profile-change-profile'>Change Profile Picture</div>
 			<form name='changeProfile' onSubmit={_handleForm}>
 				<span className='profile-placeholder'>Nickname</span>

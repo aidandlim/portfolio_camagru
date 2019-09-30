@@ -21,10 +21,16 @@ function Signin() {
 		})
 		.then(res => {
 			if(res.data.token !== '') {
-				dispatch(auth_token(res.data.token));
-				_handleData(res.data.token);
+				if(res.data.status) {
+					dispatch(auth_token(res.data.token));
+					_handleData(res.data.token);
+				} else {
+					if(window.confirm('This account has not verified by email. Do you want to get verifying email again?')) {
+						_handleVerifyingEmail();
+					}
+				}
 			} else {
-				alert('Fail!');
+				alert('Email or password is wrong');
 			}
 		});
 	}
@@ -42,6 +48,19 @@ function Signin() {
 				dispatch(user_isprivate(res.data.private));
 				dispatch(user_isnotificate(res.data.notificate));
 				dispatch(user_pic(res.data.pic));
+			} else {
+				alert('Fail!');
+			}
+		});
+	}
+
+	function _handleVerifyingEmail() {
+		axios.post(URL + 'api/user/verifyAgain', {
+			email: document.signin.email.value
+		})
+		.then(res => {
+			if(res.data) {
+				alert('Success!');
 			} else {
 				alert('Fail!');
 			}

@@ -27,6 +27,11 @@ public class AuthAPI {
         return (service.signup(user));
     }
 
+    @RequestMapping("/api/user/verifyAgain")
+    public boolean verifyAgain(@RequestBody User user) {
+        return (service.verifyAgain(user));
+    }
+
     @RequestMapping("/api/user/select")
     public User select(@RequestBody Token token) { return (service.select(token)); }
 

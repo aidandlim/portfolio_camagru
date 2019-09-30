@@ -6,7 +6,7 @@
         SELECT * FROM
             user
         WHERE
-            email = #{email} AND password = PASSWORD(#{password}) AND authorized = 1
+            email = #{email} AND password = PASSWORD(#{password})
     </select>
 
     <insert id="signup">

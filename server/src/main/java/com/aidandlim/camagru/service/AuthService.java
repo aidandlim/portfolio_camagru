@@ -76,14 +76,33 @@ public class AuthService {
     }
 
     @Transactional
+    public boolean verifyAgain(User user) {
+        try {
+            verifyDao = sqlSession.getMapper(VerifyDao.class);
+            verifyDao.delete(user);
+            user.setUuid(UUID.randomUUID().toString().replace("-", ""));
+            mailService.sendVerifyMail(user);
+            verifyDao.insert(user);
+            return true;
+        } catch(Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Transactional
     public Token signin(User user) {
         try {
             authDao = sqlSession.getMapper(AuthDao.class);
             User result = authDao.signin(user);
-            return (tokenService.createToken(result));
+            if(result.getAuthorized() == 1) {
+                return new Token(tokenService.createToken(result).getToken(), 1);
+            } else {
+                return new Token(0);
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            return (new Token(""));
+            return new Token("");
         }
     }
 

@@ -11,6 +11,7 @@ public class User extends Token {
     private boolean isPrivate;
     private boolean isNotificate;
     private String pic;
+    private int authorized;
     private String uuid;
 
     public User() {
@@ -22,7 +23,7 @@ public class User extends Token {
         this.id = id;
     }
 
-    public User(long id, String email, String password, String change, String nickname, String bio, boolean isPrivate, boolean isNotificate, String pic, String uuid) {
+    public User(long id, String email, String password, String change, String nickname, String bio, boolean isPrivate, boolean isNotificate, String pic, int authorized, String uuid) {
         super();
         this.id = id;
         this.email = email;
@@ -33,6 +34,7 @@ public class User extends Token {
         this.isPrivate = isPrivate;
         this.isNotificate = isNotificate;
         this.pic = pic;
+        this.authorized = authorized;
         this.uuid = uuid;
     }
 
@@ -106,6 +108,14 @@ public class User extends Token {
 
     public void setPic(String pic) {
         this.pic = pic;
+    }
+
+    public int getAuthorized() {
+        return authorized;
+    }
+
+    public void setAuthorized(int authorized) {
+        this.authorized = authorized;
     }
 
     public String getUuid() {

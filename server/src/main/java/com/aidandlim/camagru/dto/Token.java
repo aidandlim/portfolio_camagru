@@ -12,6 +12,10 @@ public class Token {
         this.token = token;
     }
 
+    public Token(int status) {
+        this.status = status;
+    }
+
     public Token(String token, int status) {
         this.token = token;
         this.status = status;

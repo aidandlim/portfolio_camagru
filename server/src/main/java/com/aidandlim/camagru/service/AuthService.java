@@ -1,12 +1,15 @@
 package com.aidandlim.camagru.service;
 
 import com.aidandlim.camagru.dao.AuthDao;
+import com.aidandlim.camagru.dao.VerifyDao;
 import com.aidandlim.camagru.dto.Token;
 import com.aidandlim.camagru.dto.User;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.UUID;
 
 @Service
 public class AuthService {
@@ -15,7 +18,10 @@ public class AuthService {
     SqlSession sqlSession;
 
     @Autowired
-    AuthDao dao;
+    AuthDao authDao;
+
+    @Autowired
+    VerifyDao verifyDao;
 
     @Autowired
     TokenService tokenService;
@@ -36,9 +42,14 @@ public class AuthService {
     @Transactional
     public boolean signup(User user) {
         try {
-            dao = sqlSession.getMapper(AuthDao.class);
-            dao.signup(user);
-            mailService.sendMail();
+            authDao = sqlSession.getMapper(AuthDao.class);
+            verifyDao = sqlSession.getMapper(VerifyDao.class);
+
+            authDao.signup(user);
+            user.setUuid(UUID.randomUUID().toString().replace("-", ""));
+            mailService.sendVerifyMail(user);
+            verifyDao.insert(user);
+
             return true;
         } catch(Exception e) {
             e.printStackTrace();
@@ -47,10 +58,28 @@ public class AuthService {
     }
 
     @Transactional
+    public String verify(User user) {
+        try {
+            verifyDao = sqlSession.getMapper(VerifyDao.class);
+
+            if(verifyDao.select(user).getUuid().equals(user.getUuid())) {
+                verifyDao.update(user);
+                verifyDao.delete(user);
+            } else {
+                return "Fail";
+            }
+            return "Success";
+        } catch(Exception e) {
+            e.printStackTrace();
+            return "Fail";
+        }
+    }
+
+    @Transactional
     public Token signin(User user) {
         try {
-            dao = sqlSession.getMapper(AuthDao.class);
-            User result = dao.signin(user);
+            authDao = sqlSession.getMapper(AuthDao.class);
+            User result = authDao.signin(user);
             return (tokenService.createToken(result));
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,8 +90,8 @@ public class AuthService {
     @Transactional
     public User select(Token token) {
         try {
-            dao = sqlSession.getMapper(AuthDao.class);
-            User result = dao.select(tokenService.getIdFromToken(token));
+            authDao = sqlSession.getMapper(AuthDao.class);
+            User result = authDao.select(tokenService.getIdFromToken(token));
             return (result);
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,8 +104,8 @@ public class AuthService {
         if(!tokenService.checkToken(new Token(user.getToken())))
             return false;
         try {
-            dao = sqlSession.getMapper(AuthDao.class);
-            dao.update(user);
+            authDao = sqlSession.getMapper(AuthDao.class);
+            authDao.update(user);
             return (true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,10 +118,10 @@ public class AuthService {
         if(!tokenService.checkToken(new Token(user.getToken())))
             return false;
         try {
-            dao = sqlSession.getMapper(AuthDao.class);
-            if(dao.signin(user) == null)
+            authDao = sqlSession.getMapper(AuthDao.class);
+            if(authDao.signin(user) == null)
                 return (false);
-            dao.updatePassword(user);
+            authDao.updatePassword(user);
             return (true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -105,8 +134,8 @@ public class AuthService {
         if(!tokenService.checkToken(new Token(user.getToken())))
             return false;
         try {
-            dao = sqlSession.getMapper(AuthDao.class);
-            dao.updatePrivate(user);
+            authDao = sqlSession.getMapper(AuthDao.class);
+            authDao.updatePrivate(user);
             return (true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,8 +148,8 @@ public class AuthService {
         if(!tokenService.checkToken(new Token(user.getToken())))
             return false;
         try {
-            dao = sqlSession.getMapper(AuthDao.class);
-            dao.updateNotificate(user);
+            authDao = sqlSession.getMapper(AuthDao.class);
+            authDao.updateNotificate(user);
             return (true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -131,8 +160,8 @@ public class AuthService {
     @Transactional
     public boolean delete(User user) {
         try {
-            dao = sqlSession.getMapper(AuthDao.class);
-            dao.delete(user);
+            authDao = sqlSession.getMapper(AuthDao.class);
+            authDao.delete(user);
             return (true);
         } catch (Exception e) {
             e.printStackTrace();

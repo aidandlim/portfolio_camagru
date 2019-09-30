@@ -20,7 +20,7 @@ import java.util.Map;
 @Service
 public class TokenService {
 
-    private String secretKey = "JwTsEcReTbYdLiMoF42sIlIcOnVaLlEyInThEuSa";
+    private String secretKey = "42Camagru";
 
     public Token createToken(User user) {
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;

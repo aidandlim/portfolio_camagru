@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aidandlim.camagru.dao.VerifyDao">
+
+    <select id="select" resultType="com.aidandlim.camagru.dto.User">
+        SELECT
+            uuid
+        FROM
+            verify
+        WHERE
+            email = #{email}
+    </select>
+
+   <insert id="insert">
+        INSERT INTO verify
+            (email, uuid)
+        VALUES
+            (#{email}, #{uuid})
+    </insert>
+
+    <update id="update">
+        UPDATE
+            user
+        SET
+            authorized = 1
+        WHERE
+            email = #{email}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM
+            verify
+        WHERE
+            email = #{email}
+    </delete>
+
+</mapper>

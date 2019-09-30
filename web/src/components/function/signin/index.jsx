@@ -8,7 +8,10 @@ import { URL } from '../../../const';
 import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
 
+import { confirmAlert } from 'react-confirm-alert';
+
 import './index.css';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 function Signin() {
 	const dispatch = useDispatch();
@@ -25,12 +28,30 @@ function Signin() {
 					dispatch(auth_token(res.data.token));
 					_handleData(res.data.token);
 				} else {
-					if(window.confirm('This account has not verified by email. Do you want to get verifying email again?')) {
-						_handleVerifyingEmail();
-					}
+					confirmAlert({
+						title: 'Verifying email',
+						message: 'This account has not verified by email. Do you want to get verifying email again?',
+						buttons: [
+							{
+								label: 'Yes',
+								onClick: () => _handleVerifyingEmail()
+							},
+							{
+								label: 'No, Thanks'
+							}
+						]
+					});
 				}
 			} else {
-				alert('Email or password is wrong');
+				confirmAlert({
+					title: 'Check your info',
+					message: 'It seems like email or password information is wrong',
+					buttons: [
+						{
+							label: 'OK'
+						}
+					]
+				});
 			}
 		});
 	}
@@ -49,7 +70,15 @@ function Signin() {
 				dispatch(user_isnotificate(res.data.notificate));
 				dispatch(user_pic(res.data.pic));
 			} else {
-				alert('Fail!');
+				confirmAlert({
+					title: 'Server Error',
+					message: 'Something went wrong :(',
+					buttons: [
+						{
+							label: 'I will try again'
+						}
+					]
+				});
 			}
 		});
 	}
@@ -57,13 +86,6 @@ function Signin() {
 	function _handleVerifyingEmail() {
 		axios.post(URL + 'api/user/verifyAgain', {
 			email: document.signin.email.value
-		})
-		.then(res => {
-			if(res.data) {
-				alert('Success!');
-			} else {
-				alert('Fail!');
-			}
 		});
 	}
 	

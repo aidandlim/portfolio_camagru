@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { auth_token, auth_isregister, auth_isforgot, user_id, user_email, user_nickname, user_bio, user_isprivate, user_isnotificate, user_pic } from '../../../actions';
+import { ui_isload, auth_token, auth_isregister, auth_isforgot, user_id, user_email, user_nickname, user_bio, user_isprivate, user_isnotificate, user_pic } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -17,6 +17,7 @@ function Signin() {
 
 	function _handleForm(e) {
 		e.preventDefault();
+		dispatch(ui_isload());
 		axios.post(URL + 'api/user/signin', {
 			email: document.signin.email.value,
 			password: document.signin.password.value
@@ -50,6 +51,9 @@ function Signin() {
 					]
 				});
 			}
+			setTimeout(() => {
+				dispatch(ui_isload());
+			}, 500);
 		});
 	}
 
@@ -80,8 +84,13 @@ function Signin() {
 	}
 
 	function _handleVerifyingEmail() {
+		dispatch(ui_isload());
 		axios.post(URL + 'api/user/verifyAgain', {
 			email: document.signin.email.value
+		}).then(() => {
+			setTimeout(() => {
+				dispatch(ui_isload());
+			}, 500);
 		});
 	}
 	

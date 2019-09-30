@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { auth_token, auth_isaccount, user_id, user_email, user_nickname, user_bio, user_isprivate, user_isnotificate, user_pic } from '../../../actions';
+import { ui_isload, auth_token, auth_isaccount, user_id, user_email, user_nickname, user_bio, user_isprivate, user_isnotificate, user_pic } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -17,6 +17,7 @@ function Profile() {
 
 	function _handleForm(e) {
 		e.preventDefault();
+		dispatch(ui_isload());
 		axios.post(URL + 'api/user/update', {
 			token: auth.token,
 			id: user.id,
@@ -31,14 +32,9 @@ function Profile() {
 				} else {
 					_handleData(auth.token);
 				}
-				confirmAlert({
-					message: 'Update completed',
-					buttons: [
-						{
-							label: 'Okay'
-						}
-					]
-				});
+				setTimeout(() => {
+					dispatch(ui_isload());
+				}, 500);
 			} else {
 				confirmAlert({
 					message: 'Something went wrong :(',
@@ -48,12 +44,16 @@ function Profile() {
 						}
 					]
 				});
+				setTimeout(() => {
+					dispatch(ui_isload());
+				}, 500);
 			}
 		});
 	}
 
 	function _handleChangePassword(e) {
 		e.preventDefault();
+		dispatch(ui_isload());
 		if(document.changePassword.change.value === document.changePassword.confirm.value) {
 			axios.post(URL + 'api/user/updatePassword', {
 				token: auth.token,
@@ -66,14 +66,6 @@ function Profile() {
 					document.changePassword.current.value = '';
 					document.changePassword.change.value = '';
 					document.changePassword.confirm.value = '';
-					confirmAlert({
-						message: 'Update completed',
-						buttons: [
-							{
-								label: 'Okay'
-							}
-						]
-					});
 				} else {
 					confirmAlert({
 						message: 'Something went wrong :(',
@@ -84,6 +76,9 @@ function Profile() {
 						]
 					});
 				}
+				setTimeout(() => {
+					dispatch(ui_isload());
+				}, 500);
 			});
 		} else {
 			confirmAlert({
@@ -94,6 +89,9 @@ function Profile() {
 					}
 				]
 			});
+			setTimeout(() => {
+				dispatch(ui_isload());
+			}, 500);
 		}
 	}
 

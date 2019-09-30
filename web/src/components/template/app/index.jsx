@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import Loading from '../loading';
 import Header from '../header';
 import Body from '../body';
 import Footer from '../footer';
@@ -14,6 +15,7 @@ function App() {
 	
 	return (
 		<div className='app no-drag'>
+			{ ui.isLoad ? <Loading /> : ''}
 			<Header />
 			<Body />
 			<Footer />

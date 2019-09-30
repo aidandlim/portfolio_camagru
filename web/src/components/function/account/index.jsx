@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { auth_token, auth_isaccount, user_id, user_email, user_nickname, user_bio, user_isprivate, user_isnotificate, user_pic } from '../../../actions';
+import { ui_isload, auth_token, auth_isaccount, user_id, user_email, user_nickname, user_bio, user_isprivate, user_isnotificate, user_pic } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -15,6 +15,7 @@ function Account() {
 	const dispatch = useDispatch();
 
 	function _handleIsPrivate() {
+		dispatch(ui_isload());
 		axios.post(URL + 'api/user/updatePrivate', {
 			token: auth.token,
 			id: user.id,
@@ -32,11 +33,15 @@ function Account() {
 					]
 				});
 			}
+			setTimeout(() => {
+				dispatch(ui_isload());
+			}, 500);
 		});
 		
 	}
 
 	function _handleIsNotificate() {
+		dispatch(ui_isload());
 		axios.post(URL + 'api/user/updateNotificate', {
 			token: auth.token,
 			id: user.id,
@@ -54,6 +59,9 @@ function Account() {
 					]
 				});
 			}
+			setTimeout(() => {
+				dispatch(ui_isload());
+			}, 500);
 		});
 	}
 
@@ -73,6 +81,7 @@ function Account() {
 	}
 
 	function _deleteUser() {
+		dispatch(ui_isload());
 		if(window.confirm('Are you sure?')) {
 			axios.post(URL + 'api/user/delete', {
 				id: user.id,
@@ -88,6 +97,9 @@ function Account() {
 					dispatch(user_isnotificate(false));
 					dispatch(user_pic(undefined));
 					dispatch(auth_isaccount(false));
+					setTimeout(() => {
+						dispatch(ui_isload());
+					}, 500);
 				} else {
 					confirmAlert({
 						message: 'Something went wrong :(',

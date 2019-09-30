@@ -7,6 +7,12 @@ export const ui_nav = (value) => {
     };
 };
 
+export const ui_isload = () => {
+    return {
+        type: 'UI_ISLOAD'
+    };
+};
+
 /***************************************************/
 
 export const auth_token = (value) => {

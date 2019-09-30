@@ -139,6 +139,7 @@ public class AuthService {
             return false;
         try {
             authDao = sqlSession.getMapper(AuthDao.class);
+            authDao.update(user);
             User temp = authDao.select(tokenService.getIdFromToken(new Token(user.getToken())));
             if(!temp.getEmail().equals(user.getEmail())) {
                 verifyDao = sqlSession.getMapper(VerifyDao.class);
@@ -147,7 +148,6 @@ public class AuthService {
                 verifyDao.update(temp);
                 verifyDao.insert(user);
             }
-            authDao.update(user);
             return (true);
         } catch (Exception e) {
             e.printStackTrace();

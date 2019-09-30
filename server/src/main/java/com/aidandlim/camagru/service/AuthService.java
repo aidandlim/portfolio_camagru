@@ -40,6 +40,22 @@ public class AuthService {
     }
 
     @Transactional
+    public Token signin(User user) {
+        try {
+            authDao = sqlSession.getMapper(AuthDao.class);
+            User result = authDao.signin(user);
+            if(result.getAuthorized() == 1) {
+                return new Token(tokenService.createToken(result).getToken(), 1);
+            } else {
+                return new Token(0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Token("");
+        }
+    }
+
+    @Transactional
     public boolean signup(User user) {
         try {
             authDao = sqlSession.getMapper(AuthDao.class);
@@ -84,25 +100,24 @@ public class AuthService {
             mailService.sendVerifyMail(user);
             verifyDao.insert(user);
             return true;
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
 
     @Transactional
-    public Token signin(User user) {
+    public boolean forgot(User user) {
         try {
             authDao = sqlSession.getMapper(AuthDao.class);
-            User result = authDao.signin(user);
-            if(result.getAuthorized() == 1) {
-                return new Token(tokenService.createToken(result).getToken(), 1);
-            } else {
-                return new Token(0);
-            }
+            user.setUuid(UUID.randomUUID().toString().replace("-", ""));
+            user.setChange(user.getUuid());
+            authDao.updatePassword(user);
+            mailService.sendForgotMail(user);
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
-            return new Token("");
+            return false;
         }
     }
 
@@ -124,6 +139,14 @@ public class AuthService {
             return false;
         try {
             authDao = sqlSession.getMapper(AuthDao.class);
+            User temp = authDao.select(tokenService.getIdFromToken(new Token(user.getToken())));
+            if(!temp.getEmail().equals(user.getEmail())) {
+                verifyDao = sqlSession.getMapper(VerifyDao.class);
+                user.setUuid(UUID.randomUUID().toString().replace("-", ""));
+                mailService.sendVerifyMail(user);
+                verifyDao.update(temp);
+                verifyDao.insert(user);
+            }
             authDao.update(user);
             return (true);
         } catch (Exception e) {

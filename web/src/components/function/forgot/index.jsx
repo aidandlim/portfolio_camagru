@@ -2,18 +2,48 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { auth_isforgot } from '../../../actions';
 
+import axios from 'axios';
+import { URL } from '../../../const';
+
+import { confirmAlert } from 'react-confirm-alert';
+
 function Forgot() {
 	const dispatch = useDispatch();
 
-	function _handleForm() {
-		
+	function _handleForm(e) {
+		e.preventDefault();
+		axios.post(URL + 'api/user/forgot', {
+			email: document.forgot.email.value,
+		})
+		.then(res => {
+			if(res.data) {
+				confirmAlert({
+					message: 'Email has sended',
+					buttons: [
+						{
+							label: 'Okay'
+						}
+					]
+				});
+				dispatch(auth_isforgot());
+			} else {
+				confirmAlert({
+					message: 'Something went wrong :(',
+					buttons: [
+						{
+							label: 'I will try again'
+						}
+					]
+				});
+			}
+		});
 	}
 
 	return (
 		<div className='signin'>
 			<div className='signin-title'>Forgot your password?</div>
-			<form action='#' onSubmit={() => _handleForm()}>
-				<input className='signin-input' type='email' placeholder='Email Address' required />
+			<form name='forgot' onSubmit={_handleForm}>
+				<input className='signin-input' type='email' name='email' placeholder='Email Address' required />
 				<button className='signin-btn' type='submit'>Find your password</button>
 			</form>
 			<div className='signin-margin'></div>

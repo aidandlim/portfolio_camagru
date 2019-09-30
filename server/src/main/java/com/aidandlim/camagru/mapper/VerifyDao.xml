@@ -22,7 +22,7 @@
         UPDATE
             user
         SET
-            authorized = 1
+            authorized = IF(authorized = 1, 0, 1)
         WHERE
             email = #{email}
     </update>

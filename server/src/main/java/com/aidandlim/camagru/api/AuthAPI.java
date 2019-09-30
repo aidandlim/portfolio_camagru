@@ -32,6 +32,11 @@ public class AuthAPI {
         return (service.verifyAgain(user));
     }
 
+    @RequestMapping("/api/user/forgot")
+    public boolean forgot(@RequestBody User user) {
+        return (service.forgot(user));
+    }
+
     @RequestMapping("/api/user/select")
     public User select(@RequestBody Token token) { return (service.select(token)); }
 

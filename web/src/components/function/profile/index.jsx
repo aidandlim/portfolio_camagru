@@ -26,7 +26,11 @@ function Profile() {
 		})
 		.then(res => {
 			if(res.data) {
-				_handleData(auth.token);
+				if(document.changeProfile.email.value !== user.email) {
+					_logout();
+				} else {
+					_handleData(auth.token);
+				}
 				confirmAlert({
 					message: 'Update completed',
 					buttons: [

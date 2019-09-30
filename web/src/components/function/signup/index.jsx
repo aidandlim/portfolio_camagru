@@ -8,6 +8,8 @@ import { URL } from '../../../const';
 import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
 
+import { confirmAlert } from 'react-confirm-alert';
+
 function Signup() {
 	const dispatch = useDispatch();
 
@@ -23,11 +25,26 @@ function Signup() {
 				if(res.data) {
 					dispatch(auth_isregister());
 				} else {
-					alert('Fail!');
+					confirmAlert({
+						message: 'Email has to be unique',
+						buttons: [
+							{
+								label: 'Okay'
+							}
+						]
+					});
 				}
 			});
 		} else {
-			alert('Password is not matched');
+			confirmAlert({
+				title: 'Password are not matched',
+				message: 'Try again',
+				buttons: [
+					{
+						label: 'Okay'
+					}
+				]
+			});
 		}
 	}
 	

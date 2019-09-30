@@ -5,6 +5,8 @@ import { auth_token, auth_isaccount, user_id, user_email, user_nickname, user_bi
 import axios from 'axios';
 import { URL } from '../../../const';
 
+import { confirmAlert } from 'react-confirm-alert';
+
 import './index.css';
 
 function Account() {
@@ -21,7 +23,14 @@ function Account() {
 			if(res.data) {
 				dispatch(user_isprivate(!user.isPrivate));
 			} else {
-				alert('Fail!');
+				confirmAlert({
+					message: 'Something went wrong :(',
+					buttons: [
+						{
+							label: 'I will try again'
+						}
+					]
+				});
 			}
 		});
 		
@@ -36,8 +45,30 @@ function Account() {
 			if(res.data) {
 				dispatch(user_isnotificate(!user.isNotificate));
 			} else {
-				alert('Fail!');
+				confirmAlert({
+					message: 'Something went wrong :(',
+					buttons: [
+						{
+							label: 'I will try again'
+						}
+					]
+				});
 			}
+		});
+	}
+
+	function _confirmDelete() {
+		confirmAlert({
+			message: 'Are you sure to delete your account?',
+			buttons: [
+				{
+					label: 'Yes',
+					onClick: () => _deleteUser()
+				},
+				{
+					label: 'No, Thanks'
+				}
+			]
 		});
 	}
 
@@ -58,7 +89,14 @@ function Account() {
 					dispatch(user_pic(undefined));
 					dispatch(auth_isaccount(false));
 				} else {
-					alert('Fail!');
+					confirmAlert({
+						message: 'Something went wrong :(',
+						buttons: [
+							{
+								label: 'I will try again'
+							}
+						]
+					});
 				}
 			});
 		}
@@ -94,7 +132,7 @@ function Account() {
 			}
 			<div className='signin-margin'></div>
 			<input className='profile-logout' type='button' value='Back to User Information' onClick={ () => dispatch(auth_isaccount()) } />
-			<input className='profile-delete' type='button' value='Delete Account' onClick={ () => _deleteUser() } />
+			<input className='profile-delete' type='button' value='Delete Account' onClick={ () => _confirmDelete() } />
 		</div>
 	);
 }

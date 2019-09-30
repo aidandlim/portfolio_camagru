@@ -4,6 +4,8 @@ import { ui_nav, camera_isload, camera_preview } from '../../../actions';
 
 import { FiCompass, FiCamera, FiSearch, FiHeart } from 'react-icons/fi';
 
+import { confirmAlert } from 'react-confirm-alert';
+
 import './index.css';
 
 function Footer() {
@@ -18,7 +20,14 @@ function Footer() {
 			dispatch(camera_preview(''));
 		} else {
 			dispatch((ui_nav(1)));
-			alert('You need to sign in first');
+			confirmAlert({
+				message: 'This feature needs to be signed in first',
+				buttons: [
+					{
+						label: 'Okay'
+					}
+				]
+			});
 		}
 	}
 

@@ -6,7 +6,8 @@ import Body from '../body';
 import Footer from '../footer';
 import Sidebar from '../../function/sidebar';
 
-import './index.css'
+import './index.css';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 function App() {
 	const ui = useSelector(state => state.ui);

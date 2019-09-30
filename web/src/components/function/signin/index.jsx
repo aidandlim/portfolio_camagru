@@ -11,7 +11,6 @@ import { GoogleLogin } from 'react-google-login';
 import { confirmAlert } from 'react-confirm-alert';
 
 import './index.css';
-import 'react-confirm-alert/src/react-confirm-alert.css';
 
 function Signin() {
 	const dispatch = useDispatch();
@@ -29,7 +28,6 @@ function Signin() {
 					_handleData(res.data.token);
 				} else {
 					confirmAlert({
-						title: 'Verifying email',
 						message: 'This account has not verified by email. Do you want to get verifying email again?',
 						buttons: [
 							{
@@ -44,11 +42,10 @@ function Signin() {
 				}
 			} else {
 				confirmAlert({
-					title: 'Check your info',
 					message: 'It seems like email or password information is wrong',
 					buttons: [
 						{
-							label: 'OK'
+							label: 'Okay'
 						}
 					]
 				});
@@ -71,7 +68,6 @@ function Signin() {
 				dispatch(user_pic(res.data.pic));
 			} else {
 				confirmAlert({
-					title: 'Server Error',
 					message: 'Something went wrong :(',
 					buttons: [
 						{

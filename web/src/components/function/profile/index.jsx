@@ -5,6 +5,8 @@ import { auth_token, auth_isaccount, user_id, user_email, user_nickname, user_bi
 import axios from 'axios';
 import { URL } from '../../../const';
 
+import { confirmAlert } from 'react-confirm-alert';
+
 import default_user from '../../../resources/default_user.jpg';
 import './index.css';
 
@@ -25,9 +27,23 @@ function Profile() {
 		.then(res => {
 			if(res.data) {
 				_handleData(auth.token);
-				alert('Success');
+				confirmAlert({
+					message: 'Update completed',
+					buttons: [
+						{
+							label: 'Okay'
+						}
+					]
+				});
 			} else {
-				alert('Fail');
+				confirmAlert({
+					message: 'Something went wrong :(',
+					buttons: [
+						{
+							label: 'I will try again'
+						}
+					]
+				});
 			}
 		});
 	}
@@ -46,13 +62,34 @@ function Profile() {
 					document.changePassword.current.value = '';
 					document.changePassword.change.value = '';
 					document.changePassword.confirm.value = '';
-					alert('Success');
+					confirmAlert({
+						message: 'Update completed',
+						buttons: [
+							{
+								label: 'Okay'
+							}
+						]
+					});
 				} else {
-					alert('Fail');
+					confirmAlert({
+						message: 'Something went wrong :(',
+						buttons: [
+							{
+								label: 'I will try again'
+							}
+						]
+					});
 				}
 			});
 		} else {
-			alert('Password is not matched');
+			confirmAlert({
+				message: 'Password is not matched',
+				buttons: [
+					{
+						label: 'Okay'
+					}
+				]
+			});
 		}
 	}
 
@@ -67,7 +104,14 @@ function Profile() {
 				dispatch(user_nickname(res.data.nickname));	
 				dispatch(user_bio(res.data.bio));
 			} else {
-				alert('Fail!');
+				confirmAlert({
+					message: 'Something went wrong :(',
+					buttons: [
+						{
+							label: 'I will try again'
+						}
+					]
+				});
 			}
 		});
 	}

@@ -1,1 +1,1 @@
-export const URL = 'https://10.10.136.78:8443/';
+export const URL = 'https://camagru.aidandlim.com:8443/';

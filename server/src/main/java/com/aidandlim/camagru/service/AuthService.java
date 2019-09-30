@@ -20,6 +20,9 @@ public class AuthService {
     @Autowired
     TokenService tokenService;
 
+    @Autowired
+    MailService mailService;
+
     @Transactional
     public boolean isLogin(Token token) {
         try {
@@ -35,6 +38,7 @@ public class AuthService {
         try {
             dao = sqlSession.getMapper(AuthDao.class);
             dao.signup(user);
+            mailService.sendMail();
             return true;
         } catch(Exception e) {
             e.printStackTrace();

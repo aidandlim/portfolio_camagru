@@ -70,6 +70,13 @@ export const user_bio = (value) => {
     };
 };
 
+export const user_biotemp = (value) => {
+    return {
+        type: 'USER_BIOTEMP',
+        payload: value
+    };
+};
+
 export const user_isprivate = (value) => {
     return {
         type: 'USER_ISPRIVATE',

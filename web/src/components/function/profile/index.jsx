@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_isload, auth_token, auth_isaccount, user_id, user_email, user_nickname, user_bio, user_isprivate, user_isnotificate, user_picture } from '../../../actions';
+import { ui_isload, auth_token, auth_isaccount, user_id, user_email, user_nickname, user_bio, user_biotemp, user_isprivate, user_isnotificate, user_picture } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -23,7 +23,7 @@ function Profile() {
 			id: user.id,
 			email: document.changeProfile.email.value,
 			nickname: document.changeProfile.nickname.value,
-			bio: document.changeProfile.bio.value,
+			bio: user.bioTemp,
 		})
 		.then(res => {
 			if(res.data) {
@@ -134,7 +134,8 @@ function Profile() {
 				dispatch(user_id(res.data.id));
 				dispatch(user_email(res.data.email));
 				dispatch(user_nickname(res.data.nickname));
-				dispatch(user_bio(res.data.bio));
+				dispatch(user_bio(res.data.bio === null ? '' : res.data.bio));
+				dispatch(user_biotemp(res.data.bio === null ? '' : res.data.bio));
 				dispatch(user_isprivate(res.data.private));
 				dispatch(user_isnotificate(res.data.notificate));
 				dispatch(user_picture(res.data.picture));
@@ -157,11 +158,19 @@ function Profile() {
 		dispatch(user_email(''));
 		dispatch(user_nickname(''));
 		dispatch(user_bio(''));
+		dispatch(user_biotemp(''));
 		dispatch(user_isprivate(false));
 		dispatch(user_isnotificate(false));
 		dispatch(user_picture(null));
 	}
 
+	function _handleTextareaSize() {
+		const e = document.getElementById('profile-bio');
+		dispatch(user_biotemp(e.value));
+		e.style.height = '5px';
+		e.style.height = 'calc(' + (e.scrollHeight) + 'px - 1rem)';
+	}
+	
 	return (
 		<div className='profile'>
 			<div className='profile-profile'
@@ -183,7 +192,7 @@ function Profile() {
 				<span className='profile-placeholder'>Email</span>
 				<input className='profile-input' type='email' name='email' required defaultValue={user.email} />
 				<span className='profile-placeholder'>Bio</span>
-				<input className='profile-input' name='bio' defaultValue={user.bio} />
+				<textarea id='profile-bio' className='profile-textbox' name='bio' value={user.bioTemp} onChange={() => _handleTextareaSize()} onFocus={() => _handleTextareaSize()} />
 				<input className='profile-submit' type='submit' value='Update User Information' />
 			</form>
 			<form name='changePassword' onSubmit={_handleChangePassword}>

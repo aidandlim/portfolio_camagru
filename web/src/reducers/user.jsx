@@ -3,6 +3,7 @@ const user = {
     email: '',
     nickname: '',
     bio: '',
+    bioTemp: '',
     isPrivate: false,
     isNotificate: false,
     picture: null,
@@ -25,6 +26,10 @@ const userReducer = (state = user, action) => {
         case 'USER_BIO':
             return Object.assign({}, state, {
                 bio: action.payload
+            });
+        case 'USER_BIOTEMP':
+            return Object.assign({}, state, {
+                bioTemp: action.payload
             });
         case 'USER_ISPRIVATE':
             return Object.assign({}, state, {

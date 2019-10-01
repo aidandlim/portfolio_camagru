@@ -6,7 +6,7 @@ public class Post extends Token {
 
     private long id;
     private long user_id;
-    private String pic;
+    private String picture;
     private String content;
     private String location;
     private String together;
@@ -16,11 +16,11 @@ public class Post extends Token {
         super();
     }
 
-    public Post(long id, long user_id, String pic, String content, String location, String together, Date time) {
+    public Post(long id, long user_id, String picture, String content, String location, String together, Date time) {
         super();
         this.id = id;
         this.user_id = user_id;
-        this.pic = pic;
+        this.picture = picture;
         this.content = content;
         this.location = location;
         this.together = together;
@@ -43,12 +43,12 @@ public class Post extends Token {
         this.user_id = user_id;
     }
 
-    public String getPic() {
-        return pic;
+    public String getPicture() {
+        return picture;
     }
 
-    public void setPic(String pic) {
-        this.pic = pic;
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public String getContent() {

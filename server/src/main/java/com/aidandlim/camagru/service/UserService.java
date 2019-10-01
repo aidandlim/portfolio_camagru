@@ -71,7 +71,6 @@ public class UserService {
             return false;
         try {
             userDao = sqlSession.getMapper(UserDao.class);
-            userDao.update(user);
             User temp = userDao.select(tokenService.getIdFromToken(new Token(user.getToken())));
             if(!temp.getEmail().equals(user.getEmail())) {
                 verifyDao = sqlSession.getMapper(VerifyDao.class);
@@ -80,6 +79,7 @@ public class UserService {
                 verifyDao.update(temp);
                 verifyDao.insert(user);
             }
+            userDao.update(user);
             return (true);
         } catch (Exception e) {
             e.printStackTrace();

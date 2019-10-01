@@ -11,7 +11,7 @@ function GalleryPics() {
 	let images = camera.images;
 	let preview = camera.preview;
 
-	function choose(i) {
+	function _handleChoose(i) {
 		dispatch(camera_preview(images[i]));
 		dispatch(camera_filter(0));
 	}
@@ -20,7 +20,7 @@ function GalleryPics() {
 		<div className='camera-gallery'>
 			{ images.length === 0 ? <p>There is no image yet! Take it!</p> : '' }
 			{ images.map((image, i) => 
-				<img className={preview === images[i] ? 'camera-gallery-image-active' : 'camera-gallery-image'} key={i} src={image} onClick={ () => choose(i) } alt='Rendered' />
+				<img className={preview === images[i] ? 'camera-gallery-image-active' : 'camera-gallery-image'} key={i} src={image} onClick={ () => _handleChoose(i) } alt='Rendered' />
 			)}
 		</div>
 );

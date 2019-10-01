@@ -28,7 +28,7 @@ function Profile() {
 		.then(res => {
 			if(res.data) {
 				if(document.changeProfile.email.value !== user.email) {
-					_logout();
+					_handleLogout();
 				} else {
 					_handleData(auth.token);
 				}
@@ -151,7 +151,7 @@ function Profile() {
 		});
 	}
 
-	function _logout() {
+	function _handleLogout() {
 		dispatch(auth_token(''));
 		dispatch(user_id(-1));
 		dispatch(user_email(''));
@@ -195,7 +195,7 @@ function Profile() {
 				<input className='profile-input' name='confirm' type='password' required />
 				<input className='profile-submit' type='submit' value='Update User Password' />
 				<input className='profile-logout' type='button' value='Go to Account Setting' onClick={ () => dispatch(auth_isaccount()) } />
-				<input className='profile-logout' type='button' value='Logout' onClick={ () => _logout() }/>
+				<input className='profile-logout' type='button' value='Logout' onClick={ () => _handleLogout() }/>
 			</form>
 		</div>
 	);

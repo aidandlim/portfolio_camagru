@@ -65,13 +65,13 @@ function Account() {
 		});
 	}
 
-	function _confirmDelete() {
+	function _handleDeleteUser() {
 		confirmAlert({
 			message: 'Are you sure to delete your account?',
 			buttons: [
 				{
 					label: 'Yes',
-					onClick: () => _deleteUser()
+					onClick: () => _processDeleteUser()
 				},
 				{
 					label: 'No, Thanks'
@@ -80,7 +80,7 @@ function Account() {
 		});
 	}
 
-	function _deleteUser() {
+	function _processDeleteUser() {
 		dispatch(ui_isload());
 		if(window.confirm('Are you sure?')) {
 			axios.post(URL + 'api/user/delete', {
@@ -144,7 +144,7 @@ function Account() {
 			}
 			<div className='signin-margin'></div>
 			<input className='profile-logout' type='button' value='Back to User Information' onClick={ () => dispatch(auth_isaccount()) } />
-			<input className='profile-delete' type='button' value='Delete Account' onClick={ () => _confirmDelete() } />
+			<input className='profile-delete' type='button' value='Delete Account' onClick={ () => _handleDeleteUser() } />
 		</div>
 	);
 }

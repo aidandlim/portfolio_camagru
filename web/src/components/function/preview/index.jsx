@@ -13,32 +13,32 @@ function Preview() {
 	const preview = camera.preview;
 	const filter = camera.filter;
 
-	function _rollback() {
+	function _handleRollback() {
 		dispatch(camera_isload(true));
 		dispatch(camera_preview(''));
 	}
 
-	function _deleteImage(name) {
+	function _handleDeleteImage(name) {
 		for(let i = 0; i < images.length; i++) {
 			if(images[i] === name) {
 				images.splice(i, 1);
 			}
 		}
 		dispatch(camera_images(images));
-		_rollback();
+		_handleRollback();
 	}
 
 	return (
 		<div className='preview'>
 			<img className={'preview-image preview-filter-' + filter} src={preview} alt='Rendered' />
-			<FiChevronDown className='preview-rollback' onClick={ () => _rollback() } />
+			<FiChevronDown className='preview-rollback' onClick={ () => _handleRollback() } />
 			<img className={'preview-filter preview-filter-' + filter} src={preview} alt='Rendered' onClick={ () => dispatch(camera_filter(filter === 2 ? 0 : filter + 1)) } / >
 			<div className='preview-filter-title' onClick={ () => dispatch(camera_filter(filter === 2 ? 0 : filter + 1)) }>
 				{filter === 0 ? 'Original' : ''}
 				{filter === 1 ? 'Black & White' : ''}
 				{filter === 2 ? 'Sephia' : ''}
 			</div>
-			<FiTrash2 className='preview-delete' onClick={ () => _deleteImage(preview) } />
+			<FiTrash2 className='preview-delete' onClick={ () => _handleDeleteImage(preview) } />
 		</div>
 	);
 }

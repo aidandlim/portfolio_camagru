@@ -14,7 +14,7 @@ function Header() {
 	const auth = useSelector(state => state.auth);
 	const dispatch = useDispatch();
 
-	function openUser() {
+	function _handleInitUser() {
 		axios.post(URL + 'api/auth/isLogin', {
 			token: auth.token
 		})
@@ -32,7 +32,7 @@ function Header() {
 	return (
 		<div className='header'>
 			<div className='header-title' onClick={() => dispatch(ui_nav(0))}>#Camagru</div>
-			{ ui.nav === 1 ? <FiXCircle className='header-icon' onClick={() => dispatch(ui_nav(0))}/> : <FiUser className='header-icon' onClick={() => openUser()}/> }
+			{ ui.nav === 1 ? <FiXCircle className='header-icon' onClick={() => dispatch(ui_nav(0))}/> : <FiUser className='header-icon' onClick={() => _handleInitUser()}/> }
 		</div>
 	);
 }

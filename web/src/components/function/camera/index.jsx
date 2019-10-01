@@ -17,13 +17,13 @@ function Camera() {
 	const webcamRef = React.useRef(null);
 	let images = camera.images;
 
-	function load() {
+	function _handleLoad() {
 		setTimeout(() => {
 			dispatch(camera_isload(false));
 		}, 1000);
 	}
 
-	function capture() {
+	function _handleCapture() {
 		let data = webcamRef.current.getScreenshot();
 		if(data !== null) {
 			images.push(data);
@@ -48,9 +48,9 @@ function Camera() {
 							<input className='camera-input' type='text' />
 						</div>
 					</div>
-					{ camera.preview === '' ? <Webcam className='camera-webcam' ref={webcamRef} screenshotFormat='image/jpeg' audio={false} onUserMedia={ () => load() } /> : '' }
+					{ camera.preview === '' ? <Webcam className='camera-webcam' ref={webcamRef} screenshotFormat='image/jpeg' audio={false} onUserMedia={ () => _handleLoad() } /> : '' }
 					{ camera.isLoad ? <Loadcam /> : '' }
-					{ !camera.isLoad && camera.preview === '' ? <div className='camera-shoot' onClick={ () => capture() }></div> : '' }
+					{ !camera.isLoad && camera.preview === '' ? <div className='camera-shoot' onClick={ () => _handleCapture() }></div> : '' }
 					{ !camera.isLoad && camera.preview !== '' ? <Preview /> : '' }
 					<div className='camera-margin'></div>
 					<Gallery />

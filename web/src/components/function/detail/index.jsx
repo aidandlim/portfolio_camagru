@@ -1,25 +1,20 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { content_id, content_islikes } from '../../../actions';
+import { content_islikes } from '../../../actions';
 
 import Likes from '../likes';
 import Comments from '../comments';
 
-import { FiChevronsLeft, FiHeart, FiMoreVertical } from 'react-icons/fi';
+import { FiHeart, FiMoreVertical } from 'react-icons/fi';
 import './index.css';
 
 function Detail() {
 	const content = useSelector(state => state.content);
 	const dispatch = useDispatch();
 
-	function rollback() {
-		dispatch(content_id(-1));
-	}
-
 	return (
 		<div className='detail'>
 			<div className='inner-container'>
-				<FiChevronsLeft className='detail-rollback' onClick={ () => rollback() } />
 				<div className='detail-post'>
 					<div className='post-profile'></div>
 					<div className='post-info-container'>
@@ -46,7 +41,6 @@ function Detail() {
 						<div className='post-comment-post'>POST</div>
 					</div>
 				</div>
-				<FiChevronsLeft className='detail-rollback' onClick={ () => rollback() } />
 			</div>
 		</div>
 	);

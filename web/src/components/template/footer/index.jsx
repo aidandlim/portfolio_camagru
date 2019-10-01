@@ -19,7 +19,21 @@ function Footer() {
 			dispatch(camera_isload(true));
 			dispatch(camera_preview(''));
 		} else {
-			dispatch((ui_nav(1)));
+			confirmAlert({
+				message: 'This feature needs to be signed in first',
+				buttons: [
+					{
+						label: 'Okay'
+					}
+				]
+			});
+		}
+	}
+
+	function _handleNotification() {
+		if(auth.token !== '') {
+			dispatch(ui_nav(4));
+		} else {
 			confirmAlert({
 				message: 'This feature needs to be signed in first',
 				buttons: [
@@ -37,7 +51,7 @@ function Footer() {
 				{ ui.nav === 0 || ui.nav === 1 ? <FiCompass className='footer-icon-active' onClick={() => {dispatch(ui_nav(0)); dispatch(content_id(-1))}} /> : <FiCompass className='footer-icon'  onClick={() => {dispatch(ui_nav(0)); dispatch(content_id(-1))}} /> }
 				{ ui.nav === 2 ? <FiSearch className='footer-icon-active' onClick={() => dispatch(ui_nav(0))} /> : <FiSearch className='footer-icon' onClick={() => dispatch(ui_nav(2))} /> }
 				{ ui.nav === 3 ? <FiCamera className='footer-icon-active' onClick={() => dispatch(ui_nav(0))} /> : <FiCamera className='footer-icon' onClick={() => _handleCamera()} /> }
-				{ ui.nav === 4 ? <FiHeart className='footer-icon-active' onClick={() => dispatch(ui_nav(0))} /> : <FiHeart className='footer-icon' onClick={() => dispatch(ui_nav(4))} /> }
+				{ ui.nav === 4 ? <FiHeart className='footer-icon-active' onClick={() => dispatch(ui_nav(0))} /> : <FiHeart className='footer-icon' onClick={() => _handleNotification()} /> }
 			</div>
 		</div>
 	);

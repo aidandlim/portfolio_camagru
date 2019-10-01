@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { content_islikes } from '../../../actions';
+import { content_id, content_islikes } from '../../../actions';
 
 import Likes from '../likes';
 import Comments from '../comments';
 
-import { FiHeart, FiMoreVertical } from 'react-icons/fi';
+import { FiArrowLeftCircle, FiHeart, FiMoreVertical } from 'react-icons/fi';
 import './index.css';
 
 function Detail() {
@@ -14,6 +14,7 @@ function Detail() {
 
 	return (
 		<div className='detail'>
+			<FiArrowLeftCircle className='detail-rollback' onClick={ () => dispatch(content_id(-1)) } />
 			<div className='inner-container'>
 				<div className='detail-post'>
 					<div className='post-profile'></div>

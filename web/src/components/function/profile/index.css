@@ -14,9 +14,8 @@
     position: relative;
     float: left;
 
-    object-fit: cover;
-    background-size: 10rem 10rem;
-    background-repeat: 'no-repeat';
+    background-size: cover;
+    background-position: center;
 
     border: solid 1px #404040;
     border-radius: 50%;

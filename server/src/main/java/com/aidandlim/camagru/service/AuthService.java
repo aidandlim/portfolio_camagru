@@ -4,11 +4,18 @@ import com.aidandlim.camagru.dao.AuthDao;
 import com.aidandlim.camagru.dao.VerifyDao;
 import com.aidandlim.camagru.dto.Token;
 import com.aidandlim.camagru.dto.User;
+import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.UUID;
 
 @Service
@@ -126,7 +133,20 @@ public class AuthService {
         try {
             authDao = sqlSession.getMapper(AuthDao.class);
             User result = authDao.select(tokenService.getIdFromToken(token));
+            result.setPicture(getPicture(result.getPicture()));
             return (result);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return (null);
+        }
+    }
+
+    @Transactional
+    public String getPicture(String uuid) {
+        try {
+            byte[] fileContent = FileUtils.readFileToByteArray(new File("/Users/aidan/Workspace/portfolio_camagru/static/" + uuid));
+            String encodedString = Base64.getEncoder().encodeToString(fileContent);
+            return (encodedString);
         } catch (Exception e) {
             e.printStackTrace();
             return (null);
@@ -148,6 +168,22 @@ public class AuthService {
                 verifyDao.update(temp);
                 verifyDao.insert(user);
             }
+            return (true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
+
+    @Transactional
+    public boolean updatePicture(String token, MultipartFile file) {
+        try {
+            authDao = sqlSession.getMapper(AuthDao.class);
+            String name = UUID.randomUUID().toString();
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get("/Users/aidan/Workspace/portfolio_camagru/static/" + name);
+            Files.write(path, bytes);
+            authDao.updatePicture(name, tokenService.getIdFromToken(new Token(token)));
             return (true);
         } catch (Exception e) {
             e.printStackTrace();

@@ -84,9 +84,9 @@ export const user_isnotificate = (value) => {
     };
 };
 
-export const user_pic = (value) => {
+export const user_picture = (value) => {
     return {
-        type: 'USER_PIC',
+        type: 'USER_PICTURE',
         payload: value
     };
 };

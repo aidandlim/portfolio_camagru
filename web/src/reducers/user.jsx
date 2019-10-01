@@ -5,7 +5,7 @@ const user = {
     bio: '',
     isPrivate: false,
     isNotificate: false,
-    pic: null,
+    picture: null,
 }
 
 const userReducer = (state = user, action) => {
@@ -34,9 +34,9 @@ const userReducer = (state = user, action) => {
             return Object.assign({}, state, {
                 isNotificate: action.payload
             });
-        case 'USER_PIC':
+        case 'USER_PICTURE':
             return Object.assign({}, state, {
-                pic: action.payload
+                picture: action.payload
             });
         default:
             return state;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_isload, auth_token, auth_isaccount, user_id, user_email, user_nickname, user_bio, user_isprivate, user_isnotificate, user_pic } from '../../../actions';
+import { ui_isload, auth_token, auth_isaccount, user_id, user_email, user_nickname, user_bio, user_isprivate, user_isnotificate, user_picture } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -95,7 +95,7 @@ function Account() {
 					dispatch(user_bio(''));
 					dispatch(user_isprivate(false));
 					dispatch(user_isnotificate(false));
-					dispatch(user_pic(undefined));
+					dispatch(user_picture(undefined));
 					dispatch(auth_isaccount(false));
 					setTimeout(() => {
 						dispatch(ui_isload());

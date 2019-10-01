@@ -13,6 +13,7 @@ public interface AuthDao {
     void updatePassword(User user);
     void updatePrivate(User user);
     void updateNotificate(User user);
+    void updatePicture(String fileName, long id);
     void delete(User user);
 
 }

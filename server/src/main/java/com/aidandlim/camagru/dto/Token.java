@@ -1,5 +1,7 @@
 package com.aidandlim.camagru.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Token {
 
     private String token;

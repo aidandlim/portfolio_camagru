@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, auth_token } from '../../../actions';
+import { ui_nav, auth_token, content_id } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -15,7 +15,7 @@ function Header() {
 	const dispatch = useDispatch();
 
 	function openUser() {
-		axios.post(URL + 'api/user/isLogin', {
+		axios.post(URL + 'api/auth/isLogin', {
 			token: auth.token
 		})
 		.then(res => {
@@ -25,6 +25,7 @@ function Header() {
 				dispatch(auth_token(''));
 			}
 			dispatch(ui_nav(1));
+			dispatch(content_id(-1));
 		})
 	}
 

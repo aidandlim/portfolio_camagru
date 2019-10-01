@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aidandlim.camagru.dao.UserDao">
+
+    <select id="select" resultType="com.aidandlim.camagru.dto.User">
+        SELECT
+            id, email, nickname, bio, isPrivate, isNotificate, picture
+        FROM
+            user
+        WHERE
+            id = #{id}
+    </select>
+
+    <update id="update">
+        UPDATE
+            user
+        SET
+            email = #{email},
+            nickname = #{nickname},
+            bio = #{bio}
+        WHERE
+            id = #{id}
+    </update>
+
+    <update id="updatePassword">
+        UPDATE
+            user
+        SET
+            password = PASSWORD(#{change})
+        WHERE
+            email = #{email}
+    </update>
+
+    <update id="updatePrivate">
+        UPDATE
+            user
+        SET
+            isPrivate = !isPrivate
+        WHERE
+            id = #{id}
+    </update>
+
+    <update id="updateNotificate">
+        UPDATE
+            user
+        SET
+            isNotificate = !isNotificate
+        WHERE
+            id = #{id}
+    </update>
+
+    <update id="updatePicture">
+        UPDATE
+            user
+        SET
+            picture = #{fileName}
+        WHERE
+            id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM
+            user
+        WHERE
+            id = #{id}
+    </delete>
+
+</mapper>

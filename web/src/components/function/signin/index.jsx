@@ -18,7 +18,7 @@ function Signin() {
 	function _handleForm(e) {
 		e.preventDefault();
 		dispatch(ui_isload());
-		axios.post(URL + 'api/user/signin', {
+		axios.post(URL + 'api/auth/signin', {
 			email: document.signin.email.value,
 			password: document.signin.password.value
 		})
@@ -85,7 +85,7 @@ function Signin() {
 
 	function _handleVerifyingEmail() {
 		dispatch(ui_isload());
-		axios.post(URL + 'api/user/verifyAgain', {
+		axios.post(URL + 'api/auth/verifyAgain', {
 			email: document.signin.email.value
 		}).then(() => {
 			setTimeout(() => {

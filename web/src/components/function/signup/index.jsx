@@ -17,7 +17,7 @@ function Signup() {
 		e.preventDefault();
 		dispatch(ui_isload());
 		if(document.signup.password.value === document.signup.confirm.value) {
-			axios.post(URL + 'api/user/signup', {
+			axios.post(URL + 'api/auth/signup', {
 				email: document.signup.email.value,
 				password: document.signup.password.value,
 				nickname: document.signup.nickname.value,

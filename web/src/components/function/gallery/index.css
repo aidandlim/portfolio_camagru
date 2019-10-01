@@ -13,6 +13,19 @@
     border-bottom: solid #404040 1px;
 }
 
+.camera-gallery > p {
+    width: 30rem;
+    height: 5rem;
+    padding: 0;
+    margin: 0;
+
+    color: #505050;
+    font-size: 0.6rem;
+    font-weight: 900;
+    text-align: center;
+    line-height: 5rem;
+}
+
 .camera-gallery-image {
     width: 5rem;
     height: 5rem;

@@ -13,7 +13,7 @@ function Forgot() {
 	function _handleForm(e) {
 		e.preventDefault();
 		dispatch(ui_isload());
-		axios.post(URL + 'api/user/forgot', {
+		axios.post(URL + 'api/auth/forgot', {
 			email: document.forgot.email.value,
 		})
 		.then(res => {

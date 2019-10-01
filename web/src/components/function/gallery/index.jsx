@@ -18,6 +18,7 @@ function GalleryPics() {
 
 	return (
 		<div className='camera-gallery'>
+			{ images.length === 0 ? <p>There is no image yet! Take it!</p> : '' }
 			{ images.map((image, i) => 
 				<img className={preview === images[i] ? 'camera-gallery-image-active' : 'camera-gallery-image'} key={i} src={image} onClick={ () => choose(i) } alt='Rendered' />
 			)}

@@ -99,8 +99,8 @@ function Profile() {
 		e.preventDefault();
 		dispatch(ui_isload());
 		var formData = new FormData();
-		formData.append("pic", document.changePicture.file.files[0]);
 		formData.append("token", auth.token);
+		formData.append("picture", document.changePicture.file.files[0]);
 		axios.post(URL + 'api/user/updatePicture', formData, {
 			headers: {
 			  'Content-Type': 'multipart/form-data'

@@ -12,17 +12,18 @@ import './index.css';
 function Body() {
 	const ui = useSelector(state => state.ui);
 	const content = useSelector(state => state.content);
+	const post = useSelector(state => state.post);
 
 	return (
 		<div className='body'>
 			{ ui.nav === 2 ? <Search /> : '' }
 			{ ui.nav === 3 ? <Camera /> : '' }
 			{ ui.nav === 4 ? <Notification /> : '' }
-			<div className='inner-container'>
+			<div id='test' className='inner-container'>
 				{ content.id !== -1 ? <Detail id={content.id} /> : '' }
-				<Post id={0} />
-				<Post id={1} />
-				<Post id={2} />
+				{ post.posts.map((post) => 
+					<Post id={post.id} key={post.id} />
+				)}
 			</div>
 		</div>
 	);

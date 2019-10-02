@@ -146,3 +146,9 @@ export const content_islikes = (value) => {
 
 /***************************************************/
 
+export const post_posts = (value) => {
+    return {
+        type: 'POST_POSTS',
+        payload: value
+    };
+};

@@ -5,7 +5,7 @@ import authReducer from './auth';
 import userReducer from './user';
 import cameraReducer from './camera';
 import contentReducer from './content';
-
+import postReducer from './post';
 
 const rootReducers = combineReducers({
     ui: uiReducer,
@@ -13,6 +13,7 @@ const rootReducers = combineReducers({
     user: userReducer,
     camera: cameraReducer,
     content: contentReducer,
+    post: postReducer,
 })
 
 export default rootReducers;

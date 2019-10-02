@@ -4,7 +4,15 @@
 
     <select id="selectAll" resultType="com.aidandlim.camagru.dto.Post">
         SELECT
-            *
+            p.id,
+            p.picture,
+            p.content,
+            p.location,
+            p.together,
+            p.time,
+            u.nickname as user_nickname,
+            (SELECT COUNT(*) FROM reflection WHERE post_id = p.id) as num_likes,
+            (SELECT COUNT(*) FROM comment WHERE post_id = p.id) as num_comments
         FROM
             post as p
         LEFT JOIN

@@ -14,7 +14,7 @@ function Post(props) {
 			<div className='post-profile'></div>
 			<div className='post-info-container'>
 				<div className='post-author'>{props.data.user_nickname}</div>
-				<div className='post-time'>3 HOURS AGO</div>
+				<div className='post-time'>{props.data.post_time}</div>
 				<div className='post-in'>In</div>
 				<div className='post-location'>{props.data.location}</div>
 				<div className='post-with'>with</div>

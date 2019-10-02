@@ -3,13 +3,17 @@
 <mapper namespace="com.aidandlim.camagru.dao.PostDao">
 
     <select id="selectAll" resultType="com.aidandlim.camagru.dto.Post">
+        <![CDATA[
         SELECT
             p.id,
             p.picture,
             p.content,
             p.location,
             p.together,
-            p.time,
+            CASE
+                WHEN p.time > DATE_ADD(NOW(), INTERVAL-1 HOUR) THEN CONCAT(MINUTE(TIMEDIFF(NOW(), p.time)), ' MINUTES AGO')
+                WHEN p.time > DATE_ADD(NOW(), INTERVAL-24 HOUR) THEN CONCAT(HOUR(TIMEDIFF(NOW(), p.time)), ' HOURS AGO')
+                ELSE CONCAT(DATEDIFF(NOW(), p.time), ' DAYS AGO') END as post_time,
             u.nickname as user_nickname,
             (SELECT COUNT(*) FROM reflection WHERE post_id = p.id) as num_likes,
             (SELECT COUNT(*) FROM comment WHERE post_id = p.id) as num_comments
@@ -21,6 +25,8 @@
             p.user_id = u.id
         WHERE
             u.isPrivate = 0
+        ORDER BY p.id DESC
+        ]]>
     </select>
 
     <select id="selectAllByUser" resultType="com.aidandlim.camagru.dto.Post">

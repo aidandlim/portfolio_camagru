@@ -15,12 +15,13 @@ public class Post extends Token {
     private String user_nickname;
     private int num_likes;
     private int num_comments;
+    private String post_time;
 
     public Post() {
         super();
     }
 
-    public Post(long id, long user_id, String picture, String content, String location, String together, Date time, String user_nickname, int num_likes, int num_comments) {
+    public Post(long id, long user_id, String picture, String content, String location, String together, Date time, String user_nickname, int num_likes, int num_comments, String post_time) {
         super();
         this.id = id;
         this.user_id = user_id;
@@ -32,6 +33,7 @@ public class Post extends Token {
         this.user_nickname = user_nickname;
         this.num_likes = num_likes;
         this.num_comments = num_comments;
+        this.post_time = post_time;
     }
 
     public long getId() {
@@ -112,5 +114,13 @@ public class Post extends Token {
 
     public void setNum_comments(int num_comments) {
         this.num_comments = num_comments;
+    }
+
+    public String getPost_time() {
+        return post_time;
+    }
+
+    public void setPost_time(String post_time) {
+        this.post_time = post_time;
     }
 }

@@ -22,7 +22,7 @@ function Body() {
 			<div id='test' className='inner-container'>
 				{ content.id !== -1 ? <Detail id={content.id} /> : '' }
 				{ post.posts.map((post) => 
-					<Post id={post.id} key={post.id} />
+					<Post key={post.id} data={post} />
 				)}
 			</div>
 		</div>

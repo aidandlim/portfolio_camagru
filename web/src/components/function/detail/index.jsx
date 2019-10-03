@@ -11,6 +11,7 @@ import Comments from '../comments';
 import { confirmAlert } from 'react-confirm-alert';
 
 import { FiArrowLeftCircle, FiHeart, FiMoreVertical } from 'react-icons/fi';
+import { MdFavorite } from 'react-icons/md';
 import './index.css';
 
 function Detail() {
@@ -159,7 +160,11 @@ function Detail() {
 					</div>
 					<div className='post-picture'></div>
 					<div className='post-reflect-container'>
-						<FiHeart className={content.user_islike ? 'post-icon post-icon-active' : 'post-icon'} onClick={ () => _handleLikes() } />
+						{ !content.user_islike ? 
+							<FiHeart className='post-icon' onClick={ () => _handleLikes() } /> 
+							:
+							<MdFavorite className='post-icon post-icon-active' onClick={ () => _handleLikes() } />
+						}
 						<FiMoreVertical className='post-icon' />
 						<textarea className='post-content' style={{height: content.content.split('\n').length + 'rem'}} value={content.content} readOnly></textarea>
 						<div className={ content.isLikes ? 'detail-likes-active' : 'post-likes' } onClick={ () => dispatch(content_islikes(true)) }>{content.num_likes} likes</div>

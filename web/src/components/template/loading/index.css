@@ -20,12 +20,12 @@
     height: 3rem;
 
     position: absolute;
-    top: calc(50% - 2.5rem);
-    left: calc(50% - 2.5rem);
+    top: calc(50% - 2.25rem);
+    left: calc(50% - 2.25rem);
 
-    border: 1rem solid #303030;
+    border: 0.75rem solid #303030;
     border-radius: 50%;
-    border-top: 1rem solid #004D40;
+    border-top: 0.75rem solid #004D40;
     
     animation: spin 1.5s linear infinite;
     -webkit-animation: spin 1.5s linear infinite;

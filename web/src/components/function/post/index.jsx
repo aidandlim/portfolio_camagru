@@ -8,6 +8,7 @@ import { URL } from '../../../const';
 import { confirmAlert } from 'react-confirm-alert';
 
 import { FiHeart, FiMoreVertical } from 'react-icons/fi';
+import { MdFavorite } from 'react-icons/md';
 import './index.css';
 
 function Post(props) {
@@ -157,7 +158,11 @@ function Post(props) {
 			</div>
 			<div className='post-picture' style={{ backgroundImage: 'url(\'data:image/jpeg;base64, ' + props.data.picture + '\')' }}></div>
 			<div className='post-reflect-container'>
-				<FiHeart className={props.data.user_islike ? 'post-icon post-icon-active' : 'post-icon'} onClick={ () => _handleLikes() } />
+				{ !props.data.user_islike ? 
+					<FiHeart className='post-icon' onClick={ () => _handleLikes() } /> 
+					:
+					<MdFavorite className='post-icon post-icon-active' onClick={ () => _handleLikes() } />
+				}
 				<FiMoreVertical className='post-icon' />
 				<textarea className='post-content' style={{height: props.data.content.split('\n').length + 'rem'}} value={props.data.content} readOnly></textarea>
 				<div className='post-likes' onClick={ () => _handleDetail() }>{props.data.num_likes} likes</div>

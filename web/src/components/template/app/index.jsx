@@ -16,9 +16,12 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 
 function App() {
 	const ui = useSelector(state => state.ui);
+	const auth = useSelector(state => state.auth);
 	const dispatch = useDispatch();
 
-	axios.post(URL + 'api/post/selectAll')
+	axios.post(URL + 'api/post/selectAll', {
+		token: auth.token
+	})
 	.then(res => {
 		dispatch(post_posts(res.data));
 	});

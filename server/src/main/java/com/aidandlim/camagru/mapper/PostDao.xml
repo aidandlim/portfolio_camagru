@@ -16,7 +16,8 @@
                 ELSE CONCAT(DATEDIFF(NOW(), p.time), ' DAYS AGO') END as post_time,
             u.nickname as user_nickname,
             (SELECT COUNT(*) FROM reflection WHERE post_id = p.id) as num_likes,
-            (SELECT COUNT(*) FROM comment WHERE post_id = p.id) as num_comments
+            (SELECT COUNT(*) FROM comment WHERE post_id = p.id) as num_comments,
+            (SELECT COUNT(*) FROM reflection WHERE post_id = p.id AND user_id = #{user_id}) as user_islike
         FROM
             post as p
         LEFT JOIN
@@ -43,12 +44,30 @@
     </select>
 
     <select id="select" resultType="com.aidandlim.camagru.dto.Post">
+        <![CDATA[
         SELECT
-            *
+            p.id,
+            p.picture,
+            p.content,
+            p.location,
+            p.together,
+            CASE
+                WHEN p.time > DATE_ADD(NOW(), INTERVAL-1 HOUR) THEN CONCAT(MINUTE(TIMEDIFF(NOW(), p.time)), ' MINUTES AGO')
+                WHEN p.time > DATE_ADD(NOW(), INTERVAL-24 HOUR) THEN CONCAT(HOUR(TIMEDIFF(NOW(), p.time)), ' HOURS AGO')
+                ELSE CONCAT(DATEDIFF(NOW(), p.time), ' DAYS AGO') END as post_time,
+            u.nickname as user_nickname,
+            (SELECT COUNT(*) FROM reflection WHERE post_id = p.id) as num_likes,
+            (SELECT COUNT(*) FROM comment WHERE post_id = p.id) as num_comments,
+            (SELECT COUNT(*) FROM reflection WHERE post_id = p.id AND user_id = #{user_id}) as user_islike
         FROM
-            post
+            post as p
+        LEFT JOIN
+            user as u
+        ON
+            p.user_id = u.id
         WHERE
-            id = #{id}
+            p.id = #{id}
+        ]]>
     </select>
 
     <insert id="insert">

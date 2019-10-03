@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_isload, content_id } from '../../../actions';
+import { ui_isload, content_id, content_picture, content_content, content_location, content_together, content_post_time, content_num_likes, content_num_comments, content_user_nickname, content_user_islike } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -15,13 +15,46 @@ function Post(props) {
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
 
-	function _handleTextareaSize() {
-		const e = document.getElementById('post-comment-box-' + props.data.id);
-		e.style.height = '5px';
-		e.style.height = 'calc(' + (e.scrollHeight) + 'px - 1rem)';
+	function _handleLikes() {
+		if(auth.token === '') {
+			confirmAlert({
+				message: 'This feature needs to be signed in first',
+				buttons: [
+					{
+						label: 'Okay'
+					}
+				]
+			});
+			return;
+		}
+		dispatch(ui_isload());
+		axios.post(URL + 'api/reflection/insert', {
+			token: auth.token,
+			user_id: user.id,
+			post_id: props.data.id,
+		})
+		.then(res => {
+			if(res.data) {
+				
+			} else {
+				confirmAlert({
+					message: 'It seems like email or password information is wrong',
+					buttons: [
+						{
+							label: 'Okay'
+						}
+					]
+				});
+			}
+		})
+		.then(() => {
+			setTimeout(() => {
+				dispatch(ui_isload());
+			}, 500);
+		});
 	}
 
-	function _handleForm() {
+	function _handleComments() {
 		if(auth.token === '') {
 			confirmAlert({
 				message: 'This feature needs to be signed in first',
@@ -43,6 +76,7 @@ function Post(props) {
 		.then(res => {
 			if(res.data) {
 				document.getElementById('post-comment-box-' + props.data.id).value = '';
+				_handleTextareaSize();
 			} else {
 				confirmAlert({
 					message: 'It seems like email or password information is wrong',
@@ -61,6 +95,38 @@ function Post(props) {
 		});
 	}
 
+	function _handleDetail() {
+		dispatch(ui_isload());
+		axios.post(URL + 'api/post/select', {
+			token: auth.token,
+			id: props.data.id,
+			user_id: user.id,
+		})
+		.then(res => {
+			dispatch(content_id(res.data.id));
+			dispatch(content_picture(res.data.picture));
+			dispatch(content_content(res.data.content));
+			dispatch(content_location(res.data.location));
+			dispatch(content_together(res.data.together));
+			dispatch(content_post_time(res.data.post_time));
+			dispatch(content_num_likes(res.data.num_likes));
+			dispatch(content_num_comments(res.data.num_comments));
+			dispatch(content_user_nickname(res.data.user_nickname));
+			dispatch(content_user_islike(res.data.user_islike));
+		})
+		.then(() => {
+			setTimeout(() => {
+				dispatch(ui_isload());
+			}, 500);
+		});
+	}
+
+	function _handleTextareaSize() {
+		const e = document.getElementById('post-comment-box-' + props.data.id);
+		e.style.height = '5px';
+		e.style.height = 'calc(' + (e.scrollHeight) + 'px - 1rem)';
+	}
+
 	return (
 		<div className='post'>
 			<div className='post-profile'></div>
@@ -75,13 +141,13 @@ function Post(props) {
 			</div>
 			<div className='post-picture'></div>
 			<div className='post-reflect-container'>
-				<FiHeart className='post-icon' />
+				<FiHeart className={props.data.user_islike ? 'post-icon post-icon-active' : 'post-icon'} onClick={ () => _handleLikes() } />
 				<FiMoreVertical className='post-icon' />
 				<textarea className='post-content' style={{height: props.data.content.split('\n').length + 'rem'}} value={props.data.content} readOnly></textarea>
-				<div className='post-likes' onClick={ () => dispatch(content_id(props.id)) }>{props.data.num_likes} likes</div>
-				<div className='post-comments' onClick={ () => dispatch(content_id(props.id)) }>View all {props.data.num_comments} comments</div>
+				<div className='post-likes' onClick={ () => _handleDetail() }>{props.data.num_likes} likes</div>
+				<div className='post-comments' onClick={ () => _handleDetail() }>View all {props.data.num_comments} comments</div>
 				<textarea className='post-comment-box' id={'post-comment-box-' + props.data.id} name='content' placeholder='Add a comment...' onChange={ () => _handleTextareaSize() }></textarea>
-				<div className='post-comment-post' onClick={ () => _handleForm() }>POST</div>
+				<div className='post-comment-post' onClick={ () => _handleComments() }>POST</div>
 			</div>
 		</div>
 	);

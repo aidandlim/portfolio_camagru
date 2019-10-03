@@ -24,10 +24,10 @@ public class PostService {
     TokenService tokenService;
 
     @Transactional
-    public ArrayList<Post> selectAll() {
+    public ArrayList<Post> selectAll(Token token) {
         try {
             postDao = sqlSession.getMapper(PostDao.class);
-            return postDao.selectAll();
+            return postDao.selectAll(token.getToken().equals("") ? -1 : tokenService.getIdFromToken(token));
         } catch (Exception e) {
             e.printStackTrace();
             return (null);
@@ -47,8 +47,6 @@ public class PostService {
 
     @Transactional
     public Post select(Post post) {
-        if(!tokenService.checkToken(new Token(post.getToken())))
-            return null;
         try {
             postDao = sqlSession.getMapper(PostDao.class);
             return postDao.select(post);

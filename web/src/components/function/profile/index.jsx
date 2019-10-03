@@ -192,7 +192,7 @@ function Profile() {
 				<span className='profile-placeholder'>Email</span>
 				<input className='profile-input' type='email' name='email' required defaultValue={user.email} />
 				<span className='profile-placeholder'>Bio</span>
-				<textarea id='profile-bio' className='profile-textbox' name='bio' value={user.bioTemp} onChange={() => _handleTextareaSize()} onFocus={() => _handleTextareaSize()} />
+				<textarea id='profile-bio' className='profile-textbox' name='bio' style={{height: user.bio.split('\n').length * 0.75 + 'rem'}} value={user.bioTemp} onChange={() => _handleTextareaSize()} onFocus={() => _handleTextareaSize()} />
 				<input className='profile-submit' type='submit' value='Update User Information' />
 			</form>
 			<form name='changePassword' onSubmit={_handleChangePassword}>

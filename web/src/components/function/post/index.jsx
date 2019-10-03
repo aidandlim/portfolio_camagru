@@ -24,9 +24,7 @@ function Post(props) {
 			<div className='post-reflect-container'>
 				<FiHeart className='post-icon' />
 				<FiMoreVertical className='post-icon' />
-				<div className='post-content'>
-					{props.data.content}
-				</div>
+				<textarea className='post-content' style={{height: props.data.content.split('\n').length + 'rem'}} value={props.data.content} readOnly></textarea>
 				<div className='post-likes' onClick={ () => dispatch(content_id(props.id)) }>{props.data.num_likes} likes</div>
 				<div className='post-comments' onClick={ () => dispatch(content_id(props.id)) }>View all {props.data.num_comments} comments</div>
 				<div className='post-comment-box' contentEditable='true' data-placeholder='Add a comment...'></div>

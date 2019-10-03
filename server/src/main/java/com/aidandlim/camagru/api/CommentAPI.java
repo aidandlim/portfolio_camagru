@@ -17,7 +17,7 @@ public class CommentAPI {
     CommentService service;
 
     @RequestMapping("/api/comment/selectAllByPost")
-    public ArrayList<Comment> selectAllByPost(Post post) { return (service.selectAllByPost(post)); }
+    public ArrayList<Comment> selectAllByPost(@RequestBody Post post) { return (service.selectAllByPost(post)); }
 
     @RequestMapping("/api/comment/insert")
     public boolean insert(@RequestBody Comment comment) { return (service.insert(comment)); }

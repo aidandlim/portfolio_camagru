@@ -17,7 +17,7 @@ public class ReflectionAPI {
     ReflectionService service;
 
     @RequestMapping("/api/reflection/selectAllByPost")
-    public ArrayList<Reflection> selectAllByPost(Post post) { return (service.selectAllByPost(post)); }
+    public ArrayList<Reflection> selectAllByPost(@RequestBody Post post) { return (service.selectAllByPost(post)); }
 
     @RequestMapping("/api/reflection/insert")
     public boolean insert(@RequestBody Reflection reflection) { return (service.insert(reflection)); }

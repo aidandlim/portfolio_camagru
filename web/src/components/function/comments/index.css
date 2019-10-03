@@ -36,6 +36,8 @@
 .comments-content {
     width: calc(100% - 4.05rem - 2px);
     height: auto;
+    overflow: hidden;
+    resize: none;
     min-height: 0.6rem;
     padding: 0.4rem;
     margin: 0rem 0.5rem 0.5rem 0;
@@ -49,5 +51,8 @@
     line-height: 1rem;
 
     background-color: #272727;
+    border: none;
     border-radius: 0.5rem;
+
+    outline: none;
 }

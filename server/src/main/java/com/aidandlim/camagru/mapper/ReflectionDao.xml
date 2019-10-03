@@ -8,7 +8,7 @@
         FROM
             reflection
         WHERE
-            post_id = #{post_id}
+            post_id = #{id}
     </select>
 
     <select id="select" resultType="com.aidandlim.camagru.dto.Reflection">

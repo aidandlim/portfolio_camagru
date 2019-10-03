@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_isload, content_id, content_picture, content_content, content_location, content_together, content_post_time, content_num_likes, content_num_comments, content_user_nickname, content_user_islike } from '../../../actions';
+import { ui_isload, content_id, content_picture, content_content, content_location, content_together, content_post_time, content_num_likes, content_num_comments, content_user_nickname, content_post_likes, content_post_comments, content_user_islike } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -113,11 +113,27 @@ function Post(props) {
 			dispatch(content_num_comments(res.data.num_comments));
 			dispatch(content_user_nickname(res.data.user_nickname));
 			dispatch(content_user_islike(res.data.user_islike));
+			_handleDetailLikesAndComments();
 		})
 		.then(() => {
 			setTimeout(() => {
 				dispatch(ui_isload());
 			}, 500);
+		});
+	}
+
+	function _handleDetailLikesAndComments() {
+		axios.post(URL + 'api/reflection/selectAllByPost', {
+			id: props.data.id,
+		})
+		.then(res => {
+			dispatch(content_post_likes(res.data));
+		});
+		axios.post(URL + 'api/comment/selectAllByPost', {
+			id: props.data.id,
+		})
+		.then(res => {
+			dispatch(content_post_comments(res.data));
 		});
 	}
 

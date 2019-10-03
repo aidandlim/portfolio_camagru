@@ -6,18 +6,6 @@ function Likes() {
 	return (
 		<div className='likes'>
 			<div className='likes-user'></div>
-			<div className='likes-user'></div>
-			<div className='likes-user'></div>
-			<div className='likes-user'></div>
-			<div className='likes-user'></div>
-			<div className='likes-user'></div>
-			<div className='likes-user'></div>
-			<div className='likes-user'></div>
-			<div className='likes-user'></div>
-			<div className='likes-user'></div>
-			<div className='likes-user'></div>
-			<div className='likes-user'></div>
-			<div className='likes-user'></div>
 		</div>
 	);
 }

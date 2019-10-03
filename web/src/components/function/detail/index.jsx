@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_isload, content_id, content_picture, content_content, content_location, content_together, content_post_time, content_num_likes, content_num_comments, content_user_nickname, content_user_islike, content_islikes } from '../../../actions';
+import { ui_isload, content_id, content_picture, content_content, content_location, content_together, content_post_time, content_num_likes, content_num_comments, content_user_nickname, content_user_islike, content_post_likes, content_post_comments, content_islikes } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -75,7 +75,7 @@ function Detail() {
 			token: auth.token,
 			user_id: user.id,
 			post_id: content.id,
-			content: document.getElementById('post-comment-box-' + content.id).value,
+			content: document.getElementById('detail-comment-box-' + content.id).value,
 		})
 		.then(res => {
 			if(res.data) {
@@ -117,6 +117,22 @@ function Detail() {
 			dispatch(content_num_comments(res.data.num_comments));
 			dispatch(content_user_nickname(res.data.user_nickname));
 			dispatch(content_user_islike(res.data.user_islike));
+			_handleDetailLikesAndComments();
+		});
+	}
+
+	function _handleDetailLikesAndComments() {
+		axios.post(URL + 'api/reflection/selectAllByPost', {
+			id: content.id,
+		})
+		.then(res => {
+			dispatch(content_post_likes(res.data));
+		});
+		axios.post(URL + 'api/comment/selectAllByPost', {
+			id: content.id,
+		})
+		.then(res => {
+			dispatch(content_post_comments(res.data));
 		});
 	}
 
@@ -148,8 +164,12 @@ function Detail() {
 						<textarea className='post-content' style={{height: content.content.split('\n').length + 'rem'}} value={content.content} readOnly></textarea>
 						<div className={ content.isLikes ? 'detail-likes-active' : 'post-likes' } onClick={ () => dispatch(content_islikes(true)) }>{content.num_likes} likes</div>
 						<div className={ !content.isLikes ? 'detail-comments-active' : 'post-comments' } onClick={ () => dispatch(content_islikes(false)) }>View all {content.num_comments} comments</div>
-						{ content.isLikes ? <Likes /> : '' }
-						{ !content.isLikes ? <Comments /> : '' }
+						{ content.isLikes ? content.post_likes.map((like) => 
+							<Likes key={like.id} like={like} /> 
+						) : '' }
+						{ !content.isLikes ? content.post_comments.map((comment) => 
+							<Comments key={comment.id} comment={comment} /> 
+						) : '' }
 						<textarea className='post-comment-box' id={'detail-comment-box-' + content.id} name='content' placeholder='Add a comment...' onChange={ () => _handleTextareaSize() }></textarea>
 						<div className='post-comment-post' onClick={ () => _handleComments() }>POST</div>
 					</div>

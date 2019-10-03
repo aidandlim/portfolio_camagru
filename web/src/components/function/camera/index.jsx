@@ -43,7 +43,7 @@ function Camera() {
 		axios.post(URL + 'api/post/insert', {
 			token: auth.token,
 			user_id: user.id,
-			picture: 'test',
+			picture: camera.preview,
 			content: document.camera.content.value,
 			location: document.camera.location.value,
 			together: document.camera.together.value,

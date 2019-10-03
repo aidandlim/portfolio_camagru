@@ -108,9 +108,13 @@
     position: relative;
     float: left;
 
-    background: url('https://post-phinf.pstatic.net/MjAxOTA4MDZfMTAg/MDAxNTY1MDc5NDM2NjQy.mXguO78S40YwnkUe6KGCu_QTEJDvcOr9AAtGosAi_wgg.05dbyJZgGd9_0VNWoP5TZVedTivq-24-Z7QMWipjEfUg.JPEG/1-2.jpg?type=w1200');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    transform: rotateY(180deg);
+    -webkit-transform:rotateY(180deg);
+    -moz-transform:rotateY(180deg);
+
     border-top: solid #404040 1px;
     border-bottom: solid #404040 1px;
 }

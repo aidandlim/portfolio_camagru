@@ -155,7 +155,7 @@ function Post(props) {
 				{props.data.together !== '' ? <div className='post-people'>{props.data.together}</div> : ''}
 				{props.data.location === '' && props.data.together === '' ? <div className='post-in'>By Camagru App</div> : '' }
 			</div>
-			<div className='post-picture'></div>
+			<div className='post-picture' style={{ backgroundImage: 'url(\'data:image/jpeg;base64, ' + props.data.picture + '\')' }}></div>
 			<div className='post-reflect-container'>
 				<FiHeart className={props.data.user_islike ? 'post-icon post-icon-active' : 'post-icon'} onClick={ () => _handleLikes() } />
 				<FiMoreVertical className='post-icon' />

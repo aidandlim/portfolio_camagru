@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aidandlim.camagru.dao.CommentDao">
+
+    <select id="selectAllByPost" resultType="com.aidandlim.camagru.dto.Comment">
+        SELECT
+            *
+        FROM
+            comment
+        WHERE
+            post_id = #{post_id}
+    </select>
+
+    <insert id="insert">
+        INSERT INTO comment
+            (user_id, post_id, content)
+        VALUES
+            (#{user_id}, #{post_id}, #{content})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM
+            comment
+        WHERE
+            id = #{id}
+    </delete>
+
+</mapper>

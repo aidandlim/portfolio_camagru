@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_isload, content_id, content_picture, content_content, content_location, content_together, content_post_time, content_num_likes, content_num_comments, content_user_nickname, content_post_likes, content_post_comments, content_user_islike } from '../../../actions';
+import { ui_isload, content_id, content_picture, content_content, content_location, content_together, content_post_time, content_num_likes, content_num_comments, content_user_nickname, content_user_picture, content_post_likes, content_post_comments, content_user_islike } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -9,6 +9,7 @@ import { confirmAlert } from 'react-confirm-alert';
 
 import { FiHeart, FiMoreVertical } from 'react-icons/fi';
 import { MdFavorite } from 'react-icons/md';
+import default_user from '../../../resources/default_user.jpg';
 import './index.css';
 
 function Post(props) {
@@ -113,6 +114,7 @@ function Post(props) {
 			dispatch(content_num_likes(res.data.num_likes));
 			dispatch(content_num_comments(res.data.num_comments));
 			dispatch(content_user_nickname(res.data.user_nickname));
+			dispatch(content_user_picture(res.data.user_picture));
 			dispatch(content_user_islike(res.data.user_islike));
 			_handleDetailLikesAndComments();
 		})
@@ -146,7 +148,13 @@ function Post(props) {
 
 	return (
 		<div className='post'>
-			<div className='post-profile'></div>
+			<div className='post-profile' style={
+				props.data.user_picture === null
+				?
+				{ backgroundImage: 'url(\'' + default_user + '\')' }
+				:
+				{ backgroundImage: 'url(\'data:image/jpeg;base64, ' + props.data.user_picture + '\')' }
+			}></div>
 			<div className='post-info-container'>
 				<div className='post-author'>{props.data.user_nickname}</div>
 				<div className='post-time'>{props.data.post_time}</div>

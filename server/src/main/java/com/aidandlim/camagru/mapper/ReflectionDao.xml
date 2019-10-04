@@ -4,11 +4,20 @@
 
     <select id="selectAllByPost" resultType="com.aidandlim.camagru.dto.Reflection">
         SELECT
-            *
+            r.id as id,
+            r.user_id as user_id,
+            r.post_id as post_id,
+            r.time as time,
+            u.nickname as user_nickname,
+            u.picture as user_picture
         FROM
-            reflection
+            reflection as r
+        LEFT JOIN
+            user as u
+        ON
+            r.user_id = u.id
         WHERE
-            post_id = #{id}
+            r.post_id = #{id}
     </select>
 
     <select id="select" resultType="com.aidandlim.camagru.dto.Reflection">

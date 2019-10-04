@@ -1,6 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, camera_isload, camera_preview, content_id } from '../../../actions';
+import { ui_nav, camera_isload, camera_preview, content_id, notification_content } from '../../../actions';
+
+import axios from 'axios';
+import { URL } from '../../../const';
 
 import { FiCompass, FiCamera, FiSearch, FiHeart } from 'react-icons/fi';
 
@@ -32,7 +35,13 @@ function Footer() {
 
 	function _handleNotification() {
 		if(auth.token !== '') {
-			dispatch(ui_nav(4));
+			axios.post(URL + 'api/notification/selectAll', {
+				token: auth.token
+			})
+			.then(res => {
+				dispatch(notification_content(res.data));
+				dispatch(ui_nav(4));
+			})
 		} else {
 			confirmAlert({
 				message: 'This feature needs to be signed in first',

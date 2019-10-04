@@ -13,6 +13,7 @@ public class Post extends Token {
     private Date time;
 
     private String user_nickname;
+    private String user_picture;
     private boolean user_islike;
     private int num_likes;
     private int num_comments;
@@ -22,7 +23,7 @@ public class Post extends Token {
         super();
     }
 
-    public Post(long id, long user_id, String picture, String content, String location, String together, Date time, String user_nickname, boolean user_islike, int num_likes, int num_comments, String post_time) {
+    public Post(long id, long user_id, String picture, String content, String location, String together, Date time, String user_nickname, String user_picture, boolean user_islike, int num_likes, int num_comments, String post_time) {
         super();
         this.id = id;
         this.user_id = user_id;
@@ -32,6 +33,7 @@ public class Post extends Token {
         this.together = together;
         this.time = time;
         this.user_nickname = user_nickname;
+        this.user_picture = user_picture;
         this.user_islike = user_islike;
         this.num_likes = num_likes;
         this.num_comments = num_comments;
@@ -100,6 +102,14 @@ public class Post extends Token {
 
     public void setUser_nickname(String user_nickname) {
         this.user_nickname = user_nickname;
+    }
+
+    public String getUser_picture() {
+        return user_picture;
+    }
+
+    public void setUser_picture(String user_picture) {
+        this.user_picture = user_picture;
     }
 
     public boolean isUser_islike() {

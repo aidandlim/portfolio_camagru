@@ -4,11 +4,21 @@
 
     <select id="selectAllByPost" resultType="com.aidandlim.camagru.dto.Comment">
         SELECT
-            *
+            c.id as id,
+            c.user_id as user_id,
+            c.post_id as post_id,
+            c.content as content,
+            c.time as time,
+            u.nickname as user_nickname,
+            u.picture as user_picture
         FROM
-            comment
+            comment as c
+        LEFT JOIN
+            user as u
+        ON
+            c.user_id = u.id
         WHERE
-            post_id = #{id}
+            c.post_id = #{id}
     </select>
 
     <insert id="insert">

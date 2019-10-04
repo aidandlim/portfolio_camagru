@@ -193,6 +193,13 @@ export const content_user_nickname = (value) => {
     };
 };
 
+export const content_user_picture = (value) => {
+    return {
+        type: 'CONTENT_USER_PICTURE',
+        payload: value
+    };
+};
+
 export const content_user_islike = (value) => {
     return {
         type: 'CONTENT_USER_ISLIKE',
@@ -226,6 +233,15 @@ export const content_islikes = (value) => {
 export const post_posts = (value) => {
     return {
         type: 'POST_POSTS',
+        payload: value
+    };
+};
+
+/***************************************************/
+
+export const notification_content = (value) => {
+    return {
+        type: 'NOTIFICATION_CONTENT',
         payload: value
     };
 };

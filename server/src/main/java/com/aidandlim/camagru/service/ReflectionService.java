@@ -1,8 +1,6 @@
 package com.aidandlim.camagru.service;
 
-import com.aidandlim.camagru.dao.CommentDao;
 import com.aidandlim.camagru.dao.ReflectionDao;
-import com.aidandlim.camagru.dto.Comment;
 import com.aidandlim.camagru.dto.Post;
 import com.aidandlim.camagru.dto.Reflection;
 import com.aidandlim.camagru.dto.Token;
@@ -25,11 +23,18 @@ public class ReflectionService {
     @Autowired
     TokenService tokenService;
 
+    @Autowired
+    PictureService pictureService;
+
     @Transactional
     public ArrayList<Reflection> selectAllByPost(Post post) {
         try {
             reflectionDao = sqlSession.getMapper(ReflectionDao.class);
-            return reflectionDao.selectAllByPost(post);
+            ArrayList<Reflection> dto = reflectionDao.selectAllByPost(post);
+            for(int i = 0; i < dto.size(); i++){
+                dto.get(i).setUser_picture(pictureService.getPicture(dto.get(i).getUser_picture()));
+            }
+            return dto;
         } catch (Exception e) {
             e.printStackTrace();
             return (null);

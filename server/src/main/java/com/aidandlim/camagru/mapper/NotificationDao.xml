@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aidandlim.camagru.dao.NotificationDao">
+
+    <select id="selectAll" resultType="com.aidandlim.camagru.dto.Notification">
+        SELECT
+            m.id as id,
+            m.user_id as user_id,
+            m.post_id as post_id,
+            m.type as type,
+            CASE
+                WHEN m.time > DATE_ADD(NOW(), INTERVAL-1 MINUTE ) THEN CONCAT(SECOND (TIMEDIFF(NOW(), m.time)), ' SECONDS AGO')
+                WHEN m.time > DATE_ADD(NOW(), INTERVAL-1 HOUR) THEN CONCAT(MINUTE(TIMEDIFF(NOW(), m.time)), ' MINUTES AGO')
+                WHEN m.time > DATE_ADD(NOW(), INTERVAL-24 HOUR) THEN CONCAT(HOUR(TIMEDIFF(NOW(), m.time)), ' HOURS AGO')
+                ELSE CONCAT(DATEDIFF(NOW(), m.time), ' DAYS AGO') END as time,
+            u.nickname as user_nickname,
+            u.picture as user_picture
+        FROM
+            (SELECT r.id, r.user_id, r.post_id, r.time, 'likes' AS type FROM reflection as r UNION SELECT c.id, c.user_id, c.post_id, c.time, 'comments' AS type FROM comment as c) as m
+        LEFT JOIN
+            post as p
+        ON
+            m.post_id = p.id
+        LEFT JOIN
+            user as u
+        ON
+            m.user_id = u.id
+        WHERE
+            p.user_id = #{user_id}
+            AND
+            u.id != #{user_id}
+        ORDER BY
+            m.time DESC;
+    </select>
+
+</mapper>

@@ -17,6 +17,9 @@
     position: relative;
     float: left;
 
+    background-size: cover;
+    background-position: center;
+
     border: solid 1px #404040;
     border-radius: 50%;
 

@@ -1,16 +1,11 @@
 package com.aidandlim.camagru.service;
 
-import com.aidandlim.camagru.dao.AuthDao;
 import com.aidandlim.camagru.dto.Token;
 import com.aidandlim.camagru.dto.User;
 import io.jsonwebtoken.*;
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.crypto.spec.SecretKeySpec;
-import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 import java.util.Date;

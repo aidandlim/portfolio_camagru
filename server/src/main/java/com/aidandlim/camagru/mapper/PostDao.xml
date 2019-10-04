@@ -15,6 +15,7 @@
                 WHEN p.time > DATE_ADD(NOW(), INTERVAL-24 HOUR) THEN CONCAT(HOUR(TIMEDIFF(NOW(), p.time)), ' HOURS AGO')
                 ELSE CONCAT(DATEDIFF(NOW(), p.time), ' DAYS AGO') END as post_time,
             u.nickname as user_nickname,
+            u.picture as user_picture,
             (SELECT COUNT(*) FROM reflection WHERE post_id = p.id) as num_likes,
             (SELECT COUNT(*) FROM comment WHERE post_id = p.id) as num_comments,
             (SELECT COUNT(*) FROM reflection WHERE post_id = p.id AND user_id = #{user_id}) as user_islike
@@ -56,6 +57,7 @@
                 WHEN p.time > DATE_ADD(NOW(), INTERVAL-24 HOUR) THEN CONCAT(HOUR(TIMEDIFF(NOW(), p.time)), ' HOURS AGO')
                 ELSE CONCAT(DATEDIFF(NOW(), p.time), ' DAYS AGO') END as post_time,
             u.nickname as user_nickname,
+            u.picture as user_picture,
             (SELECT COUNT(*) FROM reflection WHERE post_id = p.id) as num_likes,
             (SELECT COUNT(*) FROM comment WHERE post_id = p.id) as num_comments,
             (SELECT COUNT(*) FROM reflection WHERE post_id = p.id AND user_id = #{user_id}) as user_islike

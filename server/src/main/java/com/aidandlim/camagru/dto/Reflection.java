@@ -9,16 +9,21 @@ public class Reflection extends Token {
     private long post_id;
     private Date time;
 
+    private String user_nickname;
+    private String user_picture;
+
     public Reflection() {
         super();
     }
 
-    public Reflection(long id, long user_id, long post_id, Date time) {
+    public Reflection(long id, long user_id, long post_id, Date time, String user_nickname, String user_picture) {
         super();
         this.id = id;
         this.user_id = user_id;
         this.post_id = post_id;
         this.time = time;
+        this.user_nickname = user_nickname;
+        this.user_picture = user_picture;
     }
 
     public long getId() {
@@ -51,5 +56,21 @@ public class Reflection extends Token {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public String getUser_nickname() {
+        return user_nickname;
+    }
+
+    public void setUser_nickname(String user_nickname) {
+        this.user_nickname = user_nickname;
+    }
+
+    public String getUser_picture() {
+        return user_picture;
+    }
+
+    public void setUser_picture(String user_picture) {
+        this.user_picture = user_picture;
     }
 }

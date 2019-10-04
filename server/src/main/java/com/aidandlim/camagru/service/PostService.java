@@ -4,19 +4,14 @@ import com.aidandlim.camagru.dao.PostDao;
 import com.aidandlim.camagru.dto.Post;
 import com.aidandlim.camagru.dto.Token;
 import com.aidandlim.camagru.dto.User;
-import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -32,30 +27,24 @@ public class PostService {
     @Autowired
     TokenService tokenService;
 
+    @Autowired
+    PictureService pictureService;
+
     @Transactional
     public ArrayList<Post> selectAll(Token token) {
         try {
             postDao = sqlSession.getMapper(PostDao.class);
             ArrayList<Post> dto = postDao.selectAll(token.getToken().equals("") ? -1 : tokenService.getIdFromToken(token));
             for(int i = 0; i < dto.size(); i++){
-                dto.get(i).setPicture(getPicture(dto.get(i).getPicture()));
+                dto.get(i).setUser_picture(pictureService.getPicture(dto.get(i).getUser_picture()));
+            }
+            for(int i = 0; i < dto.size(); i++){
+                dto.get(i).setPicture(pictureService.getPicture(dto.get(i).getPicture()));
             }
             return dto;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
-        }
-    }
-
-    @Transactional
-    public String getPicture(String uuid) {
-        try {
-            byte[] fileContent = FileUtils.readFileToByteArray(new File("/Users/aidan/Workspace/portfolio_camagru/static/" + uuid));
-            String encodedString = java.util.Base64.getEncoder().encodeToString(fileContent);
-            return (encodedString.replaceFirst("dataimage/jpegbase64", ""));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return (null);
         }
     }
 
@@ -74,7 +63,10 @@ public class PostService {
     public Post select(Post post) {
         try {
             postDao = sqlSession.getMapper(PostDao.class);
-            return postDao.select(post);
+            Post dto = postDao.select(post);
+            dto.setPicture(pictureService.getPicture(dto.getPicture()));
+            dto.setUser_picture(pictureService.getPicture(dto.getUser_picture()));
+            return dto;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

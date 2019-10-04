@@ -2,27 +2,25 @@ package com.aidandlim.camagru.dto;
 
 import java.util.Date;
 
-public class Comment extends Token {
+public class Notification {
 
     private long id;
     private long user_id;
     private long post_id;
-    private String content;
-    private Date time;
+    private String type;
+    private String time;
 
     private String user_nickname;
     private String user_picture;
 
-    public Comment() {
-        super();
+    public Notification() {
     }
 
-    public Comment(long id, long user_id, long post_id, String content, Date time, String user_nickname, String user_picture) {
-        super();
+    public Notification(long id, long user_id, long post_id, String type, String time, String user_nickname, String user_picture) {
         this.id = id;
         this.user_id = user_id;
         this.post_id = post_id;
-        this.content = content;
+        this.type = type;
         this.time = time;
         this.user_nickname = user_nickname;
         this.user_picture = user_picture;
@@ -52,19 +50,19 @@ public class Comment extends Token {
         this.post_id = post_id;
     }
 
-    public String getContent() {
-        return content;
+    public String getType() {
+        return type;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

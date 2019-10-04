@@ -9,6 +9,7 @@ const content = {
     num_likes: 0,
     num_comments: 0,
     user_nickname: '',
+    user_picture: '',
     user_islike: false,
 
     post_likes: [],
@@ -54,6 +55,10 @@ const contentReducer = (state = content, action) => {
         case 'CONTENT_USER_NICKNAME':
             return Object.assign({}, state, {
                 user_nickname: action.payload
+            });
+        case 'CONTENT_USER_PICTURE':
+            return Object.assign({}, state, {
+                user_picture: action.payload
             });
         case 'CONTENT_USER_ISLIKE':
             return Object.assign({}, state, {

@@ -172,7 +172,9 @@ function Post(props) {
 					<MdFavorite className='post-icon post-icon-active' onClick={ () => _handleLikes() } />
 				}
 				<FiMoreVertical className='post-icon' />
-				<textarea className='post-content' style={{height: props.data.content.split('\n').length + 'rem'}} value={props.data.content} readOnly></textarea>
+				{props.data.content.length ? 
+					<textarea className='post-content' style={{height: props.data.content.split('\n').length + 'rem'}} value={props.data.content} readOnly></textarea>
+				: ''}
 				<div className='post-likes' onClick={ () => _handleDetail() }>{props.data.num_likes} likes</div>
 				<div className='post-comments' onClick={ () => _handleDetail() }>View all {props.data.num_comments} comments</div>
 				<textarea className='post-comment-box' id={'post-comment-box-' + props.data.id} name='content' placeholder='Add a comment...' onChange={ () => _handleTextareaSize() }></textarea>

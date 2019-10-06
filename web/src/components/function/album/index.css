@@ -1,0 +1,14 @@
+.album {
+    width: calc(9rem - 2px);
+    height: calc(9rem - 2px);
+    margin: 0 1.5rem 1.5rem 0;
+
+    position: relative;
+    float: left;
+
+    border: solid 1px #404040;
+}
+
+.album:nth-child(3n + 1) {
+    margin-right: 0;
+}

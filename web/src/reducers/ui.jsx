@@ -1,10 +1,11 @@
 const ui = {
-    nav: 0,
+    nav: 5,
     // main             0
     // sidebar          1
     // search           2
     // camera           3
     // notification     4
+    // mypage           5
     
     isLoad: false,
 }

@@ -20,7 +20,7 @@ function Body() {
 			{ ui.nav === 3 ? <Camera /> : '' }
 			{ ui.nav === 4 ? <Notification /> : '' }
 			<div id='test' className='inner-container'>
-				{ content.id !== -1 ? <Detail id={content.id} /> : '' }
+				{ content.post.id !== undefined ? <Detail id={content.id} /> : '' }
 				{ post.posts.map((post) => 
 					<Post key={post.id} data={post} />
 				)}

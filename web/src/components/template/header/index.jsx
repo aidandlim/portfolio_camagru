@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, auth_token, content_id } from '../../../actions';
+import { ui_nav, auth_token, content_post } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -25,7 +25,7 @@ function Header() {
 				dispatch(auth_token(''));
 			}
 			dispatch(ui_nav(1));
-			dispatch(content_id(-1));
+			dispatch(content_post({}));
 		})
 	}
 

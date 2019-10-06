@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_isload, content_id, content_picture, content_content, content_location, content_together, content_post_time, content_num_likes, content_num_comments, content_user_nickname, content_user_picture, content_post_likes, content_post_comments, content_user_islike } from '../../../actions';
+import { ui_isload, content_post, content_post_likes, content_post_comments } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -105,17 +105,7 @@ function Post(props) {
 			user_id: user.id,
 		})
 		.then(res => {
-			dispatch(content_id(res.data.id));
-			dispatch(content_picture(res.data.picture));
-			dispatch(content_content(res.data.content));
-			dispatch(content_location(res.data.location));
-			dispatch(content_together(res.data.together));
-			dispatch(content_post_time(res.data.post_time));
-			dispatch(content_num_likes(res.data.num_likes));
-			dispatch(content_num_comments(res.data.num_comments));
-			dispatch(content_user_nickname(res.data.user_nickname));
-			dispatch(content_user_picture(res.data.user_picture));
-			dispatch(content_user_islike(res.data.user_islike));
+			dispatch(content_post(res.data));
 			_handleDetailLikesAndComments();
 		})
 		.then(() => {
@@ -172,7 +162,7 @@ function Post(props) {
 					<MdFavorite className='post-icon post-icon-active' onClick={ () => _handleLikes() } />
 				}
 				<FiMoreVertical className='post-icon' />
-				{props.data.content.length ? 
+				{ props.data.content.length ? 
 					<textarea className='post-content' style={{height: props.data.content.split('\n').length + 'rem'}} value={props.data.content} readOnly></textarea>
 				: ''}
 				<div className='post-likes' onClick={ () => _handleDetail() }>{props.data.num_likes} likes</div>

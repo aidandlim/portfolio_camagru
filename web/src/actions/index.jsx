@@ -130,79 +130,9 @@ export const camera_filter = (value) => {
 
 /***************************************************/
 
-export const content_id = (value) => {
+export const content_post = (value) => {
     return {
-        type: 'CONTENT_ID',
-        payload: value
-    };
-};
-
-export const content_picture = (value) => {
-    return {
-        type: 'CONTENT_PICTURE',
-        payload: value
-    };
-};
-
-export const content_content = (value) => {
-    return {
-        type: 'CONTENT_CONTENT',
-        payload: value
-    };
-};
-
-export const content_location = (value) => {
-    return {
-        type: 'CONTENT_LOCATION',
-        payload: value
-    };
-};
-
-export const content_together = (value) => {
-    return {
-        type: 'CONTENT_TOGETHER',
-        payload: value
-    };
-};
-
-export const content_post_time = (value) => {
-    return {
-        type: 'CONTENT_POST_TIME',
-        payload: value
-    };
-};
-
-export const content_num_likes = (value) => {
-    return {
-        type: 'CONTENT_NUM_LIKES',
-        payload: value
-    };
-};
-
-export const content_num_comments = (value) => {
-    return {
-        type: 'CONTENT_NUM_COMMENTS',
-        payload: value
-    };
-};
-
-export const content_user_nickname = (value) => {
-    return {
-        type: 'CONTENT_USER_NICKNAME',
-        payload: value
-    };
-};
-
-export const content_user_picture = (value) => {
-    return {
-        type: 'CONTENT_USER_PICTURE',
-        payload: value
-    };
-};
-
-export const content_user_islike = (value) => {
-    return {
-        type: 'CONTENT_USER_ISLIKE',
+        type: 'CONTENT_POST',
         payload: value
     };
 };

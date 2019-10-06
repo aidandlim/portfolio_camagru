@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, camera_isload, camera_preview, content_id, notification_content } from '../../../actions';
+import { ui_nav, camera_isload, camera_preview, content_post, notification_content } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -57,7 +57,7 @@ function Footer() {
 	return (
 		<div className='footer'>
 			<div className='container footer-container'>
-				{ ui.nav === 0 || ui.nav === 1 ? <FiCompass className='footer-icon-active' onClick={() => {dispatch(ui_nav(0)); dispatch(content_id(-1))}} /> : <FiCompass className='footer-icon'  onClick={() => {dispatch(ui_nav(0)); dispatch(content_id(-1))}} /> }
+				{ ui.nav === 0 || ui.nav === 1 ? <FiCompass className='footer-icon-active' onClick={() => {dispatch(ui_nav(0)); dispatch(content_post({}))}} /> : <FiCompass className='footer-icon'  onClick={() => {dispatch(ui_nav(0)); dispatch(content_post({}))}} /> }
 				{ ui.nav === 2 ? <FiSearch className='footer-icon-active' onClick={() => dispatch(ui_nav(0))} /> : <FiSearch className='footer-icon' onClick={() => dispatch(ui_nav(2))} /> }
 				{ ui.nav === 3 ? <FiCamera className='footer-icon-active' onClick={() => dispatch(ui_nav(0))} /> : <FiCamera className='footer-icon' onClick={() => _handleCamera()} /> }
 				{ ui.nav === 4 ? <FiHeart className='footer-icon-active' onClick={() => dispatch(ui_nav(0))} /> : <FiHeart className='footer-icon' onClick={() => _handleNotification()} /> }

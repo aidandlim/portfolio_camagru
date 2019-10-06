@@ -7,6 +7,7 @@ import cameraReducer from './camera';
 import contentReducer from './content';
 import postReducer from './post';
 import notificationReducer from './notification';
+import searchReducer from './search';
 
 const rootReducers = combineReducers({
     ui: uiReducer,
@@ -16,6 +17,7 @@ const rootReducers = combineReducers({
     content: contentReducer,
     post: postReducer,
     notification: notificationReducer,
+    search: searchReducer,
 })
 
 export default rootReducers;

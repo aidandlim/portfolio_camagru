@@ -40,25 +40,16 @@ public class UserService {
     @Autowired
     MailService mailService;
 
+    @Autowired
+    PictureService pictureService;
+
     @Transactional
     public User select(Token token) {
         try {
             userDao = sqlSession.getMapper(UserDao.class);
             User result = userDao.select(tokenService.getIdFromToken(token));
-            result.setPicture(getPicture(result.getPicture()));
+            result.setPicture(pictureService.getPicture(result.getPicture()));
             return (result);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return (null);
-        }
-    }
-
-    @Transactional
-    public String getPicture(String uuid) {
-        try {
-            byte[] fileContent = FileUtils.readFileToByteArray(new File("/Users/aidan/Workspace/portfolio_camagru/static/" + uuid));
-            String encodedString = Base64.getEncoder().encodeToString(fileContent);
-            return (encodedString);
         } catch (Exception e) {
             e.printStackTrace();
             return (null);

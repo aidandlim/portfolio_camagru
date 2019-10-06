@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aidandlim.camagru.dao.SearchDao">
+
+    <select id="select" resultType="com.aidandlim.camagru.dto.Search">
+        SELECT
+            id as id,
+            picture as picture,
+            nickname as nickname,
+            bio as bio,
+            isPrivate as isPrivate,
+            (SELECT COUNT(*) FROM post WHERE user_id = #{id}) as num_posts,
+            (SELECT COUNT(*) FROM reflection as r LEFT JOIN post as p ON r.post_id = p.id WHERE p.user_id = #{id}) as num_likes,
+            (SELECT COUNT(*) FROM comment as c LEFT JOIN post as p ON c.post_id = p.id WHERE p.user_id = #{id}) as num_comments
+        FROM
+            user
+        WHERE
+            id = #{id}
+    </select>
+
+</mapper>

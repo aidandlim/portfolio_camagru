@@ -175,3 +175,19 @@ export const notification_content = (value) => {
         payload: value
     };
 };
+
+/***************************************************/
+
+export const search_user = (value) => {
+    return {
+        type: 'SEARCH_USER',
+        payload: value
+    };
+};
+
+export const search_users = (value) => {
+    return {
+        type: 'SEARCH_USERS',
+        payload: value
+    };
+};

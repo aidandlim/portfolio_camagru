@@ -36,7 +36,7 @@ function Detail() {
 		axios.post(URL + 'api/reflection/insert', {
 			token: auth.token,
 			user_id: user.id,
-			post_id: content.id,
+			post_id: content.post.id,
 		})
 		.then(res => {
 			if(res.data) {
@@ -75,12 +75,12 @@ function Detail() {
 		axios.post(URL + 'api/comment/insert', {
 			token: auth.token,
 			user_id: user.id,
-			post_id: content.id,
-			content: document.getElementById('detail-comment-box-' + content.id).value,
+			post_id: content.post.id,
+			content: document.getElementById('detail-comment-box-' + content.post.id).value,
 		})
 		.then(res => {
 			if(res.data) {
-				document.getElementById('detail-comment-box-' + content.id).value = '';
+				document.getElementById('detail-comment-box-' + content.post.id).value = '';
 				_handleTextareaSize();
 				_handleDetail();
 			} else {
@@ -104,7 +104,7 @@ function Detail() {
 	function _handleDetail() {
 		axios.post(URL + 'api/post/select', {
 			token: auth.token,
-			id: content.id,
+			id: content.post.id,
 			user_id: user.id,
 		})
 		.then(res => {
@@ -115,13 +115,13 @@ function Detail() {
 
 	function _handleDetailLikesAndComments() {
 		axios.post(URL + 'api/reflection/selectAllByPost', {
-			id: content.id,
+			id: content.post.id,
 		})
 		.then(res => {
 			dispatch(content_post_likes(res.data));
 		});
 		axios.post(URL + 'api/comment/selectAllByPost', {
-			id: content.id,
+			id: content.post.id,
 		})
 		.then(res => {
 			dispatch(content_post_comments(res.data));
@@ -129,7 +129,7 @@ function Detail() {
 	}
 
 	function _handleTextareaSize() {
-		const e = document.getElementById('detail-comment-box-' + content.id);
+		const e = document.getElementById('detail-comment-box-' + content.post.id);
 		e.style.height = '5px';
 		e.style.height = 'calc(' + (e.scrollHeight) + 'px - 1rem)';
 	}
@@ -143,11 +143,11 @@ function Detail() {
 					<div className='post-info-container'>
 						<div className='post-author'>{content.post.user_nickname}</div>
 						<div className='post-time'>{content.post.post_time}</div>
-						{content.location !== '' ? <div className='post-in'>In</div> : ''}
-						{content.location !== '' ? <div className='post-location'>{content.post.location}</div> : ''}
-						{content.together !== '' ? <div className='post-with'>With</div> : ''}
-						{content.together !== '' ? <div className='post-people'>{content.post.together}</div> : ''}
-						{content.location === '' && content.post.together === '' ? <div className='post-in'>By Camagru App</div> : '' }
+						{content.post.location !== '' ? <div className='post-in'>In</div> : ''}
+						{content.post.location !== '' ? <div className='post-location'>{content.post.location}</div> : ''}
+						{content.post.together !== '' ? <div className='post-with'>With</div> : ''}
+						{content.post.together !== '' ? <div className='post-people'>{content.post.together}</div> : ''}
+						{content.post.location === '' && content.post.together === '' ? <div className='post-in'>By Camagru App</div> : '' }
 					</div>
 					<div className='post-picture' style={{ backgroundImage: 'url(\'data:image/jpeg;base64, ' + content.post.picture + '\')' }}></div>
 					<div className='post-reflect-container'>

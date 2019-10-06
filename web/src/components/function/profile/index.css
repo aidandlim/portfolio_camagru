@@ -81,7 +81,7 @@
 .profile-textbox {
     width: calc(100% - 1rem);
     height: auto;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
     padding: 0.5rem;
 
     resize: none;

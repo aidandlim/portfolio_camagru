@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, auth_token, content_post } from '../../../actions';
+import { ui_nav, auth_token } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
 
-import { FiUser, FiXCircle } from 'react-icons/fi';
+import { FiUser, FiSettings, FiXCircle } from 'react-icons/fi';
 
 import './index.css';
 
@@ -25,14 +25,16 @@ function Header() {
 				dispatch(auth_token(''));
 			}
 			dispatch(ui_nav(1));
-			dispatch(content_post({}));
 		})
 	}
 
 	return (
 		<div className='header'>
-			<div className='header-title' onClick={() => dispatch(ui_nav(0))}>#Camagru</div>
-			{ ui.nav === 1 ? <FiXCircle className='header-icon' onClick={() => dispatch(ui_nav(0))}/> : <FiUser className='header-icon' onClick={() => _handleInitUser()}/> }
+			<div className='header-title' style={{
+				marginRight: auth.token !== '' ? 'calc(100% - 11rem)' : 'calc(100% - 8.5rem)'
+			}} onClick={() => dispatch(ui_nav(0))}>#Camagru</div>
+			{ auth.token !== '' ? <FiUser className='header-icon' /> : '' }
+			{ ui.nav === 1 ? <FiXCircle className='header-icon' onClick={() => dispatch(ui_nav(0))}/> : <FiSettings className='header-icon' onClick={() => _handleInitUser()}/> }
 		</div>
 	);
 }

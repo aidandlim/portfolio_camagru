@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 
 import Message from '../../function/message';
 
@@ -12,7 +12,7 @@ function Notification() {
 		<div className='notification'>
 			<div className='inner-container'>
 				{notification.content.map((content, key) => 
-					<Message key={key} content={content}/>
+					<Message key={key} content={content} />
 				)}
 			</div>
 		</div>

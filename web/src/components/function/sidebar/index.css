@@ -13,4 +13,6 @@
     
     background-color: #151515;
     border-left: solid 1px #404040;
+
+    z-index: 9;
 }

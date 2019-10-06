@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_isload, content_post, content_post_likes, content_post_comments, content_islikes } from '../../../actions';
+import { ui_isload, ui_nav, content_post, content_post_likes, content_post_comments, content_islikes, search_user } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -128,6 +128,31 @@ function Detail() {
 		});
 	}
 
+	function _handleProfilePage() {
+		dispatch(ui_isload());
+		axios.post(URL + 'api/search/select', {
+			id: content.post.user_id
+		})
+		.then(res => {
+			if(res.data !== null) {
+				dispatch(search_user(res.data));
+				dispatch(ui_nav(5));
+			} else {
+				confirmAlert({
+					message: 'Something went wrong :(',
+					buttons: [
+						{
+							label: 'I will try again'
+						}
+					]
+				});
+			}
+		})
+		.then(() => {
+			dispatch(ui_isload());
+		});
+	}
+
 	function _handleTextareaSize() {
 		const e = document.getElementById('detail-comment-box-' + content.post.id);
 		e.style.height = '5px';
@@ -139,9 +164,11 @@ function Detail() {
 			<FiArrowLeftCircle className='detail-rollback' onClick={ () => dispatch(content_post({})) } />
 			<div className='inner-container'>
 				<div className='detail-post'>
-					<div className='post-profile' style={{ backgroundImage: 'url(\'data:image/jpeg;base64, ' + content.post.user_picture + '\')' }}></div>
+					<div className='post-profile' style={{ 
+						backgroundImage: 'url(\'data:image/jpeg;base64, ' + content.post.user_picture + '\')' 
+					}} onClick={() => _handleProfilePage()}></div>
 					<div className='post-info-container'>
-						<div className='post-author'>{content.post.user_nickname}</div>
+						<div className='post-author' onClick={() => _handleProfilePage()}>{content.post.user_nickname}</div>
 						<div className='post-time'>{content.post.post_time}</div>
 						{content.post.location !== '' ? <div className='post-in'>In</div> : ''}
 						{content.post.location !== '' ? <div className='post-location'>{content.post.location}</div> : ''}

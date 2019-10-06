@@ -29,7 +29,7 @@ function Mypage() {
 						<div className='mypage-table-body'>{search.user.num_posts}</div>
 						<div className='mypage-table-body'>{search.user.num_likes}</div>
 						<div className='mypage-table-body'>{search.user.num_comments}</div>
-						<textarea className='mypage-profile-bio' value={search.user.bio === '' ? 'Hey there! I am using Camagru App!' : search.user.bio} readOnly></textarea>				
+						<textarea className='mypage-profile-bio' value={search.user.bio === '' || search.user.bio === undefined ? 'Hey there! I am using Camagru App!' : search.user.bio} readOnly></textarea>				
 					</div>
 				</div>
 				<Album />

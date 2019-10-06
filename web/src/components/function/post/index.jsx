@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_isload, content_post, content_post_likes, content_post_comments } from '../../../actions';
+import { ui_nav, ui_isload, content_post, content_post_likes, content_post_comments, search_user } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -130,6 +130,31 @@ function Post(props) {
 		});
 	}
 
+	function _handleProfilePage() {
+		dispatch(ui_isload());
+		axios.post(URL + 'api/search/select', {
+			id: props.data.user_id
+		})
+		.then(res => {
+			if(res.data !== null) {
+				dispatch(search_user(res.data));
+				dispatch(ui_nav(5));
+			} else {
+				confirmAlert({
+					message: 'Something went wrong :(',
+					buttons: [
+						{
+							label: 'I will try again'
+						}
+					]
+				});
+			}
+		})
+		.then(() => {
+			dispatch(ui_isload());
+		});
+	}
+
 	function _handleTextareaSize() {
 		const e = document.getElementById('post-comment-box-' + props.data.id);
 		e.style.height = '5px';
@@ -144,9 +169,9 @@ function Post(props) {
 				{ backgroundImage: 'url(\'' + default_user + '\')' }
 				:
 				{ backgroundImage: 'url(\'data:image/jpeg;base64, ' + props.data.user_picture + '\')' }
-			}></div>
+			} onClick={() => _handleProfilePage()}></div>
 			<div className='post-info-container'>
-				<div className='post-author'>{props.data.user_nickname}</div>
+				<div className='post-author' onClick={() => _handleProfilePage()}>{props.data.user_nickname}</div>
 				<div className='post-time'>{props.data.post_time}</div>
 				{props.data.location !== '' ? <div className='post-in'>In</div> : ''}
 				{props.data.location !== '' ? <div className='post-location'>{props.data.location}</div> : ''}

@@ -1,10 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_isload, content_post, content_post_likes, content_post_comments } from '../../../actions';
+import { ui_nav, ui_isload, content_post, content_post_likes, content_post_comments, search_user } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
 
+import { confirmAlert } from 'react-confirm-alert';
 import default_user from '../../../resources/default_user.jpg';
 import './index.css';
 
@@ -46,18 +47,43 @@ function Message(props) {
 		});
 	}
 
+	function _handleProfilePage() {
+		dispatch(ui_isload());
+		axios.post(URL + 'api/search/select', {
+			id: props.content.user_id
+		})
+		.then(res => {
+			if(res.data !== null) {
+				dispatch(search_user(res.data));
+				dispatch(ui_nav(5));
+			} else {
+				confirmAlert({
+					message: 'Something went wrong :(',
+					buttons: [
+						{
+							label: 'I will try again'
+						}
+					]
+				});
+			}
+		})
+		.then(() => {
+			dispatch(ui_isload());
+		});
+	}
+
 	return (
-		<div className='message' onClick={() => _handleDetail(props.content.post_id)}>
+		<div className='message'>
 			<div className='message-profile' style={
 				props.content.user_picture === null
 				?
 				{ backgroundImage: 'url(\'' + default_user + '\')' }
 				:
 				{ backgroundImage: 'url(\'data:image/jpeg;base64, ' + props.content.user_picture + '\')' }
-			}></div>
-			<div className='message-author'>{props.content.user_nickname}</div>
-			<div className='message-content'>{props.content.type === 'likes' ? 'liked your post!' : 'commented your post!'}</div>
-			<div className='message-time'>{props.content.time}</div>
+			} onClick={() => _handleProfilePage()}></div>
+			<div className='message-author' onClick={() => _handleDetail(props.content.post_id)}>{props.content.user_nickname}</div>
+			<div className='message-content' onClick={() => _handleDetail(props.content.post_id)}>{props.content.type === 'likes' ? 'liked your post!' : 'commented your post!'}</div>
+			<div className='message-time' onClick={() => _handleDetail(props.content.post_id)}>{props.content.time}</div>
 		</div>
 	);
 }

@@ -11,8 +11,8 @@ import Gallery from '../gallery';
 import Preview from '../preview';
 
 import { confirmAlert } from 'react-confirm-alert';
-
 import { FiHeart, FiMoreVertical } from 'react-icons/fi';
+import default_user from '../../../resources/default_user.jpg';
 import './index.css';
 
 function Camera() {
@@ -79,7 +79,13 @@ function Camera() {
 		<div className='camera'>
 			<div className='inner-container'>
 				<div className='camera-post'>
-					<div className='post-profile'></div>
+					<div className='post-profile' style={
+						user.picture === null
+						?
+						{ backgroundImage: 'url(\'' + default_user + '\')' }
+						:
+						{ backgroundImage: 'url(\'data:image/jpeg;base64, ' + user.picture + '\')' }
+					}></div>
 					<form name='camera'>
 						<div className='post-info-container'>
 							<div className='post-author'>{user.nickname}</div>

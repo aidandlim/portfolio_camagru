@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class VerifyApp {
+public class App {
 
     @Autowired
     AuthService service;
+
+    @RequestMapping("check")
+    public @ResponseBody String check() { return "Connection is successful!"; }
 
     @RequestMapping("verify")
     public @ResponseBody String verify(User user) { return (service.verify(user)); }

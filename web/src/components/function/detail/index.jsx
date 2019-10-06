@@ -9,7 +9,6 @@ import Likes from '../likes';
 import Comments from '../comments';
 
 import { confirmAlert } from 'react-confirm-alert';
-
 import { FiArrowLeftCircle, FiHeart, FiMoreVertical } from 'react-icons/fi';
 import { MdFavorite } from 'react-icons/md';
 import './index.css';

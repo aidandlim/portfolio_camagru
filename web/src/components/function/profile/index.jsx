@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_isload, auth_token, auth_isaccount, user_id, user_email, user_nickname, user_bio, user_biotemp, user_isprivate, user_isnotificate, user_picture } from '../../../actions';
+import { ui_isload, auth_token, auth_isaccount, user_user, user_biotemp } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -130,15 +130,10 @@ function Profile() {
 			token: token
 		})
 		.then(res => {
+			console.log(res);
 			if(res.data !== null) {
-				dispatch(user_id(res.data.id));
-				dispatch(user_email(res.data.email));
-				dispatch(user_nickname(res.data.nickname));
-				dispatch(user_bio(res.data.bio === null ? '' : res.data.bio));
+				dispatch(user_user(res.data));
 				dispatch(user_biotemp(res.data.bio === null ? '' : res.data.bio));
-				dispatch(user_isprivate(res.data.private));
-				dispatch(user_isnotificate(res.data.notificate));
-				dispatch(user_picture(res.data.picture));
 			} else {
 				confirmAlert({
 					message: 'Something went wrong :(',
@@ -154,14 +149,8 @@ function Profile() {
 
 	function _handleLogout() {
 		dispatch(auth_token(''));
-		dispatch(user_id(-1));
-		dispatch(user_email(''));
-		dispatch(user_nickname(''));
-		dispatch(user_bio(''));
+		dispatch(user_user({}));
 		dispatch(user_biotemp(''));
-		dispatch(user_isprivate(false));
-		dispatch(user_isnotificate(false));
-		dispatch(user_picture(null));
 	}
 
 	function _handleTextareaSize() {
@@ -175,11 +164,11 @@ function Profile() {
 		<div className='profile'>
 			<div className='profile-profile'
 				style={
-					user.picture === null
+					user.user.picture === null
 					?
 					{ backgroundImage: 'url(\'' + default_user + '\')' }
 					:
-					{ backgroundImage: 'url(\'data:image/jpeg;base64, ' + user.picture + '\')' }
+					{ backgroundImage: 'url(\'data:image/jpeg;base64, ' + user.user.picture + '\')' }
 				}
 			></div>
 			<div className='profile-change-profile' onClick={() => document.changePicture.file.click()}>Change Profile Picture</div>
@@ -188,11 +177,11 @@ function Profile() {
 			</form>
 			<form name='changeProfile' onSubmit={_handleForm}>
 				<span className='profile-placeholder'>Nickname</span>
-				<input className='profile-input' type='text' name='nickname' required defaultValue={user.nickname} />
+				<input className='profile-input' type='text' name='nickname' required defaultValue={user.user.nickname} />
 				<span className='profile-placeholder'>Email</span>
-				<input className='profile-input' type='email' name='email' required defaultValue={user.email} />
+				<input className='profile-input' type='email' name='email' required defaultValue={user.user.email} />
 				<span className='profile-placeholder'>Bio</span>
-				<textarea id='profile-bio' className='profile-textbox' name='bio' style={{height: user.bio.split('\n').length * 0.75 + 'rem'}} value={user.bioTemp} onChange={() => _handleTextareaSize()} onFocus={() => _handleTextareaSize()} />
+				<textarea id='profile-bio' className='profile-textbox' name='bio' style={{height: (user.bioTemp !== '' ? user.bioTemp.split('\n').length * 0.75 + 'rem' : '0rem') }} value={user.bioTemp} onChange={() => _handleTextareaSize()} onFocus={() => _handleTextareaSize()} />
 				<input className='profile-submit' type='submit' value='Update User Information' />
 			</form>
 			<form name='changePassword' onSubmit={_handleChangePassword}>

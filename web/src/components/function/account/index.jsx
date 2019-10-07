@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_isload, auth_token, auth_isaccount, user_id, user_email, user_nickname, user_bio, user_isprivate, user_isnotificate, user_picture } from '../../../actions';
+import { ui_isload, auth_token, auth_isaccount, user_user } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -22,7 +22,8 @@ function Account() {
 		})
 		.then(res => {
 			if(res.data) {
-				dispatch(user_isprivate(!user.isPrivate));
+				user.user.isPrivate = !user.user.isPrivate;
+				dispatch(user_user(user.user));
 			} else {
 				confirmAlert({
 					message: 'Something went wrong :(',
@@ -48,7 +49,8 @@ function Account() {
 		})
 		.then(res => {
 			if(res.data) {
-				dispatch(user_isnotificate(!user.isNotificate));
+				user.user.isNotificate = !user.user.isNotificate;
+				dispatch(user_user(user.user));
 			} else {
 				confirmAlert({
 					message: 'Something went wrong :(',
@@ -89,13 +91,7 @@ function Account() {
 			.then(res => {
 				if(res.data) {
 					dispatch(auth_token(''));
-					dispatch(user_id(-1));
-					dispatch(user_email(''));
-					dispatch(user_nickname(''));
-					dispatch(user_bio(''));
-					dispatch(user_isprivate(false));
-					dispatch(user_isnotificate(false));
-					dispatch(user_picture(undefined));
+					dispatch(user_user({}));
 					dispatch(auth_isaccount(false));
 					setTimeout(() => {
 						dispatch(ui_isload());
@@ -117,7 +113,7 @@ function Account() {
 	return (
 		<div className='account'>
 			<span className='account-title'>Private Account</span>
-			{ user.isPrivate 
+			{ user.user.isPrivate 
 				? 
 					<div className='account-toggle' onClick={ () => _handleIsPrivate() }>
 						<div className='account-toggle-box-active'></div>
@@ -130,7 +126,7 @@ function Account() {
 					</div>
 			}
 			<span className='account-title'>Send Notification</span>
-			{ user.isNotificate 
+			{ user.user.isNotificate 
 				? 
 					<div className='account-toggle' onClick={ () => _handleIsNotificate() }>
 						<div className='account-toggle-box-active'></div>

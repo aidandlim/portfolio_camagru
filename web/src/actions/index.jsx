@@ -42,30 +42,9 @@ export const auth_isaccount = () => {
 
 /***************************************************/
 
-export const user_id = (value) => {
+export const user_user = (value) => {
     return {
-        type: 'USER_ID',
-        payload: value
-    };
-};
-
-export const user_email = (value) => {
-    return {
-        type: 'USER_EMAIL',
-        payload: value
-    };
-};
-
-export const user_nickname = (value) => {
-    return {
-        type: 'USER_NICKNAME',
-        payload: value
-    };
-};
-
-export const user_bio = (value) => {
-    return {
-        type: 'USER_BIO',
+        type: 'USER_USER',
         payload: value
     };
 };
@@ -73,27 +52,6 @@ export const user_bio = (value) => {
 export const user_biotemp = (value) => {
     return {
         type: 'USER_BIOTEMP',
-        payload: value
-    };
-};
-
-export const user_isprivate = (value) => {
-    return {
-        type: 'USER_ISPRIVATE',
-        payload: value
-    };
-};
-
-export const user_isnotificate = (value) => {
-    return {
-        type: 'USER_ISNOTIFICATE',
-        payload: value
-    };
-};
-
-export const user_picture = (value) => {
-    return {
-        type: 'USER_PICTURE',
         payload: value
     };
 };

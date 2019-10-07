@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { ui_isload, ui_nav, search_user } from '../../../actions';
+import { ui_isload, ui_nav, content_post } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -13,13 +13,13 @@ function Album(props) {
 
 	function _handleProfilePage() {
 		dispatch(ui_isload());
-		axios.post(URL + 'api/search/select', {
-			id: props.data.user_id
+		axios.post(URL + 'api/post/select', {
+			id: props.data.id
 		})
 		.then(res => {
 			if(res.data !== null) {
-				dispatch(search_user(res.data));
-				dispatch(ui_nav(5));
+				dispatch(content_post(res.data));
+				dispatch(ui_nav(6));
 			} else {
 				confirmAlert({
 					message: 'Something went wrong :(',

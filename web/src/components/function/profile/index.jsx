@@ -164,7 +164,7 @@ function Profile() {
 		<div className='profile'>
 			<div className='profile-profile'
 				style={
-					user.user.picture === null
+					user.user.picture === undefined ||  user.user.picture === ''
 					?
 					{ backgroundImage: 'url(\'' + default_user + '\')' }
 					:

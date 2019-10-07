@@ -62,7 +62,6 @@ function Signin() {
 			token: token
 		})
 		.then(res => {
-			console.log(res);
 			if(res.data !== null) {
 				dispatch(user_user(res.data));
 				dispatch(user_biotemp(res.data.bio === null ? '' : res.data.bio));

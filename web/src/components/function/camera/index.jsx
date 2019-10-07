@@ -84,11 +84,11 @@ function Camera() {
 						?
 						{ backgroundImage: 'url(\'' + default_user + '\')' }
 						:
-						{ backgroundImage: 'url(\'data:image/jpeg;base64, ' + user.picture + '\')' }
+						{ backgroundImage: 'url(\'data:image/jpeg;base64, ' + user.user.picture + '\')' }
 					}></div>
 					<form name='camera'>
 						<div className='post-info-container'>
-							<div className='post-author'>{user.nickname}</div>
+							<div className='post-author'>{user.user.nickname}</div>
 							<div className='post-time'>RIGHT NOW</div>
 							<div className='post-in'>In</div>
 							<div className='post-location'>

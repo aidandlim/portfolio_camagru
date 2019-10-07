@@ -38,10 +38,9 @@ function Header() {
 	function _handleMypage() {
 		dispatch(ui_isload());
 		axios.post(URL + 'api/search/select', {
-			id: user.id
+			id: user.user.id
 		})
 		.then(res => {
-			console.log(res.data);
 			if(res.data !== null) {
 				dispatch(search_user(res.data));
 				dispatch(ui_nav(5));
@@ -66,7 +65,7 @@ function Header() {
 			<div className='header-title' style={{
 				marginRight: auth.token !== '' ? 'calc(100% - 11rem)' : 'calc(100% - 8.5rem)'
 			}} onClick={() => _handleCI()}>#Camagru</div>
-			{ auth.token !== '' ? ui.nav === 5 && user.id === search.user.id ? <FiUser className='header-icon-active' onClick={() => dispatch(ui_nav(0))}/> : <FiUser className='header-icon' onClick={() => _handleMypage()} /> : '' }
+			{ auth.token !== '' ? ui.nav === 5 && user.user.id === search.user.id ? <FiUser className='header-icon-active' onClick={() => dispatch(ui_nav(0))}/> : <FiUser className='header-icon' onClick={() => _handleMypage()} /> : '' }
 			{ ui.nav === 1 ? <FiSettings className='header-icon-active' onClick={() => dispatch(ui_nav(0))}/> : <FiSettings className='header-icon' onClick={() => _handleInitUser()}/> }
 		</div>
 	);

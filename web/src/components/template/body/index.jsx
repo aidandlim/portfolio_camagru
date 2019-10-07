@@ -17,7 +17,7 @@ function Body() {
 
 	return (
 		<div className='body'>
-			{ ui.nav === 0 || ui.nav === 1 ? 
+			{ ui.nav === 0 ? 
 				<div className='inner-container'>
 					{post.posts.map((post) => 
 							<Post key={post.id} data={post} />

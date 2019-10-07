@@ -31,7 +31,7 @@ function App() {
 	
 	return (
 		<div className='app no-drag'>
-			{ ui.isLoad || ((ui.nav === 0 || ui.nav === 1) && post.posts.length === 0) ? <Loading /> : ''}
+			{ ui.isLoad || (ui.nav === 0 && post.posts.length === 0) ? <Loading /> : ''}
 			<Header />
 			<Body />
 			<Footer />

@@ -40,7 +40,7 @@ function Post(props) {
 		dispatch(post_posts(posts));
 		axios.post(URL + 'api/reflection/insert', {
 			token: auth.token,
-			user_id: user.id,
+			user_id: user.user.id,
 			post_id: props.data.id,
 		})
 		.then(res => {
@@ -78,7 +78,7 @@ function Post(props) {
 		dispatch(post_posts(posts));
 		axios.post(URL + 'api/comment/insert', {
 			token: auth.token,
-			user_id: user.id,
+			user_id: user.user.id,
 			post_id: props.data.id,
 			content: document.getElementById('post-comment-box-' + props.data.id).value,
 		})
@@ -104,7 +104,7 @@ function Post(props) {
 		axios.post(URL + 'api/post/select', {
 			token: auth.token,
 			id: props.data.id,
-			user_id: user.id,
+			user_id: user.user.id,
 		})
 		.then(res => {
 			dispatch(content_post(res.data));

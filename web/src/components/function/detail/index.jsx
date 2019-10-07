@@ -31,16 +31,29 @@ function Detail() {
 			});
 			return;
 		}
-		dispatch(ui_isload());
+		var posts = content.post;
+		posts.num_likes = posts.num_likes + (posts.user_islike ? -1 : 1);
+		if(posts.user_islike) {
+			for(var i = 0; i < posts.likes.length; i++) {
+				if(posts.likes[i].user_id === user.user.id) {
+					posts.likes.splice(i, 1);
+				}
+			}
+		} else {
+			posts.likes.push({
+				user_id: user.user.id,
+				user_picture: user.user.picture
+			});
+		}
+		posts.user_islike = !posts.user_islike;
+		dispatch(content_post(posts));
 		axios.post(URL + 'api/reflection/insert', {
 			token: auth.token,
-			user_id: user.id,
+			user_id: user.user.id,
 			post_id: content.post.id,
 		})
 		.then(res => {
-			if(res.data) {
-				_handleDetail();
-			} else {
+			if(!res.data) {
 				confirmAlert({
 					message: 'It seems like email or password information is wrong',
 					buttons: [
@@ -50,11 +63,6 @@ function Detail() {
 					]
 				});
 			}
-		})
-		.then(() => {
-			setTimeout(() => {
-				dispatch(ui_isload());
-			}, 500);
 		});
 	}
 
@@ -73,7 +81,7 @@ function Detail() {
 		dispatch(ui_isload());
 		axios.post(URL + 'api/comment/insert', {
 			token: auth.token,
-			user_id: user.id,
+			user_id: user.user.id,
 			post_id: content.post.id,
 			content: document.getElementById('detail-comment-box-' + content.post.id).value,
 		})
@@ -81,7 +89,7 @@ function Detail() {
 			if(res.data) {
 				document.getElementById('detail-comment-box-' + content.post.id).value = '';
 				_handleTextareaSize();
-				_handleDetail();
+				
 			} else {
 				confirmAlert({
 					message: 'It seems like email or password information is wrong',
@@ -97,17 +105,6 @@ function Detail() {
 			setTimeout(() => {
 				dispatch(ui_isload());
 			}, 500);
-		});
-	}
-
-	function _handleDetail() {
-		axios.post(URL + 'api/post/select', {
-			token: auth.token,
-			id: content.post.id,
-			user_id: user.id,
-		})
-		.then(res => {
-			dispatch(content_post(res.data));
 		});
 	}
 

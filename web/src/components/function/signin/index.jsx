@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { ui_isload, auth_token, auth_isregister, auth_isforgot, user_user, user_biotemp } from '../../../actions';
+import { ui_nav, ui_isload, auth_token, auth_isregister, auth_isforgot, user_user, user_biotemp } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -51,6 +51,8 @@ function Signin() {
 					]
 				});
 			}
+		})
+		.then(() => {
 			setTimeout(() => {
 				dispatch(ui_isload());
 			}, 500);

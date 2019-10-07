@@ -29,25 +29,12 @@ function Mypage() {
 						<div className='mypage-table-body'>{search.user.num_posts}</div>
 						<div className='mypage-table-body'>{search.user.num_likes}</div>
 						<div className='mypage-table-body'>{search.user.num_comments}</div>
-						<textarea className='mypage-profile-bio' value={search.user.bio === null || search.user.bio === '' || search.user.bio === undefined ? 'Hey there! I am using Camagru App!' : search.user.bio} readOnly></textarea>				
+						<textarea className='mypage-profile-bio' style={{height: search.user.bio === null || search.user.bio === '' || search.user.bio === undefined ? 0 : search.user.bio.split('\n').length + 'rem'}} value={search.user.bio === null || search.user.bio === '' || search.user.bio === undefined ? 'Hey there! I am using Camagru App!' : search.user.bio} readOnly></textarea>				
 					</div>
 				</div>
-				<Album />
-				<Album />
-				<Album />
-				<Album />
-				<Album />
-				<Album />
-				<Album />
-				<Album />
-				<Album />
-				<Album />
-				<Album />
-				<Album />
-				<Album />
-				<Album />
-				<Album />
-				<Album />
+				{search.user.posts.map((post) => 
+					<Album key={post.id} data={post} />
+				)}
 			</div>
 		</div>
 	);

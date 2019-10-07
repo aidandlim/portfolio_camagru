@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, ui_isload, content_post, content_post_likes, content_post_comments, search_user } from '../../../actions';
+import { ui_nav, ui_isload, content_post, post_posts, search_user } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -15,6 +15,7 @@ import './index.css';
 function Post(props) {
 	const auth = useSelector(state => state.auth);
 	const user = useSelector(state => state.user);
+	const post = useSelector(state => state.post);
 	const dispatch = useDispatch();
 
 	function _handleLikes() {
@@ -29,16 +30,21 @@ function Post(props) {
 			});
 			return;
 		}
-		dispatch(ui_isload());
+		var posts = post.posts;
+		for(var i = 0; i < posts.length; i++) {
+			if(posts[i].id === props.data.id) {
+				posts[i].num_likes = posts[i].num_likes + (posts[i].user_islike ? -1 : 1);
+				posts[i].user_islike = !posts[i].user_islike;
+			}
+		}
+		dispatch(post_posts(posts));
 		axios.post(URL + 'api/reflection/insert', {
 			token: auth.token,
 			user_id: user.id,
 			post_id: props.data.id,
 		})
 		.then(res => {
-			if(res.data) {
-				
-			} else {
+			if(!res.data) {
 				confirmAlert({
 					message: 'It seems like email or password information is wrong',
 					buttons: [
@@ -48,11 +54,6 @@ function Post(props) {
 					]
 				});
 			}
-		})
-		.then(() => {
-			setTimeout(() => {
-				dispatch(ui_isload());
-			}, 500);
 		});
 	}
 
@@ -68,7 +69,13 @@ function Post(props) {
 			});
 			return;
 		}
-		dispatch(ui_isload());
+		var posts = post.posts;
+		for(var i = 0; i < posts.length; i++) {
+			if(posts[i].id === props.data.id) {
+				posts[i].num_comments = posts[i].num_comments + 1;
+			}
+		}
+		dispatch(post_posts(posts));
 		axios.post(URL + 'api/comment/insert', {
 			token: auth.token,
 			user_id: user.id,
@@ -76,10 +83,7 @@ function Post(props) {
 			content: document.getElementById('post-comment-box-' + props.data.id).value,
 		})
 		.then(res => {
-			if(res.data) {
-				document.getElementById('post-comment-box-' + props.data.id).value = '';
-				_handleTextareaSize();
-			} else {
+			if(!res.data) {
 				confirmAlert({
 					message: 'It seems like email or password information is wrong',
 					buttons: [
@@ -88,12 +92,10 @@ function Post(props) {
 						}
 					]
 				});
+			} else {
+				document.getElementById('post-comment-box-' + props.data.id).value = '';
+				_handleTextareaSize();
 			}
-		})
-		.then(() => {
-			setTimeout(() => {
-				dispatch(ui_isload());
-			}, 500);
 		});
 	}
 
@@ -106,27 +108,12 @@ function Post(props) {
 		})
 		.then(res => {
 			dispatch(content_post(res.data));
-			_handleDetailLikesAndComments();
+			dispatch(ui_nav(6));
 		})
 		.then(() => {
 			setTimeout(() => {
 				dispatch(ui_isload());
 			}, 500);
-		});
-	}
-
-	function _handleDetailLikesAndComments() {
-		axios.post(URL + 'api/reflection/selectAllByPost', {
-			id: props.data.id,
-		})
-		.then(res => {
-			dispatch(content_post_likes(res.data));
-		});
-		axios.post(URL + 'api/comment/selectAllByPost', {
-			id: props.data.id,
-		})
-		.then(res => {
-			dispatch(content_post_comments(res.data));
 		});
 	}
 
@@ -179,7 +166,7 @@ function Post(props) {
 				{props.data.together !== '' ? <div className='post-people'>{props.data.together}</div> : ''}
 				{props.data.location === '' && props.data.together === '' ? <div className='post-in'>By Camagru App</div> : '' }
 			</div>
-			<div className='post-picture' style={{ backgroundImage: 'url(\'data:image/jpeg;base64, ' + props.data.picture + '\')' }}></div>
+			<div className='post-picture' style={{ backgroundImage: 'url(\'data:image/jpeg;base64, ' + props.data.picture + '\')' }} onClick={ () => _handleDetail() }></div>
 			<div className='post-reflect-container'>
 				{ !props.data.user_islike ? 
 					<FiHeart className='post-icon' onClick={ () => _handleLikes() } /> 

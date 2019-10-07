@@ -8,35 +8,16 @@
     top: 0;
     left: 0;
 
-    background-color: #101010;
-
-    opacity: 0.95;
+    background-color: #292625;
 
     z-index: 19;
 }
 
 .loading-img {
-    width: 3rem;
-    height: 3rem;
+    width: 16rem;
+    height: 9rem;
 
     position: absolute;
-    top: calc(50% - 2.25rem);
-    left: calc(50% - 2.25rem);
-
-    border: 0.75rem solid #303030;
-    border-radius: 50%;
-    border-top: 0.75rem solid #004D40;
-    
-    animation: spin 1.5s linear infinite;
-    -webkit-animation: spin 1.5s linear infinite;
-}
-
-@-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    top: calc(50% - 4.5rem);
+    left: calc(50% - 8rem);;
 }

@@ -30,6 +30,12 @@ public class PostService {
     @Autowired
     PictureService pictureService;
 
+    @Autowired
+    ReflectionService reflectionService;
+
+    @Autowired
+    CommentService commentService;
+
     @Transactional
     public ArrayList<Post> selectAll(Token token) {
         try {
@@ -64,6 +70,8 @@ public class PostService {
             Post dto = postDao.select(post);
             dto.setPicture(pictureService.getPicture(dto.getPicture()));
             dto.setUser_picture(pictureService.getPicture(dto.getUser_picture()));
+            dto.setLikes(reflectionService.selectAllByPost(post));
+            dto.setComments(commentService.selectAllByPost(post));
             return dto;
         } catch (Exception e) {
             e.printStackTrace();

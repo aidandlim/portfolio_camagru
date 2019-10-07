@@ -53,3 +53,16 @@
     color: #808080;
     transition: ease-in 0.25s;
 }
+
+.header-icon-active {
+    width: 1rem;
+    height: 1rem;
+    margin: 0.75rem 0.75rem 0.75rem 0.75rem;
+
+    position: relative;
+    float: left;
+
+    color: #AAAAAA;
+
+    cursor: pointer;
+}

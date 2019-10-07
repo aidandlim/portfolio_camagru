@@ -16,3 +16,17 @@
 
     z-index: 9;
 }
+
+.sidebar-cover {
+    width: calc(100% - 15rem);
+    height: calc(100vh - 5rem + 2px);
+
+    overflow: hidden;
+
+    position: absolute;
+    top: 2.5rem;
+    left: 0;
+
+    background-color: #202020;
+    opacity: 0.95;
+}

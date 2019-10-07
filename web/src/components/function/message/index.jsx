@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, ui_isload, content_post, content_post_likes, content_post_comments, search_user } from '../../../actions';
+import { ui_nav, ui_isload, content_post, search_user } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -23,27 +23,11 @@ function Message(props) {
 		})
 		.then(res => {
 			dispatch(content_post(res.data));
-			_handleDetailLikesAndComments(id);
 		})
 		.then(() => {
 			setTimeout(() => {
 				dispatch(ui_isload());
 			}, 500);
-		});
-	}
-
-	function _handleDetailLikesAndComments(id) {
-		axios.post(URL + 'api/reflection/selectAllByPost', {
-			id: id,
-		})
-		.then(res => {
-			dispatch(content_post_likes(res.data));
-		});
-		axios.post(URL + 'api/comment/selectAllByPost', {
-			id: id,
-		})
-		.then(res => {
-			dispatch(content_post_comments(res.data));
 		});
 	}
 

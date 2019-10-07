@@ -1,5 +1,7 @@
 package com.aidandlim.camagru.dto;
 
+import java.util.ArrayList;
+
 public class Search {
 
     private long id;
@@ -10,11 +12,12 @@ public class Search {
     private int num_posts;
     private int num_likes;
     private int num_comments;
+    private ArrayList<Post> posts;
 
     public Search() {
     }
 
-    public Search(long id, String picture, String nickname, String bio, int isPrivate, int num_posts, int num_likes, int num_comments) {
+    public Search(long id, String picture, String nickname, String bio, int isPrivate, int num_posts, int num_likes, int num_comments, ArrayList<Post> posts) {
         this.id = id;
         this.picture = picture;
         this.nickname = nickname;
@@ -23,6 +26,7 @@ public class Search {
         this.num_posts = num_posts;
         this.num_likes = num_likes;
         this.num_comments = num_comments;
+        this.posts = posts;
     }
 
     public long getId() {
@@ -87,5 +91,13 @@ public class Search {
 
     public void setNum_comments(int num_comments) {
         this.num_comments = num_comments;
+    }
+
+    public ArrayList<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(ArrayList<Post> posts) {
+        this.posts = posts;
     }
 }

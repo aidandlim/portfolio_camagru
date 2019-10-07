@@ -6,6 +6,7 @@ const ui = {
     // camera           3
     // notification     4
     // mypage           5
+    // detail           6
     
     isLoad: false,
 }

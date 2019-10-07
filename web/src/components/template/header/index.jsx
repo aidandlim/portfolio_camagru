@@ -1,19 +1,25 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_isload, ui_nav, auth_token, search_user } from '../../../actions';
+import { ui_isload, ui_nav, auth_token, search_user, post_posts } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
 
 import { confirmAlert } from 'react-confirm-alert';
-import { FiUser, FiSettings, FiXCircle } from 'react-icons/fi';
+import { FiUser, FiSettings } from 'react-icons/fi';
 import './index.css';
 
 function Header() {
 	const ui = useSelector(state => state.ui);
 	const auth = useSelector(state => state.auth);
 	const user = useSelector(state => state.user);
+	const search = useSelector(state => state.search);
 	const dispatch = useDispatch();
+
+	function _handleCI() {
+		dispatch(post_posts([]));
+		dispatch(ui_nav(0));
+	}
 
 	function _handleInitUser() {
 		axios.post(URL + 'api/auth/isLogin', {
@@ -26,7 +32,7 @@ function Header() {
 				dispatch(auth_token(''));
 			}
 			dispatch(ui_nav(1));
-		})
+		});
 	}
 
 	function _handleMypage() {
@@ -35,6 +41,7 @@ function Header() {
 			id: user.id
 		})
 		.then(res => {
+			console.log(res.data);
 			if(res.data !== null) {
 				dispatch(search_user(res.data));
 				dispatch(ui_nav(5));
@@ -58,9 +65,9 @@ function Header() {
 		<div className='header'>
 			<div className='header-title' style={{
 				marginRight: auth.token !== '' ? 'calc(100% - 11rem)' : 'calc(100% - 8.5rem)'
-			}} onClick={() => dispatch(ui_nav(0))}>#Camagru</div>
-			{ auth.token !== '' ? ui.nav === 5 ? <FiXCircle className='header-icon' onClick={() => dispatch(ui_nav(0))}/> : <FiUser className='header-icon' onClick={() => _handleMypage()} /> : '' }
-			{ ui.nav === 1 ? <FiXCircle className='header-icon' onClick={() => dispatch(ui_nav(0))}/> : <FiSettings className='header-icon' onClick={() => _handleInitUser()}/> }
+			}} onClick={() => _handleCI()}>#Camagru</div>
+			{ auth.token !== '' ? ui.nav === 5 && user.id === search.user.id ? <FiUser className='header-icon-active' onClick={() => dispatch(ui_nav(0))}/> : <FiUser className='header-icon' onClick={() => _handleMypage()} /> : '' }
+			{ ui.nav === 1 ? <FiSettings className='header-icon-active' onClick={() => dispatch(ui_nav(0))}/> : <FiSettings className='header-icon' onClick={() => _handleInitUser()}/> }
 		</div>
 	);
 }

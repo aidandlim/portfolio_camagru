@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_isload, ui_nav, content_post, content_post_likes, content_post_comments, content_islikes, search_user } from '../../../actions';
+import { ui_isload, ui_nav, content_post, content_islikes, search_user } from '../../../actions';
 
 import axios from 'axios';
 import { URL } from '../../../const';
@@ -108,22 +108,6 @@ function Detail() {
 		})
 		.then(res => {
 			dispatch(content_post(res.data));
-			_handleDetailLikesAndComments();
-		});
-	}
-
-	function _handleDetailLikesAndComments() {
-		axios.post(URL + 'api/reflection/selectAllByPost', {
-			id: content.post.id,
-		})
-		.then(res => {
-			dispatch(content_post_likes(res.data));
-		});
-		axios.post(URL + 'api/comment/selectAllByPost', {
-			id: content.post.id,
-		})
-		.then(res => {
-			dispatch(content_post_comments(res.data));
 		});
 	}
 
@@ -160,7 +144,7 @@ function Detail() {
 
 	return (
 		<div className='detail'>
-			<FiArrowLeftCircle className='detail-rollback' onClick={ () => dispatch(content_post({})) } />
+			<FiArrowLeftCircle className='detail-rollback' onClick={ () => dispatch(ui_nav(0)) } />
 			<div className='inner-container'>
 				<div className='detail-post'>
 					<div className='post-profile' style={{ 
@@ -188,15 +172,16 @@ function Detail() {
 						: '' }
 						<div className={ content.isLikes ? 'detail-likes-active' : 'post-likes' } onClick={ () => dispatch(content_islikes(true)) }>{content.post.num_likes} likes</div>
 						<div className={ !content.isLikes ? 'detail-comments-active' : 'post-comments' } onClick={ () => dispatch(content_islikes(false)) }>View all {content.post.num_comments} comments</div>
-						{ content.isLikes && content.post_likes.length !== 0 ? 
+						{ content.isLikes && content.post.likes !== null ? 
 							<div className='likes'>
-							{ content.isLikes ? content.post_likes.map((like) => 
+							{ content.post.likes.map((like) => 
 								<Likes key={like.id} like={like} /> 
-							) : '' }
+							)}
 							</div>
 						: '' }
-						{ !content.isLikes ? content.post_comments.map((comment) => 
-							<Comments key={comment.id} comment={comment} /> 
+						{ !content.isLikes && content.post.comments !== null ? 
+							content.post.comments.map((comment) => 
+								<Comments key={comment.id} comment={comment} /> 
 						) : '' }
 						<textarea className='post-comment-box' id={'detail-comment-box-' + content.post.id} name='content' placeholder='Add a comment...' onChange={ () => _handleTextareaSize() }></textarea>
 						<div className='post-comment-post' onClick={ () => _handleComments() }>POST</div>

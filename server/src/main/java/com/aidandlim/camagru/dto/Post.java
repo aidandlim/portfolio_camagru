@@ -1,5 +1,6 @@
 package com.aidandlim.camagru.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Post extends Token {
@@ -19,11 +20,14 @@ public class Post extends Token {
     private int num_comments;
     private String post_time;
 
+    private ArrayList<Reflection> likes;
+    private ArrayList<Comment> comments;
+
     public Post() {
         super();
     }
 
-    public Post(long id, long user_id, String picture, String content, String location, String together, Date time, String user_nickname, String user_picture, boolean user_islike, int num_likes, int num_comments, String post_time) {
+    public Post(long id, long user_id, String picture, String content, String location, String together, Date time, String user_nickname, String user_picture, boolean user_islike, int num_likes, int num_comments, String post_time, ArrayList<Reflection> likes, ArrayList<Comment> comments) {
         super();
         this.id = id;
         this.user_id = user_id;
@@ -38,6 +42,8 @@ public class Post extends Token {
         this.num_likes = num_likes;
         this.num_comments = num_comments;
         this.post_time = post_time;
+        this.likes = likes;
+        this.comments = comments;
     }
 
     public long getId() {
@@ -142,5 +148,21 @@ public class Post extends Token {
 
     public void setPost_time(String post_time) {
         this.post_time = post_time;
+    }
+
+    public ArrayList<Reflection> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(ArrayList<Reflection> likes) {
+        this.likes = likes;
+    }
+
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<Comment> comments) {
+        this.comments = comments;
     }
 }

@@ -137,20 +137,6 @@ export const content_post = (value) => {
     };
 };
 
-export const content_post_likes = (value) => {
-    return {
-        type: 'CONTENT_POST_LIKES',
-        payload: value
-    };
-};
-
-export const content_post_comments = (value) => {
-    return {
-        type: 'CONTENT_POST_COMMENTS',
-        payload: value
-    };
-};
-
 export const content_islikes = (value) => {
     return {
         type: 'CONTENT_ISLIKES',

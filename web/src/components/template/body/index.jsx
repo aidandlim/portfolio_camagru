@@ -17,7 +17,7 @@ function Body() {
 
 	return (
 		<div className='body'>
-			{ ui.nav !== 3 && ui.nav !== 5 ? 
+			{ ui.nav === 0 || ui.nav === 1 ? 
 				<div className='inner-container'>
 					{ content.post.id !== undefined ? <Detail id={content.id} /> : '' }
 					{ post.posts.map((post) => 

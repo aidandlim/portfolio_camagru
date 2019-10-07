@@ -37,8 +37,6 @@ public class PostService {
             ArrayList<Post> dto = postDao.selectAll(token.getToken().equals("") ? -1 : tokenService.getIdFromToken(token));
             for(int i = 0; i < dto.size(); i++){
                 dto.get(i).setUser_picture(pictureService.getPicture(dto.get(i).getUser_picture()));
-            }
-            for(int i = 0; i < dto.size(); i++){
                 dto.get(i).setPicture(pictureService.getPicture(dto.get(i).getPicture()));
             }
             return dto;

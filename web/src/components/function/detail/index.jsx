@@ -40,6 +40,7 @@ function Detail() {
 			}
 		} else {
 			posts.likes.push({
+				id: new Date().getMilliseconds(),
 				user_id: user.user.id,
 				user_picture: user.user.picture
 			});
@@ -80,6 +81,7 @@ function Detail() {
 		var posts = content.post;
 		posts.num_comments = posts.num_comments + 1;
 		posts.comments.push({
+			id: new Date().getMilliseconds(),
 			user_id: user.user.id,
 			user_picture: user.user.picture,
 			content: document.getElementById('detail-comment-box-' + content.post.id).value,

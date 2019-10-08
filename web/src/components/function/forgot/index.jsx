@@ -1,9 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { ui_isload, auth_isforgot } from '../../../actions';
+import { auth_isforgot } from '../../../actions';
 
 import axios from 'axios';
-import { URL } from '../../../const';
 
 import { confirmAlert } from 'react-confirm-alert';
 
@@ -12,8 +11,7 @@ function Forgot() {
 
 	function _handleForm(e) {
 		e.preventDefault();
-		dispatch(ui_isload());
-		axios.post(URL + 'api/auth/forgot', {
+		axios.post('/auth/forgot', {
 			email: document.forgot.email.value,
 		})
 		.then(res => {
@@ -29,9 +27,6 @@ function Forgot() {
 					]
 				});
 			}
-			setTimeout(() => {
-				dispatch(ui_isload());
-			}, 500);
 		});
 	}
 

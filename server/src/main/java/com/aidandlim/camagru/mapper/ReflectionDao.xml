@@ -18,6 +18,8 @@
             r.user_id = u.id
         WHERE
             r.post_id = #{id}
+        ORDER BY
+            r.id
     </select>
 
     <select id="select" resultType="com.aidandlim.camagru.dto.Reflection">

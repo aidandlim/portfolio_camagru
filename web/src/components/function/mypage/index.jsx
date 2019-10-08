@@ -3,11 +3,12 @@ import { useSelector } from 'react-redux';
 
 import Album from '../album';
 
-import { FiGrid, FiHeart, FiMessageSquare } from 'react-icons/fi';
+import { FiGrid, FiHeart, FiMessageSquare, FiAlertCircle, FiLock } from 'react-icons/fi';
 import default_user from '../../../resources/default_user.jpg';
 import './index.css';
 
 function Mypage() {
+	const user = useSelector(state => state.user);
 	const search = useSelector(state => state.search);
 
 	return (
@@ -49,12 +50,25 @@ function Mypage() {
 						</textarea>				
 					</div>
 				</div>
-				{search.user.posts.length !== 0 
+				{search.user.isPrivate === 0 || user.user.id === search.user.id
 					?
-					search.user.posts.map((post) => 
-						<Album key={post.id} data={post} />)
+					(search.user.posts.length !== 0 
+						?
+						search.user.posts.map((post) => 
+							<Album key={post.id} data={post} />)
+						:
+						<div className='mypage-nopost'>
+							<FiAlertCircle className='mypage-nopost-icon'/>
+							THERE IS NO POST YET
+						</div>
+					)
 					:
-					<div>There is no post</div>
+					(
+						<div className='mypage-nopost'>
+							<FiLock className='mypage-nopost-icon'/>
+							THIS IS A PRIVATE ACCOUNT
+						</div>
+					)
 				}
 			</div>
 		</div>

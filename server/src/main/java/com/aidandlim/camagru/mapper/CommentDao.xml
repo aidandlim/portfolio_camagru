@@ -19,6 +19,8 @@
             c.user_id = u.id
         WHERE
             c.post_id = #{id}
+        ORDER BY
+            c.id
     </select>
 
     <insert id="insert">

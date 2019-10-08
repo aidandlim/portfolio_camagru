@@ -4,7 +4,6 @@ import { ui_nav, post_posts } from '../../../actions';
 
 import axios from 'axios';
 
-import Loading from '../loading';
 import Header from '../header';
 import Body from '../body';
 import Footer from '../footer';
@@ -23,14 +22,12 @@ function App() {
 			token: auth.token
 		})
 		.then(res => {
-			console.log("post is updated");
 			dispatch(post_posts(res.data));
 		});
 	}
 	
 	return (
 		<div className='app no-drag'>
-			{ ui.isLoad ? <Loading /> : ''}
 			<Header />
 			<Body />
 			<Footer />

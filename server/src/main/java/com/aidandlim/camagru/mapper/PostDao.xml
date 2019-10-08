@@ -43,6 +43,7 @@
             p.user_id = u.id
         WHERE
             u.id = #{id}
+        ORDER BY p.id DESC
     </select>
 
     <select id="select" resultType="com.aidandlim.camagru.dto.Post">

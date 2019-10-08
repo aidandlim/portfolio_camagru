@@ -25,7 +25,6 @@ function Header() {
 			token: auth.token
 		})
 		.then(res => {
-			console.log(res);
 			if(res.data) {
 				dispatch(auth_token(auth.token));
 			} else {

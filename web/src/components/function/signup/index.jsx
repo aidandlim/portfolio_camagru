@@ -1,9 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { ui_isload, auth_isregister } from '../../../actions';
+import { auth_isregister } from '../../../actions';
 
 import axios from 'axios';
-import { URL } from '../../../const';
 
 import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
@@ -15,9 +14,8 @@ function Signup() {
 
 	function _handleForm(e) {
 		e.preventDefault();
-		dispatch(ui_isload());
 		if(document.signup.password.value === document.signup.confirm.value) {
-			axios.post(URL + 'api/auth/signup', {
+			axios.post('/auth/signup', {
 				email: document.signup.email.value,
 				password: document.signup.password.value,
 				nickname: document.signup.nickname.value,
@@ -25,9 +23,6 @@ function Signup() {
 			.then(res => {
 				if(res.data) {
 					dispatch(auth_isregister());
-					setTimeout(() => {
-						dispatch(ui_isload());
-					}, 500);
 				} else {
 					confirmAlert({
 						message: 'Email has to be unique',
@@ -37,9 +32,6 @@ function Signup() {
 							}
 						]
 					});
-					setTimeout(() => {
-						dispatch(ui_isload());
-					}, 500);
 				}
 			});
 		} else {
@@ -52,9 +44,6 @@ function Signup() {
 					}
 				]
 			});
-			setTimeout(() => {
-				dispatch(ui_isload());
-			}, 500);
 		}
 	}
 	

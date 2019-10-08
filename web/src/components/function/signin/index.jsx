@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { ui_isload, auth_token, auth_isregister, auth_isforgot, user_user, user_biotemp } from '../../../actions';
+import { auth_token, auth_isregister, auth_isforgot, user_user, user_biotemp } from '../../../actions';
 
 import axios from 'axios';
 
@@ -73,13 +73,8 @@ function Signin() {
 	}
 
 	function _handleVerifyingEmail() {
-		dispatch(ui_isload());
 		axios.post('/auth/verifyAgain', {
 			email: document.signin.email.value
-		}).then(() => {
-			setTimeout(() => {
-				dispatch(ui_isload());
-			}, 500);
 		});
 	}
 	

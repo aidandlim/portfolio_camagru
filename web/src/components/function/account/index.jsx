@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { auth_token, auth_isaccount, user_user } from '../../../actions';
 
 import axios from 'axios';
+import cookie from 'react-cookies';
 
 import { confirmAlert } from 'react-confirm-alert';
 import './index.css';
@@ -73,27 +74,26 @@ function Account() {
 	}
 
 	function _processDeleteUser() {
-		if(window.confirm('Are you sure?')) {
-			axios.post('/user/delete', {
-				id: user.user.id,
-			})
-			.then(res => {
-				if(res.data) {
-					dispatch(auth_token(''));
-					dispatch(user_user({}));
-					dispatch(auth_isaccount(false));
-				} else {
-					confirmAlert({
-						message: 'Something went wrong :(',
-						buttons: [
-							{
-								label: 'I will try again'
-							}
-						]
-					});
-				}
-			});
-		}
+		axios.post('/user/delete', {
+			id: user.user.id,
+		})
+		.then(res => {
+			if(res.data) {
+				dispatch(auth_token(''));
+				dispatch(user_user({}));
+				dispatch(auth_isaccount(false));
+				cookie.remove('token', { path: '/'});
+			} else {
+				confirmAlert({
+					message: 'Something went wrong :(',
+					buttons: [
+						{
+							label: 'I will try again'
+						}
+					]
+				});
+			}
+		});
 	}
 
 	return (

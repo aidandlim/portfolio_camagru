@@ -168,7 +168,7 @@ function Detail() {
 						: '' }
 						<div className={ content.isLikes ? 'detail-likes-active' : 'post-likes' } onClick={ () => dispatch(content_islikes(true)) }>{content.post.num_likes} likes</div>
 						<div className={ !content.isLikes ? 'detail-comments-active' : 'post-comments' } onClick={ () => dispatch(content_islikes(false)) }>View all {content.post.num_comments} comments</div>
-						{ content.isLikes && content.post.likes !== null ? 
+						{ content.isLikes && content.post.likes.length !== 0 ? 
 							<div className='likes'>
 							{ content.post.likes.map((like) => 
 								<Likes key={like.id} like={like} /> 

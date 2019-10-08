@@ -15,10 +15,12 @@ public class TokenService {
     public String generate(User user) {
         String token = UUID.randomUUID().toString() + System.currentTimeMillis();
         session.setAttribute(token, user.getId());
+        System.out.println("generate token => " + session.getId() + " / " + session.getAttribute(token));
         return token;
     }
 
     public long get(String token) {
+        System.out.println("get token => " + session.getId() + " / " + session.getAttribute(token));
         return session.getAttribute(token) == null ? -1 : (long) session.getAttribute(token);
     }
 

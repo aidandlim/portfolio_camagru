@@ -1,9 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_isload, auth_token, auth_isaccount, user_user, user_biotemp } from '../../../actions';
+import { auth_token, auth_isaccount, user_user, user_biotemp } from '../../../actions';
 
 import axios from 'axios';
-import { URL } from '../../../const';
 
 import { confirmAlert } from 'react-confirm-alert';
 
@@ -17,24 +16,20 @@ function Profile() {
 
 	function _handleForm(e) {
 		e.preventDefault();
-		dispatch(ui_isload());
-		axios.post(URL + 'api/user/update', {
+		axios.post('/user/update', {
 			token: auth.token,
-			id: user.id,
+			id: user.user.id,
 			email: document.changeProfile.email.value,
 			nickname: document.changeProfile.nickname.value,
 			bio: user.bioTemp,
 		})
 		.then(res => {
 			if(res.data) {
-				if(document.changeProfile.email.value !== user.email) {
+				if(document.changeProfile.email.value !== user.user.email) {
 					_handleLogout();
 				} else {
 					_handleData(auth.token);
 				}
-				setTimeout(() => {
-					dispatch(ui_isload());
-				}, 500);
 			} else {
 				confirmAlert({
 					message: 'Something went wrong :(',
@@ -44,28 +39,22 @@ function Profile() {
 						}
 					]
 				});
-				setTimeout(() => {
-					dispatch(ui_isload());
-				}, 500);
 			}
 		});
 	}
 
 	function _handleChangePassword(e) {
 		e.preventDefault();
-		dispatch(ui_isload());
 		if(document.changePassword.change.value === document.changePassword.confirm.value) {
-			axios.post(URL + 'api/user/updatePassword', {
+			axios.post('/user/updatePassword', {
 				token: auth.token,
-				email: user.email,
+				email: user.user.email,
 				password: document.changePassword.current.value,
 				change: document.changePassword.change.value,
 			})
 			.then(res => {
 				if(res.data) {
-					document.changePassword.current.value = '';
-					document.changePassword.change.value = '';
-					document.changePassword.confirm.value = '';
+					dispatch(auth_token(''));
 				} else {
 					confirmAlert({
 						message: 'Something went wrong :(',
@@ -76,9 +65,6 @@ function Profile() {
 						]
 					});
 				}
-				setTimeout(() => {
-					dispatch(ui_isload());
-				}, 500);
 			});
 		} else {
 			confirmAlert({
@@ -89,19 +75,15 @@ function Profile() {
 					}
 				]
 			});
-			setTimeout(() => {
-				dispatch(ui_isload());
-			}, 500);
 		}
 	}
 
 	function _handleChangePicture(e) {
 		e.preventDefault();
-		dispatch(ui_isload());
 		var formData = new FormData();
 		formData.append("token", auth.token);
 		formData.append("picture", document.changePicture.file.files[0]);
-		axios.post(URL + 'api/user/updatePicture', formData, {
+		axios.post('/user/updatePicture', formData, {
 			headers: {
 			  'Content-Type': 'multipart/form-data'
 			}
@@ -119,18 +101,14 @@ function Profile() {
 					]
 				});
 			}
-			setTimeout(() => {
-				dispatch(ui_isload());
-			}, 500);
 		});
 	}
 
 	function _handleData(token) {
-		axios.post(URL + 'api/user/select', {
+		axios.post('/user/select', {
 			token: token
 		})
 		.then(res => {
-			console.log(res);
 			if(res.data !== null) {
 				dispatch(user_user(res.data));
 				dispatch(user_biotemp(res.data.bio === null ? '' : res.data.bio));
@@ -164,11 +142,11 @@ function Profile() {
 		<div className='profile'>
 			<div className='profile-profile'
 				style={
-					user.user.picture === undefined ||  user.user.picture === ''
+					user.user.picture === null || user.user.picture === undefined
 					?
 					{ backgroundImage: 'url(\'' + default_user + '\')' }
 					:
-					{ backgroundImage: 'url(\'data:image/jpeg;base64, ' + user.user.picture + '\')' }
+					{ backgroundImage: 'url(\'/picture?p=' + user.user.picture + '\')' }
 				}
 			></div>
 			<div className='profile-change-profile' onClick={() => document.changePicture.file.click()}>Change Profile Picture</div>
@@ -181,7 +159,7 @@ function Profile() {
 				<span className='profile-placeholder'>Email</span>
 				<input className='profile-input' type='email' name='email' required defaultValue={user.user.email} />
 				<span className='profile-placeholder'>Bio</span>
-				<textarea id='profile-bio' className='profile-textbox' name='bio' style={{height: (user.bioTemp !== '' ? user.bioTemp.split('\n').length * 0.75 + 'rem' : '0rem') }} value={user.bioTemp} onChange={() => _handleTextareaSize()} onFocus={() => _handleTextareaSize()} />
+				<textarea id='profile-bio' className='profile-textbox' name='bio' style={{height: (user.bioTemp !== '' ? user.bioTemp.split('\n').length * 0.75 + 'rem' : '0.75rem') }} value={user.bioTemp} onChange={() => _handleTextareaSize()} onFocus={() => _handleTextareaSize()} />
 				<input className='profile-submit' type='submit' value='Update User Information' />
 			</form>
 			<form name='changePassword' onSubmit={_handleChangePassword}>

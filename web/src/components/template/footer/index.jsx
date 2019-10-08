@@ -3,12 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ui_nav, camera_isload, camera_preview, content_post, notification_content, post_posts } from '../../../actions';
 
 import axios from 'axios';
-import { URL } from '../../../const';
-
-import { FiCompass, FiCamera, FiSearch, FiHeart } from 'react-icons/fi';
 
 import { confirmAlert } from 'react-confirm-alert';
-
+import { FiCompass, FiCamera, FiSearch, FiHeart } from 'react-icons/fi';
 import './index.css';
 
 function Footer() {
@@ -41,7 +38,7 @@ function Footer() {
 
 	function _handleNotification() {
 		if(auth.token !== '') {
-			axios.post(URL + 'api/notification/selectAll', {
+			axios.post('notification/selectAll', {
 				token: auth.token
 			})
 			.then(res => {

@@ -20,14 +20,14 @@ function App() {
 	const post = useSelector(state => state.post);
 	const dispatch = useDispatch();
 
-	if(ui.nav === 0 && post.posts.length === 0) {
-		axios.post(URL + 'api/post/selectAll', {
-			token: auth.token
-		})
-		.then(res => {
-			dispatch(post_posts(res.data));
-		});
-	}
+	// if(ui.nav === 0 && post.posts.length === 0) {
+	// 	axios.post(URL + 'api/post/selectAll', {
+	// 		token: auth.token
+	// 	})
+	// 	.then(res => {
+	// 		dispatch(post_posts(res.data));
+	// 	});
+	// }
 	
 	return (
 		<div className='app no-drag'>

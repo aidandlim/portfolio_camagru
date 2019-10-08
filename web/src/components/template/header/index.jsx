@@ -1,9 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_isload, ui_nav, auth_token, search_user, post_posts } from '../../../actions';
+import { ui_nav, auth_token, search_user, post_posts } from '../../../actions';
 
 import axios from 'axios';
-import { URL } from '../../../const';
 
 import { confirmAlert } from 'react-confirm-alert';
 import { FiUser, FiSettings } from 'react-icons/fi';
@@ -22,10 +21,11 @@ function Header() {
 	}
 
 	function _handleInitUser() {
-		axios.post(URL + 'api/auth/isLogin', {
+		axios.post('/auth/isLogin', {
 			token: auth.token
 		})
 		.then(res => {
+			console.log(res);
 			if(res.data) {
 				dispatch(auth_token(auth.token));
 			} else {
@@ -36,8 +36,7 @@ function Header() {
 	}
 
 	function _handleMypage() {
-		dispatch(ui_isload());
-		axios.post(URL + 'api/search/select', {
+		axios.post('/search/select', {
 			id: user.user.id
 		})
 		.then(res => {
@@ -55,9 +54,6 @@ function Header() {
 				});
 			}
 		})
-		.then(() => {
-			dispatch(ui_isload());
-		});
 	}
 
 	return (

@@ -8,7 +8,6 @@ import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
 
 import { confirmAlert } from 'react-confirm-alert';
-
 import './index.css';
 
 function Signin() {
@@ -21,8 +20,7 @@ function Signin() {
 			password: document.signin.password.value
 		})
 		.then(res => {
-			console.log(res);
-			if(res.data.token !== '') {
+			if(res.data.token !== null) {
 				if(res.data.status) {
 					dispatch(auth_token(res.data.token));
 					_handleData(res.data.token);
@@ -58,7 +56,6 @@ function Signin() {
 			token: token
 		})
 		.then(res => {
-			console.log(res);
 			if(res.data !== null) {
 				dispatch(user_user(res.data));
 				dispatch(user_biotemp(res.data.bio === null ? '' : res.data.bio));

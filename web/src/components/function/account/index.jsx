@@ -1,12 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_isload, auth_token, auth_isaccount, user_user } from '../../../actions';
+import { auth_token, auth_isaccount, user_user } from '../../../actions';
 
 import axios from 'axios';
-import { URL } from '../../../const';
 
 import { confirmAlert } from 'react-confirm-alert';
-
 import './index.css';
 
 function Account() {
@@ -15,14 +13,13 @@ function Account() {
 	const dispatch = useDispatch();
 
 	function _handleIsPrivate() {
-		dispatch(ui_isload());
-		axios.post(URL + 'api/user/updatePrivate', {
+		axios.post('/user/updatePrivate', {
 			token: auth.token,
-			id: user.id,
+			id: user.user.id,
 		})
 		.then(res => {
 			if(res.data) {
-				user.user.isPrivate = !user.user.isPrivate;
+				user.user.private = !user.user.private;
 				dispatch(user_user(user.user));
 			} else {
 				confirmAlert({
@@ -34,22 +31,18 @@ function Account() {
 					]
 				});
 			}
-			setTimeout(() => {
-				dispatch(ui_isload());
-			}, 500);
 		});
 		
 	}
 
 	function _handleIsNotificate() {
-		dispatch(ui_isload());
-		axios.post(URL + 'api/user/updateNotificate', {
+		axios.post('/user/updateNotificate', {
 			token: auth.token,
-			id: user.id,
+			id: user.user.id,
 		})
 		.then(res => {
 			if(res.data) {
-				user.user.isNotificate = !user.user.isNotificate;
+				user.user.notificate = !user.user.notificate;
 				dispatch(user_user(user.user));
 			} else {
 				confirmAlert({
@@ -61,9 +54,6 @@ function Account() {
 					]
 				});
 			}
-			setTimeout(() => {
-				dispatch(ui_isload());
-			}, 500);
 		});
 	}
 
@@ -83,19 +73,15 @@ function Account() {
 	}
 
 	function _processDeleteUser() {
-		dispatch(ui_isload());
 		if(window.confirm('Are you sure?')) {
-			axios.post(URL + 'api/user/delete', {
-				id: user.id,
+			axios.post('/user/delete', {
+				id: user.user.id,
 			})
 			.then(res => {
 				if(res.data) {
 					dispatch(auth_token(''));
 					dispatch(user_user({}));
 					dispatch(auth_isaccount(false));
-					setTimeout(() => {
-						dispatch(ui_isload());
-					}, 500);
 				} else {
 					confirmAlert({
 						message: 'Something went wrong :(',
@@ -113,7 +99,7 @@ function Account() {
 	return (
 		<div className='account'>
 			<span className='account-title'>Private Account</span>
-			{ user.user.isPrivate 
+			{ user.user.private 
 				? 
 					<div className='account-toggle' onClick={ () => _handleIsPrivate() }>
 						<div className='account-toggle-box-active'></div>
@@ -126,7 +112,7 @@ function Account() {
 					</div>
 			}
 			<span className='account-title'>Send Notification</span>
-			{ user.user.isNotificate 
+			{ user.user.notificate 
 				? 
 					<div className='account-toggle' onClick={ () => _handleIsNotificate() }>
 						<div className='account-toggle-box-active'></div>

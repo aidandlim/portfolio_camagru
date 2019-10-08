@@ -155,7 +155,7 @@ function Post(props) {
 				?
 				{ backgroundImage: 'url(\'' + default_user + '\')' }
 				:
-				{ backgroundImage: 'url(\'data:image/jpeg;base64, ' + props.data.user_picture + '\')' }
+				{ backgroundImage: 'url(\'' + URL + 'api/picture?p=' + props.data.user_picture + '\')' }
 			} onClick={() => _handleProfilePage()}></div>
 			<div className='post-info-container'>
 				<div className='post-author' onClick={() => _handleProfilePage()}>{props.data.user_nickname}</div>
@@ -166,7 +166,7 @@ function Post(props) {
 				{props.data.together !== '' ? <div className='post-people'>{props.data.together}</div> : ''}
 				{props.data.location === '' && props.data.together === '' ? <div className='post-in'>By Camagru App</div> : '' }
 			</div>
-			<div className='post-picture' style={{ backgroundImage: 'url(\'data:image/jpeg;base64, ' + props.data.picture + '\')' }} onClick={ () => _handleDetail() }></div>
+			<div className='post-picture' style={{ backgroundImage: 'url(\'' + URL + 'api/picture?p=' + props.data.picture + '\')' }} onClick={ () => _handleDetail() }></div>
 			<div className='post-reflect-container'>
 				{ !props.data.user_islike ? 
 					<FiHeart className='post-icon' onClick={ () => _handleLikes() } /> 

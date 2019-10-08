@@ -47,22 +47,18 @@ public class UserService {
     public User select(Token token) {
         try {
             userDao = sqlSession.getMapper(UserDao.class);
-            User result = userDao.select(tokenService.getIdFromToken(token));
-            result.setPicture(pictureService.getPicture(result.getPicture()));
-            return (result);
+            return userDao.select(tokenService.get(token.getToken()));
         } catch (Exception e) {
             e.printStackTrace();
-            return (null);
+            return null;
         }
     }
 
     @Transactional
     public boolean update(User user) {
-        if(!tokenService.checkToken(new Token(user.getToken())))
-            return false;
         try {
             userDao = sqlSession.getMapper(UserDao.class);
-            User temp = userDao.select(tokenService.getIdFromToken(new Token(user.getToken())));
+            User temp = userDao.select(tokenService.get(user.getToken()));
             if(!temp.getEmail().equals(user.getEmail())) {
                 verifyDao = sqlSession.getMapper(VerifyDao.class);
                 user.setUuid(UUID.randomUUID().toString().replace("-", ""));
@@ -79,25 +75,7 @@ public class UserService {
     }
 
     @Transactional
-    public boolean updatePicture(String token, MultipartFile file) {
-        try {
-            userDao = sqlSession.getMapper(UserDao.class);
-            String name = System.currentTimeMillis() + "-" + UUID.randomUUID().toString();
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get("/Users/aidan/Workspace/portfolio_camagru/static/" + name);
-            Files.write(path, bytes);
-            userDao.updatePicture(name, tokenService.getIdFromToken(new Token(token)));
-            return (true);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return (false);
-        }
-    }
-
-    @Transactional
     public boolean updatePassword(User user) {
-        if(!tokenService.checkToken(new Token(user.getToken())))
-            return false;
         try {
             authDao = sqlSession.getMapper(AuthDao.class);
             userDao = sqlSession.getMapper(UserDao.class);
@@ -112,9 +90,7 @@ public class UserService {
     }
 
     @Transactional
-    public boolean updatePrivate(User user) {
-        if(!tokenService.checkToken(new Token(user.getToken())))
-            return false;
+    public boolean updateIsPrivate(User user) {
         try {
             userDao = sqlSession.getMapper(UserDao.class);
             userDao.updatePrivate(user);
@@ -126,9 +102,7 @@ public class UserService {
     }
 
     @Transactional
-    public boolean updateNotificate(User user) {
-        if(!tokenService.checkToken(new Token(user.getToken())))
-            return false;
+    public boolean updateIsNotificate(User user) {
         try {
             userDao = sqlSession.getMapper(UserDao.class);
             userDao.updateNotificate(user);

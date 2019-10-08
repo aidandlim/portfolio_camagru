@@ -1,7 +1,8 @@
 package com.aidandlim.camagru.service;
 
 import com.aidandlim.camagru.dao.NotificationDao;
-import com.aidandlim.camagru.dto.*;
+import com.aidandlim.camagru.dto.Notification;
+import com.aidandlim.camagru.dto.Token;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,11 +29,7 @@ public class NotificationService {
     public ArrayList<Notification> selectAll(Token token) {
         try {
             notificationDao = sqlSession.getMapper(NotificationDao.class);
-            ArrayList<Notification> dto = notificationDao.selectAll(tokenService.getIdFromToken(token));
-            for(int i = 0; i < dto.size(); i++){
-                dto.get(i).setUser_picture(pictureService.getPicture(dto.get(i).getUser_picture()));
-            }
-            return dto;
+            return notificationDao.selectAll(tokenService.get(token.getToken()));
         } catch (Exception e) {
             e.printStackTrace();
             return (null);

@@ -30,11 +30,7 @@ public class ReflectionService {
     public ArrayList<Reflection> selectAllByPost(Post post) {
         try {
             reflectionDao = sqlSession.getMapper(ReflectionDao.class);
-            ArrayList<Reflection> dto = reflectionDao.selectAllByPost(post);
-            for(int i = 0; i < dto.size(); i++){
-                dto.get(i).setUser_picture(pictureService.getPicture(dto.get(i).getUser_picture()));
-            }
-            return dto;
+            return reflectionDao.selectAllByPost(post);
         } catch (Exception e) {
             e.printStackTrace();
             return (null);
@@ -43,8 +39,6 @@ public class ReflectionService {
 
     @Transactional
     public boolean insert(Reflection reflection) {
-        if(!tokenService.checkToken(new Token(reflection.getToken())))
-            return false;
         try {
             reflectionDao = sqlSession.getMapper(ReflectionDao.class);
             if(reflectionDao.select(reflection) == null) {
@@ -61,8 +55,6 @@ public class ReflectionService {
 
     @Transactional
     public boolean delete(Reflection reflection) {
-        if(!tokenService.checkToken(new Token(reflection.getToken())))
-            return false;
         try {
             reflectionDao = sqlSession.getMapper(ReflectionDao.class);
             reflectionDao.delete(reflection);

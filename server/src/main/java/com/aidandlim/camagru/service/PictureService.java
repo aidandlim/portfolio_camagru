@@ -1,33 +1,54 @@
 package com.aidandlim.camagru.service;
 
-import com.aidandlim.camagru.dao.PostDao;
-import com.aidandlim.camagru.dto.Post;
-import com.aidandlim.camagru.dto.Token;
-import com.aidandlim.camagru.dto.User;
+import com.aidandlim.camagru.dao.UserDao;
 import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.UUID;
 
 @Service
 public class PictureService {
 
+    @Autowired
+    SqlSession sqlSession;
+
+    @Autowired
+    UserDao userDao;
+
+    @Autowired
+    TokenService tokenService;
+
     @Transactional
-    public String getPicture(String uuid) {
+    public byte[] get(String uuid) {
         try {
-            byte[] fileContent = FileUtils.readFileToByteArray(new File("/Users/aidan/Workspace/portfolio_camagru/static/" + uuid));
-            String encodedString = java.util.Base64.getEncoder().encodeToString(fileContent);
-            return (encodedString.replaceFirst("dataimage/jpegbase64", ""));
+            return FileUtils.readFileToByteArray(new File("/Users/aidan/Workspace/portfolio_camagru/static/" + uuid));
         } catch (Exception e) {
             e.printStackTrace();
-            return (null);
+            return null;
+        }
+    }
+
+    @Transactional
+    public boolean update(String token, MultipartFile file) {
+        try {
+            userDao = sqlSession.getMapper(UserDao.class);
+            String name = System.currentTimeMillis() + "-" + UUID.randomUUID().toString();
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get("/Users/aidan/Workspace/portfolio_camagru/static/" + name);
+            Files.write(path, bytes);
+            userDao.updatePicture(name, tokenService.get(token));
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 

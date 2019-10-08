@@ -78,7 +78,14 @@ function Detail() {
 			});
 			return;
 		}
-		dispatch(ui_isload());
+		var posts = content.post;
+		posts.num_comments = posts.num_comments + 1;
+		posts.comments.push({
+			user_id: user.user.id,
+			user_picture: user.user.picture,
+			content: document.getElementById('detail-comment-box-' + content.post.id).value,
+		});
+		dispatch(content_post(posts));
 		axios.post(URL + 'api/comment/insert', {
 			token: auth.token,
 			user_id: user.user.id,
@@ -100,11 +107,6 @@ function Detail() {
 					]
 				});
 			}
-		})
-		.then(() => {
-			setTimeout(() => {
-				dispatch(ui_isload());
-			}, 500);
 		});
 	}
 

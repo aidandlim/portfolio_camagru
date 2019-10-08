@@ -1,9 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { ui_nav, ui_isload, auth_token, auth_isregister, auth_isforgot, user_user, user_biotemp } from '../../../actions';
+import { ui_isload, auth_token, auth_isregister, auth_isforgot, user_user, user_biotemp } from '../../../actions';
 
 import axios from 'axios';
-import { URL } from '../../../const';
 
 import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
@@ -17,12 +16,12 @@ function Signin() {
 
 	function _handleForm(e) {
 		e.preventDefault();
-		dispatch(ui_isload());
-		axios.post(URL + 'api/auth/signin', {
+		axios.post('/auth/signin', {
 			email: document.signin.email.value,
 			password: document.signin.password.value
 		})
 		.then(res => {
+			console.log(res);
 			if(res.data.token !== '') {
 				if(res.data.status) {
 					dispatch(auth_token(res.data.token));
@@ -51,19 +50,15 @@ function Signin() {
 					]
 				});
 			}
-		})
-		.then(() => {
-			setTimeout(() => {
-				dispatch(ui_isload());
-			}, 500);
 		});
 	}
 
 	function _handleData(token) {
-		axios.post(URL + 'api/user/select', {
+		axios.post('/user/select', {
 			token: token
 		})
 		.then(res => {
+			console.log(res);
 			if(res.data !== null) {
 				dispatch(user_user(res.data));
 				dispatch(user_biotemp(res.data.bio === null ? '' : res.data.bio));
@@ -82,7 +77,7 @@ function Signin() {
 
 	function _handleVerifyingEmail() {
 		dispatch(ui_isload());
-		axios.post(URL + 'api/auth/verifyAgain', {
+		axios.post('/auth/verifyAgain', {
 			email: document.signin.email.value
 		}).then(() => {
 			setTimeout(() => {

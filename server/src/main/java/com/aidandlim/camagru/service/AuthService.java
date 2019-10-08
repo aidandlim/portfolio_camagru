@@ -35,7 +35,11 @@ public class AuthService {
     @Transactional
     public boolean isLogin(Token token) {
         try {
-            return (token.getToken().equals("") ? false : tokenService.checkToken(token));
+            if(tokenService.get(token.getToken()) != -1) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -48,13 +52,13 @@ public class AuthService {
             authDao = sqlSession.getMapper(AuthDao.class);
             User result = authDao.signin(user);
             if(result.getAuthorized() == 1) {
-                return new Token(tokenService.createToken(result).getToken(), 1);
+                return new Token(tokenService.generate(result), 1);
             } else {
                 return new Token(0);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return new Token("");
+            return new Token(0);
         }
     }
 

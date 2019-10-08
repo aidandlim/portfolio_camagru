@@ -30,11 +30,7 @@ public class CommentService {
     public ArrayList<Comment> selectAllByPost(Post post) {
         try {
             commentDao = sqlSession.getMapper(CommentDao.class);
-            ArrayList<Comment> dto = commentDao.selectAllByPost(post);
-            for(int i = 0; i < dto.size(); i++){
-                dto.get(i).setUser_picture(pictureService.getPicture(dto.get(i).getUser_picture()));
-            }
-            return dto;
+            return commentDao.selectAllByPost(post);
         } catch (Exception e) {
             e.printStackTrace();
             return (null);
@@ -43,8 +39,6 @@ public class CommentService {
 
     @Transactional
     public boolean insert(Comment comment) {
-        if(!tokenService.checkToken(new Token(comment.getToken())))
-            return false;
         try {
             commentDao = sqlSession.getMapper(CommentDao.class);
             commentDao.insert(comment);
@@ -57,8 +51,6 @@ public class CommentService {
 
     @Transactional
     public boolean delete(Comment comment) {
-        if(!tokenService.checkToken(new Token(comment.getToken())))
-            return false;
         try {
             commentDao = sqlSession.getMapper(CommentDao.class);
             commentDao.delete(comment);

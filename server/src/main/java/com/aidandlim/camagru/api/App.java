@@ -13,8 +13,8 @@ public class App {
     @Autowired
     AuthService service;
 
-    @RequestMapping("check")
-    public @ResponseBody String check() { return "Connection is successful!"; }
+    @RequestMapping("/")
+    public @ResponseBody String check() { return "Restful API connection is successful!"; }
 
     @RequestMapping("verify")
     public @ResponseBody String verify(User user) { return (service.verify(user)); }

@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { auth_token, auth_isregister, auth_isforgot, user_user, user_biotemp } from '../../../actions';
 
 import axios from 'axios';
+import cookie from 'react-cookies';
 
 import FacebookLogin from 'react-facebook-login';
 import { GoogleLogin } from 'react-google-login';
@@ -23,6 +24,7 @@ function Signin() {
 			if(res.data.token !== null) {
 				if(res.data.status) {
 					dispatch(auth_token(res.data.token));
+					cookie.save('token', res.data.token, { path: '/' });
 					_handleData(res.data.token);
 				} else {
 					confirmAlert({

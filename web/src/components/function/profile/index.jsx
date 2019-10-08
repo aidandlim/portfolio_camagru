@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { auth_token, auth_isaccount, user_user, user_biotemp } from '../../../actions';
 
 import axios from 'axios';
+import cookie from 'react-cookies';
 
 import { confirmAlert } from 'react-confirm-alert';
 
@@ -129,6 +130,7 @@ function Profile() {
 		dispatch(auth_token(''));
 		dispatch(user_user({}));
 		dispatch(user_biotemp(''));
+		cookie.remove('token', { path: '/'});
 	}
 
 	function _handleTextareaSize() {

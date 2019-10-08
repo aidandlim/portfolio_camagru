@@ -10,7 +10,6 @@ import Body from '../body';
 import Footer from '../footer';
 import Sidebar from '../../function/sidebar';
 
-import { confirmAlert } from 'react-confirm-alert';
 import './index.css';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
@@ -29,18 +28,12 @@ function App() {
 			token: token
 		})
 		.then(res => {
-			if(res.data !== null) {
+			if(res.data !== '') {
 				dispatch(user_user(res.data));
 				dispatch(user_biotemp(res.data.bio === null ? '' : res.data.bio));
 			} else {
-				confirmAlert({
-					message: 'Something went wrong :(',
-					buttons: [
-						{
-							label: 'I will try again'
-						}
-					]
-				});
+				cookie.remove('token', { path: '/'});
+				dispatch(auth_token(''));
 			}
 		});
 	}

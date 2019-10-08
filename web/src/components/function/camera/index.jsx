@@ -1,9 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, ui_isload, camera_isload, camera_images } from '../../../actions';
+import { ui_nav, camera_isload, camera_images } from '../../../actions';
 
 import axios from 'axios';
-import { URL } from '../../../const';
 
 import Webcam from 'react-webcam';
 import Loadcam from '../loadcam';
@@ -39,11 +38,10 @@ function Camera() {
 	}
 
 	function _handleForm() {
-		dispatch(ui_isload());
-		axios.post(URL + 'api/post/insert', {
+		axios.post('/post/insert', {
 			token: auth.token,
-			user_id: user.id,
-			picture: camera.preview,
+			user_id: user.user.id,
+			picture: camera.preview.replace('data:image/jpeg;base64,', ''),
 			content: document.camera.content.value,
 			location: document.camera.location.value,
 			together: document.camera.together.value,
@@ -61,11 +59,6 @@ function Camera() {
 					]
 				});
 			}
-		})
-		.then(()  => {
-			setTimeout(() => {
-				dispatch(ui_isload());
-			}, 500);
 		});
 	}
 
@@ -80,11 +73,11 @@ function Camera() {
 			<div className='inner-container'>
 				<div className='camera-post'>
 					<div className='post-profile' style={
-						user.picture === null
+						user.user.picture === null
 						?
 						{ backgroundImage: 'url(\'' + default_user + '\')' }
 						:
-						{ backgroundImage: 'url(\'data:image/jpeg;base64, ' + user.user.picture + '\')' }
+						{ backgroundImage: 'url(\'/picture?p=' + user.user.picture + '\')' }
 					}></div>
 					<form name='camera'>
 						<div className='post-info-container'>

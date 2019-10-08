@@ -72,6 +72,7 @@ public class PostService {
     public boolean insert(Post post) {
         try {
             postDao = sqlSession.getMapper(PostDao.class);
+            post.setPicture(pictureService.upload(post.getPicture()));
             postDao.insert(post);
             return true;
         } catch (Exception e) {

@@ -1,9 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, ui_isload, content_post, post_posts, search_user } from '../../../actions';
+import { ui_nav, content_post, post_posts, search_user } from '../../../actions';
 
 import axios from 'axios';
-import { URL } from '../../../const';
 
 import { confirmAlert } from 'react-confirm-alert';
 
@@ -38,7 +37,7 @@ function Post(props) {
 			}
 		}
 		dispatch(post_posts(posts));
-		axios.post(URL + 'api/reflection/insert', {
+		axios.post('/reflection/insert', {
 			token: auth.token,
 			user_id: user.user.id,
 			post_id: props.data.id,
@@ -76,7 +75,7 @@ function Post(props) {
 			}
 		}
 		dispatch(post_posts(posts));
-		axios.post(URL + 'api/comment/insert', {
+		axios.post('/comment/insert', {
 			token: auth.token,
 			user_id: user.user.id,
 			post_id: props.data.id,
@@ -100,8 +99,7 @@ function Post(props) {
 	}
 
 	function _handleDetail() {
-		dispatch(ui_isload());
-		axios.post(URL + 'api/post/select', {
+		axios.post('/post/select', {
 			token: auth.token,
 			id: props.data.id,
 			user_id: user.user.id,
@@ -110,16 +108,10 @@ function Post(props) {
 			dispatch(content_post(res.data));
 			dispatch(ui_nav(6));
 		})
-		.then(() => {
-			setTimeout(() => {
-				dispatch(ui_isload());
-			}, 500);
-		});
 	}
 
 	function _handleProfilePage() {
-		dispatch(ui_isload());
-		axios.post(URL + 'api/search/select', {
+		axios.post('/search/select', {
 			id: props.data.user_id
 		})
 		.then(res => {
@@ -137,9 +129,6 @@ function Post(props) {
 				});
 			}
 		})
-		.then(() => {
-			dispatch(ui_isload());
-		});
 	}
 
 	function _handleTextareaSize() {
@@ -155,7 +144,7 @@ function Post(props) {
 				?
 				{ backgroundImage: 'url(\'' + default_user + '\')' }
 				:
-				{ backgroundImage: 'url(\'' + URL + 'api/picture?p=' + props.data.user_picture + '\')' }
+				{ backgroundImage: 'url(\'/picture?p=' + props.data.user_picture + '\')' }
 			} onClick={() => _handleProfilePage()}></div>
 			<div className='post-info-container'>
 				<div className='post-author' onClick={() => _handleProfilePage()}>{props.data.user_nickname}</div>
@@ -166,7 +155,7 @@ function Post(props) {
 				{props.data.together !== '' ? <div className='post-people'>{props.data.together}</div> : ''}
 				{props.data.location === '' && props.data.together === '' ? <div className='post-in'>By Camagru App</div> : '' }
 			</div>
-			<div className='post-picture' style={{ backgroundImage: 'url(\'' + URL + 'api/picture?p=' + props.data.picture + '\')' }} onClick={ () => _handleDetail() }></div>
+			<div className='post-picture' style={{ backgroundImage: 'url(\'/picture?p=' + props.data.picture + '\')' }} onClick={ () => _handleDetail() }></div>
 			<div className='post-reflect-container'>
 				{ !props.data.user_islike ? 
 					<FiHeart className='post-icon' onClick={ () => _handleLikes() } /> 

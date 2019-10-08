@@ -1,9 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_isload, ui_nav, content_post, content_islikes, search_user } from '../../../actions';
+import { ui_nav, content_post, content_islikes, search_user } from '../../../actions';
 
 import axios from 'axios';
-import { URL } from '../../../const';
 
 import Likes from '../likes';
 import Comments from '../comments';
@@ -47,7 +46,7 @@ function Detail() {
 		}
 		posts.user_islike = !posts.user_islike;
 		dispatch(content_post(posts));
-		axios.post(URL + 'api/reflection/insert', {
+		axios.post('reflection/insert', {
 			token: auth.token,
 			user_id: user.user.id,
 			post_id: content.post.id,
@@ -86,7 +85,7 @@ function Detail() {
 			content: document.getElementById('detail-comment-box-' + content.post.id).value,
 		});
 		dispatch(content_post(posts));
-		axios.post(URL + 'api/comment/insert', {
+		axios.post('/comment/insert', {
 			token: auth.token,
 			user_id: user.user.id,
 			post_id: content.post.id,
@@ -111,8 +110,7 @@ function Detail() {
 	}
 
 	function _handleProfilePage() {
-		dispatch(ui_isload());
-		axios.post(URL + 'api/search/select', {
+		axios.post('/search/select', {
 			id: content.post.user_id
 		})
 		.then(res => {
@@ -129,9 +127,6 @@ function Detail() {
 					]
 				});
 			}
-		})
-		.then(() => {
-			dispatch(ui_isload());
 		});
 	}
 
@@ -147,7 +142,7 @@ function Detail() {
 			<div className='inner-container'>
 				<div className='detail-post'>
 					<div className='post-profile' style={{ 
-						backgroundImage: 'url(\'data:image/jpeg;base64, ' + content.post.user_picture + '\')' 
+						backgroundImage: 'url(\'/picture?p=' + content.post.user_picture + '\')' 
 					}} onClick={() => _handleProfilePage()}></div>
 					<div className='post-info-container'>
 						<div className='post-author' onClick={() => _handleProfilePage()}>{content.post.user_nickname}</div>
@@ -158,7 +153,7 @@ function Detail() {
 						{content.post.together !== '' ? <div className='post-people'>{content.post.together}</div> : ''}
 						{content.post.location === '' && content.post.together === '' ? <div className='post-in'>By Camagru App</div> : '' }
 					</div>
-					<div className='post-picture' style={{ backgroundImage: 'url(\'data:image/jpeg;base64, ' + content.post.picture + '\')' }}></div>
+					<div className='post-picture' style={{ backgroundImage: 'url(\'/picture?p=' + content.post.picture + '\')' }}></div>
 					<div className='post-reflect-container'>
 						{ !content.post.user_islike ? 
 							<FiHeart className='post-icon' onClick={ () => _handleLikes() } /> 

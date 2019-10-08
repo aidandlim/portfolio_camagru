@@ -1,9 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { ui_isload, ui_nav, search_user } from '../../../actions';
+import { ui_nav, search_user } from '../../../actions';
 
 import axios from 'axios';
-import { URL } from '../../../const';
 
 import { confirmAlert } from 'react-confirm-alert';
 import default_user from '../../../resources/default_user.jpg';
@@ -13,8 +12,7 @@ function Comments(props) {
 	const dispatch = useDispatch();
 
 	function _handleProfilePage() {
-		dispatch(ui_isload());
-		axios.post(URL + 'api/search/select', {
+		axios.post('/search/select', {
 			id: props.comment.user_id
 		})
 		.then(res => {
@@ -31,9 +29,6 @@ function Comments(props) {
 					]
 				});
 			}
-		})
-		.then(() => {
-			dispatch(ui_isload());
 		});
 	}
 
@@ -45,7 +40,7 @@ function Comments(props) {
 					?
 					{ backgroundImage: 'url(\'' + default_user + '\')' }
 					:
-					{ backgroundImage: 'url(\'data:image/jpeg;base64, ' + props.comment.user_picture + '\')' }
+					{ backgroundImage: 'url(\'/picture?p=' + props.comment.user_picture + '\')' }
 				} onClick={() => _handleProfilePage()}></div>
 				<textarea className='comments-content' style={{height: props.comment.content.split('\n').length + 'rem'}} value={props.comment.content} readOnly></textarea>
 			</div>

@@ -1,9 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { ui_isload, ui_nav, content_post } from '../../../actions';
+import { ui_nav, content_post } from '../../../actions';
 
 import axios from 'axios';
-import { URL } from '../../../const';
 
 import { confirmAlert } from 'react-confirm-alert';
 import './index.css';
@@ -12,8 +11,7 @@ function Album(props) {
 	const dispatch = useDispatch();
 
 	function _handleProfilePage() {
-		dispatch(ui_isload());
-		axios.post(URL + 'api/post/select', {
+		axios.post('/post/select', {
 			id: props.data.id
 		})
 		.then(res => {
@@ -30,14 +28,11 @@ function Album(props) {
 					]
 				});
 			}
-		})
-		.then(() => {
-			dispatch(ui_isload());
 		});
 	}
 
 	return (
-		<div className='album' style={{ backgroundImage: 'url(\'data:image/jpeg;base64, ' + props.data.picture + '\')' }} onClick={() => _handleProfilePage()}>
+		<div className='album' style={{ backgroundImage: 'url(\'/picture?p=' + props.data.picture + '\')' }} onClick={() => _handleProfilePage()}>
 			
 		</div>
 	);

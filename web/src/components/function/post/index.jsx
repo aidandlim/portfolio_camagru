@@ -1,8 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, content_post, post_posts, search_user } from '../../../actions';
+import { ui_nav, content_post, post_posts, search_user, auth_token, user_user, user_biotemp } from '../../../actions';
 
 import axios from 'axios';
+import cookie from 'react-cookies';
 
 import { confirmAlert } from 'react-confirm-alert';
 
@@ -44,8 +45,15 @@ function Post(props) {
 		})
 		.then(res => {
 			if(!res.data) {
+				cookie.remove('token', { path: '/'});
+
+				dispatch(auth_token(''));
+				dispatch(user_user({}));
+				dispatch(user_biotemp(''));
+				dispatch(ui_nav(0));
+
 				confirmAlert({
-					message: 'It seems like email or password information is wrong',
+					message: 'It seems like your session is invalid anymore.',
 					buttons: [
 						{
 							label: 'Okay'

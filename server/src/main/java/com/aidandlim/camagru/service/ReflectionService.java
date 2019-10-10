@@ -33,12 +33,14 @@ public class ReflectionService {
             return reflectionDao.selectAllByPost(post);
         } catch (Exception e) {
             e.printStackTrace();
-            return (null);
+            return null;
         }
     }
 
     @Transactional
     public boolean insert(Reflection reflection) {
+        if(tokenService.get(reflection.getToken()) == -1)
+            return false;
         try {
             reflectionDao = sqlSession.getMapper(ReflectionDao.class);
             if(reflectionDao.select(reflection) == null) {
@@ -55,6 +57,8 @@ public class ReflectionService {
 
     @Transactional
     public boolean delete(Reflection reflection) {
+        if(tokenService.get(reflection.getToken()) == -1)
+            return false;
         try {
             reflectionDao = sqlSession.getMapper(ReflectionDao.class);
             reflectionDao.delete(reflection);

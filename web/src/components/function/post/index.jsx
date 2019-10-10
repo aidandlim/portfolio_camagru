@@ -132,18 +132,29 @@ function Post(props) {
 	}
 
 	function _handleDeletePost() {
-		confirmAlert({
-			message: 'Are you sure to delete your post?',
-			buttons: [
-				{
-					label: 'Yes',
-					onClick: () => _processDeletePost()
-				},
-				{
-					label: 'No'
-				}
-			]
-		});
+		if(props.data.user_id === user.user.id) {
+			confirmAlert({
+				message: 'Are you sure to delete your post?',
+				buttons: [
+					{
+						label: 'Yes',
+						onClick: () => _processDeletePost()
+					},
+					{
+						label: 'No'
+					}
+				]
+			});
+		} else {
+			confirmAlert({
+				message: 'This feature is only for owner',
+				buttons: [
+					{
+						label: 'Okay'
+					}
+				]
+			});
+		}
 	}
 
 	function _processDeletePost() {
@@ -202,7 +213,7 @@ function Post(props) {
 					:
 					<MdFavorite className='post-icon post-icon-active' onClick={ () => _handleLikes() } />
 				}
-				{ props.data.user_id === user.user.id ? <FiTrash2 className='post-icon' onClick={ () => _handleDeletePost() } /> : '' }
+				<FiTrash2 className='post-icon' onClick={ () => _handleDeletePost() } />
 				{ props.data.content.length ? 
 					<textarea className='post-content' style={{height: props.data.content.split('\n').length + 'rem'}} value={props.data.content} readOnly></textarea>
 				: ''}

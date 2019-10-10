@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import { confirmAlert } from 'react-confirm-alert';
 
-import { FiHeart, FiMoreVertical } from 'react-icons/fi';
+import { FiHeart, FiTrash2 } from 'react-icons/fi';
 import { MdFavorite } from 'react-icons/md';
 import default_user from '../../../resources/default_user.jpg';
 import './index.css';
@@ -131,6 +131,46 @@ function Post(props) {
 		})
 	}
 
+	function _handleDeletePost() {
+		confirmAlert({
+			message: 'Are you sure to delete your post?',
+			buttons: [
+				{
+					label: 'Yes',
+					onClick: () => _processDeletePost()
+				},
+				{
+					label: 'No'
+				}
+			]
+		});
+	}
+
+	function _processDeletePost() {
+		var posts = post.posts;
+		for(var i = 0; i < posts.length; i++) {
+			if(posts[i].id === props.data.id) {
+				posts.splice(i, 1);
+			}
+		}
+		dispatch(post_posts(posts));
+		axios.post('/post/delete', {
+			id: props.data.id,
+		})
+		.then(res => {
+			if(!res.data) {
+				confirmAlert({
+					message: 'Something went wrong :(',
+					buttons: [
+						{
+							label: 'I will try again'
+						}
+					]
+				});
+			}
+		});
+	}
+
 	function _handleTextareaSize() {
 		const e = document.getElementById('post-comment-box-' + props.data.id);
 		e.style.height = '5px';
@@ -162,7 +202,7 @@ function Post(props) {
 					:
 					<MdFavorite className='post-icon post-icon-active' onClick={ () => _handleLikes() } />
 				}
-				<FiMoreVertical className='post-icon' />
+				{ props.data.user_id === user.user.id ? <FiTrash2 className='post-icon' onClick={ () => _handleDeletePost() } /> : '' }
 				{ props.data.content.length ? 
 					<textarea className='post-content' style={{height: props.data.content.split('\n').length + 'rem'}} value={props.data.content} readOnly></textarea>
 				: ''}

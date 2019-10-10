@@ -27,7 +27,7 @@ public class UserAPI {
     public boolean update(@RequestBody User user) { return (service.update(user)); }
 
     @RequestMapping("/api/user/updatePicture")
-    public boolean updatePicture(@RequestParam("token") String token, @RequestParam("picture") MultipartFile file) { return (pictureService.update(token, file)); }
+    public boolean updatePicture(@RequestParam("token") String token, @RequestParam("picture") MultipartFile file) { return (service.updatePicture(token, file)); }
 
     @RequestMapping("/api/user/updatePassword")
     public boolean updatePassword(@RequestBody User user) { return (service.updatePassword(user)); }

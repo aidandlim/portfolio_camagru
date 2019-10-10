@@ -6,7 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -23,40 +22,37 @@ public class PictureService {
     SqlSession sqlSession;
 
     @Autowired
-    UserDao userDao;
-
-    @Autowired
     TokenService tokenService;
+
+    String PATH = "/Users/aidan/Workspace/portfolio_camagru/static/";
 
     public byte[] get(String uuid) {
         try {
-            return FileUtils.readFileToByteArray(new File("/Users/aidan/Workspace/portfolio_camagru/static/" + uuid));
+            return FileUtils.readFileToByteArray(new File(PATH + uuid));
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public boolean update(String token, MultipartFile file) {
+    public String uploadWithFile(MultipartFile file) {
         try {
-            userDao = sqlSession.getMapper(UserDao.class);
             String name = System.currentTimeMillis() + "-" + UUID.randomUUID().toString();
             byte[] bytes = file.getBytes();
-            Path path = Paths.get("/Users/aidan/Workspace/portfolio_camagru/static/" + name);
+            Path path = Paths.get(PATH + name);
             Files.write(path, bytes);
-            userDao.updatePicture(name, tokenService.get(token));
-            return true;
+            return name;
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 
-    public String upload(String file) {
+    public String uploadWithHash(String file) {
         try {
             String name = System.currentTimeMillis() + "-" + UUID.randomUUID().toString();
             byte bytes[] = Base64.decodeBase64(file);
-            FileOutputStream fos = new FileOutputStream(new File("/Users/aidan/Workspace/portfolio_camagru/static/" + name));
+            FileOutputStream fos = new FileOutputStream(new File(PATH + name));
             fos.write(bytes);
             fos.close();
             return name;
@@ -64,6 +60,11 @@ public class PictureService {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public void delete(String name) {
+        File file = new File(PATH + name);
+        file.delete();
     }
 
 }

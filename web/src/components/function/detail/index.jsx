@@ -8,7 +8,7 @@ import Likes from '../likes';
 import Comments from '../comments';
 
 import { confirmAlert } from 'react-confirm-alert';
-import { FiArrowLeftCircle, FiHeart, FiMoreVertical } from 'react-icons/fi';
+import { FiArrowLeftCircle, FiHeart, FiTrash2 } from 'react-icons/fi';
 import { MdFavorite } from 'react-icons/md';
 import './index.css';
 
@@ -132,6 +132,40 @@ function Detail() {
 		});
 	}
 
+	function _handleDeletePost() {
+		confirmAlert({
+			message: 'Are you sure to delete your post?',
+			buttons: [
+				{
+					label: 'Yes',
+					onClick: () => _processDeletePost()
+				},
+				{
+					label: 'No'
+				}
+			]
+		});
+	}
+
+	function _processDeletePost() {
+		dispatch(ui_nav(0));
+		axios.post('/post/delete', {
+			id: content.post.id,
+		})
+		.then(res => {
+			if(!res.data) {
+				confirmAlert({
+					message: 'Something went wrong :(',
+					buttons: [
+						{
+							label: 'I will try again'
+						}
+					]
+				});
+			}
+		});
+	}
+
 	function _handleTextareaSize() {
 		const e = document.getElementById('detail-comment-box-' + content.post.id);
 		e.style.height = '5px';
@@ -162,7 +196,7 @@ function Detail() {
 							:
 							<MdFavorite className='post-icon post-icon-active' onClick={ () => _handleLikes() } />
 						}
-						<FiMoreVertical className='post-icon' />
+						{ content.post.user_id === user.user.id ? <FiTrash2 className='post-icon' onClick={ () => _handleDeletePost() } /> : '' }
 						{ content.post.content.length ? 
 							<textarea className='post-content' style={{height: content.post === {} ? '0rem' : content.post.content.split('\n').length + 'rem'}} value={content.post.content} readOnly></textarea>
 						: '' }

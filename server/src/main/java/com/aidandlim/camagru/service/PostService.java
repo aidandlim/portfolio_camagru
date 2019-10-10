@@ -72,7 +72,7 @@ public class PostService {
     public boolean insert(Post post) {
         try {
             postDao = sqlSession.getMapper(PostDao.class);
-            post.setPicture(pictureService.upload(post.getPicture()));
+            post.setPicture(pictureService.uploadWithHash(post.getPicture()));
             postDao.insert(post);
             return true;
         } catch (Exception e) {
@@ -97,6 +97,7 @@ public class PostService {
     public boolean delete(Post post) {
         try {
             postDao = sqlSession.getMapper(PostDao.class);
+            pictureService.delete(postDao.select(post).getPicture());
             postDao.delete(post);
             return true;
         } catch (Exception e) {

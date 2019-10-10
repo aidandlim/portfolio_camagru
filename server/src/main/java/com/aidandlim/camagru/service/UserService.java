@@ -75,6 +75,19 @@ public class UserService {
     }
 
     @Transactional
+    public boolean updatePicture(String token, MultipartFile file) {
+        try {
+            userDao = sqlSession.getMapper(UserDao.class);
+            pictureService.delete(userDao.select(tokenService.get(token)).getPicture());
+            userDao.updatePicture(pictureService.uploadWithFile(file), tokenService.get(token));
+            return (true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
+
+    @Transactional
     public boolean updatePassword(User user) {
         try {
             authDao = sqlSession.getMapper(AuthDao.class);

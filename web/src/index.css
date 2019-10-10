@@ -36,10 +36,6 @@ body {
     user-select: none;
 }
 
-[contentEditable=true]:empty:not(:focus):before{
-    content: attr(data-placeholder);
-}
-
 ::-webkit-scrollbar {
     width: 15px;
 }
@@ -54,4 +50,10 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #555555;
+}
+
+.rotate {
+    transform: rotateY(180deg) !important;
+    -webkit-transform:rotateY(180deg) !important;
+    -moz-transform:rotateY(180deg) !important;
 }

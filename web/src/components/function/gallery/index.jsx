@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { camera_preview, camera_filter } from '../../../actions';
+import { camera_preview, camera_rotate, camera_filter } from '../../../actions';
 
 import './index.css';
 
-function GalleryPics() {
+function Gallery() {
 	const camera = useSelector(state => state.camera);
 	const dispatch = useDispatch();
 
@@ -12,7 +12,8 @@ function GalleryPics() {
 	let preview = camera.preview;
 
 	function _handleChoose(i) {
-		dispatch(camera_preview(images[i]));
+		dispatch(camera_preview(images[i].data));
+		dispatch(camera_rotate(images[i].rotate));
 		dispatch(camera_filter(0));
 	}
 
@@ -20,10 +21,10 @@ function GalleryPics() {
 		<div className='camera-gallery'>
 			{ images.length === 0 ? <p>There is no image yet! Take it!</p> : '' }
 			{ images.map((image, i) => 
-				<img className={preview === images[i] ? 'camera-gallery-image-active' : 'camera-gallery-image'} key={i} src={image} onClick={ () => _handleChoose(i) } alt='Rendered' />
+				<img className={ preview === images[i].data ? 'camera-gallery-image-active' : 'camera-gallery-image' + (images[i].rotate ? ' rotate' : '') } key={i} src={image.data}  onClick={ () => _handleChoose(i) } alt='Rendered' />
 			)}
 		</div>
-);
+	);
 }
 
-export default GalleryPics;
+export default Gallery;

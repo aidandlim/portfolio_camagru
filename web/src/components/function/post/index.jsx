@@ -195,7 +195,7 @@ function Post(props) {
 				{props.data.together !== '' ? <div className='post-people'>{props.data.together}</div> : ''}
 				{props.data.location === '' && props.data.together === '' ? <div className='post-in'>By Camagru App</div> : '' }
 			</div>
-			<div className='post-picture' style={{ backgroundImage: 'url(\'/picture?p=' + props.data.picture + '\')' }} onClick={ () => _handleDetail() }></div>
+			<div className={props.data.rotate ? 'post-picture rotate' : 'post-picture'} style={{ backgroundImage: 'url(\'/picture?p=' + props.data.picture + '\')' }} onClick={ () => _handleDetail() }></div>
 			<div className='post-reflect-container'>
 				{ !props.data.user_islike ? 
 					<FiHeart className='post-icon' onClick={ () => _handleLikes() } /> 

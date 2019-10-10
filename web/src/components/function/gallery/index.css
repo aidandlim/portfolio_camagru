@@ -34,10 +34,6 @@
 
     object-fit: cover;
 
-    transform: rotateY(180deg);
-    -webkit-transform:rotateY(180deg);
-    -moz-transform:rotateY(180deg);
-
     opacity: 0.35;
 
     cursor: pointer;
@@ -50,10 +46,6 @@
     display: inline-block;
 
     object-fit: cover;
-
-    transform: rotateY(180deg);
-    -webkit-transform:rotateY(180deg);
-    -moz-transform:rotateY(180deg);
 
     cursor: pointer;
 }

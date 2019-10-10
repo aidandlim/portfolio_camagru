@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { camera_isload, camera_preview, camera_filter, camera_images } from '../../../actions';
+import { camera_isload, camera_preview, camera_rotate, camera_filter, camera_images } from '../../../actions';
 
 import { FiChevronDown, FiTrash2 } from 'react-icons/fi';
 import './index.css';
@@ -12,10 +12,12 @@ function Preview() {
 	const images = camera.images;
 	const preview = camera.preview;
 	const filter = camera.filter;
+	const rotate = camera.rotate;
 
 	function _handleRollback() {
 		dispatch(camera_isload(true));
 		dispatch(camera_preview(''));
+		dispatch(camera_rotate(0));
 	}
 
 	function _handleDeleteImage(name) {
@@ -30,9 +32,9 @@ function Preview() {
 
 	return (
 		<div className='preview'>
-			<img className={'preview-image preview-filter-' + filter} src={preview} alt='Rendered' />
+			<img className={'preview-image preview-filter-' + filter + (rotate ? ' rotate' : '')} src={preview} alt='Rendered' />
 			<FiChevronDown className='preview-rollback' onClick={ () => _handleRollback() } />
-			<img className={'preview-filter preview-filter-' + filter} src={preview} alt='Rendered' onClick={ () => dispatch(camera_filter(filter === 2 ? 0 : filter + 1)) } / >
+			<img className={'preview-filter preview-filter-' + filter + (rotate ? ' rotate' : '')} src={preview} alt='Rendered' onClick={ () => dispatch(camera_filter(filter === 2 ? 0 : filter + 1)) } / >
 			<div className='preview-filter-title' onClick={ () => dispatch(camera_filter(filter === 2 ? 0 : filter + 1)) }>
 				{filter === 0 ? 'Original' : ''}
 				{filter === 1 ? 'Black & White' : ''}

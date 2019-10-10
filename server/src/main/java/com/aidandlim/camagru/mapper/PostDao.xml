@@ -7,6 +7,7 @@
         SELECT
             p.id,
             p.picture,
+            p.rotate,
             p.content,
             p.location,
             p.together,
@@ -51,6 +52,7 @@
         SELECT
             p.id,
             p.picture,
+            p.rotate,
             p.content,
             p.location,
             p.together,
@@ -77,9 +79,9 @@
 
     <insert id="insert">
         INSERT INTO post
-            (user_id, picture, content, location, together)
+            (user_id, picture, rotate, content, location, together)
         VALUES
-            (#{user_id}, #{picture}, #{content}, #{location}, #{together})
+            (#{user_id}, #{picture}, #{rotate}, #{content}, #{location}, #{together})
     </insert>
 
     <update id="update">

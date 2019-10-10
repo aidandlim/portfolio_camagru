@@ -32,7 +32,7 @@ function Album(props) {
 	}
 
 	return (
-		<div className='album' style={{ backgroundImage: 'url(\'/picture?p=' + props.data.picture + '\')' }} onClick={() => _handleProfilePage()}>
+		<div className={props.data.rotate ? 'album rotate' : 'album'} style={{ backgroundImage: 'url(\'/picture?p=' + props.data.picture + '\')' }} onClick={() => _handleProfilePage()}>
 			
 		</div>
 	);

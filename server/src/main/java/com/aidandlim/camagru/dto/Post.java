@@ -8,6 +8,7 @@ public class Post extends Token {
     private long id;
     private long user_id;
     private String picture;
+    private boolean rotate;
     private String content;
     private String location;
     private String together;
@@ -27,11 +28,12 @@ public class Post extends Token {
         super();
     }
 
-    public Post(long id, long user_id, String picture, String content, String location, String together, Date time, String user_nickname, String user_picture, boolean user_islike, int num_likes, int num_comments, String post_time, ArrayList<Reflection> likes, ArrayList<Comment> comments) {
+    public Post(long id, long user_id, String picture, boolean rotate, String content, String location, String together, Date time, String user_nickname, String user_picture, boolean user_islike, int num_likes, int num_comments, String post_time, ArrayList<Reflection> likes, ArrayList<Comment> comments) {
         super();
         this.id = id;
         this.user_id = user_id;
         this.picture = picture;
+        this.rotate = rotate;
         this.content = content;
         this.location = location;
         this.together = together;
@@ -68,6 +70,14 @@ public class Post extends Token {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public boolean isRotate() {
+        return rotate;
+    }
+
+    public void setRotate(boolean rotate) {
+        this.rotate = rotate;
     }
 
     public String getContent() {

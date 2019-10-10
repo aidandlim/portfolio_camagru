@@ -10,7 +10,7 @@ import Gallery from '../gallery';
 import Preview from '../preview';
 
 import { confirmAlert } from 'react-confirm-alert';
-import { FiHeart, FiMoreVertical } from 'react-icons/fi';
+import { FiHeart, FiTrash2, FiUpload } from 'react-icons/fi';
 import default_user from '../../../resources/default_user.jpg';
 import './index.css';
 
@@ -32,7 +32,10 @@ function Camera() {
 	function _handleCapture() {
 		let data = webcamRef.current.getScreenshot();
 		if(data !== null) {
-			images.push(data);
+			images.push({
+				data: data,
+				rotate: 1
+			});
 			dispatch(camera_images(images));
 		}
 	}
@@ -42,6 +45,7 @@ function Camera() {
 			token: auth.token,
 			user_id: user.user.id,
 			picture: camera.preview.replace('data:image/jpeg;base64,', ''),
+			rotate: camera.rotate,
 			content: document.camera.content.value,
 			location: document.camera.location.value,
 			together: document.camera.together.value,
@@ -60,6 +64,24 @@ function Camera() {
 				});
 			}
 		});
+	}
+
+	function _handleFileUpload() {
+		var file = document.getElementById('file').files[0];
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = () => {
+			images.push({
+				data: reader.result,
+				rotate: 0
+			});
+			dispatch(camera_images(images));
+		}
+	}
+
+	function _handleDeleteAll() {
+		images = [];
+		dispatch(camera_images(images));
 	}
 
 	function _handleTextareaSize() {
@@ -96,11 +118,14 @@ function Camera() {
 						{ camera.isLoad ? <Loadcam /> : '' }
 						{ !camera.isLoad && camera.preview === '' ? <div className='camera-shoot' onClick={ () => _handleCapture() }></div> : '' }
 						{ !camera.isLoad && camera.preview !== '' ? <Preview /> : '' }
-						<div className='camera-margin'></div>
+						<div className='camera-margin'>
+							<FiUpload className='camera-icon' onClick={ () => document.getElementById('file').click() } />	
+							<input id='file' type='file' onChange={ () => _handleFileUpload() } style={{ display: 'none'}}></input>
+							<FiTrash2 className='camera-icon' onClick={ () => _handleDeleteAll() }/>
+						</div>
 						<Gallery />
 						<div className='post-reflect-container'>
-							<FiHeart className='post-icon' />
-							<FiMoreVertical className='post-icon' />
+							<FiHeart className='camera-icon-wide' />
 							<textarea className='post-comment-box' id='camera-comment-box' name='content' placeholder='Add a comment...' onChange={ () => _handleTextareaSize() }></textarea>
 							<div className='post-comment-post' onClick={() => _handleForm()}>POST</div>
 						</div>

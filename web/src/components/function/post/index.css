@@ -111,10 +111,6 @@
     background-size: cover;
     background-position: center;
 
-    transform: rotateY(180deg);
-    -webkit-transform:rotateY(180deg);
-    -moz-transform:rotateY(180deg);
-
     border-top: solid #404040 1px;
     border-bottom: solid #404040 1px;
 }

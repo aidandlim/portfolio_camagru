@@ -7,9 +7,6 @@
     float: left;
 
     object-fit: cover;
-    transform: rotateY(180deg);
-    -webkit-transform:rotateY(180deg);
-    -moz-transform:rotateY(180deg);
 
     background-size: cover;
     background-position: center;

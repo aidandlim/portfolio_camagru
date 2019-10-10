@@ -2,6 +2,7 @@ const camera = {
     isLoad: true,
     images: [],
     preview: '',
+    rotate: 0,
     filter: 0,
 }
 
@@ -18,6 +19,10 @@ const cameraReducer = (state = camera, action) => {
         case 'CAMERA_PREVIEW':
             return Object.assign({}, state, {
                 preview: action.payload
+            });
+        case 'CAMERA_ROTATE':
+            return Object.assign({}, state, {
+                rotate: action.payload
             });
         case 'CAMERA_FILTER':
             return Object.assign({}, state, {

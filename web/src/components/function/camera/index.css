@@ -85,12 +85,47 @@
 
 .camera-margin {
     width: 100%;
-    height: 15px;
+    height: 2rem;
 
     position: relative;
     float: left;
 
     background-color: #272727;
+}
+
+.camera-icon {
+    width: 1rem;
+    height: 1rem;
+    margin: 0.5rem 0rem 0.5rem 0.5rem;
+
+    position: relative;
+    float: left;
+
+    color: #505050;
+
+    cursor: pointer;
+}
+
+.camera-icon:nth-child(2) {
+    margin-left: calc(100% - 3rem);
+}
+
+.camera-icon:hover {
+    color: #808080;
+    transition: ease-in 0.25s;
+}
+
+.camera-icon-wide {
+    width: 1rem;
+    height: 1rem;
+    margin: 0.5rem calc(100% - 1.5rem) 0.5rem 0.5rem;
+
+    position: relative;
+    float: left;
+
+    color: #505050;
+
+    cursor: pointer;
 }
 
 @media (max-width: 40rem) {

@@ -79,6 +79,13 @@ export const camera_preview = (value) => {
     };
 };
 
+export const camera_rotate = (value) => {
+    return {
+        type: 'CAMERA_ROTATE',
+        payload: value
+    };
+};
+
 export const camera_filter = (value) => {
     return {
         type: 'CAMERA_FILTER',

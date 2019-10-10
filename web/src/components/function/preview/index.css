@@ -15,10 +15,6 @@
 
     object-fit: cover;
 
-    transform: rotateY(180deg);
-    -webkit-transform:rotateY(180deg);
-    -moz-transform:rotateY(180deg);
-
     cursor: pointer;
 }
 
@@ -51,10 +47,6 @@
     left: 1.5rem;
 
     object-fit: cover;
-
-    transform: rotateY(180deg);
-    -webkit-transform:rotateY(180deg);
-    -moz-transform:rotateY(180deg);
 
     border: solid #404040 1px;
     border-radius: 0.5rem;
@@ -119,10 +111,6 @@
     left: calc(100% - 3.5rem);
 
     object-fit: cover;
-
-    transform: rotateY(180deg);
-    -webkit-transform:rotateY(180deg);
-    -moz-transform:rotateY(180deg);
 
     color: #808080;
     background-color: #202020;

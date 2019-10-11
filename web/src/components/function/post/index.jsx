@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { ui_nav, content_post, post_posts, search_user, auth_token, user_user, user_biotemp } from '../../../actions';
 
@@ -6,19 +7,18 @@ import axios from 'axios';
 import cookie from 'react-cookies';
 
 import { confirmAlert } from 'react-confirm-alert';
-
 import { FiHeart, FiTrash2 } from 'react-icons/fi';
 import { MdFavorite } from 'react-icons/md';
 import default_user from '../../../resources/default_user.jpg';
 import './index.css';
 
-function Post(props) {
+const Post = (props) => {
 	const auth = useSelector(state => state.auth);
 	const user = useSelector(state => state.user);
 	const post = useSelector(state => state.post);
 	const dispatch = useDispatch();
 
-	function _handleLikes() {
+	const _handleLikes = () => {
 		if(auth.token === '') {
 			confirmAlert({
 				message: 'This feature needs to be signed in first',
@@ -64,7 +64,7 @@ function Post(props) {
 		});
 	}
 
-	function _handleComments() {
+	const _handleComments = () => {
 		if(auth.token === '') {
 			confirmAlert({
 				message: 'This feature needs to be signed in first',
@@ -106,7 +106,7 @@ function Post(props) {
 		});
 	}
 
-	function _handleDetail() {
+	const _handleDetail = () => {
 		axios.post('/post/select', {
 			token: auth.token,
 			id: props.data.id,
@@ -118,7 +118,7 @@ function Post(props) {
 		})
 	}
 
-	function _handleProfilePage() {
+	const _handleProfilePage = () => {
 		axios.post('/search/select', {
 			id: props.data.user_id
 		})
@@ -139,7 +139,7 @@ function Post(props) {
 		})
 	}
 
-	function _handleDeletePost() {
+	const _handleDeletePost = () => {
 		if(props.data.user_id === user.user.id) {
 			confirmAlert({
 				message: 'Are you sure to delete your post?',
@@ -165,7 +165,7 @@ function Post(props) {
 		}
 	}
 
-	function _processDeletePost() {
+	const _processDeletePost = () => {
 		var posts = post.posts;
 		for(var i = 0; i < posts.length; i++) {
 			if(posts[i].id === props.data.id) {
@@ -190,7 +190,7 @@ function Post(props) {
 		});
 	}
 
-	function _handleTextareaSize() {
+	const _handleTextareaSize = () => {
 		const e = document.getElementById('post-comment-box-' + props.data.id);
 		e.style.height = '5px';
 		e.style.height = 'calc(' + (e.scrollHeight) + 'px - 1rem)';

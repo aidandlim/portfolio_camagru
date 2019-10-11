@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { ui_nav, auth_token, search_user, post_posts } from '../../../actions';
 
@@ -8,19 +9,19 @@ import { confirmAlert } from 'react-confirm-alert';
 import { FiUser, FiSettings } from 'react-icons/fi';
 import './index.css';
 
-function Header() {
+const Header = () => {
 	const ui = useSelector(state => state.ui);
 	const auth = useSelector(state => state.auth);
 	const user = useSelector(state => state.user);
 	const search = useSelector(state => state.search);
 	const dispatch = useDispatch();
 
-	function _handleCI() {
+	const _handleCI = () => {
 		dispatch(post_posts([]));
 		dispatch(ui_nav(0));
 	}
 
-	function _handleInitUser() {
+	const _handleInitUser = () => {
 		axios.post('/auth/isLogin', {
 			token: auth.token
 		})
@@ -34,7 +35,7 @@ function Header() {
 		});
 	}
 
-	function _handleMypage() {
+	const _handleMypage = () => {
 		axios.post('/search/select', {
 			id: user.user.id
 		})

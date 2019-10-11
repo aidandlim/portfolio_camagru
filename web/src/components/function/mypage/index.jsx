@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useSelector } from 'react-redux';
 
 import Album from '../album';
@@ -7,7 +8,7 @@ import { FiGrid, FiHeart, FiMessageSquare, FiAlertCircle, FiLock } from 'react-i
 import default_user from '../../../resources/default_user.jpg';
 import './index.css';
 
-function Mypage() {
+const Mypage = () => {
 	const user = useSelector(state => state.user);
 	const search = useSelector(state => state.search);
 

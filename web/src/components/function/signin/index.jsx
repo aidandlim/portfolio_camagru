@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useDispatch } from 'react-redux';
 import { auth_token, auth_isregister, auth_isforgot, user_user, user_biotemp } from '../../../actions';
 
@@ -11,10 +12,10 @@ import { GoogleLogin } from 'react-google-login';
 import { confirmAlert } from 'react-confirm-alert';
 import './index.css';
 
-function Signin() {
+const Signin = () => {
 	const dispatch = useDispatch();
 
-	function _handleForm(e) {
+	const _handleForm = (e) => {
 		e.preventDefault();
 		axios.post('/auth/signin', {
 			email: document.signin.email.value,
@@ -53,7 +54,7 @@ function Signin() {
 		});
 	}
 
-	function _handleData(token) {
+	const _handleData = (token) => {
 		axios.post('/user/select', {
 			token: token
 		})
@@ -74,17 +75,17 @@ function Signin() {
 		});
 	}
 
-	function _handleVerifyingEmail() {
+	const _handleVerifyingEmail = () => {
 		axios.post('/auth/verifyAgain', {
 			email: document.signin.email.value
 		});
 	}
 	
-	function _handleFacebookSignin(res) {
+	const _handleFacebookSignin = (res) => {
 		console.log(res);
 	}
 
-	function _handleGoogleSignin(res) {
+	const _handleGoogleSignin = (res) => {
 		console.log(res);
 	}
 

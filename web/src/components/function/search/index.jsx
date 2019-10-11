@@ -2,7 +2,7 @@ import React from 'react';
 
 import './index.css';
 
-function Search() {
+const Search = () => {
 	return (
 		<div className='search'>
 			<form>

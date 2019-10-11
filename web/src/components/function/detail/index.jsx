@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { ui_nav, content_post, content_islikes, search_user } from '../../../actions';
 
@@ -12,13 +13,13 @@ import { FiArrowLeftCircle, FiHeart, FiTrash2 } from 'react-icons/fi';
 import { MdFavorite } from 'react-icons/md';
 import './index.css';
 
-function Detail() {
+const Detail = () => {
 	const auth = useSelector(state => state.auth);
 	const user = useSelector(state => state.user);
 	const content = useSelector(state => state.content);
 	const dispatch = useDispatch();
 
-	function _handleLikes() {
+	const _handleLikes = () => {
 		if(auth.token === '') {
 			confirmAlert({
 				message: 'This feature needs to be signed in first',
@@ -66,7 +67,7 @@ function Detail() {
 		});
 	}
 
-	function _handleComments() {
+	const _handleComments = () => {
 		if(auth.token === '') {
 			confirmAlert({
 				message: 'This feature needs to be signed in first',
@@ -111,7 +112,7 @@ function Detail() {
 		});
 	}
 
-	function _handleProfilePage() {
+	const _handleProfilePage = () => {
 		axios.post('/search/select', {
 			id: content.post.user_id
 		})
@@ -132,7 +133,7 @@ function Detail() {
 		});
 	}
 
-	function _handleDeletePost() {
+	const _handleDeletePost = () => {
 		confirmAlert({
 			message: 'Are you sure to delete your post?',
 			buttons: [
@@ -147,7 +148,7 @@ function Detail() {
 		});
 	}
 
-	function _processDeletePost() {
+	const _processDeletePost = () => {
 		dispatch(ui_nav(0));
 		axios.post('/post/delete', {
 			id: content.post.id,
@@ -166,7 +167,7 @@ function Detail() {
 		});
 	}
 
-	function _handleTextareaSize() {
+	const _handleTextareaSize = () => {
 		const e = document.getElementById('detail-comment-box-' + content.post.id);
 		e.style.height = '5px';
 		e.style.height = 'calc(' + (e.scrollHeight) + 'px - 1rem)';

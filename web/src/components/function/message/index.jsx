@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { ui_nav, content_post, search_user } from '../../../actions';
 
@@ -8,11 +9,11 @@ import { confirmAlert } from 'react-confirm-alert';
 import default_user from '../../../resources/default_user.jpg';
 import './index.css';
 
-function Message(props) {
+const Message = (props) => {
 	const auth = useSelector(state => state.auth);
 	const dispatch = useDispatch();
 	
-	function _handleDetail(id) {
+	const _handleDetail = (id) => {
 		axios.post('/post/select', {
 			token: auth.token,
 			id: id,
@@ -23,7 +24,7 @@ function Message(props) {
 		});
 	}
 
-	function _handleProfilePage() {
+	const _handleProfilePage = () => {
 		axios.post('/search/select', {
 			id: props.content.user_id
 		})

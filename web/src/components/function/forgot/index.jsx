@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useDispatch } from 'react-redux';
 import { auth_isforgot } from '../../../actions';
 
@@ -6,10 +7,10 @@ import axios from 'axios';
 
 import { confirmAlert } from 'react-confirm-alert';
 
-function Forgot() {
+const Forgot = () => {
 	const dispatch = useDispatch();
 
-	function _handleForm(e) {
+	const _handleForm = (e) => {
 		e.preventDefault();
 		axios.post('/auth/forgot', {
 			email: document.forgot.email.value,

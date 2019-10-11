@@ -7,7 +7,7 @@ import Account from '../../function/account';
 
 import './index.css';
 
-function Sidebar() {
+const Sidebar = () => {
 	const auth = useSelector(state => state.auth);
 	
 	return (

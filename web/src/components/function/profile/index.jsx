@@ -10,12 +10,12 @@ import { confirmAlert } from 'react-confirm-alert';
 import default_user from '../../../resources/default_user.jpg';
 import './index.css';
 
-function Profile() {
+const Profile = () => {
 	const auth = useSelector(state => state.auth);
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
 
-	function _handleForm(e) {
+	const _handleForm = (e) => {
 		e.preventDefault();
 		axios.post('/user/update', {
 			token: auth.token,
@@ -44,7 +44,7 @@ function Profile() {
 		});
 	}
 
-	function _handleChangePassword(e) {
+	const _handleChangePassword = (e) => {
 		e.preventDefault();
 		if(document.changePassword.change.value === document.changePassword.confirm.value) {
 			axios.post('/user/updatePassword', {
@@ -79,7 +79,7 @@ function Profile() {
 		}
 	}
 
-	function _handleChangePicture(e) {
+	const _handleChangePicture = (e) => {
 		e.preventDefault();
 		var formData = new FormData();
 		formData.append("token", auth.token);
@@ -105,7 +105,7 @@ function Profile() {
 		});
 	}
 
-	function _handleData(token) {
+	const _handleData = (token) => {
 		axios.post('/user/select', {
 			token: token
 		})
@@ -126,14 +126,14 @@ function Profile() {
 		});
 	}
 
-	function _handleLogout() {
+	const _handleLogout = () => {
 		dispatch(auth_token(''));
 		dispatch(user_user({}));
 		dispatch(user_biotemp(''));
 		cookie.remove('token', { path: '/'});
 	}
 
-	function _handleTextareaSize() {
+	const _handleTextareaSize = () => {
 		const e = document.getElementById('profile-bio');
 		dispatch(user_biotemp(e.value));
 		e.style.height = '5px';

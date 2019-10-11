@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { ui_nav, camera_isload, camera_preview, content_post, notification_content, post_posts } from '../../../actions';
 
@@ -8,18 +9,18 @@ import { confirmAlert } from 'react-confirm-alert';
 import { FiCompass, FiCamera, FiSearch, FiHeart } from 'react-icons/fi';
 import './index.css';
 
-function Footer() {
+const Footer = () => {
 	const ui = useSelector(state => state.ui);
 	const auth = useSelector(state => state.auth);
 	const dispatch = useDispatch();
 
-	function _handleExplore() {
+	const _handleExplore = () => {
 		dispatch(ui_nav(0));
 		dispatch(post_posts([]));
 		dispatch(content_post({}));
 	}
 
-	function _handleCamera() {
+	const _handleCamera = () => {
 		if(auth.token !== '') {
 			dispatch(ui_nav(3));
 			dispatch(camera_isload(true));
@@ -36,7 +37,7 @@ function Footer() {
 		}
 	}
 
-	function _handleNotification() {
+	const _handleNotification = () => {
 		if(auth.token !== '') {
 			axios.post('notification/selectAll', {
 				token: auth.token

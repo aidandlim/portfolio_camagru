@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useSelector } from 'react-redux';
 
 import Message from '../../function/message';
@@ -6,7 +7,7 @@ import Message from '../../function/message';
 import { FiAlertCircle } from 'react-icons/fi';
 import './index.css';
 
-function Notification() {
+const Notification = () => {
 	const notification = useSelector(state => state.notification);
 
 	return (

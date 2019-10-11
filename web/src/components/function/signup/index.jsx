@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useDispatch } from 'react-redux';
 import { auth_isregister } from '../../../actions';
 
@@ -9,10 +10,10 @@ import { GoogleLogin } from 'react-google-login';
 
 import { confirmAlert } from 'react-confirm-alert';
 
-function Signup() {
+const Signup = () => {
 	const dispatch = useDispatch();
 
-	function _handleForm(e) {
+	const _handleForm = (e) => {
 		e.preventDefault();
 		if(document.signup.password.value === document.signup.confirm.value) {
 			axios.post('/auth/signup', {
@@ -47,11 +48,11 @@ function Signup() {
 		}
 	}
 	
-	function _handleFacebookSignup(res) {
+	const _handleFacebookSignup = (res) => {
 		console.log(res);
 	}
 
-	function _handleGoogleSignup(res) {
+	const _handleGoogleSignup = (res) => {
 		console.log(res);
 	}
 

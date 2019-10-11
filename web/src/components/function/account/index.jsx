@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { auth_token, auth_isaccount, user_user } from '../../../actions';
 
@@ -8,12 +9,12 @@ import cookie from 'react-cookies';
 import { confirmAlert } from 'react-confirm-alert';
 import './index.css';
 
-function Account() {
+const Account = () => {
 	const auth = useSelector(state => state.auth);
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
 
-	function _handleIsPrivate() {
+	const _handleIsPrivate = () => {
 		axios.post('/user/updatePrivate', {
 			token: auth.token,
 			id: user.user.id,
@@ -36,7 +37,7 @@ function Account() {
 		
 	}
 
-	function _handleIsNotificate() {
+	const _handleIsNotificate = () => {
 		axios.post('/user/updateNotificate', {
 			token: auth.token,
 			id: user.user.id,
@@ -58,7 +59,7 @@ function Account() {
 		});
 	}
 
-	function _handleDeleteUser() {
+	const _handleDeleteUser = () => {
 		confirmAlert({
 			message: 'Are you sure to delete your account?',
 			buttons: [
@@ -73,7 +74,7 @@ function Account() {
 		});
 	}
 
-	function _processDeleteUser() {
+	const _processDeleteUser = () => {
 		axios.post('/user/delete', {
 			id: user.user.id,
 		})

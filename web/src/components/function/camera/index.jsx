@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { ui_nav, camera_isload, camera_images } from '../../../actions';
 
@@ -14,22 +15,21 @@ import { FiHeart, FiTrash2, FiUpload } from 'react-icons/fi';
 import default_user from '../../../resources/default_user.jpg';
 import './index.css';
 
-function Camera() {
+const Camera = () => {
 	const camera = useSelector(state => state.camera);
 	const auth = useSelector(state => state.auth);
 	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
-
 	const webcamRef = React.useRef(null);
 	let images = camera.images;
 
-	function _handleLoad() {
+	const _handleLoad = () => {
 		setTimeout(() => {
 			dispatch(camera_isload(false));
 		}, 1000);
 	}
 
-	function _handleCapture() {
+	const _handleCapture = () => {
 		let data = webcamRef.current.getScreenshot();
 		if(data !== null) {
 			images.push({
@@ -40,7 +40,7 @@ function Camera() {
 		}
 	}
 
-	function _handleForm() {
+	const _handleForm = () => {
 		axios.post('/post/insert', {
 			token: auth.token,
 			user_id: user.user.id,
@@ -66,7 +66,7 @@ function Camera() {
 		});
 	}
 
-	function _handleFileUpload() {
+	const _handleFileUpload = () => {
 		var file = document.getElementById('file').files[0];
 		var reader = new FileReader();
 		reader.readAsDataURL(file);
@@ -79,12 +79,12 @@ function Camera() {
 		}
 	}
 
-	function _handleDeleteAll() {
+	const _handleDeleteAll = () => {
 		images = [];
 		dispatch(camera_images(images));
 	}
 
-	function _handleTextareaSize() {
+	const _handleTextareaSize = () => {
 		const e = document.getElementById('camera-comment-box');
 		e.style.height = '5px';
 		e.style.height = 'calc(' + (e.scrollHeight) + 'px - 1rem)';

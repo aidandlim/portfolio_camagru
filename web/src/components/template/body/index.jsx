@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useSelector } from 'react-redux';
 
 import Post from '../../function/post';
@@ -10,7 +11,7 @@ import Detail from '../../function/detail';
 
 import './index.css';
 
-function Body() {
+const Body = () => {
 	const ui = useSelector(state => state.ui);
 	const content = useSelector(state => state.content);
 	const post = useSelector(state => state.post);

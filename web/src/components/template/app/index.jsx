@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { ui_nav, user_user, user_biotemp, post_posts, auth_token } from '../../../actions';
 
@@ -13,17 +14,12 @@ import Sidebar from '../../function/sidebar';
 import './index.css';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
-function App() {
+const App = () => {
 	const ui = useSelector(state => state.ui);
 	const auth = useSelector(state => state.auth);
 	const dispatch = useDispatch();
 
-	if(auth.token === '' && cookie.load('token') !== undefined) {
-		dispatch(auth_token(cookie.load('token')));
-		_handleData(cookie.load('token'));
-	}
-
-	function _handleData(token) {
+	const _handleData = (token) => {
 		axios.post('/user/select', {
 			token: token
 		})
@@ -36,6 +32,11 @@ function App() {
 				dispatch(auth_token(''));
 			}
 		});
+	}
+
+	if(auth.token === '' && cookie.load('token') !== undefined) {
+		dispatch(auth_token(cookie.load('token')));
+		_handleData(cookie.load('token'));
 	}
 
 	if(ui.nav === 0) {

@@ -7,8 +7,6 @@ const ui = {
     // notification     4
     // mypage           5
     // detail           6
-    
-    isLoad: false,
 }
 
 const uiReducer = (state = ui, action) => {
@@ -16,10 +14,6 @@ const uiReducer = (state = ui, action) => {
         case 'UI_NAV':
             return Object.assign({}, state, {
                 nav: action.payload
-            });
-        case 'UI_ISLOAD':
-            return Object.assign({}, state, {
-                isLoad: !state.isLoad
             });
         default:
             return state;

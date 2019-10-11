@@ -2,7 +2,7 @@ import React from 'react';
 
 import './index.css';
 
-function Loadcam() {
+const Loadcam = () => {
 	return (
 		<div className='camera-loading'>
 			<div className='camera-loading-img'></div>

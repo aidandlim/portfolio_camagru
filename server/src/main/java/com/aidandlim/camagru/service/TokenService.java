@@ -15,7 +15,7 @@ public class TokenService {
     public String generate(User user) {
         String token = UUID.randomUUID().toString() + System.currentTimeMillis();
         session.setAttribute(token, user.getId());
-        session.setMaxInactiveInterval(5);
+        session.setMaxInactiveInterval(60 * 60);
         return token;
     }
 

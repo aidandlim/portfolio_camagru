@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useDispatch } from 'react-redux';
 import { ui_nav, search_user } from '../../../actions';
 
@@ -8,10 +9,10 @@ import { confirmAlert } from 'react-confirm-alert';
 import default_user from '../../../resources/default_user.jpg';
 import './index.css';
 
-function Likes(props) {
+const Likes = (props) => {
 	const dispatch = useDispatch();
 
-	function _handleProfilePage() {
+	const _handleProfilePage = () => {
 		axios.post('/search/select', {
 			id: props.like.user_id
 		})

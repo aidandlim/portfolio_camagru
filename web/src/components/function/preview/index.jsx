@@ -1,11 +1,12 @@
 import React from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { camera_isload, camera_preview, camera_rotate, camera_filter, camera_images } from '../../../actions';
 
 import { FiChevronDown, FiTrash2 } from 'react-icons/fi';
 import './index.css';
 
-function Preview() {
+const Preview = () => {
 	const camera = useSelector(state => state.camera);
 	const dispatch = useDispatch();
 
@@ -14,16 +15,17 @@ function Preview() {
 	const filter = camera.filter;
 	const rotate = camera.rotate;
 
-	function _handleRollback() {
+	const _handleRollback = () => {
 		dispatch(camera_isload(true));
 		dispatch(camera_preview(''));
 		dispatch(camera_rotate(0));
 	}
 
-	function _handleDeleteImage(name) {
+	const _handleDeleteImage = (name) => {
 		for(let i = 0; i < images.length; i++) {
 			if(images[i] === name) {
 				images.splice(i, 1);
+				break;
 			}
 		}
 		dispatch(camera_images(images));

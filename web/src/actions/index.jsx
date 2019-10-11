@@ -130,6 +130,13 @@ export const search_user = (value) => {
     };
 };
 
+export const search_keyword = (value) => {
+    return {
+        type: 'SEARCH_KEYWORD',
+        payload: value
+    };
+};
+
 export const search_users = (value) => {
     return {
         type: 'SEARCH_USERS',

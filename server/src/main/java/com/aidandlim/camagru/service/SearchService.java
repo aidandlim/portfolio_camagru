@@ -40,10 +40,11 @@ public class SearchService {
     }
 
     @Transactional
-    public ArrayList<User> selectUserByKeyword(Search search) {
+    public ArrayList<User> selectAllUserByKeyword(Search search) {
         try {
             searchDao = sqlSession.getMapper(SearchDao.class);
-            return (searchDao.selectUserByKeyword(search));
+            search.setKeyword("%" + search.getKeyword()  +  "%");
+            return (searchDao.selectAllUserByKeyword(search));
         } catch (Exception e) {
             e.printStackTrace();
             return (null);
@@ -51,10 +52,11 @@ public class SearchService {
     }
 
     @Transactional
-    public ArrayList<Post> selectPostByKeyword(Search search) {
+    public ArrayList<Post> selectAllPostByKeyword(Search search) {
         try {
             searchDao = sqlSession.getMapper(SearchDao.class);
-            return (searchDao.selectPostByKeyword(search));
+            search.setKeyword("%" + search.getKeyword()  +  "%");
+            return (searchDao.selectAllPostByKeyword(search));
         } catch (Exception e) {
             e.printStackTrace();
             return (null);

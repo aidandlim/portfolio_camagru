@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public interface SearchDao {
 
     Search select(User user);
-    ArrayList<User> selectUserByKeyword(Search search);
-    ArrayList<Post> selectPostByKeyword(Search search);
+    ArrayList<User> selectAllUserByKeyword(Search search);
+    ArrayList<Post> selectAllPostByKeyword(Search search);
 
 }

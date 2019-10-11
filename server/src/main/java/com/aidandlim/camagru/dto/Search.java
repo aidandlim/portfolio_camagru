@@ -13,11 +13,12 @@ public class Search {
     private int num_likes;
     private int num_comments;
     private ArrayList<Post> posts;
+    private String keyword;
 
     public Search() {
     }
 
-    public Search(long id, String picture, String nickname, String bio, int isPrivate, int num_posts, int num_likes, int num_comments, ArrayList<Post> posts) {
+    public Search(long id, String picture, String nickname, String bio, int isPrivate, int num_posts, int num_likes, int num_comments, ArrayList<Post> posts, String keyword) {
         this.id = id;
         this.picture = picture;
         this.nickname = nickname;
@@ -27,6 +28,7 @@ public class Search {
         this.num_likes = num_likes;
         this.num_comments = num_comments;
         this.posts = posts;
+        this.keyword = keyword;
     }
 
     public long getId() {
@@ -99,5 +101,13 @@ public class Search {
 
     public void setPosts(ArrayList<Post> posts) {
         this.posts = posts;
+    }
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 }

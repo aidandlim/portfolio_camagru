@@ -18,7 +18,16 @@
             id = #{id}
     </select>
 
-    <select id="selectPostByKeyword" resultType="com.aidandlim.camagru.dto.Post">
+    <select id="selectAllUserByKeyword" resultType="com.aidandlim.camagru.dto.User">
+        SELECT
+            id, email, nickname, bio, picture
+        FROM
+            user
+        WHERE
+            nickname LIKE #{keyword}
+    </select>
+
+    <select id="selectAllPostByKeyword" resultType="com.aidandlim.camagru.dto.Post">
         <![CDATA[
         SELECT
             p.id,
@@ -35,8 +44,7 @@
             u.nickname as user_nickname,
             u.picture as user_picture,
             (SELECT COUNT(*) FROM reflection WHERE post_id = p.id) as num_likes,
-            (SELECT COUNT(*) FROM comment WHERE post_id = p.id) as num_comments,
-            (SELECT COUNT(*) FROM reflection WHERE post_id = p.id AND user_id = #{user_id}) as user_islike
+            (SELECT COUNT(*) FROM comment WHERE post_id = p.id) as num_comments
         FROM
             post as p
         LEFT JOIN
@@ -46,7 +54,11 @@
         WHERE
             u.isPrivate = 0
             AND
-            u.nickname LIKE '%''%'
+            (
+            u.nickname LIKE #{keyword}
+            OR
+            p.content LIKE #{keyword}
+            )
         ORDER BY p.id DESC
         ]]>
     </select>

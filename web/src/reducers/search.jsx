@@ -1,7 +1,9 @@
 const search = {
     user: {},
     keyword: '',
-    users: []
+    users: [],
+    posts: [],
+    type: 0,
 }
 
 const searchReducer = (state = search, action) => {
@@ -17,6 +19,14 @@ const searchReducer = (state = search, action) => {
         case 'SEARCH_USERS':
             return Object.assign({}, state, {
                 users: action.payload
+            });
+        case 'SEARCH_POSTS':
+            return Object.assign({}, state, {
+                posts: action.payload
+            });
+        case 'SEARCH_TYPE':
+            return Object.assign({}, state, {
+                type: action.payload
             });
         default:
             return state;

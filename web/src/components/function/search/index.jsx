@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { search_keyword } from '../../../actions';
+import { search_keyword, search_users } from '../../../actions';
 
 import './index.css';
 
@@ -15,7 +15,7 @@ const Search = () => {
 
 	const _handleForm = (e) => {
 		e.preventDefault();
-		console.log(document.search.keyword.value);
+		dispatch(search_users([1,  2, 3]));
 	}
 
 	return (
@@ -29,3 +29,4 @@ const Search = () => {
 }
 
 export default Search;
+

@@ -143,3 +143,19 @@ export const search_users = (value) => {
         payload: value
     };
 };
+
+export const search_posts = (value) => {
+    return {
+        type: 'SEARCH_POSTS',
+        payload: value
+    };
+};
+
+export const search_type = (value) => {
+    return {
+        type: 'SEARCH_TYPE',
+        payload: value
+    };
+};
+
+/***************************************************/

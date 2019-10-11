@@ -18,4 +18,37 @@
             id = #{id}
     </select>
 
+    <select id="selectPostByKeyword" resultType="com.aidandlim.camagru.dto.Post">
+        <![CDATA[
+        SELECT
+            p.id,
+            p.picture,
+            p.rotate,
+            p.content,
+            p.location,
+            p.together,
+            CASE
+                WHEN p.time > DATE_ADD(NOW(), INTERVAL-1 HOUR) THEN CONCAT(MINUTE(TIMEDIFF(NOW(), p.time)), ' MINUTES AGO')
+                WHEN p.time > DATE_ADD(NOW(), INTERVAL-24 HOUR) THEN CONCAT(HOUR(TIMEDIFF(NOW(), p.time)), ' HOURS AGO')
+                ELSE CONCAT(DATEDIFF(NOW(), p.time), ' DAYS AGO') END as post_time,
+            u.id as user_id,
+            u.nickname as user_nickname,
+            u.picture as user_picture,
+            (SELECT COUNT(*) FROM reflection WHERE post_id = p.id) as num_likes,
+            (SELECT COUNT(*) FROM comment WHERE post_id = p.id) as num_comments,
+            (SELECT COUNT(*) FROM reflection WHERE post_id = p.id AND user_id = #{user_id}) as user_islike
+        FROM
+            post as p
+        LEFT JOIN
+            user as u
+        ON
+            p.user_id = u.id
+        WHERE
+            u.isPrivate = 0
+            AND
+            u.nickname LIKE '%''%'
+        ORDER BY p.id DESC
+        ]]>
+    </select>
+
 </mapper>

@@ -6,7 +6,7 @@ import { ui_nav, content_post, search_user } from '../../../actions';
 import axios from 'axios';
 
 import { confirmAlert } from 'react-confirm-alert';
-import default_user from '../../../resources/default_user.jpg';
+import default_user from '../../../resources/default_user.png';
 import './index.css';
 
 const Message = (props) => {

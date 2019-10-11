@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import Album from '../album';
 
 import { FiGrid, FiHeart, FiMessageSquare, FiAlertCircle, FiLock } from 'react-icons/fi';
-import default_user from '../../../resources/default_user.jpg';
+import default_user from '../../../resources/default_user.png';
 import './index.css';
 
 const Mypage = () => {

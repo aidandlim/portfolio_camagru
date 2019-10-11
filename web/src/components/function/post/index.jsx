@@ -9,7 +9,7 @@ import cookie from 'react-cookies';
 import { confirmAlert } from 'react-confirm-alert';
 import { FiHeart, FiTrash2 } from 'react-icons/fi';
 import { MdFavorite } from 'react-icons/md';
-import default_user from '../../../resources/default_user.jpg';
+import default_user from '../../../resources/default_user.png';
 import './index.css';
 
 const Post = (props) => {

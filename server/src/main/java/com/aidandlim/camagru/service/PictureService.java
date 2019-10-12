@@ -27,11 +27,9 @@ public class PictureService {
     String PATH = "/Users/aidan/Workspace/portfolio_camagru/data/picture/";
 
     public byte[] get(String uuid) {
-        System.out.println(uuid);
         try {
             return FileUtils.readFileToByteArray(new File(PATH + uuid));
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -44,7 +42,6 @@ public class PictureService {
             Files.write(path, bytes);
             return name;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -58,14 +55,17 @@ public class PictureService {
             fos.close();
             return name;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
 
     public void delete(String name) {
-        File file = new File(PATH + name);
-        file.delete();
+        try {
+            File file = new File(PATH + name);
+            file.delete();
+        } catch (Exception e) {
+            return;
+        }
     }
 
 }

@@ -38,7 +38,6 @@ public class PostService {
             postDao = sqlSession.getMapper(PostDao.class);
             return postDao.selectAll(token.getToken().equals("") ? -1 : tokenService.get(token.getToken()));
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -49,8 +48,7 @@ public class PostService {
             postDao = sqlSession.getMapper(PostDao.class);
             return postDao.selectAllByUser(user);
         } catch (Exception e) {
-            e.printStackTrace();
-            return (null);
+            return null;
         }
     }
 
@@ -63,7 +61,6 @@ public class PostService {
             dto.setComments(commentService.selectAllByPost(post));
             return dto;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -76,7 +73,6 @@ public class PostService {
             postDao.insert(post);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -89,7 +85,6 @@ public class PostService {
             postDao.delete(post);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }

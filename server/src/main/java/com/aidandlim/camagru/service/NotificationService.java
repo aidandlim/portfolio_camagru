@@ -31,8 +31,7 @@ public class NotificationService {
             notificationDao = sqlSession.getMapper(NotificationDao.class);
             return notificationDao.selectAll(tokenService.get(token.getToken()));
         } catch (Exception e) {
-            e.printStackTrace();
-            return (null);
+            return null;
         }
     }
 

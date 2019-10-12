@@ -32,10 +32,9 @@ public class SearchService {
             searchDao = sqlSession.getMapper(SearchDao.class);
             Search dto = searchDao.select(user);
             dto.setPosts(postService.selectAllByUser(user));
-            return (dto);
+            return dto;
         } catch (Exception e) {
-            e.printStackTrace();
-            return (null);
+            return null;
         }
     }
 
@@ -44,10 +43,9 @@ public class SearchService {
         try {
             searchDao = sqlSession.getMapper(SearchDao.class);
             search.setKeyword("%" + search.getKeyword()  +  "%");
-            return (searchDao.selectAllUserByKeyword(search));
+            return searchDao.selectAllUserByKeyword(search);
         } catch (Exception e) {
-            e.printStackTrace();
-            return (null);
+            return null;
         }
     }
 
@@ -56,10 +54,9 @@ public class SearchService {
         try {
             searchDao = sqlSession.getMapper(SearchDao.class);
             search.setKeyword("%" + search.getKeyword()  +  "%");
-            return (searchDao.selectAllPostByKeyword(search));
+            return searchDao.selectAllPostByKeyword(search);
         } catch (Exception e) {
-            e.printStackTrace();
-            return (null);
+            return null;
         }
     }
 

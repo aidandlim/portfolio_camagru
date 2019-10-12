@@ -16,7 +16,6 @@ public class StickerService {
         try {
             return FileUtils.readFileToByteArray(new File(PATH + uuid));
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -31,10 +30,9 @@ public class StickerService {
                 if(!files[i].getName().equals(".DS_Store"))
                     dto.add(files[i].getName());
             }
-            return (dto);
+            return dto;
         } catch (Exception e) {
-            e.printStackTrace();
-            return (null);
+            return null;
         }
     }
 

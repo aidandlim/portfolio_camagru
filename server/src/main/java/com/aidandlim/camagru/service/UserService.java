@@ -5,18 +5,11 @@ import com.aidandlim.camagru.dao.UserDao;
 import com.aidandlim.camagru.dao.VerifyDao;
 import com.aidandlim.camagru.dto.Token;
 import com.aidandlim.camagru.dto.User;
-import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Base64;
 import java.util.UUID;
 
 @Service
@@ -49,7 +42,6 @@ public class UserService {
             userDao = sqlSession.getMapper(UserDao.class);
             return userDao.select(tokenService.get(token.getToken()));
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -67,10 +59,9 @@ public class UserService {
                 verifyDao.insert(user);
             }
             userDao.update(user);
-            return (true);
+            return true;
         } catch (Exception e) {
-            e.printStackTrace();
-            return (false);
+            return false;
         }
     }
 
@@ -80,10 +71,9 @@ public class UserService {
             userDao = sqlSession.getMapper(UserDao.class);
             pictureService.delete(userDao.select(tokenService.get(token)).getPicture());
             userDao.updatePicture(pictureService.uploadWithFile(file), tokenService.get(token));
-            return (true);
+            return true;
         } catch (Exception e) {
-            e.printStackTrace();
-            return (false);
+            return false;
         }
     }
 
@@ -93,12 +83,11 @@ public class UserService {
             authDao = sqlSession.getMapper(AuthDao.class);
             userDao = sqlSession.getMapper(UserDao.class);
             if(authDao.signin(user) == null)
-                return (false);
+                return false;
             userDao.updatePassword(user);
-            return (true);
+            return true;
         } catch (Exception e) {
-            e.printStackTrace();
-            return (false);
+            return false;
         }
     }
 
@@ -107,10 +96,9 @@ public class UserService {
         try {
             userDao = sqlSession.getMapper(UserDao.class);
             userDao.updatePrivate(user);
-            return (true);
+            return true;
         } catch (Exception e) {
-            e.printStackTrace();
-            return (false);
+            return false;
         }
     }
 
@@ -119,10 +107,9 @@ public class UserService {
         try {
             userDao = sqlSession.getMapper(UserDao.class);
             userDao.updateNotificate(user);
-            return (true);
+            return true;
         } catch (Exception e) {
-            e.printStackTrace();
-            return (false);
+            return false;
         }
     }
 
@@ -131,10 +118,9 @@ public class UserService {
         try {
             userDao = sqlSession.getMapper(UserDao.class);
             userDao.delete(user);
-            return (true);
+            return true;
         } catch (Exception e) {
-            e.printStackTrace();
-            return (false);
+            return false;
         }
     }
 

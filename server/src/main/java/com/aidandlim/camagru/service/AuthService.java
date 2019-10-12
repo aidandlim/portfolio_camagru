@@ -41,7 +41,6 @@ public class AuthService {
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -57,7 +56,6 @@ public class AuthService {
                 return new Token(0);
             }
         } catch (Exception e) {
-            e.printStackTrace();
             return new Token(0);
         }
     }
@@ -67,15 +65,12 @@ public class AuthService {
         try {
             authDao = sqlSession.getMapper(AuthDao.class);
             verifyDao = sqlSession.getMapper(VerifyDao.class);
-
             authDao.signup(user);
             user.setUuid(UUID.randomUUID().toString().replace("-", ""));
             mailService.sendVerifyMail(user);
             verifyDao.insert(user);
-
             return true;
         } catch(Exception e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -84,7 +79,6 @@ public class AuthService {
     public String verify(User user) {
         try {
             verifyDao = sqlSession.getMapper(VerifyDao.class);
-
             if(verifyDao.select(user).getUuid().equals(user.getUuid())) {
                 verifyDao.update(user);
                 verifyDao.delete(user);
@@ -93,7 +87,6 @@ public class AuthService {
             }
             return "Success";
         } catch(Exception e) {
-            e.printStackTrace();
             return "Fail";
         }
     }
@@ -108,7 +101,6 @@ public class AuthService {
             verifyDao.insert(user);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -123,7 +115,6 @@ public class AuthService {
             mailService.sendForgotMail(user);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }

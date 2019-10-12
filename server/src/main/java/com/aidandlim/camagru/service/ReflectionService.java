@@ -3,7 +3,6 @@ package com.aidandlim.camagru.service;
 import com.aidandlim.camagru.dao.ReflectionDao;
 import com.aidandlim.camagru.dto.Post;
 import com.aidandlim.camagru.dto.Reflection;
-import com.aidandlim.camagru.dto.Token;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +31,6 @@ public class ReflectionService {
             reflectionDao = sqlSession.getMapper(ReflectionDao.class);
             return reflectionDao.selectAllByPost(post);
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -50,7 +48,6 @@ public class ReflectionService {
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -64,7 +61,6 @@ public class ReflectionService {
             reflectionDao.delete(reflection);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }

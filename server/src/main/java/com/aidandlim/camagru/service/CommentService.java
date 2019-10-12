@@ -3,7 +3,6 @@ package com.aidandlim.camagru.service;
 import com.aidandlim.camagru.dao.CommentDao;
 import com.aidandlim.camagru.dto.Comment;
 import com.aidandlim.camagru.dto.Post;
-import com.aidandlim.camagru.dto.Token;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,8 +31,7 @@ public class CommentService {
             commentDao = sqlSession.getMapper(CommentDao.class);
             return commentDao.selectAllByPost(post);
         } catch (Exception e) {
-            e.printStackTrace();
-            return (null);
+            return null;
         }
     }
 
@@ -44,7 +42,6 @@ public class CommentService {
             commentDao.insert(comment);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -56,7 +53,6 @@ public class CommentService {
             commentDao.delete(comment);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }

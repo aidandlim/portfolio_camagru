@@ -82,18 +82,6 @@ public class PostService {
     }
 
     @Transactional
-    public boolean update(Post post) {
-        try {
-            postDao = sqlSession.getMapper(PostDao.class);
-            postDao.update(post);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    @Transactional
     public boolean delete(Post post) {
         try {
             postDao = sqlSession.getMapper(PostDao.class);

@@ -84,17 +84,6 @@
             (#{user_id}, #{picture}, #{rotate}, #{content}, #{location}, #{together})
     </insert>
 
-    <update id="update">
-        UPDATE
-            post
-        SET
-            content = #{content},
-            location = #{location},
-            together = #{together}
-        WHERE
-            id = #{id}
-    </update>
-
     <delete id="delete">
         DELETE FROM
             post

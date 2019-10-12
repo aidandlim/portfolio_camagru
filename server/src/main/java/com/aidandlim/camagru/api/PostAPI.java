@@ -29,9 +29,6 @@ public class PostAPI {
     @RequestMapping("/api/post/insert")
     public boolean insert(@RequestBody Post post) { return (service.insert(post)); }
 
-    @RequestMapping("/api/post/update")
-    public boolean update(@RequestBody Post post) { return (service.update(post)); }
-
     @RequestMapping("/api/post/delete")
     public boolean delete(@RequestBody Post post) { return (service.delete(post)); }
 

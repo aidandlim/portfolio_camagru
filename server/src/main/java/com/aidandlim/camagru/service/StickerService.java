@@ -24,9 +24,9 @@ public class StickerService {
     @Transactional
     public ArrayList<String> selectAll() {
         try {
-            File dir = new File("/Users/aidan/Workspace/portfolio_camagru/data/sticker/");
+            File dir = new File(PATH);
             File[] files = dir.listFiles();
-            ArrayList<String> dto = new ArrayList<String>();
+            ArrayList<String> dto = new ArrayList<>();
             for(int i = 0; i < files.length; i++) {
                 if(!files[i].getName().equals(".DS_Store"))
                     dto.add(files[i].getName());

@@ -13,7 +13,6 @@ public interface PostDao {
     ArrayList<Post> selectAllByUser(User user);
     Post select(Post post);
     void insert(Post post);
-    void update(Post post);
     void delete(Post post);
 
 }

@@ -43,29 +43,40 @@ const Camera = () => {
 	}
 
 	const _handleForm = () => {
-		axios.post('/post/insert', {
-			token: auth.token,
-			user_id: user.user.id,
-			picture: camera.preview.replace('data:image/jpeg;base64,', ''),
-			rotate: camera.rotate,
-			content: document.camera.content.value,
-			location: document.camera.location.value,
-			together: document.camera.together.value,
-		})
-		.then(res => {
-			if(res.data) {
-				dispatch(ui_nav(0));
-			} else {
-				confirmAlert({
-					message: 'It seems like email or password information is wrong',
-					buttons: [
-						{
-							label: 'Okay'
-						}
-					]
-				});
-			}
-		});
+		if(camera.preview === '') {
+			confirmAlert({
+				message: 'It needs to be choosen picture first',
+				buttons: [
+					{
+						label: 'Okay'
+					}
+				]
+			});
+		} else {
+			axios.post('/post/insert', {
+				token: auth.token,
+				user_id: user.user.id,
+				picture: camera.preview.replace('data:image/jpeg;base64,', ''),
+				rotate: camera.rotate,
+				content: document.camera.content.value,
+				location: document.camera.location.value,
+				together: document.camera.together.value,
+			})
+			.then(res => {
+				if(res.data) {
+					dispatch(ui_nav(0));
+				} else {
+					confirmAlert({
+						message: 'It seems like email or password information is wrong',
+						buttons: [
+							{
+								label: 'Okay'
+							}
+						]
+					});
+				}
+			});
+		}
 	}
 
 	const _handleFileUpload = () => {

@@ -17,9 +17,6 @@ public class UserAPI {
     @Autowired
     UserService service;
 
-    @Autowired
-    PictureService pictureService;
-
     @RequestMapping("/api/user/select")
     public User select(@RequestBody Token token) { return (service.select(token)); }
 

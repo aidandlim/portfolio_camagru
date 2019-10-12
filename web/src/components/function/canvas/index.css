@@ -1,0 +1,22 @@
+.canvas {
+    width: 30rem;
+    height: 30rem;
+
+    position: absolute;
+    top: 3.5rem;
+    left: 0;
+
+    z-index: 4;
+}
+
+.canvas-sticker {
+    width: 3rem;
+    height: 3rem;
+
+    position: absolute;
+    top: calc(50% - 1.5rem);
+    left: calc(50% - 1.5rem);
+
+    background-size: cover;
+    background-position: center;
+}

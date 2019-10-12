@@ -16,6 +16,8 @@
     object-fit: cover;
 
     cursor: pointer;
+
+    z-index: 3;
 }
 
 .preview-rollback {
@@ -35,7 +37,7 @@
 
     cursor: pointer;
 
-    z-index: 2;
+    z-index: 5;
 }
 
 .preview-filter {
@@ -51,7 +53,7 @@
     border: solid #404040 1px;
     border-radius: 0.5rem;
 
-    z-index: 3;
+    z-index: 6;
 }
 
 .preview-filter-1 {
@@ -82,7 +84,7 @@
 
     opacity: 0.85;
 
-    z-index: 2;
+    z-index: 5;
 }
 
 .preview-upload {
@@ -118,5 +120,5 @@
 
     opacity: 0.85;
 
-    z-index: 3;
+    z-index: 5;
 }

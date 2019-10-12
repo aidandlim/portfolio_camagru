@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.*;
 public class PictureAPI {
 
     @Autowired
-    PictureService pictureService;
+    PictureService service;
 
     @RequestMapping("/api/picture")
-    public @ResponseBody byte[] picture(@RequestParam("p") String picture) { return (pictureService.get(picture)); }
+    public @ResponseBody byte[] picture(@RequestParam("p") String picture) { return (service.get(picture)); }
 
 }

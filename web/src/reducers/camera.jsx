@@ -1,9 +1,11 @@
 const camera = {
     isLoad: true,
     images: [],
+    inputs: [],
     preview: '',
     rotate: 0,
     filter: 0,
+    stickers: [],
 }
 
 const cameraReducer = (state = camera, action) => {
@@ -16,6 +18,10 @@ const cameraReducer = (state = camera, action) => {
             return Object.assign({}, state, {
                 images: action.payload
             });
+        case 'CAMERA_INPUTS':
+            return Object.assign({}, state, {
+                inputs: action.payload
+            });
         case 'CAMERA_PREVIEW':
             return Object.assign({}, state, {
                 preview: action.payload
@@ -27,6 +33,10 @@ const cameraReducer = (state = camera, action) => {
         case 'CAMERA_FILTER':
             return Object.assign({}, state, {
                 filter: action.payload
+            });
+        case 'CAMERA_STICKERS':
+            return Object.assign({}, state, {
+                stickers: action.payload
             });
         default:
             return state;

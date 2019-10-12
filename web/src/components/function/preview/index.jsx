@@ -10,7 +10,7 @@ const Preview = () => {
 	const camera = useSelector(state => state.camera);
 	const dispatch = useDispatch();
 
-	const images = camera.images;
+	let images = camera.images;
 	const preview = camera.preview;
 	const filter = camera.filter;
 	const rotate = camera.rotate;
@@ -23,7 +23,7 @@ const Preview = () => {
 
 	const _handleDeleteImage = (name) => {
 		for(let i = 0; i < images.length; i++) {
-			if(images[i] === name) {
+			if(images[i].data === name) {
 				images.splice(i, 1);
 				break;
 			}

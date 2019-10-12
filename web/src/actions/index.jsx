@@ -66,6 +66,13 @@ export const camera_images = (value) => {
     };
 };
 
+export const camera_inputs = (value) => {
+    return {
+        type: 'CAMERA_INPUTS',
+        payload: value
+    };
+};
+
 export const camera_preview = (value) => {
     return {
         type: 'CAMERA_PREVIEW',
@@ -83,6 +90,13 @@ export const camera_rotate = (value) => {
 export const camera_filter = (value) => {
     return {
         type: 'CAMERA_FILTER',
+        payload: value
+    };
+};
+
+export const camera_stickers = (value) => {
+    return {
+        type: 'CAMERA_STICKERS',
         payload: value
     };
 };

@@ -9,6 +9,8 @@ import Webcam from 'react-webcam';
 import Loadcam from '../loadcam';
 import Gallery from '../gallery';
 import Preview from '../preview';
+import Sticker from '../sticker';
+import Canvas from '../canvas';
 
 import { confirmAlert } from 'react-confirm-alert';
 import { FiHeart, FiTrash2, FiUpload } from 'react-icons/fi';
@@ -118,12 +120,14 @@ const Camera = () => {
 						{ camera.isLoad ? <Loadcam /> : '' }
 						{ !camera.isLoad && camera.preview === '' ? <div className='camera-shoot' onClick={ () => _handleCapture() }></div> : '' }
 						{ !camera.isLoad && camera.preview !== '' ? <Preview /> : '' }
+						{ !camera.isLoad && camera.preview !== '' ? <Canvas /> : '' }
 						<div className='camera-margin'>
 							<FiUpload className='camera-icon' onClick={ () => document.getElementById('file').click() } />	
 							<input id='file' type='file' onChange={ () => _handleFileUpload() } style={{ display: 'none'}}></input>
 							<FiTrash2 className='camera-icon' onClick={ () => _handleDeleteAll() }/>
 						</div>
 						<Gallery />
+						{ !camera.isLoad && camera.preview !== '' ? <Sticker /> : '' }
 						<div className='post-reflect-container'>
 							<FiHeart className='camera-icon-wide' />
 							<textarea className='post-comment-box' id='camera-comment-box' name='content' placeholder='Add a comment...' onChange={ () => _handleTextareaSize() }></textarea>

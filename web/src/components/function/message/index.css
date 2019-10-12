@@ -8,8 +8,6 @@
 
     background-color: #303030;
     border: solid #404040 1px;
-
-    cursor: pointer;
 }
 
 .message-profile {
@@ -25,6 +23,8 @@
     
     border: solid 1px #404040;
     border-radius: 50%;
+
+    cursor: pointer;
 }
 
 .message-author {
@@ -41,6 +41,8 @@
     line-height: 3rem;
 
     opacity: 0.5;
+
+    cursor: pointer;
 }
 
 .message-content {
@@ -56,6 +58,8 @@
     line-height: 3rem;
 
     opacity: 0.25;
+
+    cursor: pointer;
 }
 
 .message-time {
@@ -73,4 +77,6 @@
     line-height: 3rem;
 
     opacity: 0.35;
+
+    cursor: pointer;
 }

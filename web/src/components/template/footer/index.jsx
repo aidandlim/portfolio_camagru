@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, camera_isload, camera_preview, content_post, notification_content, post_posts } from '../../../actions';
+import { ui_nav, camera_isload, camera_preview, content_post, camera_stickers, notification_content, post_posts } from '../../../actions';
 
 import axios from 'axios';
 
@@ -22,9 +22,15 @@ const Footer = () => {
 
 	const _handleCamera = () => {
 		if(auth.token !== '') {
-			dispatch(ui_nav(3));
-			dispatch(camera_isload(true));
-			dispatch(camera_preview(''));
+			axios.post('sticker/selectAll', {
+				
+			})
+			.then(res => {
+				dispatch(ui_nav(3));
+				dispatch(camera_isload(true));
+				dispatch(camera_preview(''));
+				dispatch(camera_stickers(res.data));
+			})
 		} else {
 			confirmAlert({
 				message: 'This feature needs to be signed in first',

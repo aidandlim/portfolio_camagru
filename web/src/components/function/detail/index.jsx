@@ -9,7 +9,7 @@ import Likes from '../likes';
 import Comments from '../comments';
 
 import { confirmAlert } from 'react-confirm-alert';
-import { FiArrowLeftCircle, FiHeart, FiTrash2 } from 'react-icons/fi';
+import { FiHeart, FiTrash2 } from 'react-icons/fi';
 import { MdFavorite } from 'react-icons/md';
 import './index.css';
 
@@ -186,7 +186,6 @@ const Detail = () => {
 
 	return (
 		<div className='detail'>
-			<FiArrowLeftCircle className='detail-rollback' onClick={ () => dispatch(ui_nav(0)) } />
 			<div className='inner-container'>
 				<div className='detail-post'>
 					<div className='post-profile' style={{ 

@@ -14,21 +14,6 @@
     z-index: 3;
 }
 
-.detail-rollback {
-    width: 2rem;
-    height: 2rem;
-
-    position: absolute;
-    top: calc(50% - 1rem);
-    left: calc(50% - 18rem);
-
-    color: white;
-    
-    opacity: 0.25;
-
-    cursor: pointer;
-}
-
 .detail-post {
     width: 30rem;
     height: auto;

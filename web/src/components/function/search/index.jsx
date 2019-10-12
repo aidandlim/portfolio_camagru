@@ -3,11 +3,14 @@ import React from 'react';
 import axios from 'axios';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { search_keyword, search_type, search_users, search_posts} from '../../../actions';
+import { ui_nav, search_keyword, search_type, search_users, search_posts, search_user, content_post} from '../../../actions';
 
+import { confirmAlert } from 'react-confirm-alert';
+import default_user from '../../../resources/default_user.png';
 import './index.css';
 
 const Search = () => {
+	const auth = useSelector(state => state.auth);
 	const search = useSelector(state => state.search);
 	const dispatch = useDispatch();
 	
@@ -16,33 +19,69 @@ const Search = () => {
 	}
 
 	const _handleSearchType = (type) => {
-		axios.post(type ? '/search/selectAllPostByKeyword' : '/search/selectAllUserByKeyword', {
-			keyword: search.keyword
-		})
-		.then(res => {
-			if(type) {
-				dispatch(search_posts(res.data));
-				dispatch(search_users([]));
-			} else {
-				dispatch(search_users(res.data));
-				dispatch(search_posts([]));
-			}
-			dispatch(search_type(type));
-		});
+		if(search.keyword !== '') {
+			axios.post(type ? '/search/selectAllPostByKeyword' : '/search/selectAllUserByKeyword', {
+				keyword: search.keyword
+			})
+			.then(res => {
+				if(type) {
+					dispatch(search_posts(res.data));
+					dispatch(search_users([]));
+				} else {
+					dispatch(search_users(res.data));
+					dispatch(search_posts([]));
+				}
+				dispatch(search_type(type));
+			});
+		}
 	}
 
 	const _handleForm = (e) => {
 		e.preventDefault();
-		axios.post(search.type ? '/search/selectAllPostByKeyword' : '/search/selectAllUserByKeyword', {
-			keyword: search.keyword
+		if(search.keyword !== '') {
+			axios.post(search.type ? '/search/selectAllPostByKeyword' : '/search/selectAllUserByKeyword', {
+				keyword: search.keyword
+			})
+			.then(res => {
+				if(search.type) {
+					dispatch(search_posts(res.data));
+					dispatch(search_users([]));
+				} else {
+					dispatch(search_users(res.data));
+					dispatch(search_posts([]));
+				}
+			});
+		}
+	}
+
+	const _handleDetail = (id) => {
+		axios.post('/post/select', {
+			token: auth.token,
+			id: id,
 		})
 		.then(res => {
-			if(search.type) {
-				dispatch(search_posts(res.data));
-				dispatch(search_users([]));
+			dispatch(content_post(res.data));
+			dispatch(ui_nav(6));
+		});
+	}
+
+	const _handleProfilePage = (id) => {
+		axios.post('/search/select', {
+			id: id
+		})
+		.then(res => {
+			if(res.data !== null) {
+				dispatch(search_user(res.data));
+				dispatch(ui_nav(5));
 			} else {
-				dispatch(search_users(res.data));
-				dispatch(search_posts([]));
+				confirmAlert({
+					message: 'Something went wrong :(',
+					buttons: [
+						{
+							label: 'I will try again'
+						}
+					]
+				});
 			}
 		});
 	}
@@ -55,9 +94,27 @@ const Search = () => {
 						<div className={search.type ? 'search-button' : 'search-button search-button-active'} onClick={ () => _handleSearchType(0) }>USERS</div>
 						<div className={search.type ? 'search-button search-button-active' : 'search-button'} onClick={ () => _handleSearchType(1) }>POSTS</div>
 					</div>
-					<input className='search-input' type='text' name='keyword' placeholder='Search...' onChange={ (e) => _handleSearchKeyword(e) } autoFocus />
+					<input className='search-input' type='text' name='keyword' placeholder='Search...' value={search.keyword} onChange={ (e) => _handleSearchKeyword(e) } autoFocus />
 					{ search.users.length === 0 && search.posts.length === 0 ? <p className='search-info'>Press enter to search for users & posts</p> : ''}
 				</form>
+				{ search.type === 0 ? search.users.map((user, index) => 
+					<div className='search-user-container' key={index} onClick={ () => _handleProfilePage(user.id) }>
+						<div className='search-user-profile'  style={
+							user.picture === null
+							?
+							{ backgroundImage: 'url(\'' + default_user + '\')' }
+							:
+							{ backgroundImage: 'url(\'/picture?p=' + user.picture + '\')' }
+						}></div>
+						<div className='search-user-nickname'>@{user.nickname}</div>
+						<div className='search-user-bio'>{user.bio}</div>
+					</div>
+				) : ''}
+				<div className='search-post-container'>
+					{ search.type === 1 ? search.posts.map((post, index) => 
+						<div className={post.rotate ? 'search-post rotate' : 'search-post'} style={{ backgroundImage: 'url(\'/picture?p=' + post.picture + '\')' }} key={index} onClick={ () => _handleDetail(post.id) }></div>
+					) : ''}
+				</div>
 			</div>
 		</div>
 	);

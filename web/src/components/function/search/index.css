@@ -17,15 +17,15 @@
 .search-button-container {
     width: 6rem;
     height: 2rem;
-    margin: 1rem 0 0 0;
+    margin: 1rem 0;
 
     position: relative;
     float: left;
 
+    background-color: #303030;
     border-top: solid 0.05rem #404040;
     border-left: solid 0.05rem #404040;
     border-bottom: solid 0.05rem #404040;
-    border-radius: 1rem 0 0 1rem;
 }
 
 .search-button {
@@ -41,7 +41,7 @@
     font-weight: 500;
     text-align: center;
     line-height: 0.99rem;
-    border: solid 0.05rem #404040;
+    border: solid 0.05rem #606060;
 
     opacity: 0.5;
 
@@ -66,7 +66,7 @@
 .search-input {
     width: 22.9rem;
     height: 2rem;
-    margin: 1rem 0 0 0;
+    margin: 1rem 0;
     padding: 0 0.5rem;
 
     position: relative;
@@ -75,12 +75,11 @@
     color: white;
     font-size: 0.7rem;
     font-weight: 700;
-    background: none;
+    background-color: #303030;
     border: none;
     border-top: solid 0.05rem #404040;
     border-right: solid 0.05rem #404040;
     border-bottom: solid 0.05rem #404040;
-    border-radius: 0 1rem 1rem 0;
 
     cursor: pointer;
     outline: none;
@@ -105,4 +104,105 @@
 
     cursor: pointer;
     outline: none;
+}
+
+.search-user-container {
+    width: 100%;
+    height: 3rem;
+    margin: 0 0 1rem 0;
+
+    position: relative;
+    float: left;
+
+    border: solid 0.05rem #404040;
+
+    cursor: pointer;
+}
+
+.search-user-profile {
+    width: 1.9rem;
+    height: 1.9rem;
+    margin: 0.5rem;
+
+    position: relative;
+    float: left;
+
+    background-size: cover;
+    background-position: center;
+
+    border: solid 0.05rem #404040;
+    border-radius: 50%;
+}
+
+.search-user-nickname {
+    width: auto;
+    max-width: 10rem;
+    height: 3rem;
+    margin: 0 0 0 0.5rem;
+
+    position: relative;
+    float: left;
+
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 900;
+    line-height: 2.9rem;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    opacity: 0.75;
+}
+
+.search-user-bio {
+    width: auto;
+    max-width: 10rem;
+    height: 3rem;
+
+    margin: 0 0 0 1rem;
+
+    position: relative;
+    float: left;
+
+    color: white;
+    font-size: 0.6rem;
+    font-weight: 700;
+    line-height: 3.1rem;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    opacity: 0.5;
+}
+
+.search-post-container {
+    width: 100%;
+    height: auto;
+
+    position: relative;
+    float: left;
+}
+
+.search-post {
+    width: calc(9.66rem - 2px);
+    height: calc(9.66rem - 2px);
+    margin: 0 0.5rem 0.5rem 0;
+
+    position: relative;
+    float: left;
+
+    object-fit: cover;
+
+    background-size: cover;
+    background-position: center;
+
+    border: solid 1px #404040;
+
+    cursor: pointer;
+}
+
+.search-post:nth-child(3n) {
+    margin-right: 0;
 }

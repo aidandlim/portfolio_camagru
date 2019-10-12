@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { camera_preview, camera_rotate, camera_filter } from '../../../actions';
+import { camera_preview, camera_rotate, camera_filter, camera_inputs } from '../../../actions';
 
 import './index.css';
 
@@ -15,6 +15,7 @@ const Gallery = () => {
 	const _handleChoose = (i) => {
 		dispatch(camera_preview(images[i].data));
 		dispatch(camera_rotate(images[i].rotate));
+		dispatch(camera_inputs([]));
 		dispatch(camera_filter(0));
 	}
 

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 @Service
 public class StickerService {
 
-    String PATH = "/Users/aidan/Workspace/portfolio_camagru/sticker/";
+    String PATH = "/Users/aidan/Workspace/portfolio_camagru/data/sticker/";
 
     public byte[] get(String uuid) {
         try {
@@ -24,11 +24,12 @@ public class StickerService {
     @Transactional
     public ArrayList<String> selectAll() {
         try {
-            File dir = new File("/Users/aidan/Workspace/portfolio_camagru/sticker/");
+            File dir = new File("/Users/aidan/Workspace/portfolio_camagru/data/sticker/");
             File[] files = dir.listFiles();
             ArrayList<String> dto = new ArrayList<String>();
             for(int i = 0; i < files.length; i++) {
-                dto.add(files[i].getName());
+                if(!files[i].getName().equals(".DS_Store"))
+                    dto.add(files[i].getName());
             }
             return (dto);
         } catch (Exception e) {

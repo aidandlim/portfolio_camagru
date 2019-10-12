@@ -1,0 +1,22 @@
+.sticker {
+    width: calc(100% - 1rem);
+    height: 2rem;
+    padding: 0.5rem;
+    overflow-y: scroll;
+
+    position: relative;
+    float: left;
+
+    border-bottom: solid #404040 1px;
+}
+
+.sticker-image {
+    width: 5%;
+    height: 1.5rem;
+
+    position: relative;
+    float: left;
+
+    background-size: cover;
+    background-position: center;
+}

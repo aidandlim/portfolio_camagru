@@ -24,7 +24,7 @@ public class PictureService {
     @Autowired
     TokenService tokenService;
 
-    String PATH = "/Users/aidan/Workspace/portfolio_camagru/static/";
+    String PATH = "/Users/aidan/Workspace/portfolio_camagru/data/picture/";
 
     public byte[] get(String uuid) {
         try {

@@ -33,6 +33,8 @@ const Search = () => {
 				}
 				dispatch(search_type(type));
 			});
+		} else {
+			dispatch(search_type(type));
 		}
 	}
 

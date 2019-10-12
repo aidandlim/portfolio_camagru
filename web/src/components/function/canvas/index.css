@@ -1,6 +1,7 @@
 .canvas {
     width: 30rem;
     height: 30rem;
+    overflow: hidden;
 
     position: absolute;
     top: 3.5rem;
@@ -10,12 +11,12 @@
 }
 
 .canvas-sticker {
-    width: 3rem;
-    height: 3rem;
+    width: 5rem;
+    height: 5rem;
 
     position: absolute;
-    top: calc(50% - 1.5rem);
-    left: calc(50% - 1.5rem);
+    top: 0;
+    left: 0;
 
     background-size: cover;
     background-position: center;

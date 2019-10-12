@@ -1,16 +1,43 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { camera_inputs } from '../../../actions';
 
 import './index.css';
 
 const Canvas = () => {
 	const camera = useSelector(state => state.camera);
+	const dispatch = useDispatch();
+
+	var absoluteX = 0;
+	var absoluteY = 0;
+
+	const _handleDrag = (e) => {
+		absoluteX = !absoluteX ? e.clientX : absoluteX;
+		absoluteY = !absoluteY ? e.clientY + document.getElementById('camera').scrollTop : absoluteY;
+		e.target.style.left = e.clientX - absoluteX + 'px';
+		e.target.style.top = e.clientY - absoluteY + document.getElementById('camera').scrollTop + 'px';
+	}
+
+	const _handleRemove = (index) => {
+		var inputs = camera.inputs;
+		inputs[index] = '';
+		dispatch(camera_inputs(inputs));
+	}
+
+	document.addEventListener("dragover", function(event) {
+		event.preventDefault();
+	}, false);
+
+	document.addEventListener("dragstart", function(event) {
+		var img = document.createElement("img");
+		event.dataTransfer.setDragImage(img, 0, 0);
+	}, false);
 
 	return (
 		<div className='canvas'>
 			{camera.inputs.map((input, index) =>
-				<div className='canvas-sticker' style={{ backgroundImage: 'url(\'/sticker?s=' + input + '\')'}} key={index}></div>	
+				<div className='canvas-sticker' style={{ backgroundImage: 'url(\'/sticker?s=' + input + '\')'}} key={index} onDrag={_handleDrag} onDoubleClick={() => _handleRemove(index)} draggable></div>	
 			)}
 		</div>
 	);

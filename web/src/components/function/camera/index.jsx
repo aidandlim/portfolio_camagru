@@ -93,7 +93,7 @@ const Camera = () => {
 	}
 
 	return (
-		<div className='camera'>
+		<div id='camera' className='camera'>
 			<div className='inner-container'>
 				<div className='camera-post'>
 					<div className='post-profile' style={

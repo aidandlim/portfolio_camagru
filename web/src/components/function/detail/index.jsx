@@ -45,6 +45,7 @@ const Detail = () => {
 			posts.likes.push({
 				id: new Date().getMilliseconds(),
 				user_id: user.user.id,
+				user_nickname: user.user.nickname,
 				user_picture: user.user.picture
 			});
 		}
@@ -94,6 +95,7 @@ const Detail = () => {
 			id: new Date().getMilliseconds(),
 			user_id: user.user.id,
 			user_picture: user.user.picture,
+			user_nickname: user.user.nickname,
 			content: document.getElementById('detail-comment-box-' + content.post.id).value,
 		});
 		dispatch(content_post(posts));

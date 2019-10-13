@@ -1,6 +1,5 @@
 package com.aidandlim.camagru.service;
 
-import com.aidandlim.camagru.dao.UserDao;
 import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.tomcat.util.codec.binary.Base64;

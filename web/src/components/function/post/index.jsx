@@ -41,6 +41,7 @@ const Post = (props) => {
 		axios.post('/reflection/insert', {
 			token: auth.token,
 			user_id: user.user.id,
+			user_nickname: user.user.nickname,
 			post_id: props.data.id,
 		})
 		.then(res => {
@@ -86,6 +87,7 @@ const Post = (props) => {
 		axios.post('/comment/insert', {
 			token: auth.token,
 			user_id: user.user.id,
+			user_nickname: user.user.nickname,
 			post_id: props.data.id,
 			content: document.getElementById('post-comment-box-' + props.data.id).value,
 		})

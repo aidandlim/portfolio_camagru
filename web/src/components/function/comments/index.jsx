@@ -1,14 +1,18 @@
 import React from 'react';
 
-import { useDispatch } from 'react-redux';
-import { ui_nav, search_user } from '../../../actions';
+import { useSelector, useDispatch } from 'react-redux';
+import { ui_nav, auth_token, user_user, user_biotemp, search_user, post_posts } from '../../../actions';
 
 import axios from 'axios';
+import cookie from 'react-cookies';
 
+import { confirmAlert } from 'react-confirm-alert';
 import default_user from '../../../resources/default_user.png';
 import './index.css';
 
 const Comments = (props) => {
+	const auth = useSelector(state => state.auth);
+	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
 
 	const _handleProfilePage = () => {
@@ -19,6 +23,72 @@ const Comments = (props) => {
 			if(res.data !== null) {
 				dispatch(search_user(res.data));
 				dispatch(ui_nav(5));
+			}
+		});
+	}
+
+	const _handleCommentsDelete = (id) => {
+		if(props.comment.user_id === user.user.id) {
+			confirmAlert({
+				message: 'Are you sure to delete your post?',
+				buttons: [
+					{
+						label: 'Yes',
+						onClick: () => _processDeleteComment(id)
+					},
+					{
+						label: 'No'
+					}
+				]
+			});
+		} else {
+			confirmAlert({
+				message: 'This feature is only available to owner',
+				buttons: [
+					{
+						label: 'Okay'
+					}
+				]
+			});
+		}
+	}
+
+	const _processDeleteComment = (id) => {
+		if(auth.token === '') {
+			confirmAlert({
+				message: 'This feature needs to be signed in first!',
+				buttons: [
+					{
+						label: 'Okay'
+					}
+				]
+			});
+			return;
+		}
+		axios.post('/comment/delete', {
+			token: auth.token,
+			id: id
+		})
+		.then(res => {
+			if(res.data) {
+				dispatch(post_posts([]));
+				dispatch(ui_nav(0));
+			} else {
+				cookie.remove('token', { path: '/'});
+
+				dispatch(auth_token(''));
+				dispatch(user_user({}));
+				dispatch(user_biotemp(''));
+				dispatch(ui_nav(0));
+
+				confirmAlert({
+					message: 'The session is no longer valid!',
+					buttons: [
+						{
+							label: 'Okay'
+						}
+					]
+				});
 			}
 		});
 	}
@@ -34,6 +104,8 @@ const Comments = (props) => {
 					{ backgroundImage: 'url(\'/picture?p=' + props.comment.user_picture + '\')' }
 				} onClick={() => _handleProfilePage()}></div>
 				<textarea className='comments-content' style={{height: props.comment.content.split('\n').length + 'rem'}} value={props.comment.content} readOnly></textarea>
+				<div className='comment-nickname'>BY {props.comment.user_nickname}</div>
+				<div className='comment-delete' onClick={() => _handleCommentsDelete(props.comment.id)}>DELETE</div>
 			</div>
 		</div>
 	);

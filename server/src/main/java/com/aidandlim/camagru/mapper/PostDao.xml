@@ -81,6 +81,21 @@
         ]]>
     </select>
 
+    <select id="selectUserEmailByPostId" resultType="java.lang.String">
+        SELECT
+            u.email
+        FROM
+            post as p
+        LEFT JOIN
+            user as u
+        ON
+            p.user_id = u.id
+        WHERE
+            p.id = #{post_id}
+            AND
+            u.id != #{user_id}
+    </select>
+
     <insert id="insert">
         INSERT INTO post
             (user_id, picture, rotate, content, location, together)

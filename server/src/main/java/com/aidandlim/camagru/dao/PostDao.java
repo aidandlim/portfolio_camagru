@@ -12,6 +12,7 @@ public interface PostDao {
     ArrayList<Post> selectAll(long user_id, int call);
     ArrayList<Post> selectAllByUser(User user);
     Post select(Post post);
+    String selectUserEmailByPostId(long post_id, long user_id);
     void insert(Post post);
     void delete(Post post);
 

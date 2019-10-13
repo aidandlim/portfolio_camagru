@@ -42,15 +42,16 @@
 .signin-btn {
     width: 100%;
     height: 1.5rem;
+    margin-bottom: 0.5rem;
 
     position: relative;
     float: left;
 
-    color: #EEEEEE;
+    color: #212121;
     font-size: 0.5rem;
     font-weight: 700;
-    background-color: #00695C;
-    border: solid 1px #004D40;
+    background-color: #9E9E9E;
+    border: solid 1px #616161;
 
     cursor: pointer;
     outline: none;
@@ -66,7 +67,7 @@
     position: relative;
     float: left;
 
-    color: white;
+    color: #616161;
     font-size: 0.6rem;
     text-align: center;
     line-height: 1.5rem;
@@ -75,64 +76,10 @@
 }
 
 .signin > p > span {
-    color: #4DB6AC;
+    color: #9E9E9E;
     font-weight: 900;
 
     cursor: pointer;
-}
-
-.signin-or {
-    width: 100%;
-    height: 3rem;
-
-    position: relative;
-    float: left;
-
-    color: white;
-    font-size: 0.6rem;
-    font-weight: 700;
-    text-align: center;
-    line-height: 3rem;
-
-    opacity: 0.25;
-}
-
-.signin-facebook-btn {
-    width: 100%;
-    height: 1.5rem;
-
-    margin-bottom: 0.5rem;
-
-    position: relative;
-    float: left;
-
-    color: white;
-    font-size: 0.5rem;
-    text-align: center;
-    background-color: #3C5A99;
-    border: solid 1px #0D47A1;
-
-    cursor: pointer;
-    outline: none;
-}
-
-.signin-google-btn {
-    width: 100%;
-    height: 1.5rem;
-
-    margin-bottom: 0.5rem;
-
-    position: relative;
-    float: left;
-
-    color: white;
-    font-size: 0.5rem;
-    text-align: center;
-    background-color: #DB4437;
-    border: solid 1px #E53935;
-
-    cursor: pointer;
-    outline: none;
 }
 
 .signin-margin {

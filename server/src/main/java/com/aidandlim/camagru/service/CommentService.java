@@ -1,6 +1,7 @@
 package com.aidandlim.camagru.service;
 
 import com.aidandlim.camagru.dao.CommentDao;
+import com.aidandlim.camagru.dao.PostDao;
 import com.aidandlim.camagru.dto.Comment;
 import com.aidandlim.camagru.dto.Post;
 import org.apache.ibatis.session.SqlSession;
@@ -20,10 +21,16 @@ public class CommentService {
     CommentDao commentDao;
 
     @Autowired
+    PostDao postDao;
+
+    @Autowired
     TokenService tokenService;
 
     @Autowired
     PictureService pictureService;
+
+    @Autowired
+    MailService mailService;
 
     @Transactional
     public ArrayList<Comment> selectAllByPost(Post post) {
@@ -41,6 +48,7 @@ public class CommentService {
             return false;
         try {
             commentDao = sqlSession.getMapper(CommentDao.class);
+            mailService.sendNotificationMail(postDao.selectUserEmailByPostId(comment.getPost_id(), tokenService.get(comment.getToken())));
             commentDao.insert(comment);
             return true;
         } catch (Exception e) {

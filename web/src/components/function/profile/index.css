@@ -108,29 +108,11 @@
     position: relative;
     float: left;
 
-    color: #EEEEEE;
+    color: #212121;
     font-size: 0.5rem;
     font-weight: 700;
-    background-color: #00695C;
-    border: solid 1px #004D40;
-
-    cursor: pointer;
-    outline: none;
-}
-
-.profile-detail {
-    width: 100%;
-    height: 1.5rem;
-    margin-bottom: 0.75rem;
-
-    position: relative;
-    float: left;
-
-    color: #EEEEEE;
-    font-size: 0.5rem;
-    font-weight: 700;
-    background-color: #00695C;
-    border: solid 1px #004D40;
+    background-color: #9E9E9E;
+    border: solid 1px #616161;
 
     cursor: pointer;
     outline: none;
@@ -144,11 +126,11 @@
     position: relative;
     float: left;
 
-    color: #EEEEEE;
+    color: #AAAAAA;
     font-size: 0.5rem;
     font-weight: 700;
-    background-color: #546E7A;
-    border: solid 1px #455A64;
+    background-color: #444444;
+    border: solid 1px #333333;
 
     cursor: pointer;
     outline: none;

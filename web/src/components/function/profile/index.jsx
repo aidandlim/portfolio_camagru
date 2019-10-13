@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, auth_token, auth_isaccount, user_user, user_biotemp } from '../../../actions';
+import { ui_nav, auth_token, auth_isaccount, user_user, user_biotemp, post_posts } from '../../../actions';
 
 import axios from 'axios';
 import cookie from 'react-cookies';
@@ -27,8 +27,10 @@ const Profile = () => {
 		.then(res => {
 			if(res.data) {
 				if(document.changeProfile.email.value !== user.user.email) {
+					dispatch(post_posts([]));
 					_handleLogout();
 				} else {
+					dispatch(post_posts([]));
 					_handleData(auth.token);
 				}
 			} else {
@@ -62,6 +64,7 @@ const Profile = () => {
 			})
 			.then(res => {
 				if(res.data) {
+					dispatch(post_posts([]));
 					_handleLogout();
 				} else {
 					cookie.remove('token', { path: '/'});
@@ -104,6 +107,7 @@ const Profile = () => {
 			}
 		}).then(res => {
 			if(res.data) {
+				dispatch(post_posts([]));
 				_handleData(auth.token);
 				document.changePicture.file.value = '';
 			} else {

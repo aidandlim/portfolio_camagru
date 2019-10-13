@@ -6,9 +6,6 @@ import { auth_token, auth_isregister, auth_isforgot, user_user, user_biotemp, po
 import axios from 'axios';
 import cookie from 'react-cookies';
 
-import FacebookLogin from 'react-facebook-login';
-import { GoogleLogin } from 'react-google-login';
-
 import { confirmAlert } from 'react-confirm-alert';
 import './index.css';
 
@@ -70,14 +67,6 @@ const Signin = () => {
 			email: document.signin.email.value
 		});
 	}
-	
-	const _handleFacebookSignin = (res) => {
-		console.log(res);
-	}
-
-	const _handleGoogleSignin = (res) => {
-		console.log(res);
-	}
 
 	return (
 		<div className='signin'>
@@ -87,24 +76,6 @@ const Signin = () => {
 				<input className='signin-input' type='password' name='password' placeholder='Password' required />
 				<button className='signin-btn' type='submit'>Sign in</button>
 			</form>
-			<div className='signin-or'>OR</div>
-			<FacebookLogin
-				cssClass='signin-facebook-btn'
-				appId='304184623413563'
-				fields='name,email,picture'
-				callback={(res) => _handleFacebookSignin(res)}
-				textButton='Sign in with Facebook'
-			/>
-			<GoogleLogin
-				clientId='572337747213-el3eomejo8fi035ge0tj2n4vff9qbvcl.apps.googleusercontent.com'
-				onSuccess={(res) => _handleGoogleSignin(res)}
-				onFailure={(res) => _handleGoogleSignin(res)}
-				icon={false}
-				buttonText='Sign in with Google'
-				render={renderProps => (
-					<button className='signin-google-btn' onClick={renderProps.onClick}>Sign in with Google</button>
-				)}
-			/>
 			<p onClick={() => dispatch(auth_isforgot())}><span>Forgot password?</span></p>
 			<p>Don't have an account? <span onClick={() => dispatch(auth_isregister())}>Sign up!</span></p>
 		</div>

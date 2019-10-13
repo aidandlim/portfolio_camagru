@@ -147,7 +147,7 @@ const Account = () => {
 					</div>
 			}
 			<div className='signin-margin'></div>
-			<input className='profile-logout' type='button' value='Back to User Information' onClick={ () => dispatch(auth_isaccount()) } />
+			<input className='profile-submit' type='button' value='Back to User Information' onClick={ () => dispatch(auth_isaccount()) } />
 			<input className='profile-delete' type='button' value='Delete Account' onClick={ () => _handleDeleteUser() } />
 		</div>
 	);

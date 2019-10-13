@@ -1,5 +1,6 @@
 package com.aidandlim.camagru.service;
 
+import com.aidandlim.camagru.dao.PostDao;
 import com.aidandlim.camagru.dao.ReflectionDao;
 import com.aidandlim.camagru.dto.Post;
 import com.aidandlim.camagru.dto.Reflection;
@@ -20,10 +21,16 @@ public class ReflectionService {
     ReflectionDao reflectionDao;
 
     @Autowired
+    PostDao postDao;
+
+    @Autowired
     TokenService tokenService;
 
     @Autowired
     PictureService pictureService;
+
+    @Autowired
+    MailService mailService;
 
     @Transactional
     public ArrayList<Reflection> selectAllByPost(Post post) {
@@ -42,12 +49,14 @@ public class ReflectionService {
         try {
             reflectionDao = sqlSession.getMapper(ReflectionDao.class);
             if(reflectionDao.select(reflection) == null) {
+                mailService.sendNotificationMail(postDao.selectUserEmailByPostId(reflection.getPost_id(), tokenService.get(reflection.getToken())));
                 reflectionDao.insert(reflection);
             } else {
                 reflectionDao.delete(reflection);
             }
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }

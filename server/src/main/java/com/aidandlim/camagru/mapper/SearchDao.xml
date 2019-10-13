@@ -55,9 +55,13 @@
             u.isPrivate = 0
             AND
             (
-            u.nickname LIKE #{keyword}
-            OR
-            p.content LIKE #{keyword}
+                u.nickname LIKE #{keyword}
+                OR
+                p.content LIKE #{keyword}
+                OR
+                p.location LIKE #{keyword}
+                OR
+                p.together LIKE #{keyword}
             )
         ORDER BY p.id DESC
         ]]>

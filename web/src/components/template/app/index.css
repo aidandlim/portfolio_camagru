@@ -18,7 +18,7 @@ body.react-confirm-alert-body-element {
     bottom: 0;
     z-index: 99;
     background: #202020;
-    opacity: 0.975;
+    opacity: 0.99;
 }
 
 .react-confirm-alert-body {

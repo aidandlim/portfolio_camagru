@@ -31,6 +31,22 @@ const Profile = () => {
 				} else {
 					_handleData(auth.token);
 				}
+			} else {
+				cookie.remove('token', { path: '/'});
+
+				dispatch(auth_token(''));
+				dispatch(user_user({}));
+				dispatch(user_biotemp(''));
+				dispatch(ui_nav(0));
+
+				confirmAlert({
+					message: 'The session is no longer valid!',
+					buttons: [
+						{
+							label: 'Okay'
+						}
+					]
+				});
 			}
 		});
 	}
@@ -47,6 +63,22 @@ const Profile = () => {
 			.then(res => {
 				if(res.data) {
 					_handleLogout();
+				} else {
+					cookie.remove('token', { path: '/'});
+
+					dispatch(auth_token(''));
+					dispatch(user_user({}));
+					dispatch(user_biotemp(''));
+					dispatch(ui_nav(0));
+
+					confirmAlert({
+						message: 'The session is no longer valid!',
+						buttons: [
+							{
+								label: 'Okay'
+							}
+						]
+					});
 				}
 			});
 		} else {
@@ -74,6 +106,22 @@ const Profile = () => {
 			if(res.data) {
 				_handleData(auth.token);
 				document.changePicture.file.value = '';
+			} else {
+				cookie.remove('token', { path: '/'});
+
+				dispatch(auth_token(''));
+				dispatch(user_user({}));
+				dispatch(user_biotemp(''));
+				dispatch(ui_nav(0));
+
+				confirmAlert({
+					message: 'The session is no longer valid!',
+					buttons: [
+						{
+							label: 'Okay'
+						}
+					]
+				});
 			}
 		});
 	}
@@ -86,6 +134,22 @@ const Profile = () => {
 			if(res.data !== null) {
 				dispatch(user_user(res.data));
 				dispatch(user_biotemp(res.data.bio === null ? '' : res.data.bio));
+			} else {
+				cookie.remove('token', { path: '/'});
+
+				dispatch(auth_token(''));
+				dispatch(user_user({}));
+				dispatch(user_biotemp(''));
+				dispatch(ui_nav(0));
+
+				confirmAlert({
+					message: 'The session is no longer valid!',
+					buttons: [
+						{
+							label: 'Okay'
+						}
+					]
+				});
 			}
 		});
 	}

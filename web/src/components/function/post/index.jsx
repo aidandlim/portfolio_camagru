@@ -53,7 +53,7 @@ const Post = (props) => {
 				dispatch(ui_nav(0));
 
 				confirmAlert({
-					message: 'It seems like your session is invalid anymore.',
+					message: 'The session is no longer valid!',
 					buttons: [
 						{
 							label: 'Okay'
@@ -91,8 +91,15 @@ const Post = (props) => {
 		})
 		.then(res => {
 			if(!res.data) {
+				cookie.remove('token', { path: '/'});
+
+				dispatch(auth_token(''));
+				dispatch(user_user({}));
+				dispatch(user_biotemp(''));
+				dispatch(ui_nav(0));
+
 				confirmAlert({
-					message: 'It seems like email or password information is wrong',
+					message: 'The session is no longer valid!',
 					buttons: [
 						{
 							label: 'Okay'
@@ -126,15 +133,6 @@ const Post = (props) => {
 			if(res.data !== null) {
 				dispatch(search_user(res.data));
 				dispatch(ui_nav(5));
-			} else {
-				confirmAlert({
-					message: 'Something went wrong :(',
-					buttons: [
-						{
-							label: 'I will try again'
-						}
-					]
-				});
 			}
 		})
 	}
@@ -155,7 +153,7 @@ const Post = (props) => {
 			});
 		} else {
 			confirmAlert({
-				message: 'This feature is only for owner',
+				message: 'This feature is only available to owner',
 				buttons: [
 					{
 						label: 'Okay'
@@ -178,11 +176,18 @@ const Post = (props) => {
 		})
 		.then(res => {
 			if(!res.data) {
+				cookie.remove('token', { path: '/'});
+
+				dispatch(auth_token(''));
+				dispatch(user_user({}));
+				dispatch(user_biotemp(''));
+				dispatch(ui_nav(0));
+
 				confirmAlert({
-					message: 'Something went wrong :(',
+					message: 'The session is no longer valid!',
 					buttons: [
 						{
-							label: 'I will try again'
+							label: 'Okay'
 						}
 					]
 				});

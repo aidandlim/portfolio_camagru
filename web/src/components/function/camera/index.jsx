@@ -1,9 +1,10 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, camera_isload, camera_images } from '../../../actions';
+import { ui_nav, auth_token, user_user, user_biotemp, camera_isload, camera_images } from '../../../actions';
 
 import axios from 'axios';
+import cookie from 'react-cookies';
 
 import Webcam from 'react-webcam';
 import Loadcam from '../loadcam';
@@ -66,8 +67,15 @@ const Camera = () => {
 				if(res.data) {
 					dispatch(ui_nav(0));
 				} else {
+					cookie.remove('token', { path: '/'});
+
+					dispatch(auth_token(''));
+					dispatch(user_user({}));
+					dispatch(user_biotemp(''));
+					dispatch(ui_nav(0));
+
 					confirmAlert({
-						message: 'It seems like email or password information is wrong',
+						message: 'The session is no longer valid!',
 						buttons: [
 							{
 								label: 'Okay'

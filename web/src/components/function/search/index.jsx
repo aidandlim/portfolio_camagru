@@ -5,7 +5,6 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { ui_nav, search_keyword, search_type, search_users, search_posts, search_user, content_post} from '../../../actions';
 
-import { confirmAlert } from 'react-confirm-alert';
 import default_user from '../../../resources/default_user.png';
 import './index.css';
 
@@ -75,15 +74,6 @@ const Search = () => {
 			if(res.data !== null) {
 				dispatch(search_user(res.data));
 				dispatch(ui_nav(5));
-			} else {
-				confirmAlert({
-					message: 'Something went wrong :(',
-					buttons: [
-						{
-							label: 'I will try again'
-						}
-					]
-				});
 			}
 		});
 	}

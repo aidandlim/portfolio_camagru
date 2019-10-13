@@ -5,7 +5,6 @@ import { ui_nav, search_user } from '../../../actions';
 
 import axios from 'axios';
 
-import { confirmAlert } from 'react-confirm-alert';
 import default_user from '../../../resources/default_user.png';
 import './index.css';
 
@@ -20,15 +19,6 @@ const Likes = (props) => {
 			if(res.data !== null) {
 				dispatch(search_user(res.data));
 				dispatch(ui_nav(5));
-			} else {
-				confirmAlert({
-					message: 'Something went wrong :(',
-					buttons: [
-						{
-							label: 'I will try again'
-						}
-					]
-				});
 			}
 		});
 	}

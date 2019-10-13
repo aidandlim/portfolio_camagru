@@ -1,9 +1,10 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, content_post, content_islikes, search_user } from '../../../actions';
+import { ui_nav, auth_token, user_user, user_biotemp, content_post, content_islikes, search_user } from '../../../actions';
 
 import axios from 'axios';
+import cookie from 'react-cookies';
 
 import Likes from '../likes';
 import Comments from '../comments';
@@ -22,7 +23,7 @@ const Detail = () => {
 	const _handleLikes = () => {
 		if(auth.token === '') {
 			confirmAlert({
-				message: 'This feature needs to be signed in first',
+				message: 'This feature needs to be signed in first!',
 				buttons: [
 					{
 						label: 'Okay'
@@ -55,8 +56,15 @@ const Detail = () => {
 		})
 		.then(res => {
 			if(!res.data) {
+				cookie.remove('token', { path: '/'});
+
+				dispatch(auth_token(''));
+				dispatch(user_user({}));
+				dispatch(user_biotemp(''));
+				dispatch(ui_nav(0));
+
 				confirmAlert({
-					message: 'It seems like email or password information is wrong',
+					message: 'The session is no longer valid!',
 					buttons: [
 						{
 							label: 'Okay'
@@ -70,7 +78,7 @@ const Detail = () => {
 	const _handleComments = () => {
 		if(auth.token === '') {
 			confirmAlert({
-				message: 'This feature needs to be signed in first',
+				message: 'This feature needs to be signed in first!',
 				buttons: [
 					{
 						label: 'Okay'
@@ -98,10 +106,16 @@ const Detail = () => {
 			if(res.data) {
 				document.getElementById('detail-comment-box-' + content.post.id).value = '';
 				_handleTextareaSize();
-				
 			} else {
+				cookie.remove('token', { path: '/'});
+
+				dispatch(auth_token(''));
+				dispatch(user_user({}));
+				dispatch(user_biotemp(''));
+				dispatch(ui_nav(0));
+
 				confirmAlert({
-					message: 'It seems like email or password information is wrong',
+					message: 'The session is no longer valid!',
 					buttons: [
 						{
 							label: 'Okay'
@@ -120,15 +134,6 @@ const Detail = () => {
 			if(res.data !== null) {
 				dispatch(search_user(res.data));
 				dispatch(ui_nav(5));
-			} else {
-				confirmAlert({
-					message: 'Something went wrong :(',
-					buttons: [
-						{
-							label: 'I will try again'
-						}
-					]
-				});
 			}
 		});
 	}
@@ -149,7 +154,7 @@ const Detail = () => {
 			});
 		} else {
 			confirmAlert({
-				message: 'This feature is only for owner',
+				message: 'This feature is only available to owner',
 				buttons: [
 					{
 						label: 'Okay'
@@ -166,11 +171,18 @@ const Detail = () => {
 		})
 		.then(res => {
 			if(!res.data) {
+				cookie.remove('token', { path: '/'});
+
+				dispatch(auth_token(''));
+				dispatch(user_user({}));
+				dispatch(user_biotemp(''));
+				dispatch(ui_nav(0));
+
 				confirmAlert({
-					message: 'Something went wrong :(',
+					message: 'The session is no longer valid!',
 					buttons: [
 						{
-							label: 'I will try again'
+							label: 'Okay'
 						}
 					]
 				});

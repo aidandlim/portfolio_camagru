@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { auth_token, auth_isaccount, user_user } from '../../../actions';
+import { ui_nav, auth_token, auth_isaccount, user_user, user_biotemp } from '../../../actions';
 
 import axios from 'axios';
 import cookie from 'react-cookies';
@@ -24,11 +24,18 @@ const Account = () => {
 				user.user.private = !user.user.private;
 				dispatch(user_user(user.user));
 			} else {
+				cookie.remove('token', { path: '/'});
+
+				dispatch(auth_token(''));
+				dispatch(user_user({}));
+				dispatch(user_biotemp(''));
+				dispatch(ui_nav(0));
+
 				confirmAlert({
-					message: 'Something went wrong :(',
+					message: 'The session is no longer valid!',
 					buttons: [
 						{
-							label: 'I will try again'
+							label: 'Okay'
 						}
 					]
 				});
@@ -47,11 +54,18 @@ const Account = () => {
 				user.user.notificate = !user.user.notificate;
 				dispatch(user_user(user.user));
 			} else {
+				cookie.remove('token', { path: '/'});
+
+				dispatch(auth_token(''));
+				dispatch(user_user({}));
+				dispatch(user_biotemp(''));
+				dispatch(ui_nav(0));
+
 				confirmAlert({
-					message: 'Something went wrong :(',
+					message: 'The session is no longer valid!',
 					buttons: [
 						{
-							label: 'I will try again'
+							label: 'Okay'
 						}
 					]
 				});
@@ -85,11 +99,18 @@ const Account = () => {
 				dispatch(auth_isaccount(false));
 				cookie.remove('token', { path: '/'});
 			} else {
+				cookie.remove('token', { path: '/'});
+
+				dispatch(auth_token(''));
+				dispatch(user_user({}));
+				dispatch(user_biotemp(''));
+				dispatch(ui_nav(0));
+
 				confirmAlert({
-					message: 'Something went wrong :(',
+					message: 'The session is no longer valid!',
 					buttons: [
 						{
-							label: 'I will try again'
+							label: 'Okay'
 						}
 					]
 				});

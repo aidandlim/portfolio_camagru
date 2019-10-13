@@ -5,7 +5,6 @@ import { ui_nav, content_post } from '../../../actions';
 
 import axios from 'axios';
 
-import { confirmAlert } from 'react-confirm-alert';
 import './index.css';
 
 const Album = (props) => {
@@ -19,15 +18,6 @@ const Album = (props) => {
 			if(res.data !== null) {
 				dispatch(content_post(res.data));
 				dispatch(ui_nav(6));
-			} else {
-				confirmAlert({
-					message: 'Something went wrong :(',
-					buttons: [
-						{
-							label: 'I will try again'
-						}
-					]
-				});
 			}
 		});
 	}

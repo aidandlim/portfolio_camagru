@@ -2,7 +2,6 @@ package com.aidandlim.camagru.service;
 
 import com.aidandlim.camagru.dao.PostDao;
 import com.aidandlim.camagru.dto.Post;
-import com.aidandlim.camagru.dto.Token;
 import com.aidandlim.camagru.dto.User;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +32,10 @@ public class PostService {
     CommentService commentService;
 
     @Transactional
-    public ArrayList<Post> selectAll(Token token) {
+    public ArrayList<Post> selectAll(Post post) {
         try {
             postDao = sqlSession.getMapper(PostDao.class);
-            return postDao.selectAll(token.getToken().equals("") ? -1 : tokenService.get(token.getToken()));
+            return postDao.selectAll(post.getToken().equals("") ? -1 : tokenService.get(post.getToken()), post.getCall());
         } catch (Exception e) {
             return null;
         }

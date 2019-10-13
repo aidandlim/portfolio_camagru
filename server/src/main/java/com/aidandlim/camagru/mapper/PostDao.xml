@@ -29,7 +29,10 @@
             p.user_id = u.id
         WHERE
             u.isPrivate = 0
+            AND
+            p.id < IF(#{call} = 0, (SELECT MAX(id) + 1 FROM post), #{call})
         ORDER BY p.id DESC
+        LIMIT 0, 5
         ]]>
     </select>
 

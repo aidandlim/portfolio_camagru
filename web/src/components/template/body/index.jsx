@@ -1,6 +1,9 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { post_posts } from '../../../actions';
+
+import axios from 'axios';
 
 import Post from '../../function/post';
 import Search from '../../function/search';
@@ -13,15 +16,34 @@ import './index.css';
 
 const Body = () => {
 	const ui = useSelector(state => state.ui);
+	const auth = useSelector(state => state.auth);
 	const content = useSelector(state => state.content);
-	const post = useSelector(state => state.post);
+	const dispatch = useDispatch();
+
+	let post = useSelector(state => state.post);
+
+	const _handleExploreScroll = (e) => {
+		if(ui.nav === 0) {
+			if(e.target.scrollTop / (e.target.scrollHeight - e.target.clientHeight) > 0.9) {
+				axios.post('/post/selectAll', {
+					token: auth.token,
+					call: parseInt(post.posts[post.posts.length - 1].id),
+				})
+				.then(res => {
+					let posts = post.posts;
+					dispatch(post_posts(posts.concat(res.data)));
+				});
+				
+			}
+		}
+	}
 
 	return (
-		<div className='body'>
+		<div className='body' onScroll={_handleExploreScroll}>
 			{ ui.nav === 0 ? 
 				<div className='inner-container'>
 					{post.posts.map((post) => 
-							<Post key={post.id} data={post} />
+						<Post key={post.id} data={post} />
 					)}
 				</div>
 			: '' }

@@ -1,5 +1,5 @@
 const post = {
-    posts: [],
+    posts: []
 }
 
 const postReducer = (state = post, action) => {

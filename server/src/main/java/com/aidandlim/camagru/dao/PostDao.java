@@ -9,7 +9,7 @@ import java.util.ArrayList;
 @Repository
 public interface PostDao {
 
-    ArrayList<Post> selectAll(long user_id);
+    ArrayList<Post> selectAll(long user_id, int call);
     ArrayList<Post> selectAllByUser(User user);
     Post select(Post post);
     void insert(Post post);

@@ -19,10 +19,8 @@ const Canvas = () => {
 		e.target.style.top = e.clientY - absoluteY + document.getElementById('camera').scrollTop + 'px';
 	}
 
-	const _handleRemove = (index) => {
-		var inputs = camera.inputs;
-		inputs[index] = '';
-		dispatch(camera_inputs(inputs));
+	const _handleRemove = () => {
+		dispatch(camera_inputs([]));
 	}
 
 	document.addEventListener("dragover", function(event) {
@@ -37,7 +35,7 @@ const Canvas = () => {
 	return (
 		<div className='canvas'>
 			{camera.inputs.map((input, index) =>
-				<div className='canvas-sticker' style={{ backgroundImage: 'url(\'/sticker?s=' + input + '\')'}} key={index} onDrag={_handleDrag} onDoubleClick={() => _handleRemove(index)} draggable></div>	
+				<div className='canvas-sticker' style={{ backgroundImage: 'url(\'/sticker?s=' + input + '\')'}} key={index} onDrag={_handleDrag} onDoubleClick={() => _handleRemove()} draggable></div>	
 			)}
 		</div>
 	);

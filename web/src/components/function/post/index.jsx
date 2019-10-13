@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, content_post, post_posts, search_user, auth_token, user_user, user_biotemp } from '../../../actions';
+import { ui_nav, content_post, content_islikes, post_posts, search_user, auth_token, user_user, user_biotemp } from '../../../actions';
 
 import axios from 'axios';
 import cookie from 'react-cookies';
@@ -113,13 +113,18 @@ const Post = (props) => {
 		});
 	}
 
-	const _handleDetail = () => {
+	const _handleDetail = (type) => {
 		axios.post('/post/select', {
 			token: auth.token,
 			id: props.data.id,
 			user_id: user.user.id,
 		})
 		.then(res => {
+			if(type) {
+				dispatch(content_islikes(true));
+			} else {
+				dispatch(content_islikes(false));
+			}
 			dispatch(content_post(res.data));
 			dispatch(ui_nav(6));
 		})
@@ -172,6 +177,7 @@ const Post = (props) => {
 		}
 		dispatch(post_posts(posts));
 		axios.post('/post/delete', {
+			token: auth.token,
 			id: props.data.id,
 		})
 		.then(res => {
@@ -230,8 +236,8 @@ const Post = (props) => {
 				{ props.data.content.length ? 
 					<textarea className='post-content' style={{height: props.data.content.split('\n').length + 'rem'}} value={props.data.content} readOnly></textarea>
 				: ''}
-				<div className='post-likes' onClick={ () => _handleDetail() }>{props.data.num_likes} likes</div>
-				<div className='post-comments' onClick={ () => _handleDetail() }>View all {props.data.num_comments} comments</div>
+				<div className='post-likes' onClick={ () => _handleDetail(1) }>{props.data.num_likes} likes</div>
+				<div className='post-comments' onClick={ () => _handleDetail(0) }>View all {props.data.num_comments} comments</div>
 				<textarea className='post-comment-box' id={'post-comment-box-' + props.data.id} name='content' placeholder='Add a comment...' onChange={ () => _handleTextareaSize() }></textarea>
 				<div className='post-comment-post' onClick={ () => _handleComments() }>POST</div>
 			</div>

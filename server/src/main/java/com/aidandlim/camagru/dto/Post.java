@@ -24,11 +24,13 @@ public class Post extends Token {
     private ArrayList<Reflection> likes;
     private ArrayList<Comment> comments;
 
+    private int call;
+
     public Post() {
         super();
     }
 
-    public Post(long id, long user_id, String picture, boolean rotate, String content, String location, String together, Date time, String user_nickname, String user_picture, boolean user_islike, int num_likes, int num_comments, String post_time, ArrayList<Reflection> likes, ArrayList<Comment> comments) {
+    public Post(long id, long user_id, String picture, boolean rotate, String content, String location, String together, Date time, String user_nickname, String user_picture, boolean user_islike, int num_likes, int num_comments, String post_time, ArrayList<Reflection> likes, ArrayList<Comment> comments, int call) {
         super();
         this.id = id;
         this.user_id = user_id;
@@ -46,6 +48,7 @@ public class Post extends Token {
         this.post_time = post_time;
         this.likes = likes;
         this.comments = comments;
+        this.call = call;
     }
 
     public long getId() {
@@ -174,5 +177,13 @@ public class Post extends Token {
 
     public void setComments(ArrayList<Comment> comments) {
         this.comments = comments;
+    }
+
+    public int getCall() {
+        return call;
+    }
+
+    public void setCall(int call) {
+        this.call = call;
     }
 }

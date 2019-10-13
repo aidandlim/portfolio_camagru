@@ -16,11 +16,12 @@ import './index.css';
 const App = () => {
 	const ui = useSelector(state => state.ui);
 	const auth = useSelector(state => state.auth);
+	const post = useSelector(state => state.post);
 	const dispatch = useDispatch();
 
 	const _handleData = (token) => {
 		axios.post('/user/select', {
-			token: token
+			token: token,
 		})
 		.then(res => {
 			if(res.data !== '') {
@@ -38,9 +39,9 @@ const App = () => {
 		_handleData(cookie.load('token'));
 	}
 
-	if(ui.nav === 0) {
+	if(ui.nav === 0 && post.posts.length === 0) {
 		axios.post('/post/selectAll', {
-			token: auth.token
+			token: auth.token,
 		})
 		.then(res => {
 			dispatch(post_posts(res.data));

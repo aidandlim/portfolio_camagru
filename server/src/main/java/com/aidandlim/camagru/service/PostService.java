@@ -67,6 +67,8 @@ public class PostService {
 
     @Transactional
     public boolean insert(Post post) {
+        if(tokenService.get(post.getToken()) == -1)
+            return false;
         try {
             postDao = sqlSession.getMapper(PostDao.class);
             post.setPicture(pictureService.uploadWithHash(post.getPicture()));
@@ -79,6 +81,8 @@ public class PostService {
 
     @Transactional
     public boolean delete(Post post) {
+        if(tokenService.get(post.getToken()) == -1)
+            return false;
         try {
             postDao = sqlSession.getMapper(PostDao.class);
             pictureService.delete(postDao.select(post).getPicture());

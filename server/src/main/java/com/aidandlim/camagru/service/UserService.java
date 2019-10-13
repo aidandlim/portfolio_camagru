@@ -48,6 +48,8 @@ public class UserService {
 
     @Transactional
     public boolean update(User user) {
+        if(tokenService.get(user.getToken()) == -1)
+            return false;
         try {
             userDao = sqlSession.getMapper(UserDao.class);
             User temp = userDao.select(tokenService.get(user.getToken()));
@@ -67,6 +69,8 @@ public class UserService {
 
     @Transactional
     public boolean updatePicture(String token, MultipartFile file) {
+        if(tokenService.get(token) == -1)
+            return false;
         try {
             userDao = sqlSession.getMapper(UserDao.class);
             pictureService.delete(userDao.select(tokenService.get(token)).getPicture());
@@ -79,6 +83,8 @@ public class UserService {
 
     @Transactional
     public boolean updatePassword(User user) {
+        if(tokenService.get(user.getToken()) == -1)
+            return false;
         try {
             authDao = sqlSession.getMapper(AuthDao.class);
             userDao = sqlSession.getMapper(UserDao.class);
@@ -93,6 +99,8 @@ public class UserService {
 
     @Transactional
     public boolean updateIsPrivate(User user) {
+        if(tokenService.get(user.getToken()) == -1)
+            return false;
         try {
             userDao = sqlSession.getMapper(UserDao.class);
             userDao.updatePrivate(user);
@@ -104,6 +112,8 @@ public class UserService {
 
     @Transactional
     public boolean updateIsNotificate(User user) {
+        if(tokenService.get(user.getToken()) == -1)
+            return false;
         try {
             userDao = sqlSession.getMapper(UserDao.class);
             userDao.updateNotificate(user);
@@ -115,6 +125,8 @@ public class UserService {
 
     @Transactional
     public boolean delete(User user) {
+        if(tokenService.get(user.getToken()) == -1)
+            return false;
         try {
             userDao = sqlSession.getMapper(UserDao.class);
             userDao.delete(user);

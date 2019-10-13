@@ -37,6 +37,8 @@ public class CommentService {
 
     @Transactional
     public boolean insert(Comment comment) {
+        if(tokenService.get(comment.getToken()) == -1)
+            return false;
         try {
             commentDao = sqlSession.getMapper(CommentDao.class);
             commentDao.insert(comment);
@@ -48,6 +50,8 @@ public class CommentService {
 
     @Transactional
     public boolean delete(Comment comment) {
+        if(tokenService.get(comment.getToken()) == -1)
+            return false;
         try {
             commentDao = sqlSession.getMapper(CommentDao.class);
             commentDao.delete(comment);

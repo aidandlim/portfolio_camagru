@@ -12,6 +12,7 @@ import Comments from '../comments';
 import { confirmAlert } from 'react-confirm-alert';
 import { FiHeart, FiTrash2 } from 'react-icons/fi';
 import { MdFavorite } from 'react-icons/md';
+import default_user from '../../../resources/default_user.png';
 import './index.css';
 
 const Detail = () => {
@@ -200,9 +201,13 @@ const Detail = () => {
 		<div className='detail'>
 			<div className='inner-container'>
 				<div className='detail-post'>
-					<div className='post-profile' style={{ 
-						backgroundImage: 'url(\'/picture?p=' + content.post.user_picture + '\')' 
-					}} onClick={() => _handleProfilePage()}></div>
+				<div className='post-profile' style={
+					content.post.user_picture === null
+					?
+					{ backgroundImage: 'url(\'' + default_user + '\')' }
+					:
+					{ backgroundImage: 'url(\'/picture?p=' + content.post.user_picture + '\')' }
+				} onClick={() => _handleProfilePage()}></div>
 					<div className='post-info-container'>
 						<div className='post-author' onClick={() => _handleProfilePage()}>{content.post.user_nickname}</div>
 						<div className='post-time'>{content.post.post_time}</div>

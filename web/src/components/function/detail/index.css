@@ -9,7 +9,7 @@
     top: calc(2.5rem + 1px);
     left: 0;
 
-    background-color: #151515;
+    background-color: #202020;
 
     z-index: 3;
 }
@@ -38,7 +38,7 @@
     position: relative;
     float: left;
 
-    color: #00695C;
+    color: #808080;
     font-size: 0.6rem;
     font-weight: 900;
     line-height: 1rem;

@@ -22,7 +22,7 @@ public class MailService {
 
             javaMailSender.send(msg);
 
-            System.out.println("Email has sended to " + user.getEmail());
+            System.out.println("[Verifying] Email has sended to " + user.getEmail());
         } catch (Exception e) {
             return ;
         }
@@ -38,7 +38,7 @@ public class MailService {
 
             javaMailSender.send(msg);
 
-            System.out.println("Email has sended to " + user.getEmail());
+            System.out.println("[Forgot] Email has sended to " + user.getEmail());
         } catch (Exception e) {
             return ;
         }
@@ -54,7 +54,7 @@ public class MailService {
 
             javaMailSender.send(msg);
 
-            System.out.println("Email has sended to " + email);
+            System.out.println("[Notification] Email has sended to " + email);
         } catch (Exception e) {
             return ;
         }

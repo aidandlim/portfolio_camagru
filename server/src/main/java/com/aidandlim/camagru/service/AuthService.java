@@ -56,7 +56,7 @@ public class AuthService {
                 return new Token(0);
             }
         } catch (Exception e) {
-            return new Token(0);
+            return new Token(-1);
         }
     }
 
@@ -109,11 +109,15 @@ public class AuthService {
     public boolean forgot(User user) {
         try {
             userDao = sqlSession.getMapper(UserDao.class);
-            user.setUuid(UUID.randomUUID().toString().replace("-", ""));
-            user.setChange(user.getUuid());
-            userDao.updatePassword(user);
-            mailService.sendForgotMail(user);
-            return true;
+            if(userDao.selectByEmail(user) != null) {
+                user.setUuid(UUID.randomUUID().toString().replace("-", ""));
+                user.setChange(user.getUuid());
+                userDao.updatePassword(user);
+                mailService.sendForgotMail(user);
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e) {
             return false;
         }

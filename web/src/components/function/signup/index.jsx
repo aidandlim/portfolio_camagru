@@ -26,7 +26,7 @@ const Signup = () => {
 					dispatch(auth_isregister());
 				} else {
 					confirmAlert({
-						message: 'Email has to be unique',
+						message: 'This email is already registered!',
 						buttons: [
 							{
 								label: 'Okay'
@@ -37,8 +37,7 @@ const Signup = () => {
 			});
 		} else {
 			confirmAlert({
-				title: 'Password are not matched',
-				message: 'Try again',
+				message: 'Passwords do not match!',
 				buttons: [
 					{
 						label: 'Okay'

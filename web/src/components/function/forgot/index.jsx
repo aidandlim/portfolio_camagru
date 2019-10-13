@@ -20,7 +20,7 @@ const Forgot = () => {
 				dispatch(auth_isforgot());
 			} else {
 				confirmAlert({
-					message: 'Something went wrong :(',
+					message: 'This email does not exist!',
 					buttons: [
 						{
 							label: 'I will try again'

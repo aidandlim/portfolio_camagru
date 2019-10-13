@@ -12,7 +12,6 @@ import Footer from '../footer';
 import Sidebar from '../../function/sidebar';
 
 import './index.css';
-import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const App = () => {
 	const ui = useSelector(state => state.ui);

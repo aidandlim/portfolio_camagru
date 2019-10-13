@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { auth_token, auth_isaccount, user_user, user_biotemp } from '../../../actions';
+import { ui_nav, auth_token, auth_isaccount, user_user, user_biotemp } from '../../../actions';
 
 import axios from 'axios';
 import cookie from 'react-cookies';
@@ -31,15 +31,6 @@ const Profile = () => {
 				} else {
 					_handleData(auth.token);
 				}
-			} else {
-				confirmAlert({
-					message: 'Something went wrong :(',
-					buttons: [
-						{
-							label: 'I will try again'
-						}
-					]
-				});
 			}
 		});
 	}
@@ -55,16 +46,7 @@ const Profile = () => {
 			})
 			.then(res => {
 				if(res.data) {
-					dispatch(auth_token(''));
-				} else {
-					confirmAlert({
-						message: 'Something went wrong :(',
-						buttons: [
-							{
-								label: 'I will try again'
-							}
-						]
-					});
+					_handleLogout();
 				}
 			});
 		} else {
@@ -92,15 +74,6 @@ const Profile = () => {
 			if(res.data) {
 				_handleData(auth.token);
 				document.changePicture.file.value = '';
-			} else {
-				confirmAlert({
-					message: 'Something went wrong :(',
-					buttons: [
-						{
-							label: 'I will try again'
-						}
-					]
-				});
 			}
 		});
 	}
@@ -113,24 +86,16 @@ const Profile = () => {
 			if(res.data !== null) {
 				dispatch(user_user(res.data));
 				dispatch(user_biotemp(res.data.bio === null ? '' : res.data.bio));
-			} else {
-				confirmAlert({
-					message: 'Something went wrong :(',
-					buttons: [
-						{
-							label: 'I will try again'
-						}
-					]
-				});
 			}
 		});
 	}
 
 	const _handleLogout = () => {
+		cookie.remove('token', { path: '/'});
 		dispatch(auth_token(''));
 		dispatch(user_user({}));
 		dispatch(user_biotemp(''));
-		cookie.remove('token', { path: '/'});
+		dispatch(ui_nav(0));
 	}
 
 	const _handleTextareaSize = () => {

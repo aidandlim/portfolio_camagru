@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 public interface UserDao {
 
     User select(long id);
+    User selectByEmail(User user);
     void update(User user);
     void updatePassword(User user);
     void updatePrivate(User user);

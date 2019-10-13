@@ -11,6 +11,15 @@
             id = #{id}
     </select>
 
+    <select id="selectByEmail" resultType="com.aidandlim.camagru.dto.User">
+        SELECT
+            *
+        FROM
+            user
+        WHERE
+            email = #{email}
+    </select>
+
     <update id="update">
         UPDATE
             user

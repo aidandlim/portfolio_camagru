@@ -22,28 +22,26 @@ const Signin = () => {
 			password: document.signin.password.value
 		})
 		.then(res => {
-			if(res.data.token !== null) {
-				if(res.data.status) {
-					dispatch(auth_token(res.data.token));
-					cookie.save('token', res.data.token, { path: '/' });
-					_handleData(res.data.token);
-				} else {
-					confirmAlert({
-						message: 'This account has not verified by email. Do you want to get verifying email again?',
-						buttons: [
-							{
-								label: 'Yes',
-								onClick: () => _handleVerifyingEmail()
-							},
-							{
-								label: 'No, Thanks'
-							}
-						]
-					});
-				}
-			} else {
+			if(res.data.status === 1) {
+				dispatch(auth_token(res.data.token));
+				cookie.save('token', res.data.token, { path: '/' });
+				_handleData(res.data.token);
+			} else if(res.data.status === 0) {
 				confirmAlert({
-					message: 'It seems like email or password information is wrong',
+					message: 'This account has not verified by email!',
+					buttons: [
+						{
+							label: 'Request resend email',
+							onClick: () => _handleVerifyingEmail()
+						},
+						{
+							label: 'Okay'
+						}
+					]
+				});
+			} else if(res.data.status === -1) {
+				confirmAlert({
+					message: 'Email or password information is wrong!',
 					buttons: [
 						{
 							label: 'Okay'
@@ -62,15 +60,6 @@ const Signin = () => {
 			if(res.data !== null) {
 				dispatch(user_user(res.data));
 				dispatch(user_biotemp(res.data.bio === null ? '' : res.data.bio));
-			} else {
-				confirmAlert({
-					message: 'Something went wrong :(',
-					buttons: [
-						{
-							label: 'I will try again'
-						}
-					]
-				});
 			}
 		});
 	}

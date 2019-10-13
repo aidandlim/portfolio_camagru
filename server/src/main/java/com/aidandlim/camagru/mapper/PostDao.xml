@@ -94,6 +94,8 @@
             p.id = #{post_id}
             AND
             u.id != #{user_id}
+            AND
+            u.isNotificate = 1
     </select>
 
     <insert id="insert">

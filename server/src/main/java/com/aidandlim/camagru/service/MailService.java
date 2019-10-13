@@ -45,18 +45,20 @@ public class MailService {
     }
 
     void sendNotificationMail(String email) {
-        try {
-            SimpleMailMessage msg = new SimpleMailMessage();
-            msg.setTo(email);
+        if(email != null) {
+            try {
+                SimpleMailMessage msg = new SimpleMailMessage();
+                msg.setTo(email);
 
-            msg.setSubject("New notification from Camagru Application");
-            msg.setText("You have a new notification from Camagru Application! Check it out now!");
+                msg.setSubject("New notification from Camagru Application");
+                msg.setText("You have a new notification from Camagru Application! Check it out now!");
 
-            javaMailSender.send(msg);
+                javaMailSender.send(msg);
 
-            System.out.println("[Notification] Email has sended to " + email);
-        } catch (Exception e) {
-            return ;
+                System.out.println("[Notification] Email has sended to " + email);
+            } catch (Exception e) {
+                return;
+            }
         }
     }
 

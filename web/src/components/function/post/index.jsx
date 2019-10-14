@@ -83,13 +83,16 @@ const Post = (props) => {
 				posts[i].num_comments = posts[i].num_comments + 1;
 			}
 		}
+		var value = document.getElementById('post-comment-box-' + props.data.id).value;
+		document.getElementById('post-comment-box-' + props.data.id).value = '';
+		_handleTextareaSize();
 		dispatch(post_posts(posts));
 		axios.post('/comment/insert', {
 			token: auth.token,
 			user_id: user.user.id,
 			user_nickname: user.user.nickname,
 			post_id: props.data.id,
-			content: document.getElementById('post-comment-box-' + props.data.id).value,
+			content: value,
 		})
 		.then(res => {
 			if(!res.data) {
@@ -108,9 +111,6 @@ const Post = (props) => {
 						}
 					]
 				});
-			} else {
-				document.getElementById('post-comment-box-' + props.data.id).value = '';
-				_handleTextareaSize();
 			}
 		});
 	}

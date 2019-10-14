@@ -99,17 +99,17 @@ const Detail = () => {
 			content: document.getElementById('detail-comment-box-' + content.post.id).value,
 		});
 		dispatch(content_post(posts));
+		var value = document.getElementById('detail-comment-box-' + content.post.id).value;
+		document.getElementById('detail-comment-box-' + content.post.id).value = '';
+		_handleTextareaSize();
 		axios.post('/comment/insert', {
 			token: auth.token,
 			user_id: user.user.id,
 			post_id: content.post.id,
-			content: document.getElementById('detail-comment-box-' + content.post.id).value,
+			content: value,
 		})
 		.then(res => {
-			if(res.data) {
-				document.getElementById('detail-comment-box-' + content.post.id).value = '';
-				_handleTextareaSize();
-			} else {
+			if(!res.data) {
 				cookie.remove('token', { path: '/'});
 
 				dispatch(auth_token(''));

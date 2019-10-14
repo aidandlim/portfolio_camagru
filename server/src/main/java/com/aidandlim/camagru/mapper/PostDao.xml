@@ -7,7 +7,6 @@
         SELECT
             p.id,
             p.picture,
-            p.rotate,
             p.content,
             p.location,
             p.together,
@@ -56,11 +55,11 @@
         SELECT
             p.id,
             p.picture,
-            p.rotate,
             p.content,
             p.location,
             p.together,
             CASE
+                WHEN MINUTE(TIMEDIFF(NOW(), p.time)) = 0 THEN 'RIGHT NOW'
                 WHEN p.time > DATE_ADD(NOW(), INTERVAL-1 HOUR) THEN CONCAT(MINUTE(TIMEDIFF(NOW(), p.time)), ' MINUTES AGO')
                 WHEN p.time > DATE_ADD(NOW(), INTERVAL-24 HOUR) THEN CONCAT(HOUR(TIMEDIFF(NOW(), p.time)), ' HOURS AGO')
                 ELSE CONCAT(DATEDIFF(NOW(), p.time), ' DAYS AGO') END as post_time,
@@ -100,9 +99,9 @@
 
     <insert id="insert">
         INSERT INTO post
-            (user_id, picture, rotate, content, location, together)
+            (user_id, picture, content, location, together)
         VALUES
-            (#{user_id}, #{picture}, #{rotate}, #{content}, #{location}, #{together})
+            (#{user_id}, #{picture}, #{content}, #{location}, #{together})
     </insert>
 
     <delete id="delete">

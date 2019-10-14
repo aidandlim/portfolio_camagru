@@ -10,7 +10,9 @@ const Sticker = () => {
 	const dispatch = useDispatch();
 
 	const _handleStickers = (name) => {
-		inputs.push(name);
+		inputs.push(
+			name
+		);
 		dispatch(camera_inputs(inputs));
 	}
 

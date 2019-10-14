@@ -6,7 +6,7 @@ import { camera_inputs } from '../../../actions';
 import './index.css';
 
 const Canvas = () => {
-	const camera = useSelector(state => state.camera);
+	let camera = useSelector(state => state.camera);
 	const dispatch = useDispatch();
 
 	var absoluteX = 0;
@@ -35,7 +35,7 @@ const Canvas = () => {
 	return (
 		<div className='canvas'>
 			{camera.inputs.map((input, index) =>
-				<div className='canvas-sticker' style={{ backgroundImage: 'url(\'/sticker?s=' + input + '\')'}} key={index} onDrag={_handleDrag} onDoubleClick={() => _handleRemove()} draggable></div>	
+				<div id={'canvas-sticker-' + index} className='canvas-sticker' style={{ backgroundImage: 'url(\'/sticker?s=' + input + '\')'}} key={index} onDrag={_handleDrag} onDoubleClick={() => _handleRemove()} draggable></div>	
 			)}
 		</div>
 	);

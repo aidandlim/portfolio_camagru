@@ -2,6 +2,7 @@ package com.aidandlim.camagru.service;
 
 import com.aidandlim.camagru.dao.PostDao;
 import com.aidandlim.camagru.dto.Post;
+import com.aidandlim.camagru.dto.Sticker;
 import com.aidandlim.camagru.dto.User;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +71,7 @@ public class PostService {
             return false;
         try {
             postDao = sqlSession.getMapper(PostDao.class);
-            post.setPicture(pictureService.uploadWithHash(post.getPicture()));
+            post.setPicture(pictureService.uploadWithHash(post.getPicture(), post.getStickers()));
             postDao.insert(post);
             return true;
         } catch (Exception e) {

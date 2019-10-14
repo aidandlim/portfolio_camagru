@@ -8,7 +8,6 @@ public class Post extends Token {
     private long id;
     private long user_id;
     private String picture;
-    private boolean rotate;
     private String content;
     private String location;
     private String together;
@@ -24,18 +23,19 @@ public class Post extends Token {
     private ArrayList<Reflection> likes;
     private ArrayList<Comment> comments;
 
+    private ArrayList<Sticker> stickers;
+
     private int call;
 
     public Post() {
         super();
     }
 
-    public Post(long id, long user_id, String picture, boolean rotate, String content, String location, String together, Date time, String user_nickname, String user_picture, boolean user_islike, int num_likes, int num_comments, String post_time, ArrayList<Reflection> likes, ArrayList<Comment> comments, int call) {
+    public Post(long id, long user_id, String picture, String content, String location, String together, Date time, String user_nickname, String user_picture, boolean user_islike, int num_likes, int num_comments, String post_time, ArrayList<Reflection> likes, ArrayList<Comment> comments, ArrayList<Sticker> stickers, int call) {
         super();
         this.id = id;
         this.user_id = user_id;
         this.picture = picture;
-        this.rotate = rotate;
         this.content = content;
         this.location = location;
         this.together = together;
@@ -48,6 +48,7 @@ public class Post extends Token {
         this.post_time = post_time;
         this.likes = likes;
         this.comments = comments;
+        this.stickers = stickers;
         this.call = call;
     }
 
@@ -73,14 +74,6 @@ public class Post extends Token {
 
     public void setPicture(String picture) {
         this.picture = picture;
-    }
-
-    public boolean isRotate() {
-        return rotate;
-    }
-
-    public void setRotate(boolean rotate) {
-        this.rotate = rotate;
     }
 
     public String getContent() {
@@ -177,6 +170,14 @@ public class Post extends Token {
 
     public void setComments(ArrayList<Comment> comments) {
         this.comments = comments;
+    }
+
+    public ArrayList<Sticker> getStickers() {
+        return stickers;
+    }
+
+    public void setStickers(ArrayList<Sticker> stickers) {
+        this.stickers = stickers;
     }
 
     public int getCall() {

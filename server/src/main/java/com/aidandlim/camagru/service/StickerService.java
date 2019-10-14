@@ -12,9 +12,9 @@ public class StickerService {
 
     String PATH = "/Users/aidan/Workspace/portfolio_camagru/data/sticker/";
 
-    public byte[] get(String uuid) {
+    public byte[] get(String name) {
         try {
-            return FileUtils.readFileToByteArray(new File(PATH + uuid));
+            return FileUtils.readFileToByteArray(new File(PATH + name));
         } catch (Exception e) {
             return null;
         }

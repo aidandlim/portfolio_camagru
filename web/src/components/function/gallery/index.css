@@ -33,6 +33,8 @@
     display: inline-block;
 
     object-fit: cover;
+    background-size: cover;
+    background-position: center;
 
     opacity: 0.35;
 
@@ -46,6 +48,8 @@
     display: inline-block;
 
     object-fit: cover;
+    background-size: cover;
+    background-position: center;
 
     cursor: pointer;
 }

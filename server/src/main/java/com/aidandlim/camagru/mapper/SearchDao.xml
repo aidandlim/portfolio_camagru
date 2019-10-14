@@ -32,7 +32,6 @@
         SELECT
             p.id,
             p.picture,
-            p.rotate,
             p.content,
             p.location,
             p.together,

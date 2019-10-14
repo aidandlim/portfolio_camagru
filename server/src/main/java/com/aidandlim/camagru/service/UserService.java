@@ -74,7 +74,7 @@ public class UserService {
         try {
             userDao = sqlSession.getMapper(UserDao.class);
             pictureService.delete(userDao.select(tokenService.get(token)).getPicture());
-            userDao.updatePicture(pictureService.uploadWithFile(file), tokenService.get(token));
+            userDao.updatePicture(pictureService.uploadWithFile(file, null), tokenService.get(token));
             return true;
         } catch (Exception e) {
             return false;

@@ -104,7 +104,7 @@ const Search = () => {
 				) : ''}
 				<div className='search-post-container'>
 					{ search.type === 1 ? search.posts.map((post, index) => 
-						<div className={post.rotate ? 'search-post rotate' : 'search-post'} style={{ backgroundImage: 'url(\'/picture?p=' + post.picture + '\')' }} key={index} onClick={ () => _handleDetail(post.id) }></div>
+						<div className='search-post' style={{ backgroundImage: 'url(\'/picture?p=' + post.picture + '\')' }} key={index} onClick={ () => _handleDetail(post.id) }></div>
 					) : ''}
 				</div>
 			</div>

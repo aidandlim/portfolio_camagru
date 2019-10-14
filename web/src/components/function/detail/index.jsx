@@ -219,7 +219,7 @@ const Detail = () => {
 						{content.post.together !== '' ? <div className='post-people'>{content.post.together}</div> : ''}
 						{content.post.location === '' && content.post.together === '' ? <div className='post-in'>By Camagru App</div> : '' }
 					</div>
-					<div className={content.post.rotate ? 'post-picture rotate' : 'post-picture'} style={{ backgroundImage: 'url(\'/picture?p=' + content.post.picture + '\')' }}></div>
+					<div className='post-picture' style={{ backgroundImage: 'url(\'/picture?p=' + content.post.picture + '\')' }}></div>
 					<div className='post-reflect-container'>
 						{ !content.post.user_islike ? 
 							<FiHeart className='post-icon' onClick={ () => _handleLikes() } /> 

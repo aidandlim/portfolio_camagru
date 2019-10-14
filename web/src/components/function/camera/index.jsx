@@ -37,11 +37,10 @@ const Camera = () => {
 		setTimeout(() => {
 			document.getElementById('shutter').classList.remove("camera-shutter-on");
 		}, 150);
-		let data = webcamRef.current.getScreenshot();
+		const data = webcamRef.current.getScreenshot();
 		if(data !== null) {
 			images.push({
-				data: data,
-				rotate: 1
+				data: data
 			});
 			dispatch(camera_images(images));
 		}
@@ -58,14 +57,24 @@ const Camera = () => {
 				]
 			});
 		} else {
+			var stickers = [];
+			for(var i = 0; i < camera.inputs.length; i++) {
+				var target = document.getElementById('canvas-sticker-' + i);
+				stickers.push({
+					name: camera.inputs[i],
+					x: parseInt(target.style.left) / parseInt(document.getElementById('preview').offsetWidth),
+					y: parseInt(target.style.top) / parseInt(document.getElementById('preview').offsetWidth),
+				});
+			}
 			axios.post('/post/insert', {
 				token: auth.token,
 				user_id: user.user.id,
 				picture: camera.preview.replace('data:image/jpeg;base64,', ''),
-				rotate: camera.rotate,
 				content: document.camera.content.value,
 				location: document.camera.location.value,
 				together: document.camera.together.value,
+
+				stickers: stickers
 			})
 			.then(res => {
 				if(res.data) {
@@ -101,8 +110,7 @@ const Camera = () => {
 			reader.readAsDataURL(file);
 			reader.onload = () => {
 				images.push({
-					data: reader.result,
-					rotate: 0
+					data: reader.result
 				});
 				dispatch(camera_images(images));
 			}
@@ -153,7 +161,16 @@ const Camera = () => {
 								<input className='camera-input' name='together' type='text' />
 							</div>
 						</div>
-						{ camera.preview === '' ? <Webcam className='camera-webcam' ref={webcamRef} screenshotFormat='image/jpeg' audio={false} onUserMedia={ () => _handleLoad() } /> : '' }
+						{ camera.preview === '' 
+							? 
+							<Webcam className='camera-webcam' ref={webcamRef}
+								screenshotFormat='image/jpeg'
+								audio={false}
+								onUserMedia={ () => _handleLoad() }
+							/> 
+							:
+							''
+						}
 						{ camera.isLoad ? <Loadcam /> : '' }
 						{ !camera.isLoad && camera.preview === '' ? <div className='camera-shoot' onClick={ () => _handleCapture() }></div> : '' }
 						{ !camera.isLoad && camera.preview === '' ? <div id='shutter' className='camera-shutter'></div> : '' }

@@ -67,7 +67,7 @@
     top: 29.5rem;
     left: calc(50% - 1.5rem);
 
-    background-color: #00695C;
+    background-color: #AAAAAA;
     border-radius: 50%;
     border: solid 0.5rem #404040;
 
@@ -81,6 +81,30 @@
 .camera-shoot:hover {
     opacity: 1;
     transition: 0.3s;
+}
+
+.camera-shutter {
+    width: 30rem;
+    height: 30rem;
+    overflow: hidden;
+
+    position: absolute;
+    top: 3.5rem;
+    left: 0;
+
+    background-color: #606060;
+
+    opacity: 0;
+    -webkit-transition: all 150ms ease-in;
+    transition: all 150ms ease-in;
+
+    z-index: 1;
+}
+
+.camera-shutter-on {
+    opacity: 1;
+    -webkit-transition: all 150ms ease-in;
+    transition: all 150ms ease-in;
 }
 
 .camera-margin {

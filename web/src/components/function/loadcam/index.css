@@ -22,7 +22,7 @@
 
     border: 0.35rem solid #707070;
     border-radius: 50%;
-    border-top: 0.35rem solid #00695C;
+    border-top: 0.35rem solid #AAAAAA;
     
     animation: spin 1.5s linear infinite;
     -webkit-animation: spin 1.5s linear infinite;

@@ -33,6 +33,10 @@ const Camera = () => {
 	}
 
 	const _handleCapture = () => {
+		document.getElementById('shutter').classList.add("camera-shutter-on");
+		setTimeout(() => {
+			document.getElementById('shutter').classList.remove("camera-shutter-on");
+		}, 150);
 		let data = webcamRef.current.getScreenshot();
 		if(data !== null) {
 			images.push({
@@ -152,6 +156,7 @@ const Camera = () => {
 						{ camera.preview === '' ? <Webcam className='camera-webcam' ref={webcamRef} screenshotFormat='image/jpeg' audio={false} onUserMedia={ () => _handleLoad() } /> : '' }
 						{ camera.isLoad ? <Loadcam /> : '' }
 						{ !camera.isLoad && camera.preview === '' ? <div className='camera-shoot' onClick={ () => _handleCapture() }></div> : '' }
+						{ !camera.isLoad && camera.preview === '' ? <div id='shutter' className='camera-shutter'></div> : '' }
 						{ !camera.isLoad && camera.preview !== '' ? <Preview /> : '' }
 						{ !camera.isLoad && camera.preview !== '' ? <Canvas /> : '' }
 						<div className='camera-margin'>

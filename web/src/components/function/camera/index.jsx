@@ -89,15 +89,28 @@ const Camera = () => {
 	}
 
 	const _handleFileUpload = () => {
-		var file = document.getElementById('file').files[0];
-		var reader = new FileReader();
-		reader.readAsDataURL(file);
-		reader.onload = () => {
-			images.push({
-				data: reader.result,
-				rotate: 0
+		let input = document.getElementById('file');
+		let extension = input.value.split('.')[input.value.split('.').length - 1];
+		if(extension === 'jpg' || extension === 'jpeg' || extension === 'png' || extension === 'gif') {
+			let file = input.files[0];
+			let reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = () => {
+				images.push({
+					data: reader.result,
+					rotate: 0
+				});
+				dispatch(camera_images(images));
+			}
+		} else {
+			confirmAlert({
+				message: 'Extension of image can be only .jpg, .jpeg, .png, .gif!',
+				buttons: [
+					{
+						label: 'Okay'
+					}
+				]
 			});
-			dispatch(camera_images(images));
 		}
 	}
 

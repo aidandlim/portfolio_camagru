@@ -49,6 +49,7 @@ public class PictureService {
             Files.write(path, bytes);
             return name;
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -62,6 +63,7 @@ public class PictureService {
             fos.close();
             return name;
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -74,6 +76,7 @@ public class PictureService {
             }
             return result;
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -106,6 +109,7 @@ public class PictureService {
             ImageIO.write(combined, "png", result);
             return result.toByteArray();
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }

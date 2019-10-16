@@ -24,7 +24,7 @@ public class ShareService {
             String result = "<html>";
             result += "<header>";
             result += "<title>" + dto.getUser_nickname() + "'s post on Camagru</title>";
-            result += "<meta name=\"description\" content=\"Check out the post on Camagru app\"";
+            result += "<meta name=\"description\" content=\"Check out the post on Camagru app\">";
             result += "<link href=\"https://fonts.googleapis.com/css?family=Astloch|Quicksand&display=swap\" rel=\"stylesheet\">";
             result += "</header>";
             result += "<body  style=\"width: 100%; height: 100vh; background-color: #303030; margin: 0; padding: 0; overflow: hidden;\">";

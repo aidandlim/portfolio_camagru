@@ -31,6 +31,10 @@ public class Post extends Token {
         super();
     }
 
+    public Post(long id) {
+        this.id = id;
+    }
+
     public Post(long id, long user_id, String picture, String content, String location, String together, Date time, String user_nickname, String user_picture, boolean user_islike, int num_likes, int num_comments, String post_time, ArrayList<Reflection> likes, ArrayList<Comment> comments, ArrayList<Sticker> stickers, int call) {
         super();
         this.id = id;

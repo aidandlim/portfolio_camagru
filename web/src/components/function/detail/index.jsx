@@ -10,7 +10,7 @@ import Likes from '../likes';
 import Comments from '../comments';
 
 import { confirmAlert } from 'react-confirm-alert';
-import { FiHeart, FiTrash2 } from 'react-icons/fi';
+import { FiHeart, FiTrash2, FiFacebook, FiTwitter } from 'react-icons/fi';
 import { MdFavorite } from 'react-icons/md';
 import default_user from '../../../resources/default_user.png';
 import './index.css';
@@ -226,6 +226,8 @@ const Detail = () => {
 							:
 							<MdFavorite className='post-icon post-icon-active' onClick={ () => _handleLikes() } />
 						}
+						<FiFacebook className='post-icon' />
+						<FiTwitter className='post-icon' />
 						<FiTrash2 className='post-icon' onClick={ () => _handleDeletePost() } />
 						{ content.post.content.length ? 
 							<textarea className='post-content' style={{height: content.post === {} ? '0rem' : content.post.content.split('\n').length + 'rem'}} value={content.post.content} readOnly></textarea>

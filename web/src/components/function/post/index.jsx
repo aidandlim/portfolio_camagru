@@ -7,7 +7,7 @@ import axios from 'axios';
 import cookie from 'react-cookies';
 
 import { confirmAlert } from 'react-confirm-alert';
-import { FiHeart, FiTrash2 } from 'react-icons/fi';
+import { FiHeart, FiTrash2, FiFacebook, FiTwitter } from 'react-icons/fi';
 import { MdFavorite } from 'react-icons/md';
 import default_user from '../../../resources/default_user.png';
 import './index.css';
@@ -234,6 +234,8 @@ const Post = (props) => {
 					:
 					<MdFavorite className='post-icon post-icon-active' onClick={ () => _handleLikes() } />
 				}
+				<FiFacebook className='post-icon' />
+				<FiTwitter className='post-icon' />
 				<FiTrash2 className='post-icon' onClick={ () => _handleDeletePost() } />
 				{ props.data.content.length ? 
 					<textarea className='post-content' style={{height: props.data.content.split('\n').length + 'rem'}} value={props.data.content} readOnly></textarea>

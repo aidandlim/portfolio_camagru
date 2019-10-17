@@ -244,9 +244,9 @@ const Post = (props) => {
 					:
 					<MdFavorite className='post-icon post-icon-active' onClick={ () => _handleLikes() } />
 				}
-				<FiFacebook className='post-icon' onClick={ () => _handleShareToFacebook() }/>
-				<FiTwitter className='post-icon' onClick={ () => _handleShareToTwitter() } />
-				<FiTrash2 className='post-icon' onClick={ () => _handleDeletePost() } />
+				{ props.data.user_id === user.user.id ? <FiFacebook className='post-icon' onClick={ () => _handleShareToFacebook() }/> : <div className='post-icon'></div> }
+				{ props.data.user_id === user.user.id ? <FiTwitter className='post-icon' onClick={ () => _handleShareToTwitter() } /> : <div className='post-icon'></div> }
+				{ props.data.user_id === user.user.id ? <FiTrash2 className='post-icon' onClick={ () => _handleDeletePost() } /> : <div className='post-icon'></div> }
 				{ props.data.content.length ? 
 					<textarea className='post-content' style={{height: props.data.content.split('\n').length + 'rem'}} value={props.data.content} readOnly></textarea>
 				: ''}

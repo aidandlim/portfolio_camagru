@@ -74,7 +74,8 @@ const Camera = () => {
 				location: document.camera.location.value,
 				together: document.camera.together.value,
 
-				stickers: stickers
+				stickers: stickers,
+				filter: camera.filter,
 			})
 			.then(res => {
 				if(res.data) {

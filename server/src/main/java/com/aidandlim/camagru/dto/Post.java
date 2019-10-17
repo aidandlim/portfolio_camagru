@@ -24,6 +24,7 @@ public class Post extends Token {
     private ArrayList<Comment> comments;
 
     private ArrayList<Sticker> stickers;
+    private int filter;
 
     private int call;
 
@@ -35,7 +36,7 @@ public class Post extends Token {
         this.id = id;
     }
 
-    public Post(long id, long user_id, String picture, String content, String location, String together, Date time, String user_nickname, String user_picture, boolean user_islike, int num_likes, int num_comments, String post_time, ArrayList<Reflection> likes, ArrayList<Comment> comments, ArrayList<Sticker> stickers, int call) {
+    public Post(long id, long user_id, String picture, String content, String location, String together, Date time, String user_nickname, String user_picture, boolean user_islike, int num_likes, int num_comments, String post_time, ArrayList<Reflection> likes, ArrayList<Comment> comments, ArrayList<Sticker> stickers, int filter, int call) {
         super();
         this.id = id;
         this.user_id = user_id;
@@ -53,6 +54,7 @@ public class Post extends Token {
         this.likes = likes;
         this.comments = comments;
         this.stickers = stickers;
+        this.filter = filter;
         this.call = call;
     }
 
@@ -182,6 +184,14 @@ public class Post extends Token {
 
     public void setStickers(ArrayList<Sticker> stickers) {
         this.stickers = stickers;
+    }
+
+    public int getFilter() {
+        return filter;
+    }
+
+    public void setFilter(int filter) {
+        this.filter = filter;
     }
 
     public int getCall() {

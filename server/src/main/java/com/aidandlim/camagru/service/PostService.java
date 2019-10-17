@@ -71,7 +71,7 @@ public class PostService {
             return false;
         try {
             postDao = sqlSession.getMapper(PostDao.class);
-            post.setPicture(pictureService.uploadWithHash(post.getPicture(), post.getStickers()));
+            post.setPicture(pictureService.uploadWithHash(post.getPicture(), post.getFilter(), post.getStickers()));
             postDao.insert(post);
             return true;
         } catch (Exception e) {

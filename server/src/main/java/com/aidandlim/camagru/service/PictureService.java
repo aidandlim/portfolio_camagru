@@ -39,10 +39,10 @@ public class PictureService {
         }
     }
 
-    public String uploadWithFile(MultipartFile file, ArrayList<Sticker> stickers) {
+    public String uploadWithFile(MultipartFile file) {
         try {
             String name = System.currentTimeMillis() + "-" + UUID.randomUUID().toString();
-            byte bytes[] = stickers != null ? mergeImage(file.getBytes(), getBytesStickers(stickers), stickers) : file.getBytes();
+            byte bytes[] = file.getBytes();
             Path path = Paths.get(Const.PATH_PICTURE + name);
             Files.write(path, bytes);
             return name;
@@ -52,10 +52,10 @@ public class PictureService {
         }
     }
 
-    public String uploadWithHash(String file, ArrayList<Sticker> stickers) {
+    public String uploadWithHash(String file, int filter, ArrayList<Sticker> stickers) {
         try {
             String name = System.currentTimeMillis() + "-" + UUID.randomUUID().toString();
-            byte bytes[] = mergeImage(Base64.decodeBase64(file), getBytesStickers(stickers), stickers);
+            byte bytes[] = mergeImage(Base64.decodeBase64(file), filter, getBytesStickers(stickers), stickers);
             FileOutputStream fos = new FileOutputStream(new File(Const.PATH_PICTURE + name));
             fos.write(bytes);
             fos.close();
@@ -79,7 +79,7 @@ public class PictureService {
         }
     }
 
-    public byte[] mergeImage(byte[] image, ArrayList<byte[]> stickers, ArrayList<Sticker> stickersInfo) {
+    public byte[] mergeImage(byte[] image, int filter, ArrayList<byte[]> stickers, ArrayList<Sticker> stickersInfo) {
         try {
             ArrayList<BufferedImage> bufferedImage = new ArrayList<>();
 
@@ -89,19 +89,23 @@ public class PictureService {
             }
 
             int size = Math.min(bufferedImage.get(0).getWidth(), bufferedImage.get(0).getHeight());
-            BufferedImage combined = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
+            BufferedImage combined = new BufferedImage(size, size, (filter != 1 ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_BYTE_GRAY));
 
-            Graphics g  = combined.getGraphics();
+            Graphics graphics = combined.getGraphics();
 
-            g.drawImage(bufferedImage.get(0), (bufferedImage.get(0).getWidth() - size) / -2, (bufferedImage.get(0).getHeight() - size) / -2, null);
+            graphics.drawImage(bufferedImage.get(0), (bufferedImage.get(0).getWidth() - size) / -2, (bufferedImage.get(0).getHeight() - size) / -2, null);
             for(int i = 1; i < bufferedImage.size(); i++) {
-                g.drawImage(
+                graphics.drawImage(
                         bufferedImage.get(i).getScaledInstance(size / 10, size  / 10, Image.SCALE_SMOOTH),
                         (int) (stickersInfo.get(i - 1).getX() * size),
                         (int) (stickersInfo.get(i - 1).getY() * size),
                         null);
             }
-            g.dispose();
+            graphics.dispose();
+
+            if(filter == 2) {
+                combined = setSephiaFilter(combined, size);
+            }
 
             ByteArrayOutputStream result = new ByteArrayOutputStream();
             ImageIO.write(combined, "png", result);
@@ -110,6 +114,30 @@ public class PictureService {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public BufferedImage setSephiaFilter(BufferedImage image, int size) {
+        for(int y = 0; y < size; y++){
+            for(int x = 0; x < size; x++){
+                int p = image.getRGB(x,y);
+                int a = (p >> 24) &0xff;
+                int r = (p >> 16) &0xff;
+                int g = (p >> 8) &0xff;
+                int b = p&0xff;
+
+                int tr = (int) (0.393 * r + 0.769 * g + 0.189 * b);
+                int tg = (int) (0.349 * r + 0.686 * g + 0.168 * b);
+                int tb = (int) (0.272 * r + 0.534 * g + 0.131 * b);
+
+                r = tr > 255 ? 255 : tr;
+                g = tg > 255 ? 255 : tg;
+                b = tb > 255 ? 255 : tb;
+                p = (a << 24) | (r << 16) | (g << 8) | b;
+
+                image.setRGB(x, y, p);
+            }
+        }
+        return image;
     }
 
     public void delete(String name) {

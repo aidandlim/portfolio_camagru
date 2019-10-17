@@ -193,6 +193,16 @@ const Detail = () => {
 		});
 	}
 
+	const _handleShareToFacebook = () => {
+		const url = 'https://camagru.aidandlim.com:8443/share?sid=' +  content.post.id;
+		window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, 'Share to Facebook','height=500, width=500');
+	}
+
+	const _handleShareToTwitter = () => {
+		const url = 'https://camagru.aidandlim.com:8443/share?sid=' + content.post.id;
+		window.open('https://twitter.com/intent/tweet?url=' + url, 'Share to Twitter','height=500, width=500');
+	}
+
 	const _handleTextareaSize = () => {
 		const e = document.getElementById('detail-comment-box-' + content.post.id);
 		e.style.height = '5px';
@@ -226,9 +236,9 @@ const Detail = () => {
 							:
 							<MdFavorite className='post-icon post-icon-active' onClick={ () => _handleLikes() } />
 						}
-						<FiFacebook className='post-icon' />
-						<FiTwitter className='post-icon' />
-						<FiTrash2 className='post-icon' onClick={ () => _handleDeletePost() } />
+						{ content.post.user_id === user.user.id ? <FiFacebook className='post-icon' onClick={ () => _handleShareToFacebook() }/> : <div className='post-icon'></div> }
+						{ content.post.user_id === user.user.id ? <FiTwitter className='post-icon' onClick={ () => _handleShareToTwitter() } /> : <div className='post-icon'></div> }
+						{ content.post.user_id === user.user.id ? <FiTrash2 className='post-icon' onClick={ () => _handleDeletePost() } /> : <div className='post-icon'></div> }
 						{ content.post.content.length ? 
 							<textarea className='post-content' style={{height: content.post === {} ? '0rem' : content.post.content.split('\n').length + 'rem'}} value={content.post.content} readOnly></textarea>
 						: '' }

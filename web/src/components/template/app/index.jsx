@@ -11,6 +11,8 @@ import Body from '../body';
 import Footer from '../footer';
 import Sidebar from '../../function/sidebar';
 
+import Wrapper from 'react-div-100vh';
+
 import './index.css';
 
 const App = () => {
@@ -49,13 +51,13 @@ const App = () => {
 	}
 	
 	return (
-		<div className='app no-drag'>
+		<Wrapper className='app no-drag'>
 			<Header />
 			<Body />
 			<Footer />
 			{ ui.nav === 1 ? <div className='sidebar-cover' onClick={() => dispatch(ui_nav(0))} /> : '' }
 			{ ui.nav === 1 ? <Sidebar /> : '' }
-		</div>
+		</Wrapper>
 	);
 }
 

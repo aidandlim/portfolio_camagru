@@ -116,6 +116,7 @@ const Camera = () => {
 				dispatch(camera_images(images));
 			}
 		} else {
+			input.value = '';
 			confirmAlert({
 				message: 'Extension of image can be only .jpg, .jpeg, .png!',
 				buttons: [

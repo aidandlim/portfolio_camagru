@@ -27,9 +27,9 @@ public class App {
     public @ResponseBody String verify(User user) { return (authService.verify(user)); }
 
     @RequestMapping("share")
-    public @ResponseBody String share(HttpServletResponse res, @RequestParam("p") String id) {
+    public @ResponseBody String share(HttpServletResponse res, @RequestParam("sid") String sid) {
         res.setContentType("text/html");
-        return shareService.share(id);
+        return shareService.share(sid);
     }
 
 }

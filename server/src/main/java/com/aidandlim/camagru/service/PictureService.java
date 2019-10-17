@@ -1,5 +1,6 @@
 package com.aidandlim.camagru.service;
 
+import com.aidandlim.camagru.config.Const;
 import com.aidandlim.camagru.dto.Sticker;
 import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -10,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -31,11 +31,9 @@ public class PictureService {
     @Autowired
     StickerService stickerService;
 
-    String PATH = "/Users/aidan/Workspace/portfolio_camagru/data/picture/";
-
     public byte[] get(String uuid) {
         try {
-            return FileUtils.readFileToByteArray(new File(PATH + uuid));
+            return FileUtils.readFileToByteArray(new File(Const.PATH_PICTURE + uuid));
         } catch (Exception e) {
             return null;
         }
@@ -45,7 +43,7 @@ public class PictureService {
         try {
             String name = System.currentTimeMillis() + "-" + UUID.randomUUID().toString();
             byte bytes[] = stickers != null ? mergeImage(file.getBytes(), getBytesStickers(stickers), stickers) : file.getBytes();
-            Path path = Paths.get(PATH + name);
+            Path path = Paths.get(Const.PATH_PICTURE + name);
             Files.write(path, bytes);
             return name;
         } catch (Exception e) {
@@ -58,7 +56,7 @@ public class PictureService {
         try {
             String name = System.currentTimeMillis() + "-" + UUID.randomUUID().toString();
             byte bytes[] = mergeImage(Base64.decodeBase64(file), getBytesStickers(stickers), stickers);
-            FileOutputStream fos = new FileOutputStream(new File(PATH + name));
+            FileOutputStream fos = new FileOutputStream(new File(Const.PATH_PICTURE + name));
             fos.write(bytes);
             fos.close();
             return name;
@@ -116,7 +114,7 @@ public class PictureService {
 
     public void delete(String name) {
         try {
-            File file = new File(PATH + name);
+            File file = new File(Const.PATH_PICTURE + name);
             file.delete();
         } catch (Exception e) {
             return;

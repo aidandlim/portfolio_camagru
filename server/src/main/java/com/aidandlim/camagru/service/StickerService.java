@@ -1,5 +1,6 @@
 package com.aidandlim.camagru.service;
 
+import com.aidandlim.camagru.config.Const;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,11 +11,9 @@ import java.util.ArrayList;
 @Service
 public class StickerService {
 
-    String PATH = "/Users/aidan/Workspace/portfolio_camagru/data/sticker/";
-
     public byte[] get(String name) {
         try {
-            return FileUtils.readFileToByteArray(new File(PATH + name));
+            return FileUtils.readFileToByteArray(new File(Const.PATH_STICKER + name));
         } catch (Exception e) {
             return null;
         }
@@ -23,7 +22,7 @@ public class StickerService {
     @Transactional
     public ArrayList<String> selectAll() {
         try {
-            File dir = new File(PATH);
+            File dir = new File(Const.PATH_STICKER);
             File[] files = dir.listFiles();
             ArrayList<String> dto = new ArrayList<>();
             for(int i = 0; i < files.length; i++) {

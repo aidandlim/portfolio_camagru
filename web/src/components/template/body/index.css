@@ -7,6 +7,7 @@
     overflow-y: scroll;
 
     position: relative;
+    float: left;
 
     background-color: #303030;
 }

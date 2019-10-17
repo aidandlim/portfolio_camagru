@@ -2,10 +2,10 @@ package com.aidandlim.camagru.config;
 
 public class Const {
 
-//    public static String URL_SERVER = "https://54.153.127.241:8443/";
-//    public static String URL_APP = "https://54.153.127.241:3000/";
-    public static String URL_SERVER = "https://localhost:8443/";
-    public static String URL_APP = "https://localhost:3000/";
+    public static String URL_SERVER = "https://13.57.206.200:8443/";
+    public static String URL_APP = "https://13.57.206.200:3000/";
+//    public static String URL_SERVER = "https://localhost:8443/";
+//    public static String URL_APP = "https://localhost:3000/";
 
     public static String PATH_PICTURE = "/Users/aidan/Workspace/portfolio_camagru/data/picture/";
     public static String PATH_STICKER = "/Users/aidan/Workspace/portfolio_camagru/data/sticker/";

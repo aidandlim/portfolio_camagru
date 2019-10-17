@@ -56,9 +56,9 @@ public class ShareService {
             result += "<div style=\"width: 100%; height: 70px; position: relative; float: left; background-color: #101010; border-top: solid #404040 1px;\">";
 
             if(dto == null) {
-                result += "<button style=\"width: 300px; height: 40px; margin: 14px calc(50% - 150px); color: #DDDDDD; font-size: 15px; font-weight: 900; font-family: 'Quicksand', sans-serif; background-color: #808080; border: solid 1px #404040; border-radius: 5px; cursor: pointer\" onclick=\"location.href='" + Const.URL_APP + "'\">Check another posts on Camagru App</button>";
+                result += "<button style=\"width: 300px; height: 40px; margin: 14px calc(50% - 150px); color: #EEEEEE; font-size: 15px; font-weight: 900; font-family: 'Quicksand', sans-serif; background-color: #404040; border: solid 1px #606060; border-radius: 10px; cursor: pointer\" onclick=\"location.href='" + Const.URL_APP + "'\">Check another posts on Camagru App</button>";
             } else {
-                result += "<button style=\"width: 300px; height: 40px; margin: 14px calc(50% - 150px); color: #DDDDDD; font-size: 15px; font-weight: 900; font-family: 'Quicksand', sans-serif; background-color: #808080; border: solid 1px #404040; border-radius: 5px; cursor: pointer\" onclick=\"location.href='" + Const.URL_APP + "'\">Check out on Camagru App</button>";
+                result += "<button style=\"width: 300px; height: 40px; margin: 14px calc(50% - 150px); color: #EEEEEE; font-size: 15px; font-weight: 900; font-family: 'Quicksand', sans-serif; background-color: #404040; border: solid 1px #606060; border-radius: 10px; cursor: pointer; outline: none;\" onclick=\"location.href='" + Const.URL_APP + "'\">Check out on Camagru App</button>";
             }
 
             result += "</div>";

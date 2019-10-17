@@ -203,6 +203,16 @@ const Post = (props) => {
 		});
 	}
 
+	const _handleShareToFacebook = () => {
+		const url = 'https://camagru.aidandlim.com:8443/share?sid=' + props.data.id;
+		window.open('https://www.facebook.com/sharer/sharer.php?u=' + url, 'Share to Facebook','height=500, width=500');
+	}
+
+	const _handleShareToTwitter = () => {
+		const url = 'https://camagru.aidandlim.com:8443/share?sid=' + props.data.id;
+		window.open('https://twitter.com/intent/tweet?url=' + url, 'Share to Twitter','height=500, width=500');
+	}
+
 	const _handleTextareaSize = () => {
 		const e = document.getElementById('post-comment-box-' + props.data.id);
 		e.style.height = '5px';
@@ -234,8 +244,8 @@ const Post = (props) => {
 					:
 					<MdFavorite className='post-icon post-icon-active' onClick={ () => _handleLikes() } />
 				}
-				<FiFacebook className='post-icon' />
-				<FiTwitter className='post-icon' />
+				<FiFacebook className='post-icon' onClick={ () => _handleShareToFacebook() }/>
+				<FiTwitter className='post-icon' onClick={ () => _handleShareToTwitter() } />
 				<FiTrash2 className='post-icon' onClick={ () => _handleDeletePost() } />
 				{ props.data.content.length ? 
 					<textarea className='post-content' style={{height: props.data.content.split('\n').length + 'rem'}} value={props.data.content} readOnly></textarea>

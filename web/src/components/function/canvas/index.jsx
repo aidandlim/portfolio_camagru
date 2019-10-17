@@ -35,7 +35,7 @@ const Canvas = () => {
 	return (
 		<div className='canvas'>
 			{camera.inputs.map((input, index) =>
-				<div id={'canvas-sticker-' + index} className='canvas-sticker' style={{ backgroundImage: 'url(\'/sticker?s=' + input + '\')'}} key={index} onDrag={_handleDrag} onDoubleClick={() => _handleRemove()} draggable></div>	
+				<div id={'canvas-sticker-' + index} className={'canvas-sticker preview-filter-' + camera.filter} style={{ backgroundImage: 'url(\'/sticker?s=' + input + '\')'}} key={index} onDrag={_handleDrag} onDoubleClick={() => _handleRemove()} draggable></div>	
 			)}
 		</div>
 	);

@@ -104,7 +104,7 @@ const Comments = (props) => {
 					{ backgroundImage: 'url(\'/picture?p=' + props.comment.user_picture + '\')' }
 				} onClick={() => _handleProfilePage()}></div>
 				<textarea className='comments-content' style={{height: props.comment.content.split('\n').length + 'rem'}} value={props.comment.content} readOnly></textarea>
-				<div className='comment-nickname'>BY {props.comment.user_nickname}</div>
+				<div className='comment-nickname'>BY {props.comment.user_nickname} ({props.comment.time})</div>
 				{ props.comment.user_id === user.user.id ? <div className='comment-delete' onClick={() => _handleCommentsDelete(props.comment.id)}>DELETE</div> : <div className='comment-delete'></div> }
 			</div>
 		</div>

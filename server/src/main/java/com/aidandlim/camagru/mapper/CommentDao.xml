@@ -8,7 +8,11 @@
             c.user_id as user_id,
             c.post_id as post_id,
             c.content as content,
-            c.time as time,
+            CASE
+                WHEN MINUTE(TIMEDIFF(NOW(), c.time)) = 0 THEN 'RIGHT NOW'
+                WHEN c.time > DATE_ADD(NOW(), INTERVAL-1 HOUR) THEN CONCAT(MINUTE(TIMEDIFF(NOW(), c.time)), ' MINUTES AGO')
+                WHEN c.time > DATE_ADD(NOW(), INTERVAL-24 HOUR) THEN CONCAT(HOUR(TIMEDIFF(NOW(), c.time)), ' HOURS AGO')
+                ELSE CONCAT(DATEDIFF(NOW(), c.time), ' DAYS AGO') END as `time`,
             u.nickname as user_nickname,
             u.picture as user_picture
         FROM

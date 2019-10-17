@@ -105,7 +105,7 @@ const Camera = () => {
 	const _handleFileUpload = () => {
 		let input = document.getElementById('file');
 		let extension = input.value.split('.')[input.value.split('.').length - 1];
-		if(extension === 'jpg' || extension === 'jpeg' || extension === 'png' || extension === 'gif') {
+		if(extension === 'jpg' || extension === 'jpeg' || extension === 'png') {
 			let file = input.files[0];
 			let reader = new FileReader();
 			reader.readAsDataURL(file);
@@ -117,7 +117,7 @@ const Camera = () => {
 			}
 		} else {
 			confirmAlert({
-				message: 'Extension of image can be only .jpg, .jpeg, .png, .gif!',
+				message: 'Extension of image can be only .jpg, .jpeg, .png!',
 				buttons: [
 					{
 						label: 'Okay'

@@ -38,6 +38,7 @@ public class CommentService {
             commentDao = sqlSession.getMapper(CommentDao.class);
             return commentDao.selectAllByPost(post);
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }

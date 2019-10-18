@@ -3,10 +3,13 @@ package com.aidandlim.camagru.service;
 import com.aidandlim.camagru.config.Const;
 import com.aidandlim.camagru.dao.PostDao;
 import com.aidandlim.camagru.dto.Post;
+import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.io.File;
 
 @Service
 public class ShareService {
@@ -34,7 +37,7 @@ public class ShareService {
 
             result += "<meta name=\"description\" content=\"Check out the post on Camagru app\">";
             result += "<link href=\"https://fonts.googleapis.com/css?family=Astloch|Quicksand&display=swap\" rel=\"stylesheet\">";
-            result += "<link rel=\"shortcut icon\">";
+            result += "<link href=\"http://icons.iconarchive.com/icons/designbolts/free-multimedia/512/Dslr-Camera-icon.png\" rel=\"shortcut icon\">";
             result += "</header>";
 
             result += "<body  style=\"width: 100%; height: 100vh; background-color: #303030; margin: 0; padding: 0; overflow: hidden;\">";
@@ -48,7 +51,7 @@ public class ShareService {
             }
 
             if(dto == null) {
-                result += "<div style=\"width: 100%; height: calc(100vh - 142px); position: relative; float: left;\">This post is not valid anymore! Check out another post :)</div>";
+                result += "<div style=\"width: 100%; height: calc(100vh - 142px); position: relative; float: left; color: #CCCCCC; font-size: 20px; font-weight: 900; font-family: 'Quicksand', sans-serif; text-align: center; line-height: calc(100vh - 142px);\">This post is not valid anymore! Check out another post :)</div>";
             } else {
                 result += "<div style=\"width: 100%; height: calc(100vh - 142px); position: relative; float: left; background-size: contain; background-repeat: no-repeat; background-position: center; background-image: url(\'" + Const.URL_SERVER + "api/picture?p=" + dto.getPicture() + "\')\"></div>";
             }

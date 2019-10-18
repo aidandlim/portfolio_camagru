@@ -55,7 +55,16 @@ const Profile = () => {
 
 	const _handleChangePassword = (e) => {
 		e.preventDefault();
-		if(document.changePassword.change.value === document.changePassword.confirm.value) {
+		if(_handlePasswordCheck() !== 0) {
+			confirmAlert({
+				message: 'Passwords is not enough safety!',
+				buttons: [
+					{
+						label: 'Okay'
+					}
+				]
+			});
+		} else {
 			axios.post('/user/updatePassword', {
 				token: auth.token,
 				email: user.user.email,
@@ -67,15 +76,8 @@ const Profile = () => {
 					dispatch(post_posts([]));
 					_handleLogout();
 				} else {
-					cookie.remove('token', { path: '/'});
-
-					dispatch(auth_token(''));
-					dispatch(user_user({}));
-					dispatch(user_biotemp(''));
-					dispatch(ui_nav(0));
-
 					confirmAlert({
-						message: 'The session is no longer valid!',
+						message: 'Current password is not matched',
 						buttons: [
 							{
 								label: 'Okay'
@@ -84,16 +86,39 @@ const Profile = () => {
 					});
 				}
 			});
-		} else {
-			confirmAlert({
-				message: 'Password is not matched',
-				buttons: [
-					{
-						label: 'Okay'
-					}
-				]
-			});
 		}
+	}
+
+	const _handlePasswordCheck = () => {
+		const password = document.changePassword.change.value;
+		const confirm = document.changePassword.confirm.value;
+
+		const pattern1 = /[0-9]/;
+        const pattern2 = /[a-zA-Z]/;
+		const pattern3 = /[~!@#$%<>^&*]/;
+
+		document.getElementById('changePassword-password-check-1').style.color = '#00796B';
+		document.getElementById('changePassword-password-check-2').style.color = '#00796B';
+		document.getElementById('changePassword-password-check-3').style.color = '#00796B';
+
+		let error = 0;
+		
+		if(!(8 <= password.length && password.length <= 20)) {
+			document.getElementById('changePassword-password-check-1').style.color = '#D32F2F';
+			error++;
+		}
+
+		if(!pattern1.test(password) || !pattern2.test(password) || !pattern3.test(password)) {
+			document.getElementById('changePassword-password-check-2').style.color = '#D32F2F';
+			error++;
+		}
+
+		if(password === '' || password !== confirm) {
+			document.getElementById('changePassword-password-check-3').style.color = '#D32F2F';
+			error++;
+		}
+
+		return error;
 	}
 
 	const _handleChangePicture = (e) => {
@@ -201,9 +226,14 @@ const Profile = () => {
 				<span className='profile-placeholder'>Current Password</span>
 				<input className='profile-input' name='current' type='password' required />
 				<span className='profile-placeholder'>Change Password</span>
-				<input className='profile-input' name='change' type='password' required />
+				<input className='profile-input' name='change' type='password' onChange={ () => _handlePasswordCheck() } required />
 				<span className='profile-placeholder'>Confirm Password</span>
-				<input className='profile-input' name='confirm' type='password' required />
+				<input className='profile-input' name='confirm' type='password' onChange={ () => _handlePasswordCheck() } required />
+				<div className='changePassword-password-check'>
+					<p id='changePassword-password-check-1'>- Password has to be within 8 ~ 20 characters.</p>
+					<p id='changePassword-password-check-2'>- Also, it has to include upper case and special characters.</p>
+					<p id='changePassword-password-check-3'>- And then, pleas confirm your password.</p>
+				</div>
 				<input className='profile-submit' type='submit' value='Update User Password' />
 				<input className='profile-logout' type='button' value='Go to Account Setting' onClick={ () => dispatch(auth_isaccount()) } />
 				<input className='profile-logout' type='button' value='Logout' onClick={ () => _handleLogout() }/>

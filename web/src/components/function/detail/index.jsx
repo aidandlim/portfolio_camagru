@@ -96,6 +96,7 @@ const Detail = () => {
 			user_id: user.user.id,
 			user_picture: user.user.picture,
 			user_nickname: user.user.nickname,
+			time: 'RIGHT NOW',
 			content: document.getElementById('detail-comment-box-' + content.post.id).value,
 		});
 		dispatch(content_post(posts));
@@ -253,7 +254,7 @@ const Detail = () => {
 						: '' }
 						{ !content.isLikes && content.post.comments !== null ? 
 							content.post.comments.map((comment) => 
-								<Comments key={comment.id} comment={comment} /> 
+								<Comments key={comment.id} comment={comment} postId={content.post.id} /> 
 						) : '' }
 						<textarea className='post-comment-box' id={'detail-comment-box-' + content.post.id} name='content' placeholder='Add a comment...' onChange={ () => _handleTextareaSize() }></textarea>
 						<div className='post-comment-post' onClick={ () => _handleComments() }>POST</div>

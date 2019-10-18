@@ -12,16 +12,27 @@ const Signup = () => {
 
 	const _handleForm = (e) => {
 		e.preventDefault();
-		if(document.signup.password.value === document.signup.confirm.value) {
+		if(_handlePasswordCheck() !== 0) {
+			confirmAlert({
+				message: 'Passwords is not enough safety!',
+				buttons: [
+					{
+						label: 'Okay'
+					}
+				]
+			});
+		} else {
+			const email = document.signup.email.value;
+			const password = document.signup.password.value;
+			const nickname = document.signup.nickname.value;
+			dispatch(auth_isregister());
 			axios.post('/auth/signup', {
-				email: document.signup.email.value,
-				password: document.signup.password.value,
-				nickname: document.signup.nickname.value,
+				email: email,
+				password: password,
+				nickname: nickname,
 			})
 			.then(res => {
-				if(res.data) {
-					dispatch(auth_isregister());
-				} else {
+				if(!res.data) {
 					confirmAlert({
 						message: 'This email is already registered!',
 						buttons: [
@@ -32,16 +43,39 @@ const Signup = () => {
 					});
 				}
 			});
-		} else {
-			confirmAlert({
-				message: 'Passwords do not match!',
-				buttons: [
-					{
-						label: 'Okay'
-					}
-				]
-			});
 		}
+	}
+
+	const _handlePasswordCheck = () => {
+		const password = document.signup.password.value;
+		const confirm = document.signup.confirm.value;
+
+		const pattern1 = /[0-9]/;
+        const pattern2 = /[a-zA-Z]/;
+		const pattern3 = /[~!@#$%<>^&*]/;
+
+		document.getElementById('signin-password-check-1').style.color = '#00796B';
+		document.getElementById('signin-password-check-2').style.color = '#00796B';
+		document.getElementById('signin-password-check-3').style.color = '#00796B';
+
+		let error = 0;
+		
+		if(!(8 <= password.length && password.length <= 20)) {
+			document.getElementById('signin-password-check-1').style.color = '#D32F2F';
+			error++;
+		}
+
+		if(!pattern1.test(password) || !pattern2.test(password) || !pattern3.test(password)) {
+			document.getElementById('signin-password-check-2').style.color = '#D32F2F';
+			error++;
+		}
+
+		if(password === '' || password !== confirm) {
+			document.getElementById('signin-password-check-3').style.color = '#D32F2F';
+			error++;
+		}
+
+		return error;
 	}
 
 	return (
@@ -49,8 +83,13 @@ const Signup = () => {
 			<div className='signin-title'>Sign up!</div>
 			<form name='signup' onSubmit={_handleForm}>
 				<input className='signin-input' type='email' name='email' placeholder='Email Address' required />
-				<input className='signin-input' type='password' name='password' placeholder='Password' required />
-				<input className='signin-input' type='password' name='confirm' placeholder='Confirm Password' required />
+				<input className='signin-input' type='password' name='password' placeholder='Password' onChange={ () => _handlePasswordCheck() } required />
+				<input className='signin-input' type='password' name='confirm' placeholder='Confirm Password' onChange={ () => _handlePasswordCheck() } required />
+				<div id='signin-password-checker' className='signup-password-check'>
+					<p id='signin-password-check-1'>- Password has to be within 8 ~ 20 characters.</p>
+					<p id='signin-password-check-2'>- Also, it has to include upper case and special characters.</p>
+					<p id='signin-password-check-3'>- And then, pleas confirm your password.</p>
+				</div>
 				<input className='signin-input' type='text' name='nickname' placeholder='Nickname' required />
 				<button className='signin-btn' type='submit'>Sign up</button>
 			</form>

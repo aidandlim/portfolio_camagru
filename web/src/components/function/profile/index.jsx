@@ -190,6 +190,7 @@ const Profile = () => {
 		dispatch(auth_token(''));
 		dispatch(user_user({}));
 		dispatch(user_biotemp(''));
+		dispatch(post_posts([]));
 		dispatch(ui_nav(0));
 	}
 

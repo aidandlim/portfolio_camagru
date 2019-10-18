@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, auth_token, auth_isaccount, user_user, user_biotemp } from '../../../actions';
+import { ui_nav, auth_token, auth_isaccount, user_user, user_biotemp, post_posts } from '../../../actions';
 
 import axios from 'axios';
 import cookie from 'react-cookies';
@@ -23,6 +23,7 @@ const Account = () => {
 			if(res.data) {
 				user.user.private = !user.user.private;
 				dispatch(user_user(user.user));
+				dispatch(post_posts([]));
 			} else {
 				cookie.remove('token', { path: '/'});
 

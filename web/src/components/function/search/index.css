@@ -211,7 +211,7 @@
 
 @media (max-width: 50rem) {
     .search-input {
-        width: calc(100% - 7rem - 2px);
+        width: calc(100% - 7.1rem);
     }
 
     .search-info {

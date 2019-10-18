@@ -126,3 +126,33 @@
 
     z-index: 5;
 }
+
+@media (max-width: 50rem) {
+    .preview {
+        width: calc(95vw - 15px);
+        max-width: calc(95vw - 15px);
+
+        height: calc(95vw - 15px);
+        max-height: calc(95vw - 15px);
+    }
+
+    .preview-image {
+        width: calc(95vw - 15px);
+        max-width: calc(95vw - 15px);
+
+        height: calc(95vw - 15px);
+        max-height: calc(95vw - 15px);
+    }
+
+    .preview-rollback {
+        top: calc(95vw - 15px - 4.5rem);
+    }
+
+    .preview-filter {
+        top: calc(95vw - 15px - 3.75rem);
+    }
+
+    .preview-filter-title {
+        top: calc(95vw - 15px - 3.75rem);
+    }
+}

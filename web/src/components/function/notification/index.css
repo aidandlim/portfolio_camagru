@@ -33,3 +33,10 @@
     height: 4rem;
     margin: 0 13rem;
 }
+
+
+@media (max-width: 50rem) {
+    .notification-nopost-icon {
+        margin: 0 calc(50% - 2rem);
+    }
+}

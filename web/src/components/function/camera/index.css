@@ -151,19 +151,29 @@
     cursor: pointer;
 }
 
-@media (max-width: 40rem) {
-    .camera-webcam {
+@media (max-width: 50rem) {
+    .camera-post {
         width: 100%;
-        height: 100vw;
+        max-width: 100%;
     }
-    
-    .camera-loading {
-        width: 100%;
-        height: 100vw;
+
+    .camera-webcam {
+        width: calc(95vw - 15px);
+        max-width: calc(95vw - 15px);
+
+        height: calc(95vw - 15px);
+        max-height: calc(95vw - 15px);
     }
 
     .camera-shoot {
-        top: calc(100vw - 4rem);
-        left: calc(50% - 1.5rem);
+        top: calc(95vw - 15px - 1rem);
+    }
+
+    .camera-shutter {
+        width: calc(95vw - 15px);
+        max-width: calc(95vw - 15px);
+
+        height: calc(95vw - 15px);
+        max-height: calc(95vw - 15px);
     }
 }

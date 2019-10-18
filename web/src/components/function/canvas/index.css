@@ -21,3 +21,13 @@
     background-size: cover;
     background-position: center;
 }
+
+@media (max-width: 50rem) {
+    .canvas {
+        width: calc(95vw - 15px);
+        height: calc(95vw - 15px);
+
+        max-width: calc(95vw - 15px);
+        max-height: calc(95vw - 15px);
+    }
+}

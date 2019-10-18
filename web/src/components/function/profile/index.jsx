@@ -32,6 +32,7 @@ const Profile = () => {
 				} else {
 					dispatch(post_posts([]));
 					_handleData(auth.token);
+					dispatch(ui_nav(0));
 				}
 			} else {
 				cookie.remove('token', { path: '/'});
@@ -75,6 +76,7 @@ const Profile = () => {
 				if(res.data) {
 					dispatch(post_posts([]));
 					_handleLogout();
+					dispatch(ui_nav(0));
 				} else {
 					confirmAlert({
 						message: 'Current password is not matched',
@@ -134,7 +136,7 @@ const Profile = () => {
 			if(res.data) {
 				dispatch(post_posts([]));
 				_handleData(auth.token);
-				document.changePicture.file.value = '';
+				dispatch(ui_nav(0));
 			} else {
 				cookie.remove('token', { path: '/'});
 

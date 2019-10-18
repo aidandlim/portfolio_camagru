@@ -1,6 +1,7 @@
 .mypage {
     width: 100%;
-    height: calc(100% - 5rem + 2px);
+    height: calc(100% - 5.5rem + 2px);
+    padding-bottom: 0.5rem;
 
     overflow-x: hidden;
     overflow-y: scroll;
@@ -132,4 +133,22 @@
     width: 4rem;
     height: 4rem;
     margin: 0 13rem;
+}
+
+@media (max-width: 50rem) {
+    .mypage-profile-container:nth-child(2) {
+        width: calc(100% - 12rem);
+    }
+
+    .mypage-table-header {
+        width: calc((100% - 12rem) / 3 - 2px);
+    }
+
+    .mypage-table-body {
+        width: calc(33.33% - 2px);
+    }
+
+    .mypage-nopost-icon {
+        margin: 0 calc(50% - 2rem);
+    }
 }

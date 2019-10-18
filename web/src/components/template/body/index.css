@@ -22,10 +22,10 @@
     position: relative;
 }
 
-@media (max-width: 40rem) {
+@media (max-width: 50rem) {
     .inner-container {
-        width: 100%;
-        max-width: 100%;
-        margin-left: 0;
+        width: 95%;
+        max-width: 95%;
+        margin-left: 2.5%;
     }
 }

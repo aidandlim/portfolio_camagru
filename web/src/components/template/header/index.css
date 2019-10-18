@@ -13,12 +13,6 @@
     z-index: 10;
 }
 
-@media (max-width:1000px){
-    .header-container {
-        margin-left: 0;
-    }
-}
-
 .header-title {
     width: 5rem;
     height: 2.5rem;

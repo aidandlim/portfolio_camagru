@@ -40,7 +40,7 @@ const Body = () => {
 
 	return (
 		<div className='body' onScroll={_handleExploreScroll}>
-			{ ui.nav === 0 ? 
+			{ ui.nav === 0 || ui.nav === 1 ? 
 				<div className='inner-container'>
 					{post.posts.map((post) => 
 						<Post key={post.id} data={post} />

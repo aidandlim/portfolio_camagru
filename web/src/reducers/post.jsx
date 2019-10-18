@@ -1,5 +1,6 @@
 const post = {
-    posts: []
+    posts: [],
+    isDone: false,
 }
 
 const postReducer = (state = post, action) => {
@@ -7,6 +8,10 @@ const postReducer = (state = post, action) => {
         case 'POST_POSTS':
             return Object.assign({}, state, {
                 posts: action.payload
+            });
+        case 'POST_ISDONE':
+            return Object.assign({}, state, {
+                isDone: action.payload
             });
         default:
             return state;

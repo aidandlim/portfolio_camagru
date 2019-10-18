@@ -77,6 +77,17 @@ const Post = (props) => {
 			});
 			return;
 		}
+		if(document.getElementById('post-comment-box-' + props.data.id).value === '') {
+			confirmAlert({
+				message: 'Write the comment first',
+				buttons: [
+					{
+						label: 'Okay'
+					}
+				]
+			});
+			return;
+		}
 		var posts = post.posts;
 		for(var i = 0; i < posts.length; i++) {
 			if(posts[i].id === props.data.id) {

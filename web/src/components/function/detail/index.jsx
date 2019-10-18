@@ -89,6 +89,17 @@ const Detail = () => {
 			});
 			return;
 		}
+		if(document.getElementById('detail-comment-box-' + content.post.id).value === '') {
+			confirmAlert({
+				message: 'Write the comment first',
+				buttons: [
+					{
+						label: 'Okay'
+					}
+				]
+			});
+			return;
+		}
 		var posts = content.post;
 		posts.num_comments = posts.num_comments + 1;
 		posts.comments.push({

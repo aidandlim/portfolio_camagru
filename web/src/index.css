@@ -37,7 +37,15 @@ body {
 }
 
 ::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+::-webkit-scrollbar:vertical {
     width: 15px;
+}
+
+::-webkit-scrollbar:horizontal {
+    height: 15px;
 }
 
 ::-webkit-scrollbar-track {

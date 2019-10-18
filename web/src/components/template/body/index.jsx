@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { post_posts } from '../../../actions';
+import { post_posts, post_isdone } from '../../../actions';
 
 import axios from 'axios';
 
@@ -21,19 +21,27 @@ const Body = () => {
 	const dispatch = useDispatch();
 
 	let post = useSelector(state => state.post);
+	var isLoad = false;
 
 	const _handleExploreScroll = (e) => {
-		if(ui.nav === 0) {
+		if(ui.nav === 0 && post.isDone === false && isLoad === false) {
 			if(e.target.scrollTop / (e.target.scrollHeight - e.target.clientHeight) > 0.9) {
+				isLoad = true;
 				axios.post('/post/selectAll', {
 					token: auth.token,
 					call: parseInt(post.posts[post.posts.length - 1].id),
 				})
 				.then(res => {
 					let posts = post.posts;
-					dispatch(post_posts(posts.concat(res.data)));
+					if(res.data.length === 0) {
+						dispatch(post_isdone(true));
+					} else {
+						dispatch(post_posts(posts.concat(res.data)));
+					}
+				})
+				.then(() => {
+					isLoad = false;
 				});
-				
 			}
 		}
 	}

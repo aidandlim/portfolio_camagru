@@ -126,6 +126,13 @@ export const post_posts = (value) => {
     };
 };
 
+export const post_isdone = (value) => {
+    return {
+        type: 'POST_ISDONE',
+        payload: value
+    };
+};
+
 /***************************************************/
 
 export const notification_content = (value) => {

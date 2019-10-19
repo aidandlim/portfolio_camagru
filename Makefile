@@ -38,8 +38,9 @@ start:
 	@echo ""
 	@sleep 0.5
 
-	@echo "\t$(GREEN_BOLD)CAMAGRU APP > $(WHITE_BOLD)It has been completed. $(UNDERLINE)It will be opened your browser automatically$(RESET)."
-	@echo ""
+	@echo "\t$(GREEN_BOLD)CAMAGRU APP > $(WHITE_BOLD)It has been completed. IP address of server : \c"
+	@ipconfig getifaddr en0
+	@echo "$(RESET)"
 
 end:
 	@echo "Trying to terminate all Camagru application server :)"

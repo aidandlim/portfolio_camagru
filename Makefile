@@ -24,14 +24,14 @@ start:
 	@echo ""
 	@sleep 0.5
 
-	@echo "\t     [   ]  Installing the $(UNDERLINE)Dependency of React$(RESET).\c"
+	@echo "\t     [   ]  Installing the $(UNDERLINE)Dependency of React Application$(RESET).\c"
 	@cd app && npm install &> /dev/null
 	@sleep 0.5
 	@echo "\r\t     [ $(YELLOW)\xE2\x9C\x94$(RESET) ]"
 	@echo ""
 	@sleep 0.5
 	
-	@echo "\t     [   ]  Initializing the $(UNDERLINE)React Web Application$(RESET).\c"
+	@echo "\t     [   ]  Initializing the $(UNDERLINE)Frontend Web Application$(RESET).\c"
 	@cd app && nohup npm start >/dev/null 2>&1 &
 	@sleep 0.5
 	@echo "\r\t     [ $(YELLOW)\xE2\x9C\x94$(RESET) ]"

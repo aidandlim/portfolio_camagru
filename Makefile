@@ -16,6 +16,8 @@ start:
 	@echo "\t$(GREEN_BOLD)CAMAGRU APP > $(WHITE_BOLD)Welcome! The server setting process is initializing.$(RESET)"
 	@echo ""
 	@echo "\t     [   ]  Initializing the $(UNDERLINE)Restful API Backend Server$(RESET).\c"
+	@rm -rf ./server/src/main/resources/data/picture
+	@mkdir ./server/src/main/resources/data/picture
 	@cd server && nohup java -jar camagru-0.0.1.jar >/dev/null 2>&1 &
 	@sleep 0.5
 	@echo "\r\t     [ $(YELLOW)\xE2\x9C\x94$(RESET) ]"

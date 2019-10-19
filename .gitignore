@@ -4,6 +4,6 @@
 **/._.DS_Store
 
 node_modules
-picture/**
 
 **/nohup.out
+**/data/picture/**

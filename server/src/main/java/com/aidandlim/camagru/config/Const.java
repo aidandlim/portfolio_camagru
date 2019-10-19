@@ -12,6 +12,7 @@ public class Const {
     static {
         try {
             ip = InetAddress.getLocalHost().getHostAddress();
+            System.out.println(ip);
             if(ip.indexOf("/") != -1) {
                 ip = ip.split("/")[1];
             }

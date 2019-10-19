@@ -11,7 +11,7 @@ public class Const {
 
     static {
         try {
-            ip = InetAddress.getLocalHost().toString();
+            ip = InetAddress.getLocalHost().getHostAddress();
         } catch (UnknownHostException e) {
 
         }

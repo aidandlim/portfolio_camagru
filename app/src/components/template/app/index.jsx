@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, user_user, user_biotemp, post_posts, auth_token } from '../../../actions';
+import { ui_nav, user_user, user_biotemp, post_posts, auth_token, post_isdone } from '../../../actions';
 
 import axios from 'axios';
 import cookie from 'react-cookies';
@@ -41,12 +41,16 @@ const App = () => {
 		_handleData(cookie.load('token'));
 	}
 
-	if(ui.nav === 0 && post.posts.length === 0) {
+	if(ui.nav === 0 && post.posts.length === 0 && !post.isDone) {
 		axios.post('/post/selectAll', {
 			token: auth.token,
 		})
 		.then(res => {
-			dispatch(post_posts(res.data));
+			if(res.data.length === 0) {
+				dispatch(post_isdone(true));
+			} else {
+				dispatch(post_posts(res.data));
+			}
 		});
 	}
 	

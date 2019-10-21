@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, post_posts, auth_token, user_user, user_biotemp, camera_isload, camera_images } from '../../../actions';
+import { ui_nav, post_posts, post_isdone, auth_token, user_user, user_biotemp, camera_isload, camera_images } from '../../../actions';
 
 import axios from 'axios';
 import cookie from 'react-cookies';
@@ -80,6 +80,7 @@ const Camera = () => {
 			.then(res => {
 				if(res.data) {
 					dispatch(post_posts([]));
+					dispatch(post_isdone(false));
 					dispatch(ui_nav(0));
 				} else {
 					cookie.remove('token', { path: '/'});

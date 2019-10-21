@@ -188,7 +188,8 @@ const Post = (props) => {
 				posts.splice(i, 1);
 			}
 		}
-		dispatch(post_posts(posts));
+		if(posts.length > 0)
+			dispatch(post_posts(posts));
 		axios.post('/post/delete', {
 			token: auth.token,
 			id: props.data.id,
@@ -210,6 +211,9 @@ const Post = (props) => {
 						}
 					]
 				});
+			} else {
+				if(posts.length === 0)
+					dispatch(post_posts([]));
 			}
 		});
 	}

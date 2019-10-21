@@ -16,31 +16,30 @@ start:
 	@echo "\t$(GREEN_BOLD)CAMAGRU APP > $(WHITE_BOLD)Welcome! The server setting process is initializing.$(RESET)"
 	@echo ""
 	@echo "\t     [   ]  Initializing the $(UNDERLINE)Restful API Backend Server$(RESET).\c"
-	@rm -rf ./server/src/main/resources/data/picture
-	@mkdir ./server/src/main/resources/data/picture
-	@cd server && nohup java -jar camagru-0.0.1.jar >/dev/null 2>&1 &
+	@sudo rm -rf ./server/src/main/resources/data/picture
+	@sudo mkdir ./server/src/main/resources/data/picture
+	@cd server && sudo nohup java -jar camagru-0.0.1.jar >/dev/null 2>&1 &
 	@sleep 0.5
-	@echo "\r\t     [ $(YELLOW)\xE2\x9C\x94$(RESET) ]"
+	@echo "\r\t     [ $(YELLOW)#$(RESET) ]"
 	@echo ""
 	@sleep 0.5
 
 	@echo "\t     [   ]  Installing the $(UNDERLINE)Dependency of React Application$(RESET).\c"
-	@cd app && npm install &> /dev/null
+	@cd app && sudo npm install --quiet --no-progress > /dev/null 2>&1
 	@sleep 0.5
-	@echo "\r\t     [ $(YELLOW)\xE2\x9C\x94$(RESET) ]"
+	@echo "\r\t     [ $(YELLOW)#$(RESET) ]"
 	@echo ""
 	@sleep 0.5
 	
 	@echo "\t     [   ]  Initializing the $(UNDERLINE)Frontend Web Application$(RESET).\c"
-	@cd app && nohup npm start >/dev/null 2>&1 &
+	@cd app && sudo nohup npm start >/dev/null 2>&1 &
 	@sleep 0.5
-	@echo "\r\t     [ $(YELLOW)\xE2\x9C\x94$(RESET) ]"
+	@echo "\r\t     [ $(YELLOW)#$(RESET) ]"
 	@echo ""
 	@sleep 0.5
 
-	@echo "\t$(GREEN_BOLD)CAMAGRU APP > $(WHITE_BOLD)It has been completed. IP address of server : \c"
-	@ipconfig getifaddr en0
-	@echo "$(RESET)"
+	@echo "\t$(GREEN_BOLD)CAMAGRU APP > $(WHITE_BOLD)It has been completed."
+	@echo ""
 
 end:
 	@echo "Trying to terminate all Camagru application server :)"

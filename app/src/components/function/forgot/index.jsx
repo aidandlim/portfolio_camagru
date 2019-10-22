@@ -18,6 +18,14 @@ const Forgot = () => {
 		.then(res => {
 			if(res.data) {
 				dispatch(auth_isforgot());
+				confirmAlert({
+					message: 'Check your email, please!',
+					buttons: [
+						{
+							label: 'Okay'
+						}
+					]
+				});	
 			} else {
 				confirmAlert({
 					message: 'This email does not exist!',

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, user_user, user_biotemp, post_posts, auth_token, post_isdone } from '../../../actions';
+import { auth_token, user_user, user_biotemp, post_posts, post_isdone } from '../../../actions';
 
 import axios from 'axios';
 import cookie from 'react-cookies';
@@ -59,7 +59,7 @@ const App = () => {
 			<Header />
 			<Body />
 			<Footer />
-			{ ui.nav === 1 ? <div className='sidebar-cover' onClick={() => dispatch(ui_nav(0))} /> : '' }
+			{ ui.nav === 1 ? <div className='sidebar-cover' /> : '' }
 			{ ui.nav === 1 ? <Sidebar /> : '' }
 		</Wrapper>
 	);

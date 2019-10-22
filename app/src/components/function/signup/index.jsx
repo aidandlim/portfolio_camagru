@@ -32,7 +32,16 @@ const Signup = () => {
 				nickname: nickname,
 			})
 			.then(res => {
-				if(!res.data) {
+				if(res.data) {
+					confirmAlert({
+						message: 'Check your email, please!',
+						buttons: [
+							{
+								label: 'Okay'
+							}
+						]
+					});	
+				} else {
 					confirmAlert({
 						message: 'This email is already registered!',
 						buttons: [
@@ -41,6 +50,7 @@ const Signup = () => {
 							}
 						]
 					});
+					dispatch(auth_isregister());
 				}
 			});
 		}

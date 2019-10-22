@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, auth_token, user_user, user_biotemp, search_user, content_post } from '../../../actions';
+import { ui_nav, auth_token, user_user, user_biotemp, content_post, search_user } from '../../../actions';
 
 import axios from 'axios';
 import cookie from 'react-cookies';

@@ -69,7 +69,10 @@ const Camera = () => {
 			axios.post('/post/insert', {
 				token: auth.token,
 				user_id: user.user.id,
-				picture: camera.preview.replace('data:image/jpeg;base64,', '').replace('data:image/jpg;base64,', '').replace('data:image/png;base64,', '').replace('data:image/gif;base64,', ''),
+				picture: camera.preview.replace('data:image/jpeg;base64,', '')
+									.replace('data:image/jpg;base64,', '')
+									.replace('data:image/png;base64,', '')
+									.replace('data:image/gif;base64,', ''),
 				content: document.camera.content.value,
 				location: document.camera.location.value,
 				together: document.camera.together.value,

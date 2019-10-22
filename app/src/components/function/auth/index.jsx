@@ -13,7 +13,12 @@ const Auth = () => {
 	
 	return (
 		<div className='auth'>
-			{ auth.isRegister ? <Signup /> : ( auth.isForgot ? <Forgot /> : <Signin /> ) }
+			{ auth.isRegister 
+				? 
+				<Signup /> 
+				: 
+				( auth.isForgot ? <Forgot /> : <Signin /> ) 
+			}
 		</div>
 	);
 }

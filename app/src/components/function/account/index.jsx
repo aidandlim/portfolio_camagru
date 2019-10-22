@@ -94,19 +94,7 @@ const Account = () => {
 			id: user.user.id,
 		})
 		.then(res => {
-			if(res.data) {
-				dispatch(auth_token(''));
-				dispatch(user_user({}));
-				dispatch(auth_isaccount(false));
-				cookie.remove('token', { path: '/'});
-			} else {
-				cookie.remove('token', { path: '/'});
-
-				dispatch(auth_token(''));
-				dispatch(user_user({}));
-				dispatch(user_biotemp(''));
-				dispatch(ui_nav(0));
-
+			if(!res.data) {
 				confirmAlert({
 					message: 'The session is no longer valid!',
 					buttons: [
@@ -116,6 +104,12 @@ const Account = () => {
 					]
 				});
 			}
+			cookie.remove('token', { path: '/'});
+
+			dispatch(auth_token(''));
+			dispatch(user_user({}));
+			dispatch(user_biotemp(''));
+			dispatch(ui_nav(0));
 		});
 	}
 

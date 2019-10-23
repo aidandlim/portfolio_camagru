@@ -91,7 +91,8 @@ const Account = () => {
 
 	const _processDeleteUser = () => {
 		axios.post('/user/delete', {
-			id: user.user.id,
+			token:  auth.token,
+			id: user.user.id
 		})
 		.then(res => {
 			if(!res.data) {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, auth_token, search_user, post_posts } from '../../../actions';
+import { ui_nav, auth_token, search_user, post_posts, post_isdone } from '../../../actions';
 
 import axios from 'axios';
 
@@ -18,6 +18,7 @@ const Header = () => {
 
 	const _handleCI = () => {
 		dispatch(post_posts([]));
+		dispatch(post_isdone(false));
 		dispatch(ui_nav(0));
 	}
 

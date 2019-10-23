@@ -41,8 +41,8 @@ input[type="password"],
 input[type="email"],
 input[type="submit"],
 textarea  {
--webkit-appearance: none;
-border-radius: 0;
+    -webkit-appearance: none;
+    border-radius: 0;
 }
 
 ::-webkit-scrollbar {

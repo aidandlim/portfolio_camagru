@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, camera_images, camera_isload, camera_preview, camera_stickers, content_post, notification_content, post_posts } from '../../../actions';
+import { ui_nav, camera_images, camera_isload, camera_preview, camera_stickers, content_post, notification_content, post_posts, post_isdone } from '../../../actions';
 
 import axios from 'axios';
 
@@ -17,6 +17,7 @@ const Footer = () => {
 	const _handleExplore = () => {
 		dispatch(ui_nav(0));
 		dispatch(post_posts([]));
+		dispatch(post_isdone(false));
 		dispatch(content_post({}));
 	}
 

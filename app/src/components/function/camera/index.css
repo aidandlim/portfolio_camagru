@@ -164,7 +164,8 @@
     background-color: #272727;
     border-top: solid #404040 1px;
     border-bottom: solid #404040 1px;
-z-index: 3;
+
+    z-index: 3;
 }
 
 @media (max-width: 50rem) {

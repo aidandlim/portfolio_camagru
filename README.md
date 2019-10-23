@@ -10,13 +10,9 @@
 
 > A web project of bootcamp named <a href="https://www.42.us.org" target="_blank">`42 Silicon Valley`</a>
 
----
-
 ## Preview
 
 ***Not yet***
-
----
 
 ## Language & Library
 
@@ -76,13 +72,13 @@
 
 ## Aidan Lim (@dlim in 42 Silicon Valley)
 
-> Web & App developer who love traveling.
+- Web & App developer who love traveling.
 
-> Wokred as full stack developer for 3 years.
+- Wokred as full stack developer for 3 years.
 
-> Studies computer science at De Anza College & 42 Silicon Valley.
+- Studies computer science at De Anza College & 42 Silicon Valley.
 
-> Contact : ortivo.sol@gmail.com
+- Contact : ortivo.sol@gmail.com
 
 ---
 

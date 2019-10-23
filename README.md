@@ -64,7 +64,7 @@
 
 > Click <a href="https://camagru.aidandlim.com" target="_blank">`here`</a> to check it out right now.
 
-## Aidan Lim
+## Aidan Lim (@dlim in 42 Silicon Valley)
 
 ## License
 

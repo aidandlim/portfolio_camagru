@@ -77,8 +77,11 @@
 ## Aidan Lim (@dlim in 42 Silicon Valley)
 
 > Web & App developer who love traveling.
+
 > Wokred as full stack developer for 3 years.
+
 > Studies computer science at De Anza College & 42 Silicon Valley.
+
 > Contact : ortivo.sol@gmail.com
 
 ---

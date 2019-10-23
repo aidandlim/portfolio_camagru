@@ -4,11 +4,11 @@
 
 # Camagru Application
 
-> A responsive web application using React & Java
+> A responsive single page application(SPA) using React & Java
 
 > A Social Network Service(SNS) for sharing pictures like Instagram
 
-> A web project of bootcamp named <a href="https://www.42.us.org" target="_blank">`42 Silicon Valley`</a>
+> A web brunch project of bootcamp named <a href="https://www.42.us.org" target="_blank">`42 Silicon Valley`</a>
 
 ## Preview
 
@@ -66,7 +66,7 @@
 
 ## Live Demo
 
-> Click <a href="https://camagru.aidandlim.com" target="_blank">`here`</a> to check it out right now.
+> Click <a href="https://camagru.aidandlim.com" target="_blank">`HERE`</a> to check it out right now.
 
 ---
 
@@ -74,7 +74,7 @@
 
 - Web & App developer who love traveling.
 
-- Wokred as full stack developer for 3 years.
+- Wokred as full stack developer for 3 and half years.
 
 - Studies computer science at De Anza College & 42 Silicon Valley.
 

@@ -10,9 +10,13 @@
 
 > A web project of bootcamp named <a href="https://www.42.us.org" target="_blank">`42 Silicon Valley`</a>
 
+---
+
 ## Preview
 
 ***Not yet***
+
+---
 
 ## Language & Library
 
@@ -33,6 +37,8 @@
 - MyBatis
 
 > Amazon Web Service (AWS)
+
+---
 
 ## Fetures
 
@@ -60,11 +66,22 @@
 - Infinite loop for loading posts
 - Responsive page for desktop & mobile
 
+---
+
 ## Live Demo
 
 > Click <a href="https://camagru.aidandlim.com" target="_blank">`here`</a> to check it out right now.
 
+---
+
 ## Aidan Lim (@dlim in 42 Silicon Valley)
+
+> Web & App developer who love traveling.
+> Wokred as full stack developer for 3 years.
+> Studies computer science at De Anza College & 42 Silicon Valley.
+> Contact : ortivo.sol@gmail.com
+
+---
 
 ## License
 

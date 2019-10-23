@@ -76,18 +76,18 @@ public class AuthService {
     }
 
     @Transactional
-    public String verify(User user) {
+    public boolean verify(User user) {
         try {
             verifyDao = sqlSession.getMapper(VerifyDao.class);
             if(verifyDao.select(user).getUuid().equals(user.getUuid())) {
                 verifyDao.update(user);
                 verifyDao.delete(user);
             } else {
-                return "Fail";
+                return false;
             }
-            return "Success";
+            return true;
         } catch(Exception e) {
-            return "Fail";
+            return false;
         }
     }
 

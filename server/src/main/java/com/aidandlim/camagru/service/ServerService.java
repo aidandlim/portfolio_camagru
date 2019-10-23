@@ -3,13 +3,9 @@ package com.aidandlim.camagru.service;
 import com.aidandlim.camagru.config.Const;
 import com.aidandlim.camagru.dao.PostDao;
 import com.aidandlim.camagru.dto.Post;
-import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.io.File;
 
 @Service
 public class ServerService {
@@ -43,6 +39,45 @@ public class ServerService {
             result += "<div style=\"width: 100%; height: 70px; position: relative; float: left; background-color: #101010; border-top: solid #404040 1px;\">";
 
             result += "<button style=\"width: 300px; height: 40px; margin: 14px calc(50% - 150px); color: #EEEEEE; font-size: 15px; font-weight: 900; font-family: 'Quicksand', sans-serif; background-color: #404040; border: solid 1px #606060; border-radius: 10px; cursor: pointer\" onclick=\"location.href='" + Const.URL_APP + "'\">Go to Camagru Application</button>";
+
+            result += "</div>";
+
+            result += "</body>";
+            result += "</html>";
+
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public String verify() {
+        try {
+            String result = "";
+
+            result += "<html>";
+
+            result += "<header>";
+            result += "<title>#Camagru</title>";
+            result += "<meta name=\"description\" content=\"#Camagru\">";
+            result += "<link rel=\"shortcut icon\" href=\"http://icons.iconarchive.com/icons/designbolts/free-multimedia/64/Dslr-Camera-icon.png\" type=\"image/png\" />";
+            result += "<link href=\"https://fonts.googleapis.com/css?family=Astloch|Quicksand&display=swap\" rel=\"stylesheet\">";
+            result += "<link href=\"http://icons.iconarchive.com/icons/designbolts/free-multimedia/512/Dslr-Camera-icon.png\" rel=\"shortcut icon\">";
+            result += "<script>";
+            result += "setTimeout(function(){ location.href=\"" + Const.URL_APP + "\"; }, 3000);";
+            result += "</script>";
+            result += "</header>";
+
+            result += "<body  style=\"width: 100%; height: 100vh; background-color: #303030; margin: 0; padding: 0; overflow: hidden;\">";
+
+            result += "<div style=\"width: 100%; height: 70px; position: relative; float: left; background-color: #101010; border-bottom: solid #404040 1px; color: #808080; font-size: 30px; font-family: 'Astloch', cursive; line-height: 70px; text-indent: 30px\">Camagru</div>";
+
+            result += "<div style=\"width: 100%; height: calc(100vh - 142px); position: relative; float: left; color: #AAAAAA; font-size: 20px; font-weight: 900; font-family: 'Quicksand', sans-serif; text-align: center; line-height: calc(100vh - 142px);\">This email has been verified! Redirect to application soon...!</div>";
+
+            result += "<div style=\"width: 100%; height: 70px; position: relative; float: left; background-color: #101010; border-top: solid #404040 1px;\">";
+
+            result += "<button style=\"width: 300px; height: 40px; margin: 14px calc(50% - 150px); color: #EEEEEE; font-size: 15px; font-weight: 900; font-family: 'Quicksand', sans-serif; background-color: #404040; border: solid 1px #606060; border-radius: 10px; cursor: pointer\" onclick=\"location.href='" + Const.URL_APP + "'\">Go to Camagru Application now</button>";
 
             result += "</div>";
 

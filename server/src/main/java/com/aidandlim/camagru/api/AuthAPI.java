@@ -6,7 +6,6 @@ import com.aidandlim.camagru.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -37,8 +36,5 @@ public class AuthAPI {
     public boolean forgot(@RequestBody User user) {
         return (service.forgot(user));
     }
-
-    @RequestMapping("verify")
-    public @ResponseBody String verify(User user) { return (service.verify(user)); }
 
 }

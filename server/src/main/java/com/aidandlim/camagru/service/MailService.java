@@ -22,8 +22,6 @@ public class MailService {
             msg.setText("Enter link to verify your email address : " + Const.URL_SERVER + "verify?email=" + user.getEmail() + "&uuid=" + user.getUuid());
 
             javaMailSender.send(msg);
-
-            System.out.println("[Verifying] Email has sended to " + user.getEmail());
         } catch (Exception e) {
             return ;
         }
@@ -38,8 +36,6 @@ public class MailService {
             msg.setText("Here is temporary password : " + user.getUuid());
 
             javaMailSender.send(msg);
-
-            System.out.println("[Forgot] Email has sended to " + user.getEmail());
         } catch (Exception e) {
             return ;
         }

@@ -151,6 +151,21 @@
     cursor: pointer;
 }
 
+.camera-mobile-upload {
+    width: 5rem;
+    height: 5rem;
+    padding: 10rem;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    color: #808080;
+    background-color: #272727;
+    border-top: solid #404040 1px;
+    border-bottom: solid #404040 1px;
+}
+
 @media (max-width: 50rem) {
     .camera-post {
         width: 100%;

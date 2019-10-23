@@ -6,6 +6,8 @@ import { ui_nav, post_posts, post_isdone, auth_token, user_user, user_biotemp, c
 import axios from 'axios';
 import cookie from 'react-cookies';
 
+import { isMobile } from "react-device-detect";
+
 import Webcam from 'react-webcam';
 import Loadcam from '../loadcam';
 import Gallery from '../gallery';
@@ -14,7 +16,7 @@ import Sticker from '../sticker';
 import Canvas from '../canvas';
 
 import { confirmAlert } from 'react-confirm-alert';
-import { FiHeart, FiTrash2, FiUpload } from 'react-icons/fi';
+import { FiHeart, FiTrash2, FiUpload, FiCamera } from 'react-icons/fi';
 import default_user from '../../../resources/default_user.png';
 import './index.css';
 
@@ -177,7 +179,7 @@ const Camera = () => {
 							:
 							''
 						}
-						{ camera.isLoad ? <Loadcam /> : '' }
+						{ camera.isLoad ? (isMobile ? <FiCamera className='camera-mobile-upload' onClick={ () => document.getElementById('file').click() } /> : <Loadcam />) : '' }
 						{ !camera.isLoad && camera.preview === '' ? <div className='camera-shoot' onClick={ () => _handleCapture() }></div> : '' }
 						{ !camera.isLoad && camera.preview === '' ? <div id='shutter' className='camera-shutter'></div> : '' }
 						{ !camera.isLoad && camera.preview !== '' ? <Preview /> : '' }
@@ -188,7 +190,7 @@ const Camera = () => {
 							<FiTrash2 className='camera-icon' onClick={ () => _handleDeleteAll() }/>
 						</div>
 						<Gallery />
-						{ !camera.isLoad && camera.preview !== '' ? <Sticker /> : '' }
+						{ !camera.isLoad && camera.preview !== '' && !isMobile ? <Sticker /> : '' }
 						<div className='post-reflect-container'>
 							<FiHeart className='camera-icon-wide' />
 							<textarea className='post-comment-box' id='camera-comment-box' name='content' placeholder='Add a comment...' onChange={ () => _handleTextareaSize() }></textarea>

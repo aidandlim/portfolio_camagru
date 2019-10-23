@@ -37,15 +37,8 @@ const Profile = () => {
 					dispatch(ui_nav(0));
 				}
 			} else {
-				cookie.remove('token', { path: '/'});
-
-				dispatch(auth_token(''));
-				dispatch(user_user({}));
-				dispatch(user_biotemp(''));
-				dispatch(ui_nav(0));
-
 				confirmAlert({
-					message: 'The session is no longer valid!',
+					message: 'This email is taken already!',
 					buttons: [
 						{
 							label: 'Okay'

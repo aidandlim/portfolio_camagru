@@ -96,19 +96,23 @@ public class PictureService {
             graphics.drawImage(bufferedImage.get(0), (bufferedImage.get(0).getWidth() - size) / -2, (bufferedImage.get(0).getHeight() - size) / -2, null);
             for(int i = 1; i < bufferedImage.size(); i++) {
                 graphics.drawImage(
-                        bufferedImage.get(i).getScaledInstance(size / 10, size  / 10, Image.SCALE_SMOOTH),
+                        bufferedImage.get(i).getScaledInstance(size / 10, size / 10, Image.SCALE_SMOOTH),
                         (int) (stickersInfo.get(i - 1).getX() * size),
                         (int) (stickersInfo.get(i - 1).getY() * size),
                         null);
             }
-            graphics.dispose();
 
             if(filter == 2) {
                 combined = setSephiaFilter(combined, size);
             }
 
+            BufferedImage resizedImage = new BufferedImage(640, 640, Image.SCALE_SMOOTH);
+            graphics = resizedImage.createGraphics();
+            graphics.drawImage(combined, 0, 0, 640, 640, null);
+            graphics.dispose();
+
             ByteArrayOutputStream result = new ByteArrayOutputStream();
-            ImageIO.write(combined, "png", result);
+            ImageIO.write(resizedImage, "png", result);
             return result.toByteArray();
         } catch (Exception e) {
             e.printStackTrace();

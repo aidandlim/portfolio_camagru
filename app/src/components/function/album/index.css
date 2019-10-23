@@ -6,13 +6,32 @@
     position: relative;
     float: left;
 
-    object-fit: cover;
-    background-size: cover;
-    background-position: center;
-
     border: solid 1px #404040;
 
     cursor: pointer;
+}
+
+.album-picture {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+}
+
+.album-load {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background-color: #252525;
+    border-top: solid 1px #404040;
+    border-bottom: solid 1px #404040;
 }
 
 .album:nth-child(3n + 1) {
@@ -21,6 +40,11 @@
 
 @media (max-width: 50rem) {
     .album {
+        width: calc((95vw - 15px) / 3 - 0.5rem * 2 / 3 - 2px);
+        height: calc((95vw - 15px) / 3 - 0.5rem * 2 / 3 - 2px);
+    }
+
+    .album-load {
         width: calc((95vw - 15px) / 3 - 0.5rem * 2 / 3 - 2px);
         height: calc((95vw - 15px) / 3 - 0.5rem * 2 / 3 - 2px);
     }

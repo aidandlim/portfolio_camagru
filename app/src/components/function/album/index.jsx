@@ -23,10 +23,9 @@ const Album = (props) => {
 	}
 
 	return (
-		<div className={props.data.rotate ? 'album rotate' : 'album'} 
-			style={{ 
-				backgroundImage: 'url(\'/picture?p=' + props.data.picture + '\')' 
-			}} onClick={() => _handleProfilePage()}>
+		<div className='album' onClick={() => _handleProfilePage()}>
+			<img className='album-picture' src={'/picture?p=' + props.data.picture} onLoad={ () => document.getElementById('album-load-' + props.data.id).style.display = 'none' } alt='post' />
+			<div id={'album-load-' + props.data.id} className='album-load'><div className='slider'></div></div>
 		</div>
 	);
 }

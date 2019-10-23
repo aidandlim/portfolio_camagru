@@ -241,7 +241,8 @@ const Detail = () => {
 						{content.post.together !== '' ? <div className='post-people'>{content.post.together}</div> : ''}
 						{content.post.location === '' && content.post.together === '' ? <div className='post-in'>By Camagru App</div> : '' }
 					</div>
-					<div className='post-picture' style={{ backgroundImage: 'url(\'/picture?p=' + content.post.picture + '\')' }}></div>
+					<img className='post-picture' src={'/picture?p=' + content.post.picture} onLoad={ () => document.getElementById('post-load-' + content.post.id).style.display = 'none' } alt='post' />
+					<div id={'post-load-' + content.post.id} className='post-load'><div className='slider'></div></div>
 					<div className='post-reflect-container'>
 						{ !content.post.user_islike ? 
 							<FiHeart className='post-icon' onClick={ () => _handleLikes() } /> 

@@ -43,7 +43,7 @@
 - Sign in & Sign up with email verification
 - Find password & Request verifying by email
 - Change user profile & information includes private account & notification setting
-- Access User detail page includes user information, activities and posts
+- Access User detail page includes user information, activities, and posts
 
 > Picture
 
@@ -54,13 +54,13 @@
 > Social
 
 - Reflect Likes & Comments to posts
-- Search user & post with keyword
+- Search user & post with the keyword
 - Check notification about reflection
 
 > Interface
 
 - Infinite loop for loading posts
-- Responsive page for desktop & mobile
+- A responsive page for desktop & mobile
 
 ---
 
@@ -74,11 +74,11 @@
 
 - Web & App developer who love traveling.
 
-- Wokred as full stack developer for 3 and half years.
+- Worked as a full-stack developer for 3 and a half years.
 
 - Studies computer science at De Anza College & 42 Silicon Valley.
 
-- Contact : ortivo.sol@gmail.com
+- Contact: ortivo.sol@gmail.com
 
 ---
 

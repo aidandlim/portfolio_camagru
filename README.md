@@ -40,7 +40,7 @@
 
 ---
 
-## Fetures
+## Features
 
 > User
 

@@ -173,22 +173,30 @@
     }
 
     .camera-webcam {
-        width: calc(95vw - 15px);
-        max-width: calc(95vw - 15px);
+        width: 100%;
+        max-width: 100%;
 
-        height: calc(95vw - 15px);
-        max-height: calc(95vw - 15px);
+        height: 90vw;
+        max-height: 90vw;
     }
 
     .camera-shoot {
-        top: calc(95vw - 15px - 1rem);
+        top: calc(90vw - 1rem);
     }
 
     .camera-shutter {
-        width: calc(95vw - 15px);
-        max-width: calc(95vw - 15px);
+        width: 100%;
+        max-width: 100%;
 
-        height: calc(95vw - 15px);
-        max-height: calc(95vw - 15px);
+        height: 90vw;
+        max-height: 90vw;
+    }
+
+    .camera-mobile-upload {
+        width: 100%;
+        max-width: 100%;
+
+        height: 90vw;
+        max-height: 90vw;
     }
 }

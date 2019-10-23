@@ -129,30 +129,30 @@
 
 @media (max-width: 50rem) {
     .preview {
-        width: calc(95vw - 15px);
-        max-width: calc(95vw - 15px);
+        width: 100%;
+        max-width: 100%;
 
-        height: calc(95vw - 15px);
-        max-height: calc(95vw - 15px);
+        height: 90vw;
+        max-height: 90vw;
     }
 
     .preview-image {
-        width: calc(95vw - 15px);
-        max-width: calc(95vw - 15px);
+        width: 100%;
+        max-width: 100%;
 
-        height: calc(95vw - 15px);
-        max-height: calc(95vw - 15px);
+        height: 90vw;
+        max-height: 90vw;
     }
 
     .preview-rollback {
-        top: calc(95vw - 15px - 4.5rem);
+        top: calc(90vw - 4.5rem);
     }
 
     .preview-filter {
-        top: calc(95vw - 15px - 3.75rem);
+        top: calc(90vw - 3.75rem);
     }
 
     .preview-filter-title {
-        top: calc(95vw - 15px - 3.75rem);
+        top: calc(90vw - 3.75rem);
     }
 }

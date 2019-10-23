@@ -182,7 +182,7 @@ const Camera = () => {
 						{ camera.isLoad ? (isMobile ? <FiCamera className='camera-mobile-upload' onClick={ () => document.getElementById('file').click() } /> : <Loadcam />) : '' }
 						{ !camera.isLoad && camera.preview === '' ? <div className='camera-shoot' onClick={ () => _handleCapture() }></div> : '' }
 						{ !camera.isLoad && camera.preview === '' ? <div id='shutter' className='camera-shutter'></div> : '' }
-						{ !camera.isLoad && camera.preview !== '' ? <Preview /> : '' }
+						{ (!camera.isLoad || isMobile) && camera.preview !== '' ? <Preview /> : '' }
 						{ !camera.isLoad && camera.preview !== '' ? <Canvas /> : '' }
 						<div className='camera-margin'>
 							<FiUpload className='camera-icon' onClick={ () => document.getElementById('file').click() } />	

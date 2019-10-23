@@ -40,10 +40,10 @@
 
 @media (max-width: 50rem) {
     .camera-loading {
-        width: calc(95vw - 15px);
-        height: calc(95vw - 15px);
+        width: 100%;
+        max-width: 100%;
 
-        max-width: calc(95vw - 15px);
-        max-height: calc(95vw - 15px);
+        height: 90vw;
+        max-height: 90vw;
     }
 }

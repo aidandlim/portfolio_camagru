@@ -65,7 +65,7 @@ public class ServerService {
             result += "<link href=\"https://fonts.googleapis.com/css?family=Astloch|Quicksand&display=swap\" rel=\"stylesheet\">";
             result += "<link href=\"http://icons.iconarchive.com/icons/designbolts/free-multimedia/512/Dslr-Camera-icon.png\" rel=\"shortcut icon\">";
             result += "<script>";
-            result += "setTimeout(function(){ location.href=\"" + Const.URL_APP + "\"; }, 3000);";
+            result += "setTimeout(function(){ location.href=\"" + Const.URL_APP + "\"; }, 5000);";
             result += "</script>";
             result += "</header>";
 

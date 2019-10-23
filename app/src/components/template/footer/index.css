@@ -15,6 +15,17 @@
     padding-left: calc(50% - 8.5rem);
 }
 
+.footer-copyright {
+    height: 2.5rem;
+    position: absolute;
+    top: 0;
+    left: 0.75rem;
+
+    color: #404040;
+    font-size: 0.4rem;
+    line-height: 2.3rem;
+}
+
 .footer-icon {
     width: 1rem;
     height: 1rem;

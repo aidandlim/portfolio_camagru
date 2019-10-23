@@ -157,13 +157,14 @@
     padding: 10rem;
 
     position: absolute;
-    top: 0;
+    top: 3.5rem;
     left: 0;
 
     color: #808080;
     background-color: #272727;
     border-top: solid #404040 1px;
     border-bottom: solid #404040 1px;
+z-index: 3;
 }
 
 @media (max-width: 50rem) {

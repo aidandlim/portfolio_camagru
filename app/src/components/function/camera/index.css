@@ -193,6 +193,6 @@
     }
 
     .camera-mobile-upload {
-        padding: calc(45vw - 2.5rem) calc(50vw - 2.5rem);
+        padding: calc(45vw - 2.5rem) calc(50% - 2.5rem);
     }
 }

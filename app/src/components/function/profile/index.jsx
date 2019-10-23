@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, auth_token, auth_isaccount, user_user, user_biotemp, post_posts } from '../../../actions';
+import { ui_nav, auth_token, auth_isaccount, user_user, user_biotemp, post_posts, post_isdone } from '../../../actions';
 
 import axios from 'axios';
 import cookie from 'react-cookies';
@@ -28,9 +28,11 @@ const Profile = () => {
 			if(res.data) {
 				if(document.changeProfile.email.value !== user.user.email) {
 					dispatch(post_posts([]));
+					dispatch(post_isdone(false));
 					_handleLogout();
 				} else {
 					dispatch(post_posts([]));
+					dispatch(post_isdone(false));
 					_handleData(auth.token);
 					dispatch(ui_nav(0));
 				}
@@ -75,6 +77,7 @@ const Profile = () => {
 			.then(res => {
 				if(res.data) {
 					dispatch(post_posts([]));
+					dispatch(post_isdone(false));
 					_handleLogout();
 					dispatch(ui_nav(0));
 				} else {

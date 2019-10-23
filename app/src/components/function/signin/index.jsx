@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useDispatch } from 'react-redux';
-import { auth_token, auth_isregister, auth_isforgot, user_user, user_biotemp, post_posts } from '../../../actions';
+import { auth_token, auth_isregister, auth_isforgot, user_user, user_biotemp, post_posts, post_isdone } from '../../../actions';
 
 import axios from 'axios';
 import cookie from 'react-cookies';
@@ -23,6 +23,7 @@ const Signin = () => {
 				dispatch(auth_token(res.data.token));
 				cookie.save('token', res.data.token, { path: '/' });
 				dispatch(post_posts([]));
+				dispatch(post_isdone(false));
 				_handleData(res.data.token);
 			} else if(res.data.status === 0) {
 				confirmAlert({

@@ -4,11 +4,11 @@
 
 # Camagru Application
 
-> A responsive web application using React & Java
+> A responsive single page application(SPA) using React & Java
 
 > A Social Network Service(SNS) for sharing pictures like Instagram
 
-> A web project of bootcamp named <a href="https://www.42.us.org" target="_blank">`42 Silicon Valley`</a>
+> A web brunch project of bootcamp named <a href="https://www.42.us.org" target="_blank">`42 Silicon Valley`</a>
 
 ## Preview
 
@@ -43,7 +43,7 @@
 - Sign in & Sign up with email verification
 - Find password & Request verifying by email
 - Change user profile & information includes private account & notification setting
-- Access User detail page includes user information, activities and posts
+- Access User detail page includes user information, activities, and posts
 
 > Picture
 
@@ -54,19 +54,19 @@
 > Social
 
 - Reflect Likes & Comments to posts
-- Search user & post with keyword
+- Search user & post with the keyword
 - Check notification about reflection
 
 > Interface
 
 - Infinite loop for loading posts
-- Responsive page for desktop & mobile
+- A responsive page for desktop & mobile
 
 ---
 
 ## Live Demo
 
-> Click <a href="https://camagru.aidandlim.com" target="_blank">`here`</a> to check it out right now.
+> Click <a href="https://camagru.aidandlim.com" target="_blank">`HERE`</a> to check it out right now.
 
 ---
 
@@ -74,11 +74,11 @@
 
 - Web & App developer who love traveling.
 
-- Wokred as full stack developer for 3 years.
+- Worked as a full-stack developer for 3 and a half years.
 
 - Studies computer science at De Anza College & 42 Silicon Valley.
 
-- Contact : ortivo.sol@gmail.com
+- Contact: ortivo.sol@gmail.com
 
 ---
 

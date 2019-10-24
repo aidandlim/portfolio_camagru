@@ -59,6 +59,7 @@ const Camera = () => {
 				]
 			});
 		} else {
+			document.getElementById('cover').style.display = 'block';
 			var stickers = [];
 			for(var i = 0; i < camera.inputs.length; i++) {
 				var target = document.getElementById('canvas-sticker-' + i);
@@ -87,6 +88,7 @@ const Camera = () => {
 					dispatch(post_posts([]));
 					dispatch(post_isdone(false));
 					dispatch(ui_nav(0));
+					document.getElementById('cover').style.display = 'none';
 				} else {
 					cookie.remove('token', { path: '/'});
 

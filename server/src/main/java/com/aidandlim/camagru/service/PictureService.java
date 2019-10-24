@@ -53,9 +53,9 @@ public class PictureService {
 
             graphics.drawImage(bufferedImage, (bufferedImage.getWidth() - size) / -2, (bufferedImage.getHeight() - size) / -2, null);
 
-            BufferedImage resizedImage = new BufferedImage(160, 160, Image.SCALE_SMOOTH);
+            BufferedImage resizedImage = new BufferedImage(240, 240, Image.SCALE_SMOOTH);
             graphics = resizedImage.createGraphics();
-            graphics.drawImage(combined, 0, 0, 160, 160, null);
+            graphics.drawImage(combined, 0, 0, 240, 240, null);
             graphics.dispose();
 
             ByteArrayOutputStream result = new ByteArrayOutputStream();
@@ -126,9 +126,9 @@ public class PictureService {
                 combined = setSephiaFilter(combined, size);
             }
 
-            BufferedImage resizedImage = new BufferedImage(640, 640, Image.SCALE_SMOOTH);
+            BufferedImage resizedImage = new BufferedImage(960, 960, Image.SCALE_SMOOTH);
             graphics = resizedImage.createGraphics();
-            graphics.drawImage(combined, 0, 0, 640, 640, null);
+            graphics.drawImage(combined, 0, 0, 960, 960, null);
             graphics.dispose();
 
             ByteArrayOutputStream result = new ByteArrayOutputStream();

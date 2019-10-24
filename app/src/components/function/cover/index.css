@@ -1,0 +1,50 @@
+.cover {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background-color: #202020;
+
+    z-index: 99;
+
+    display: none;
+}
+
+.cover-loading {
+    width: 3rem;
+    height: 3rem;
+
+    position: absolute;
+    top: calc(50% - 2.5rem);
+    left: calc(50% - 2.5rem);
+
+    border: 1rem solid #707070;
+    border-radius: 50%;
+    border-top: 1rem solid #AAAAAA;
+    
+    animation: spin 1.5s linear infinite;
+    -webkit-animation: spin 1.5s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 50rem) {
+    .camera-loading {
+        width: 100%;
+        max-width: 100%;
+
+        height: 90vw;
+        max-height: 90vw;
+    }
+}

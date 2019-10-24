@@ -1,6 +1,7 @@
 .notification {
     width: 100%;
-    height: calc(100% - 5rem + 2px);
+    height: calc(100% - 5.5rem + 2px);
+    padding-bottom: 0.5rem;
 
     overflow-x: hidden;
     overflow-y: scroll;

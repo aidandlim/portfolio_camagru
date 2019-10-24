@@ -10,6 +10,7 @@ import Header from '../header';
 import Body from '../body';
 import Footer from '../footer';
 import Sidebar from '../../function/sidebar';
+import Cover from '../../function/cover';
 
 import Wrapper from 'react-div-100vh';
 
@@ -61,6 +62,7 @@ const App = () => {
 			<Footer />
 			{ ui.nav === 1 ? <div className='sidebar-cover' /> : '' }
 			{ ui.nav === 1 ? <Sidebar /> : '' }
+			<Cover />
 		</Wrapper>
 	);
 }

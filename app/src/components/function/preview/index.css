@@ -7,8 +7,10 @@
 
     border-top: solid #404040 1px;
     border-bottom: solid #404040 1px;
+}
 
-    z-index: 4;
+.preview-mobile {
+    z-index: 9 !important;
 }
 
 .preview-image {
@@ -41,7 +43,7 @@
 
     cursor: pointer;
 
-    z-index: 5;
+    z-index: 6;
 }
 
 .preview-filter {

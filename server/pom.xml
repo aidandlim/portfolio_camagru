@@ -5,7 +5,7 @@
 
     <groupId>com.aidandlim</groupId>
     <artifactId>camagru</artifactId>
-    <version>0.0.1</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
     <name>camagru</name>
     <description>Responsive Web Application for Sharing Pictures</description>

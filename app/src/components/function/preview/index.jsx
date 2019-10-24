@@ -3,6 +3,8 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { camera_isload, camera_preview, camera_filter, camera_images } from '../../../actions';
 
+import { isMobile } from 'react-device-detect';
+
 import { FiChevronDown, FiTrash2 } from 'react-icons/fi';
 import './index.css';
 
@@ -31,7 +33,7 @@ const Preview = () => {
 	}
 
 	return (
-		<div className='preview'>
+		<div className={isMobile ? 'preview preview-mobile' : 'preview'}>
 			<img id='preview' className={'preview-image preview-filter-' + filter} src={preview} alt='Rendered' />
 			<FiChevronDown className='preview-rollback' onClick={ () => _handleRollback() } />
 			<img className={'preview-filter preview-filter-' + filter} src={preview} alt='Rendered' onClick={ () => dispatch(camera_filter(filter === 2 ? 0 : filter + 1)) } / >

@@ -2,7 +2,7 @@
 
 .sidebar {
     width: 15rem;
-    height: calc(100vh - 5rem + 2px);
+    height: calc(100% - 5rem + 2px);
 
     overflow-x: hidden;
     overflow-y: scroll;
@@ -19,7 +19,7 @@
 
 .sidebar-cover {
     width: calc(100% - 15rem);
-    height: calc(100vh - 5rem + 2px);
+    height: calc(100% - 5rem + 2px);
 
     overflow: hidden;
 

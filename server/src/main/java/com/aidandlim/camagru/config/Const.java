@@ -38,13 +38,4 @@ public class Const {
     public static String PATH_STICKER = absolutePath + "/data/sticker/";
     */
 
-    /* 42 */
-    /*
-    public static String URL_SERVER = "https://" + ip + ":8443/";
-    public static String URL_APP = "https://" + ip + ":3000/";
-
-    public static String PATH_PICTURE = absolutePath + "/data/picture/";
-    public static String PATH_STICKER = absolutePath + "/data/sticker/";
-    */
-
 }

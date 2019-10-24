@@ -43,8 +43,28 @@ public class PictureService {
         try {
             String name = System.currentTimeMillis() + "-" + UUID.randomUUID().toString();
             byte bytes[] = file.getBytes();
-            Path path = Paths.get(Const.PATH_PICTURE + name);
-            Files.write(path, bytes);
+
+             BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(bytes));
+
+            int size = Math.min(bufferedImage.getWidth(), bufferedImage.getHeight());
+            BufferedImage combined = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
+
+            Graphics graphics = combined.getGraphics();
+
+            graphics.drawImage(bufferedImage, (bufferedImage.getWidth() - size) / -2, (bufferedImage.getHeight() - size) / -2, null);
+
+            BufferedImage resizedImage = new BufferedImage(160, 160, Image.SCALE_SMOOTH);
+            graphics = resizedImage.createGraphics();
+            graphics.drawImage(combined, 0, 0, 160, 160, null);
+            graphics.dispose();
+
+            ByteArrayOutputStream result = new ByteArrayOutputStream();
+            ImageIO.write(resizedImage, "png", result);
+
+            FileOutputStream fos = new FileOutputStream(new File(Const.PATH_PICTURE + name));
+            fos.write(result.toByteArray());
+            fos.close();
+
             return name;
         } catch (Exception e) {
             e.printStackTrace();

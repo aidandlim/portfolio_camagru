@@ -29,7 +29,7 @@ public class MailService {
             msg += "</header>";
             msg += "<body>";
             msg += "<div style=\"width: 100%; height: auto;\">";
-            msg += "<div style=\"width: 100%; height: 50px; position: relative; float: left; background-color: #101010; border-bottom: solid #404040 1px; border-radius: 20px 20px 0 0; color: #808080; font-size: 20px; font-family: 'Astloch', cursive; line-height: 50px; text-indent: 30px;\">Camagru</div>";
+            msg += "<div style=\"width: 100%; height: 50px; position: relative; float: left; background-color: #101010; border-bottom: solid #404040 1px; border-radius: 20px 20px 0 0; color: #808080; font-size: 20px; font-family: 'Astloch', cursive; line-height: 50px; text-indent: 30px;\">#Camagru</div>";
             msg += "<div style=\"width: calc(100% - 40px); height: auto; padding: 20px; position: relative; float: left; background-color: #202020; border-radius: 0 0 20px 20px; color: #AAAAAA; font-size: 14px; font-family: 'Quicksand', sans-serif; text-align: center; line-height: 30px;\">Welcome! " + user.getNickname() + ". Enter link below to verify your email address :<BR><a style=\"color: #AAAAAA; font-weight: 900;\" href=\"" + Const.URL_SERVER + "verify?email=" + user.getEmail() + "&uuid=" + user.getUuid() + "\">Go to Verify Email!</a></div>";
             msg += "</div>";
             msg += "</body>";
@@ -59,7 +59,7 @@ public class MailService {
             msg += "</header>";
             msg += "<body>";
             msg += "<div style=\"width: 100%; height: auto;\">";
-            msg += "<div style=\"width: 100%; height: 50px; position: relative; float: left; background-color: #101010; border-bottom: solid #404040 1px; border-radius: 20px 20px 0 0; color: #808080; font-size: 20px; font-family: 'Astloch', cursive; line-height: 50px; text-indent: 30px;\">Camagru</div>";
+            msg += "<div style=\"width: 100%; height: 50px; position: relative; float: left; background-color: #101010; border-bottom: solid #404040 1px; border-radius: 20px 20px 0 0; color: #808080; font-size: 20px; font-family: 'Astloch', cursive; line-height: 50px; text-indent: 30px;\">#Camagru</div>";
             msg += "<div style=\"width: calc(100% - 40px); height: auto; padding: 20px; position: relative; float: left; background-color: #202020; border-radius: 0 0 20px 20px; color: #AAAAAA; font-size: 14px; font-family: 'Quicksand', sans-serif; text-align: center; line-height: 30px;\">Here is temporary password :<BR>" + user.getUuid() + "</div>";
             msg += "</div>";
             msg += "</body>";
@@ -90,7 +90,7 @@ public class MailService {
                 msg += "</header>";
                 msg += "<body>";
                 msg += "<div style=\"width: 100%; height: auto;\">";
-                msg += "<div style=\"width: 100%; height: 50px; position: relative; float: left; background-color: #101010; border-bottom: solid #404040 1px; border-radius: 20px 20px 0 0; color: #808080; font-size: 20px; font-family: 'Astloch', cursive; line-height: 50px; text-indent: 30px;\">Camagru</div>";
+                msg += "<div style=\"width: 100%; height: 50px; position: relative; float: left; background-color: #101010; border-bottom: solid #404040 1px; border-radius: 20px 20px 0 0; color: #808080; font-size: 20px; font-family: 'Astloch', cursive; line-height: 50px; text-indent: 30px;\">#Camagru</div>";
                 msg += "<div style=\"width: calc(100% - 40px); height: auto; padding: 20px; position: relative; float: left; background-color: #202020; border-radius: 0 0 20px 20px; color: #AAAAAA; font-size: 14px; font-family: 'Quicksand', sans-serif; text-align: center; line-height: 30px;\">You have a new notification from Camagru Application! Check it out now! <BR><a style=\"color: #AAAAAA; font-weight: 900;\" href=\"" + Const.URL_APP + "\">Camagru Application Link</a></div>";
                 msg += "</div>";
                 msg += "</body>";

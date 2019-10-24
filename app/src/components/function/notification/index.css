@@ -6,7 +6,7 @@
     overflow-y: scroll;
 
     position: fixed;
-    top: calc(2.5rem + 1px);
+    top: 2.5rem;
     left: 0;
 
     background-color: #202020;

@@ -44,8 +44,18 @@
         height: calc((95vw - 15px) / 3 - 0.5rem * 2 / 3 - 2px);
     }
 
+    .album-mobile {
+        width: calc(95vw / 3 - 0.5rem * 2 / 3 - 2px);
+        height: calc(95vw / 3 - 0.5rem * 2 / 3 - 2px);
+    }
+
     .album-load {
         width: calc((95vw - 15px) / 3 - 0.5rem * 2 / 3 - 2px);
         height: calc((95vw - 15px) / 3 - 0.5rem * 2 / 3 - 2px);
+    }
+
+    .album-load-mobile {
+        width: calc(95vw / 3 - 0.5rem * 2 / 3 - 2px);
+        height: calc(95vw / 3 - 0.5rem * 2 / 3 - 2px);
     }
 }

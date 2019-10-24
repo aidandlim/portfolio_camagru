@@ -32,7 +32,7 @@ public class ServerService {
 
             result += "<body  style=\"width: 100%; height: 100vh; background-color: #303030; margin: 0; padding: 0; overflow: hidden;\">";
 
-            result += "<div style=\"width: 100%; height: 70px; position: relative; float: left; background-color: #101010; border-bottom: solid #404040 1px; color: #808080; font-size: 30px; font-family: 'Astloch', cursive; line-height: 70px; text-indent: 30px\">Camagru</div>";
+            result += "<div style=\"width: 100%; height: 70px; position: relative; float: left; background-color: #101010; border-bottom: solid #404040 1px; color: #808080; font-size: 30px; font-family: 'Astloch', cursive; line-height: 70px; text-indent: 30px\">#Camagru</div>";
 
             result += "<div style=\"width: 100%; height: calc(100vh - 142px); position: relative; float: left; color: #AAAAAA; font-size: 15px; font-weight: 900; font-family: 'Quicksand', sans-serif; text-align: center; line-height: calc(100vh - 142px);\">Camagru Application Server is running on " + Const.URL_SERVER + "</div>";
 
@@ -71,7 +71,7 @@ public class ServerService {
 
             result += "<body  style=\"width: 100%; height: 100vh; background-color: #303030; margin: 0; padding: 0; overflow: hidden;\">";
 
-            result += "<div style=\"width: 100%; height: 70px; position: relative; float: left; background-color: #101010; border-bottom: solid #404040 1px; color: #808080; font-size: 30px; font-family: 'Astloch', cursive; line-height: 70px; text-indent: 30px\">Camagru</div>";
+            result += "<div style=\"width: 100%; height: 70px; position: relative; float: left; background-color: #101010; border-bottom: solid #404040 1px; color: #808080; font-size: 30px; font-family: 'Astloch', cursive; line-height: 70px; text-indent: 30px\">#Camagru</div>";
 
             result += "<div style=\"width: 100%; height: calc(100vh - 142px); position: relative; float: left; color: #AAAAAA; font-size: 15px; font-weight: 900; font-family: 'Quicksand', sans-serif; text-align: center; line-height: calc(100vh - 142px);\">This email has been verified! Redirect to application soon...!</div>";
 
@@ -107,7 +107,7 @@ public class ServerService {
 
             result += "<body  style=\"width: 100%; height: 100vh; background-color: #303030; margin: 0; padding: 0; overflow: hidden;\">";
 
-            result += "<div style=\"width: 100%; height: 70px; position: relative; float: left; background-color: #101010; border-bottom: solid #404040 1px; color: #808080; font-size: 30px; font-family: 'Astloch', cursive; line-height: 70px; text-indent: 30px\">Camagru</div>";
+            result += "<div style=\"width: 100%; height: 70px; position: relative; float: left; background-color: #101010; border-bottom: solid #404040 1px; color: #808080; font-size: 30px; font-family: 'Astloch', cursive; line-height: 70px; text-indent: 30px\">#Camagru</div>";
 
             result += "<div style=\"width: 100%; height: calc(100vh - 142px); position: relative; float: left; color: #AAAAAA; font-size: 15px; font-weight: 900; font-family: 'Quicksand', sans-serif; text-align: center; line-height: calc(100vh - 142px);\">Something went wrong!</div>";
 
@@ -151,7 +151,7 @@ public class ServerService {
 
             result += "<body  style=\"width: 100%; height: 100vh; background-color: #303030; margin: 0; padding: 0; overflow: hidden;\">";
 
-            result += "<div style=\"width: 50%; height: 70px; position: relative; float: left; background-color: #101010; border-bottom: solid #404040 1px; color: #808080; font-size: 30px; font-family: 'Astloch', cursive; line-height: 70px; text-indent: 30px\">Camagru</div>";
+            result += "<div style=\"width: 50%; height: 70px; position: relative; float: left; background-color: #101010; border-bottom: solid #404040 1px; color: #808080; font-size: 30px; font-family: 'Astloch', cursive; line-height: 70px; text-indent: 30px\">#Camagru</div>";
 
             if(dto == null) {
                 result += "<div style=\"width: calc(50% - 30px); height: 70px; padding-right: 30px; position: relative; float: left; background-color: #101010; border-bottom: solid #404040 1px; color: #808080; font-size: 15px; font-family: 'Quicksand', sans-serif; text-align: right; line-height: 70px;\"></div>";

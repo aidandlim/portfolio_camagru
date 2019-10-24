@@ -72,7 +72,7 @@ const Signin = () => {
 	return (
 		<div className='signin'>
 			<div className='signin-title'>Sign in!</div>
-			<form name='signin' onSubmit={_handleForm}>
+			<form name='signin' onSubmit={_handleForm} autoComplete='off'>
 				<input className='signin-input' type='email' name='email' placeholder='Email Address' required />
 				<input className='signin-input' type='password' name='password' placeholder='Password' required />
 				<button className='signin-btn' type='submit'>Sign in</button>

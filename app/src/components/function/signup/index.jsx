@@ -91,7 +91,7 @@ const Signup = () => {
 	return (
 		<div className='signin'>
 			<div className='signin-title'>Sign up!</div>
-			<form name='signup' onSubmit={_handleForm}>
+			<form name='signup' onSubmit={_handleForm} autoComplete='off'>
 				<input className='signin-input' type='email' name='email' placeholder='Email Address' required />
 				<input className='signin-input' type='password' name='password' placeholder='Password' onChange={ () => _handlePasswordCheck() } required />
 				<input className='signin-input' type='password' name='confirm' placeholder='Confirm Password' onChange={ () => _handlePasswordCheck() } required />

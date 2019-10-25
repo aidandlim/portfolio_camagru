@@ -202,6 +202,12 @@ const Detail = () => {
 						}
 					]
 				});
+			} else {
+				dispatch(post_posts([]));
+				dispatch(post_isdone(false));
+				dispatch(content_post({}));
+				dispatch(content_islikes(false));
+				dispatch(ui_nav(0));
 			}
 		});
 	}

@@ -23,8 +23,6 @@ const Account = () => {
 			if(res.data) {
 				user.user.private = !user.user.private;
 				dispatch(user_user(user.user));
-				dispatch(post_posts([]));
-				dispatch(post_isdone(false));
 			} else {
 				cookie.remove('token', { path: '/'});
 
@@ -111,6 +109,8 @@ const Account = () => {
 			dispatch(auth_token(''));
 			dispatch(user_user({}));
 			dispatch(user_biotemp(''));
+			dispatch(post_posts([]));
+			dispatch(post_isdone(false));
 			dispatch(ui_nav(0));
 		});
 	}

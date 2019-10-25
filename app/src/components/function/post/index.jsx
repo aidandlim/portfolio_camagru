@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, content_post, content_islikes, post_posts, search_user, auth_token, user_user, user_biotemp } from '../../../actions';
+import { ui_nav, content_post, content_islikes, post_posts, search_user, auth_token, user_user, user_biotemp, post_isdone } from '../../../actions';
 
 import axios from 'axios';
 import cookie from 'react-cookies';
@@ -212,8 +212,10 @@ const Post = (props) => {
 					]
 				});
 			} else {
-				if(posts.length === 0)
+				if(posts.length === 0) {
 					dispatch(post_posts([]));
+					dispatch(post_isdone(false));
+				}
 			}
 		});
 	}

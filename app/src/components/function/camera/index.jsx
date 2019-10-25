@@ -88,7 +88,9 @@ const Camera = () => {
 					dispatch(post_posts([]));
 					dispatch(post_isdone(false));
 					dispatch(ui_nav(0));
-					document.getElementById('cover').style.display = 'none';
+					setTimeout(() => {
+						document.getElementById('cover').style.display = 'none';
+					}, 1000);
 				} else {
 					cookie.remove('token', { path: '/'});
 

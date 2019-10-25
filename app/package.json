@@ -1,6 +1,6 @@
 {
   "name": "camagru",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "proxy": "https://camagru.aidandlim.com:8443/api",
   "dependencies": {

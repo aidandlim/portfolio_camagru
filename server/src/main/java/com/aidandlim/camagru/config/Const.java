@@ -1,26 +1,12 @@
 package com.aidandlim.camagru.config;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.nio.file.Paths;
 
 public class Const {
 
     static String absolutePath = Paths.get("").toAbsolutePath().toString() + "/src/main/resources";
-    static String ip;
 
-    static {
-        try {
-            ip = InetAddress.getLocalHost().getHostAddress();
-            if(ip.indexOf("/") != -1) {
-                ip = ip.split("/")[1];
-            }
-        } catch (UnknownHostException e) {
-
-        }
-    }
-
-    /* URL */
+    /* SERVICE */
     /* */
     public static String URL_SERVER = "https://camagru.aidandlim.com:8443/";
     public static String URL_APP = "https://camagru.aidandlim.com/";

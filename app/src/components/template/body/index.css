@@ -20,6 +20,7 @@
     margin-left: calc(50% - 15rem);
 
     position: relative;
+    float: left;
 }
 
 @media (max-width: 50rem) {

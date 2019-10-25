@@ -17,6 +17,7 @@ const Profile = () => {
 
 	const _handleForm = (e) => {
 		e.preventDefault();
+		document.getElementById('cover').style.display = 'block';
 		axios.post('/user/update', {
 			token: auth.token,
 			id: user.user.id,
@@ -27,14 +28,17 @@ const Profile = () => {
 		.then(res => {
 			if(res.data) {
 				if(document.changeProfile.email.value !== user.user.email) {
-					dispatch(post_posts([]));
-					dispatch(post_isdone(false));
+					confirmAlert({
+						message: 'Email has changed. Please sign in again!',
+						buttons: [
+							{
+								label: 'Okay'
+							}
+						]
+					});
 					_handleLogout();
 				} else {
-					dispatch(post_posts([]));
-					dispatch(post_isdone(false));
 					_handleData(auth.token);
-					dispatch(ui_nav(0));
 				}
 			} else {
 				confirmAlert({
@@ -46,6 +50,9 @@ const Profile = () => {
 					]
 				});
 			}
+			setTimeout(() => {
+				document.getElementById('cover').style.display = 'none';
+			}, 1000);
 		});
 	}
 
@@ -53,7 +60,7 @@ const Profile = () => {
 		e.preventDefault();
 		if(_handlePasswordCheck() !== 0) {
 			confirmAlert({
-				message: 'Passwords is not enough safety!',
+				message: 'Passwords is not valid!',
 				buttons: [
 					{
 						label: 'Okay'
@@ -61,6 +68,7 @@ const Profile = () => {
 				]
 			});
 		} else {
+			document.getElementById('cover').style.display = 'block';
 			axios.post('/user/updatePassword', {
 				token: auth.token,
 				email: user.user.email,
@@ -69,10 +77,15 @@ const Profile = () => {
 			})
 			.then(res => {
 				if(res.data) {
-					dispatch(post_posts([]));
-					dispatch(post_isdone(false));
+					confirmAlert({
+						message: 'Password has changed. Please sign in again!',
+						buttons: [
+							{
+								label: 'Okay'
+							}
+						]
+					});
 					_handleLogout();
-					dispatch(ui_nav(0));
 				} else {
 					confirmAlert({
 						message: 'Current password is not matched',
@@ -83,6 +96,9 @@ const Profile = () => {
 						]
 					});
 				}
+				setTimeout(() => {
+					document.getElementById('cover').style.display = 'none';
+				}, 1000);
 			});
 		}
 	}
@@ -121,6 +137,7 @@ const Profile = () => {
 
 	const _handleChangePicture = (e) => {
 		e.preventDefault();
+		document.getElementById('cover').style.display = 'block';
 		var formData = new FormData();
 		formData.append("token", auth.token);
 		formData.append("picture", document.changePicture.file.files[0]);
@@ -131,8 +148,8 @@ const Profile = () => {
 		}).then(res => {
 			if(res.data) {
 				dispatch(post_posts([]));
+				dispatch(post_isdone(false));
 				_handleData(auth.token);
-				dispatch(ui_nav(0));
 			} else {
 				cookie.remove('token', { path: '/'});
 
@@ -150,6 +167,9 @@ const Profile = () => {
 					]
 				});
 			}
+			setTimeout(() => {
+				document.getElementById('cover').style.display = 'none';
+			}, 1000);
 		});
 	}
 
@@ -161,6 +181,8 @@ const Profile = () => {
 			if(res.data !== null) {
 				dispatch(user_user(res.data));
 				dispatch(user_biotemp(res.data.bio === null ? '' : res.data.bio));
+				dispatch(post_posts([]));
+				dispatch(post_isdone(false));
 			} else {
 				cookie.remove('token', { path: '/'});
 
@@ -187,6 +209,7 @@ const Profile = () => {
 		dispatch(user_user({}));
 		dispatch(user_biotemp(''));
 		dispatch(post_posts([]));
+		dispatch(post_isdone(false));
 		dispatch(ui_nav(0));
 	}
 

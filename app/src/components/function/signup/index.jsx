@@ -14,7 +14,7 @@ const Signup = () => {
 		e.preventDefault();
 		if(_handlePasswordCheck() !== 0) {
 			confirmAlert({
-				message: 'Passwords is not enough safety!',
+				message: 'Passwords is not valid!',
 				buttons: [
 					{
 						label: 'Okay'

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { ui_nav, auth_token, user_user, user_biotemp, content_post, content_islikes, search_user } from '../../../actions';
+import { ui_nav, auth_token, user_user, user_biotemp, content_post, content_islikes, search_user, post_posts, post_isdone } from '../../../actions';
 
 import axios from 'axios';
 import cookie from 'react-cookies';
@@ -221,8 +221,21 @@ const Detail = () => {
 		e.style.height = 'calc(' + (e.scrollHeight) + 'px - 1rem)';
 	}
 
+	const _handleRollback = () => {
+		dispatch(ui_nav(0));
+		dispatch(post_posts([]));
+		dispatch(post_isdone(false));
+		dispatch(content_post({}));
+	}
+
 	return (
-		<div className='detail'>
+		<div id='detail' className='detail'>
+			<div className='detail-rollback' 
+				onClick={() => _handleRollback() } 
+				onWheel={ (e) => document.getElementById('detail').scrollTop += e.deltaY } 
+				onMouseEnter={ () => document.getElementById('rollback-hint').style.opacity = 0.85 }
+				onMouseLeave={ () => document.getElementById('rollback-hint').style.opacity = 0 }></div>
+			<div id='rollback-hint' className='detail-rollback-hint'>Click to go back to the explore page</div>
 			<div className='inner-container'>
 				<div className='detail-post'>
 				<div className='post-profile' style={

@@ -30,6 +30,8 @@ const App = () => {
 			if(res.data !== '') {
 				dispatch(user_user(res.data));
 				dispatch(user_biotemp(res.data.bio === null ? '' : res.data.bio));
+				dispatch(post_posts([]));
+				dispatch(post_isdone(false));
 			} else {
 				cookie.remove('token', { path: '/'});
 				dispatch(auth_token(''));
@@ -42,7 +44,7 @@ const App = () => {
 		_handleData(cookie.load('token'));
 	}
 
-	if(ui.nav === 0 && post.posts.length === 0 && !post.isDone) {
+	if((ui.nav === 0 || ui.nav === 1) && post.posts.length === 0 && !post.isDone) {
 		axios.post('/post/selectAll', {
 			token: auth.token,
 		})

@@ -106,7 +106,7 @@ const Search = () => {
 				) : ''}
 				<div className='search-post-container'>
 					{ search.type === 1 ? search.posts.map((post, index) => 
-						<div className={isMobile ? 'search-post search-post-mobile' : 'search-post'} onClick={ () => _handleDetail(post.id) }>
+						<div className={isMobile ? 'search-post search-post-mobile' : 'search-post'} onClick={ () => _handleDetail(post.id) } key={index}>
 							<img className='search-picture' src={'/picture?p=' + post.picture} onLoad={ () => document.getElementById('search-load-' + post.id).style.display = 'none' } alt='post' />
 							<div id={'search-load-' + post.id} className={isMobile ? 'search-load search-load-mobile' : 'search-load'}><div className='slider'></div></div>
 						</div>

@@ -40,6 +40,7 @@ input[type="text"],
 input[type="password"],
 input[type="email"],
 input[type="submit"],
+input[type="button"]
 textarea  {
     -webkit-appearance: none;
     border-radius: 0;

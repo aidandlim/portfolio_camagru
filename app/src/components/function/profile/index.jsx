@@ -141,7 +141,7 @@ const Profile = () => {
 		let formData = new FormData();
 		formData.append("token", auth.token);
 		formData.append("picture", document.changePicture.file.files[0]);
-		let extension = document.changePicture.file.files[0].value.split('.')[input.value.split('.').length - 1];
+		let extension = document.changePicture.file.files[0].value.split('.')[document.changePicture.file.files[0].value.split('.').length - 1];
 		if(extension === 'jpg' || extension === 'jpeg' || extension === 'png') {
 			axios.post('/user/updatePicture', formData, {
 				headers: {

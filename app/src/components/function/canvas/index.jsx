@@ -9,8 +9,8 @@ const Canvas = () => {
 	let camera = useSelector(state => state.camera);
 	const dispatch = useDispatch();
 
-	var absoluteX = 0;
-	var absoluteY = 0;
+	let absoluteX = 0;
+	let absoluteY = 0;
 
 	const _handleDrag = (e) => {
 		absoluteX = !absoluteX ? e.clientX : absoluteX;
@@ -28,7 +28,7 @@ const Canvas = () => {
 	}, false);
 
 	document.addEventListener("dragstart", function(event) {
-		var img = document.createElement("img");
+		let img = document.createElement("img");
 		event.dataTransfer.setDragImage(img, 0, 0);
 	}, false);
 

@@ -60,9 +60,9 @@ const Camera = () => {
 			});
 		} else {
 			document.getElementById('cover').style.display = 'block';
-			var stickers = [];
-			for(var i = 0; i < camera.inputs.length; i++) {
-				var target = document.getElementById('canvas-sticker-' + i);
+			let stickers = [];
+			for(let i = 0; i < camera.inputs.length; i++) {
+				let target = document.getElementById('canvas-sticker-' + i);
 				stickers.push({
 					name: camera.inputs[i],
 					x: parseInt(target.style.left) / parseInt(document.getElementById('preview').offsetWidth),
@@ -74,8 +74,7 @@ const Camera = () => {
 				user_id: user.user.id,
 				picture: camera.preview.replace('data:image/jpeg;base64,', '')
 									.replace('data:image/jpg;base64,', '')
-									.replace('data:image/png;base64,', '')
-									.replace('data:image/gif;base64,', ''),
+									.replace('data:image/png;base64,', ''),
 				content: document.camera.content.value,
 				location: document.camera.location.value,
 				together: document.camera.together.value,

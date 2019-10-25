@@ -30,8 +30,8 @@ const Post = (props) => {
 			});
 			return;
 		}
-		var posts = post.posts;
-		for(var i = 0; i < posts.length; i++) {
+		let posts = post.posts;
+		for(let i = 0; i < posts.length; i++) {
 			if(posts[i].id === props.data.id) {
 				posts[i].num_likes = posts[i].num_likes + (posts[i].user_islike ? -1 : 1);
 				posts[i].user_islike = !posts[i].user_islike;
@@ -88,13 +88,13 @@ const Post = (props) => {
 			});
 			return;
 		}
-		var posts = post.posts;
-		for(var i = 0; i < posts.length; i++) {
+		let posts = post.posts;
+		for(let i = 0; i < posts.length; i++) {
 			if(posts[i].id === props.data.id) {
 				posts[i].num_comments = posts[i].num_comments + 1;
 			}
 		}
-		var value = document.getElementById('post-comment-box-' + props.data.id).value;
+		let value = document.getElementById('post-comment-box-' + props.data.id).value;
 		document.getElementById('post-comment-box-' + props.data.id).value = '';
 		_handleTextareaSize();
 		dispatch(post_posts(posts));
@@ -182,8 +182,8 @@ const Post = (props) => {
 	}
 
 	const _processDeletePost = () => {
-		var posts = post.posts;
-		for(var i = 0; i < posts.length; i++) {
+		let posts = post.posts;
+		for(let i = 0; i < posts.length; i++) {
 			if(posts[i].id === props.data.id) {
 				posts.splice(i, 1);
 			}

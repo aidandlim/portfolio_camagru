@@ -21,7 +21,7 @@ const Body = () => {
 	const dispatch = useDispatch();
 
 	let post = useSelector(state => state.post);
-	var isLoad = false;
+	let isLoad = false;
 
 	const _handleExploreScroll = (e) => {
 		if(ui.nav === 0 && post.isDone === false && isLoad === false) {

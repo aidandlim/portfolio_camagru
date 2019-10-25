@@ -138,39 +138,52 @@ const Profile = () => {
 	const _handleChangePicture = (e) => {
 		e.preventDefault();
 		document.getElementById('cover').style.display = 'block';
-		var formData = new FormData();
+		let formData = new FormData();
 		formData.append("token", auth.token);
 		formData.append("picture", document.changePicture.file.files[0]);
-		axios.post('/user/updatePicture', formData, {
-			headers: {
-			  'Content-Type': 'multipart/form-data'
-			}
-		}).then(res => {
-			if(res.data) {
-				dispatch(post_posts([]));
-				dispatch(post_isdone(false));
-				_handleData(auth.token);
-			} else {
-				cookie.remove('token', { path: '/'});
+		let extension = document.changePicture.file.files[0].value.split('.')[input.value.split('.').length - 1];
+		if(extension === 'jpg' || extension === 'jpeg' || extension === 'png') {
+			axios.post('/user/updatePicture', formData, {
+				headers: {
+				'Content-Type': 'multipart/form-data'
+				}
+			}).then(res => {
+				if(res.data) {
+					dispatch(post_posts([]));
+					dispatch(post_isdone(false));
+					_handleData(auth.token);
+				} else {
+					cookie.remove('token', { path: '/'});
 
-				dispatch(auth_token(''));
-				dispatch(user_user({}));
-				dispatch(user_biotemp(''));
-				dispatch(ui_nav(0));
+					dispatch(auth_token(''));
+					dispatch(user_user({}));
+					dispatch(user_biotemp(''));
+					dispatch(ui_nav(0));
 
-				confirmAlert({
-					message: 'The session is no longer valid!',
-					buttons: [
-						{
-							label: 'Okay'
-						}
-					]
-				});
-			}
-			setTimeout(() => {
-				document.getElementById('cover').style.display = 'none';
-			}, 1000);
-		});
+					confirmAlert({
+						message: 'The session is no longer valid!',
+						buttons: [
+							{
+								label: 'Okay'
+							}
+						]
+					});
+				}
+				setTimeout(() => {
+					document.getElementById('cover').style.display = 'none';
+				}, 1000);
+			});
+		} else {
+			document.changePicture.file.files[0].value = '';
+			confirmAlert({
+				message: 'Extension of image can be only .jpg, .jpeg, .png!',
+				buttons: [
+					{
+						label: 'Okay'
+					}
+				]
+			});
+		}
 	}
 
 	const _handleData = (token) => {

@@ -33,10 +33,10 @@ const Detail = () => {
 			});
 			return;
 		}
-		var posts = content.post;
+		let posts = content.post;
 		posts.num_likes = posts.num_likes + (posts.user_islike ? -1 : 1);
 		if(posts.user_islike) {
-			for(var i = 0; i < posts.likes.length; i++) {
+			for(let i = 0; i < posts.likes.length; i++) {
 				if(posts.likes[i].user_id === user.user.id) {
 					posts.likes.splice(i, 1);
 				}
@@ -100,7 +100,7 @@ const Detail = () => {
 			});
 			return;
 		}
-		var posts = content.post;
+		let posts = content.post;
 		posts.num_comments = posts.num_comments + 1;
 		posts.comments.push({
 			id: new Date().getMilliseconds(),
@@ -111,7 +111,7 @@ const Detail = () => {
 			content: document.getElementById('detail-comment-box-' + content.post.id).value,
 		});
 		dispatch(content_post(posts));
-		var value = document.getElementById('detail-comment-box-' + content.post.id).value;
+		let value = document.getElementById('detail-comment-box-' + content.post.id).value;
 		document.getElementById('detail-comment-box-' + content.post.id).value = '';
 		_handleTextareaSize();
 		axios.post('/comment/insert', {
@@ -182,6 +182,7 @@ const Detail = () => {
 	const _processDeletePost = () => {
 		dispatch(ui_nav(0));
 		axios.post('/post/delete', {
+			token: auth.token,
 			id: content.post.id,
 		})
 		.then(res => {

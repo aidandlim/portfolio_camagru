@@ -137,12 +137,13 @@ const Profile = () => {
 
 	const _handleChangePicture = (e) => {
 		e.preventDefault();
-		document.getElementById('cover').style.display = 'block';
-		let formData = new FormData();
-		formData.append("token", auth.token);
-		formData.append("picture", document.changePicture.file.files[0]);
-		let extension = document.changePicture.file.files[0].value.split('.')[document.changePicture.file.files[0].value.split('.').length - 1];
+		let input = document.getElementById('file');
+		let extension = input.value.split('.')[input.value.split('.').length - 1];
 		if(extension === 'jpg' || extension === 'jpeg' || extension === 'png') {
+			document.getElementById('cover').style.display = 'block';
+			let formData = new FormData();
+			formData.append("token", auth.token);
+			formData.append("picture", document.changePicture.file.files[0]);
 			axios.post('/user/updatePicture', formData, {
 				headers: {
 				'Content-Type': 'multipart/form-data'
@@ -174,7 +175,7 @@ const Profile = () => {
 				}, 1000);
 			});
 		} else {
-			document.changePicture.file.files[0].value = '';
+			input.value = '';
 			confirmAlert({
 				message: 'Extension of image can be only .jpg, .jpeg, .png!',
 				buttons: [
@@ -246,7 +247,7 @@ const Profile = () => {
 			></div>
 			<div className='profile-change-profile' onClick={() => document.changePicture.file.click()}>Change Profile Picture</div>
 			<form name='changePicture' encType="multipart/form-data">
-				<input type='file' name='file' onChange={_handleChangePicture} style={{display: 'none'}} />
+				<input id='file' type='file' name='file' onChange={_handleChangePicture} style={{display: 'none'}} />
 			</form>
 			<form name='changeProfile' onSubmit={_handleForm}>
 				<span className='profile-placeholder'>Nickname</span>

@@ -18,7 +18,7 @@
 
 ---
 
-## Language & Library
+## Language
 
 > Front-end Side
 

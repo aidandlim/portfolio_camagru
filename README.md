@@ -4,7 +4,7 @@
 
 # Camagru Application
 
-> A responsive single page application(SPA) using React & Java
+> A responsive Single Page Application(SPA) using React & Java
 
 > A Social Network Service(SNS) for sharing pictures like Instagram
 
@@ -12,19 +12,19 @@
 
 ## Preview
 
-***Not yet, Check the Demo below 😅***
+***Not yet, Check a Demo below 😅***
 
 ---
 
 ## Language & Library
 
-> Frontend Side
+> Front-end Side
 
 - Javascript
 - React
 - Redux
 
-> Backend Side
+> Back-end Side
 
 - Java
 - Spring-boot

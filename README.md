@@ -69,6 +69,7 @@
 ## Live Demo
 
 > Click <a href="https://camagru.aidandlim.com" target="_blank">`HERE`</a> to check it out right now.
+> [Link](https://camagru.aidandlim.com "HERE" target="_blank")
 
 ---
 

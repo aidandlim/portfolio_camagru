@@ -12,10 +12,8 @@
 
 ## Preview
 
-***Not yet, Check a Demo below 😅***
-
 <a href="https://camagru.aidandlim.com" title="preview" alt="preview">
-  <img src="https://media.giphy.com/media/UTvjTEhuYxRKwdoXpE/giphy.gif" width="100%" title="preview" alt="preview">
+  <img src="https://github.com/ortivosol/portfolio_camagru/blob/master/PREVIEW.gif?raw=true" width="100%" title="preview" alt="preview">
 </a>
 
 ---

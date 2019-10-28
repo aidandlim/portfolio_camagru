@@ -2,7 +2,7 @@
   <img src="https://icon-library.net/images/photography-icon-png/photography-icon-png-2.jpg" width="200" height="200" title="header" alt="header">
 </a>
 
-# Camagru Application
+# #Camagru
 
 > A responsive Single Page Application(SPA) using React & Java
 

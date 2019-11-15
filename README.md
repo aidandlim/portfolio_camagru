@@ -2,7 +2,7 @@
   <img src="https://icon-library.net/images/photography-icon-png/photography-icon-png-2.jpg" width="200" height="200" title="header" alt="header">
 </a>
 
-# Camagru Application
+# #Camagru
 
 > A responsive Single Page Application(SPA) using React & Java
 
@@ -76,13 +76,13 @@
 
 ## Aidan Lim (@dlim in 42 Silicon Valley)
 
-- Web & App developer who love traveling.
+- A Web & App developer who love traveling.
 
 - Worked as a full-stack developer for 3 and a half years.
 
 - Studies computer science at De Anza College & 42 Silicon Valley.
 
-- Contact: ortivo.sol@gmail.com
+- Contact: aidandlim@gmail.com
 
 ---
 

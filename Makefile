@@ -45,3 +45,6 @@ end:
 	@echo "Trying to terminate all Camagru application server :)"
 	@pkill -9 -f camagru
 
+deploy:
+	cd server && sudo nohup java -jar camagru-1.0.0.jar &
+	cd app && sudo nohup npm start &

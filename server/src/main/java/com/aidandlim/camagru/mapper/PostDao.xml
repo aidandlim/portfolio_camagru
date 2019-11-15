@@ -29,7 +29,7 @@
             p.user_id = u.id
         WHERE
             (
-                u.id = ${user_id}
+                u.id = #{user_id}
                 OR
                 u.isPrivate = 0
             )

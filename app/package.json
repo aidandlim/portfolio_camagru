@@ -4,7 +4,7 @@
   "private": true,
   "proxy": "https://camagru.aidandlim.com:8443/api",
   "dependencies": {
-    "axios": "^0.19.1",
+    "axios": "^0.21.1",
     "react": "^16.12.0",
     "react-confirm-alert": "^2.4.1",
     "react-cookies": "^0.1.1",
